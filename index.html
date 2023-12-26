@@ -1,7 +1,177 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Your Name - Personal Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 0;
+            margin: 0;
+        }
+
+        header {
+            background: #f4f4f4;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav button {
+            margin: 0 10px;
+            padding: 8px 16px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        nav button:hover {
+            background: #555;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-links img {
+            width: 30px; /* Adjust size as needed */
+        }
+
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <header>
+        <h1 id="greeting">Hello!</h1> <!-- Dynamic greeting -->
+        <!-- Navigation buttons -->
+        <nav>
+            <button onclick="scrollToSection('bio')">Bio</button>
+            <button onclick="scrollToSection('experience')">Experience</button>
+            <button onclick="scrollToSection('honors-awards')">Honors</button>
+            <button onclick="scrollToSection('hobbies')">Hobbies</button>
+            <button onclick="scrollToSection('contact')">Contact</button>
+        </nav>
+    </header>
+
+    <section id="bio">
+        <h2>About Me 👨🏻‍💻</h2>
+        <p>I am an undergraduate student in the Computer Science and Engineering Department at University of Seoul.<br>
+        My interests are related to data analysis, human computer interaction, and game development.<br>
+        'Baby steps everyday' is my life motto.
+        </p>
+    </section>
+
+    <section id="experience">
+        <h2>Professional Experience 🗓️</h2>
+        <ul>
+            <li><strong>Military Interpreter</strong> at Republic of Korea Air Force Operations Command (February 2021 - November 2022)
+                <ul>
+                    <li>Key responsibilities included handling communications between ROK and US A1(manpower and personnel) forces</li>
+                    <li>Major achievements include the Recognition of Superior Performance awarded by the Commander of ACC(Air Components Command)</li>
+                </ul>
+            </li>
+            <li><strong>Research Assistant</strong> at SKYGG (Blockchain Gaming Community Startup) (December 2022 - May 2023)
+                <ul>
+                    <li>Participated in building a battlelog analyzing web application for Axie Infinity: Origins</li>
+                    <li>Contributed to building a playground for web3 games.</li>
+                </ul>
+            </li>
+            <li><strong>Undergraduate Research Intern</strong> at HCAIL (Human-Centered Artificial Intelligence Lab) (December 2023 - Present)
+                <!-- <ul>
+                    <li>Currently engaged in...</li>
+                    <li>Focus areas include...</li>
+                </ul> -->
+            </li>
+        </ul>
+    </section>
+    
+
+    <section id="honors-awards">
+        <h2>Honors and Awards 🏅</h2>
+        <ul>
+            <li><strong>TOEIC (Score of 980)</strong> - Achieved in November 2019
+            </li>
+            <li><strong>TEPS (Level 1)</strong> - Achieved in August 2022
+            </li>
+            <li><strong>Participation Award</strong> at the University of Seoul Programming Contest (UOSPC) - Awarded in November 2023
+                <ul>
+                    <li>Acknowledged for active participation and competency in algorithms and programming.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    
+
+    <section id="hobbies">
+        <h2>Hobbies 🏉</h2>
+        <ul>
+            <li><strong>Collecting music albums(mostly Hip-Hop)</strong></li>
+            <li><strong>Rugby and Cycling</strong></li>
+            <li><strong>Video Gaming</strong></li>
+            <li><strong>Algorithm Problem Solving</strong></li>
+        </ul>
+    </section>
+    
+
+    <section id="contact">
+        <h2>Contact 🪪</h2>
+        <div class="contact-links">
+            <a href="mailto:fivestar1103@uos.ac.kr">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/University_of_Seoul.svg/150px-University_of_Seoul.svg.png" alt="Email Icon">
+                fivestar1103@uos.ac.kr
+            </a>
+            <a href="https://www.linkedin.com/in/hwanyo">
+                <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/LinkedIN.png?raw=true" alt="LinkedIn Icon">
+                www.linkedin.com/in/hwanyo
+            </a>
+            <a href="https://github.com/fivestar1103">
+                <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Black/Github_black.png?raw=true" alt="GitHub Icon">
+                https://github.com/fivestar1103
+            </a>
+            <a href="https://twitter.com/shwanyo">
+                <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/Twitter.png?raw=true" alt="Twitter Icon">
+                https://twitter.com/shwanyo
+            </a>
+        </div>
+    </section>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateGreeting();
+
+            // Scroll to specific sections
+            window.scrollToSection = function(sectionId) {
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            };
+        });
+
+        // Update greeting based on time of day
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting;
+            if (hour < 12) greeting = "Good Morning!😎";
+            else if (hour < 18) greeting = "Good Afternoon!☕️";
+            else greeting = "Good Evening!🌆";
+            document.getElementById('greeting').textContent = greeting + " This is Hwany";
+        }
+    </script>
 </body>
 </html>
