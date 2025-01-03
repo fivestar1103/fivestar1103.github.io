@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Project #3: Tank</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        #topBar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #000;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        #topBar h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.4em;
+        }
+
+        #topBar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #canvasContainer {
+            position: absolute;
+            top: 80px;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-color: #000;
+        }
+
+        #bottomBar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background-color: #000;
+            color: #0f0;
+            text-align: center;
+            line-height: 30px;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="topBar">
+        <h1>Project #3: Tank</h1>
+        <ul>
+            <li>Rotate: Drag left mouse button</li>
+            <li>Translate: Drag middle mouse button or cmd + left mouse button drag</li>
+            <li>Zoom: Mouse wheel</li>
+            <li>Move Tank: ArrowUp/ArrowDown, Rotate Tank: ArrowRight/ArrowLeft</li>
+            <li>Rotate Turret: A/D, Elevate Barrel: W/S</li>
+            <li>Shoot: Spacebar, Pause/Resume: P</li>
+        </ul>
+    </div>
+
+    <div id="canvasContainer">
+        <canvas id="webgpu"></canvas>
+    </div>
+
+    <div id="bottomBar">
+        <span id="messageArea">message area</span>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "wgpu-matrix": "https://wgpu-matrix.org/dist/2.x/wgpu-matrix.module.min.js",
+                "three": "https://threejs.org/build/three.module.min.js",
+                "three/addons/": "https://threejs.org/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import { vec2, vec3, vec4, mat4, utils } from 'wgpu-matrix';
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+        import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+
+        // ----------------------------------------------------------------
+        // Constants, locations, and global references
+        // ----------------------------------------------------------------
+        const loc_position = 0;
+        const loc_color = 1;
+        const loc_uv = 2;
+        const loc_normal = 3;
+        const loc_tangent = 4;
+
+        const FORMAT_DEPTH_TEXTURE = 'depth24plus';
+        const GRID_SIZE = 20;
+        const HALF_SIZE = GRID_SIZE / 2;
+
+        // Tank control state
+        let tankPosition = [0, 0.5, 0]; // [x, y, z]
+        let tankSpeed = 0.05;
+        let turretRotationSpeed = 3;
+        let barrelElevationSpeed = 2;
+
+        // Key states
+        const keyState = {
+            ArrowUp: false,
+            ArrowDown: false,
+            ArrowLeft: false,
+            ArrowRight: false,
+            w: false,
+            s: false,
+            a: false,
+            d: false,
+            p: false,
+            " ": false
+        };
+
+        let bodyAngle = 0;     // -180..180
+        let turretAngle = 0;   // -180..180
+        let barrelAngle = 0;   // -20..40
+
+        const turretXOffset = -0.4;
+        const barrelXOffset = -0.1;
+        const barrelYOffset = 0.3;
+
+        let gridPipeline = null;
+        let tankPipeline = null;
+        let shellPipeline = null;
+
+        let gridPart = null;
+        let tankPart = null;
+
+        let bodyMeshIndex = -1;
+        let turretMeshIndex = -1;
+        let barrelMeshIndex = -1;
+
+        const gravity = -9.8;
+        const SHELL_SCALE = 2;
+        const shellSpeed = 8.0;
+
+        let isPaused = false;
+
+        let lastTime = performance.now();
+
+        // ----------------------------------------------------------------
+        // Utility & UI / Camera
+        // ----------------------------------------------------------------
+        const UI = {
+            NONE: 0,
+            ROTATING: 1,
+            TRANSLATING: 2,
+            mouseMove: 0,
+            camera: {
+                fovy: 60,
+                position: vec3.create(0, -1, -3),
+                near: 0.1,
+                far: 100,
+            },
+            matrices: {
+                P: mat4.identity(),
+                R: mat4.identity(),
+                VP: mat4.identity(),
+            },
+            update_VP(canvas) {
+                UI.matrices.P = mat4.perspective(
+                    utils.degToRad(UI.camera.fovy),
+                    canvas.width / canvas.height,
+                    UI.camera.near,
+                    UI.camera.far
+                );
+                const view = mat4.translate(mat4.identity(), UI.camera.position);
+                const viewRotated = mat4.multiply(view, UI.matrices.R);
+                UI.matrices.VP = mat4.multiply(UI.matrices.P, viewRotated);
+            },
+        };
+
+        function onMouseDown(ev) {
+            // Middle button or (cmd + left = metaKey)
+            if (ev.buttons & 4 || (ev.buttons & 1 && ev.metaKey)) {
+                UI.mouseMove = UI.TRANSLATING;
+            } else if (ev.buttons & 1) {
+                UI.mouseMove = UI.ROTATING;
+            }
+        }
+
+        function onMouseUp(ev) {
+            UI.mouseMove = UI.NONE;
+        }
+
+        function onMouseMove(ev, canvas) {
+            let offset = [ev.movementX, ev.movementY];
+            if (UI.mouseMove === UI.ROTATING) {
+                UI.update_VP(canvas);
+                let axis = unproject_vector(
+                    [offset[1], offset[0], 0],
+                    UI.matrices.VP,
+                    [0, 0, canvas.clientWidth, canvas.clientHeight]
+                );
+                UI.matrices.R = mat4.rotate(
+                    UI.matrices.R,
+                    [axis[0], axis[1], axis[2]],
+                    utils.degToRad(vec2.lenSq(offset) * 0.1)
+                );
+            } else if (UI.mouseMove === UI.TRANSLATING) {
+                UI.update_VP(canvas);
+                let by = unproject_vector(
+                    [offset[0], -offset[1], 0],
+                    UI.matrices.VP,
+                    [0, 0, canvas.clientWidth, canvas.clientHeight]
+                );
+                let localShift = vec3.transformMat4(vec3.create(by[0], by[1], by[2]), UI.matrices.R);
+                UI.camera.position = vec3.add(UI.camera.position, localShift);
+            }
+        }
+
+        function onWheel(ev, canvas) {
+            ev.preventDefault();
+            UI.camera.position[2] = -Math.max(
+                1,
+                Math.min(-UI.camera.position[2] + ev.deltaY * 0.01, 50)
+            );
+            UI.update_VP(canvas);
+        }
+
+        // ----------------------------------------------------------------
+        // Project / Unproject helpers
+        // ----------------------------------------------------------------
+        function project(p_obj, MVP, viewport) {
+            let tmp = vec4.transformMat4(p_obj, MVP);
+            tmp = tmp.map((x) => x / tmp[3]);
+            for (let i = 0; i < 2; i++) {
+                tmp[i] = (0.5 * tmp[i] + 0.5) * viewport[i + 2] + viewport[i];
+            }
+            return tmp;
+        }
+
+        function unproject(p_win, MVP, viewport) {
+            let MVP_inv = mat4.invert(MVP);
+            let tmp = vec4.clone(p_win);
+            for (let i = 0; i < 2; i++)
+                tmp[i] = 2.0 * (tmp[i] - viewport[i]) / viewport[i + 2] - 1.0;
+            let p_obj = vec4.transformMat4(tmp, MVP_inv);
+            p_obj = p_obj.map((x) => x / p_obj[3]);
+            return p_obj;
+        }
+
+        function unproject_vector(vec_win, MVP, viewport) {
+            let org_win = project([0, 0, 0, 1], MVP, viewport);
+            let vec = unproject(
+                [org_win[0] + vec_win[0], org_win[1] + vec_win[1], org_win[2] + vec_win[2], 1],
+                MVP, viewport
+            );
+            return vec;
+        }
+
+        // ----------------------------------------------------------------
+        // 1) Create the Grid geometry (line-list)
+        // ----------------------------------------------------------------
+        function createGridAndAxesData() {
+            const lines = [];
+            const gridColor = [0.5, 0.5, 0.5];
+            for (let i = -HALF_SIZE; i <= HALF_SIZE; i++) {
+                if (i === 0) continue;
+                // X lines
+                lines.push(-HALF_SIZE, 0, i, ...gridColor);
+                lines.push(HALF_SIZE, 0, i, ...gridColor);
+            }
+            for (let i = -HALF_SIZE; i <= HALF_SIZE; i++) {
+                if (i === 0) continue;
+                // Z lines
+                lines.push(i, 0, -HALF_SIZE, ...gridColor);
+                lines.push(i, 0, HALF_SIZE, ...gridColor);
+            }
+
+            // Axes
+            const xPositiveColor = [1.0, 0.0, 0.0];
+            const xNegativeColor = [0.5, 0.0, 0.0];
+            lines.push(-HALF_SIZE, 0, 0, ...xNegativeColor);
+            lines.push(0, 0, 0, ...xNegativeColor);
+            lines.push(0, 0, 0, ...xPositiveColor);
+            lines.push(HALF_SIZE, 0, 0, ...xPositiveColor);
+
+            const yPositiveColor = [0.0, 1.0, 0.0];
+            const yNegativeColor = [0.0, 0.5, 0.0];
+            lines.push(0, -HALF_SIZE, 0, ...yNegativeColor);
+            lines.push(0, 0, 0, ...yNegativeColor);
+            lines.push(0, 0, 0, ...yPositiveColor);
+            lines.push(0, HALF_SIZE, 0, ...yPositiveColor);
+
+            const zPositiveColor = [0.0, 0.0, 1.0];
+            const zNegativeColor = [0.0, 0.0, 0.5];
+            lines.push(0, 0, -HALF_SIZE, ...zNegativeColor);
+            lines.push(0, 0, 0, ...zNegativeColor);
+            lines.push(0, 0, 0, ...zPositiveColor);
+            lines.push(0, 0, HALF_SIZE, ...zPositiveColor);
+
+            return new Float32Array(lines);
+        }
+
+        function createLocalAxesData() {
+            const lines = [];
+
+            const xPositiveColor = [1.0, 0.0, 0.0];
+            const xNegativeColor = [0.5, 0.0, 0.0];
+            lines.push(-HALF_SIZE / 4, -0.5, 0, ...xNegativeColor);
+            lines.push(0, -0.5, 0, ...xNegativeColor);
+            lines.push(0, -0.5, 0, ...xPositiveColor);
+            lines.push(HALF_SIZE / 4, -0.5, 0, ...xPositiveColor);
+
+            const yPositiveColor = [0.0, 1.0, 0.0];
+            const yNegativeColor = [0.0, 0.5, 0.0];
+            lines.push(0, -HALF_SIZE / 4 - 0.5, 0, ...yNegativeColor);
+            lines.push(0, -0.5, 0, ...yNegativeColor);
+            lines.push(0, -0.5, 0, ...yPositiveColor);
+            lines.push(0, HALF_SIZE / 4 - 0.5, 0, ...yPositiveColor);
+
+            const zPositiveColor = [0.0, 0.0, 1.0];
+            const zNegativeColor = [0.0, 0.0, 0.5];
+            lines.push(0, -0.5, -HALF_SIZE / 4, ...zNegativeColor);
+            lines.push(0, -0.5, 0, ...zNegativeColor);
+            lines.push(0, -0.5, 0, ...zPositiveColor);
+            lines.push(0, -0.5, HALF_SIZE / 4, ...zPositiveColor);
+
+            return new Float32Array(lines);
+        }
+
+
+        function createSphereData(radius = 0.1, segments = 12, rings = 12) {
+            const positions = [];
+            const indices = [];
+
+            for (let i = 0; i <= rings; i++) {
+                const v = i / rings;
+                const phi = v * Math.PI;  // 0..PI
+                for (let j = 0; j <= segments; j++) {
+                    const u = j / segments;
+                    const theta = u * 2.0 * Math.PI; // 0..PI
+
+                    const x = -radius * Math.cos(theta) * Math.sin(phi);
+                    const y = radius * Math.cos(phi);
+                    const z = radius * Math.sin(theta) * Math.sin(phi);
+                    positions.push(x, y, z);
+                }
+            }
+
+            for (let i = 0; i < rings; i++) {
+                for (let j = 0; j < segments; j++) {
+                    const first = i * (segments + 1) + j;
+                    const second = first + segments + 1;
+                    indices.push(first, second, first + 1);
+                    indices.push(second, second + 1, first + 1);
+                }
+            }
+            return {
+                positions: new Float32Array(positions),
+                indices: new Uint32Array(indices),
+            };
+        }
+
+        // ----------------------------------------------------------------
+        // 2) Load the GLTF tank
+        // ----------------------------------------------------------------
+        async function init_tank(device) {
+            async function loadGLTF(url, diffuseURL, materialURL, normalMapURL) {
+                const loader = new GLTFLoader();
+                const textureLoader = new THREE.TextureLoader();
+
+                const root = await new Promise((resolve, reject) => {
+                    loader.load(url, resolve, null, reject);
+                });
+                root.scene.traverse((child) => {
+                    if (child.isMesh && child.geometry) {
+                        if (!child.geometry.attributes.tangent) {
+                            child.geometry.computeTangents?.();
+                        }
+                    }
+                });
+
+                async function loadImage(url) {
+                    return new Promise((resolve, reject) => {
+                        textureLoader.load(url, resolve, undefined, reject);
+                    });
+                }
+
+                async function createGPUTexture(image) {
+                    const gpuTexture = device.createTexture({
+                        size: [image.width, image.height, 1],
+                        format: "rgba8unorm",
+                        usage: GPUTextureUsage.TEXTURE_BINDING |
+                            GPUTextureUsage.COPY_DST |
+                            GPUTextureUsage.RENDER_ATTACHMENT
+                    });
+                    const imageBitmap = await createImageBitmap(image);
+                    device.queue.copyExternalImageToTexture(
+                        { source: imageBitmap },
+                        { texture: gpuTexture },
+                        [image.width, image.height, 1]
+                    );
+                    return gpuTexture.createView();
+                }
+
+                const diffuseTex = await loadImage(diffuseURL);
+                const materialTex = await loadImage(materialURL);
+                const normalMapTex = await loadImage(normalMapURL);
+
+                const diffuseView = await createGPUTexture(diffuseTex.image);
+                const materialView = await createGPUTexture(materialTex.image);
+                const normalMapView = await createGPUTexture(normalMapTex.image);
+
+                const meshes = [];
+                root.scene.traverse((child) => {
+                    if (child.isMesh && child.geometry) {
+                        meshes.push(child);
+                    }
+                });
+                if (!meshes.length) {
+                    throw new Error("No mesh in glTF model!");
+                }
+
+                const buffers = meshes.map((mesh) => {
+                    const posArray = mesh.geometry.attributes.position.array;
+                    const uvArray = mesh.geometry.attributes.uv.array;
+                    const normArray = mesh.geometry.attributes.normal.array;
+                    if (!mesh.geometry.attributes.tangent) {
+                        throw new Error("No tangent attribute found.");
+                    }
+                    const tanArray = mesh.geometry.attributes.tangent.array;
+
+                    let indices = mesh.geometry.index.array;
+                    if (!(indices instanceof Uint32Array)) {
+                        indices = new Uint32Array(indices);
+                    }
+
+                    const positionBuf = device.createBuffer({
+                        size: posArray.byteLength,
+                        usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+                    });
+                    device.queue.writeBuffer(positionBuf, 0, posArray);
+
+                    const uvBuf = device.createBuffer({
+                        size: uvArray.byteLength,
+                        usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+                    });
+                    device.queue.writeBuffer(uvBuf, 0, uvArray);
+
+                    const normalBuf = device.createBuffer({
+                        size: normArray.byteLength,
+                        usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+                    });
+                    device.queue.writeBuffer(normalBuf, 0, normArray);
+
+                    const tangentBuf = device.createBuffer({
+                        size: tanArray.byteLength,
+                        usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+                    });
+                    device.queue.writeBuffer(tangentBuf, 0, tanArray);
+
+                    const indexBuf = device.createBuffer({
+                        size: indices.byteLength,
+                        usage: GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST
+                    });
+                    device.queue.writeBuffer(indexBuf, 0, indices);
+
+                    return {
+                        position: positionBuf,
+                        uv: uvBuf,
+                        normal: normalBuf,
+                        tangent: tangentBuf,
+                        index: indexBuf,
+                        count: indices.length
+                    };
+                });
+
+                const sampler = device.createSampler({
+                    addressModeU: "repeat",
+                    addressModeV: "repeat",
+                    magFilter: "linear",
+                    minFilter: "linear",
+                });
+
+                meshes.forEach((child, i) => {
+                    if (child.name === "body") bodyMeshIndex = i;
+                    if (child.name === "turret") turretMeshIndex = i;
+                    if (child.name === "barrel") barrelMeshIndex = i;
+                });
+
+                return {
+                    buffers,
+                    diffuseView,
+                    materialView,
+                    normalMapView,
+                    sampler,
+                };
+            }
+
+            const tankData = await loadGLTF(
+                "tank.glb",
+                "textures/tank-color.jpg",
+                "textures/tank-etc.png",
+                "textures/tank-normal.png"
+            );
+            return tankData;
+        }
+
+        async function init_shell(device) {
+            const textureLoader = new THREE.TextureLoader();
+            const [diffuseTex, materialTex, normalMapTex] = await Promise.all([
+                loadImage("textures/shell-color.png"),
+                loadImage("textures/shell-etc.png"),
+                loadImage("textures/shell-normal.png"),
+            ]);
+
+            const diffuseView = await createGPUTexture(device, diffuseTex.image);
+            const materialView = await createGPUTexture(device, materialTex.image);
+            const normalMapView = await createGPUTexture(device, normalMapTex.image);
+
+            const loader = new OBJLoader();
+            const root = await new Promise((resolve, reject) => {
+                loader.load("shell.obj", resolve, null, reject);
+            });
+
+            let mesh = null;
+            root.traverse((child) => {
+                if (child.isMesh) {
+                    mesh = child;
+                }
+            });
+            if (!mesh) {
+                throw new Error("No mesh found in shell.obj!");
+            }
+
+            const posArray = mesh.geometry.attributes.position.array;
+            const normalArray = mesh.geometry.attributes.normal?.array;
+            const uvArray = mesh.geometry.attributes.uv?.array;
+
+            if (!normalArray) {
+                throw new Error("No normals found in shell.obj!");
+            }
+
+            const uvArrayFinal = uvArray ?? new Float32Array((posArray.length / 3) * 2);
+            if (!uvArray) {
+                for (let i = 0; i < uvArrayFinal.length; i++) {
+                    uvArrayFinal[i] = 0.0;
+                }
+            }
+
+            const tangentArrayFinal = new Float32Array((posArray.length / 3) * 4);
+            for (let i = 0; i < tangentArrayFinal.length; i += 4) {
+                tangentArrayFinal[i + 0] = 0.0; // x
+                tangentArrayFinal[i + 1] = 0.0; // y
+                tangentArrayFinal[i + 2] = 0.0; // z
+                tangentArrayFinal[i + 3] = 1.0; // w
+            }
+
+            let indexArray = null;
+            let indexCount = 0;
+
+            if (mesh.geometry.index) {
+                indexArray = mesh.geometry.index.array;
+                indexCount = indexArray.length;
+            } else {
+                const count = posArray.length / 3;
+                indexArray = new Uint32Array(count);
+                for (let i = 0; i < count; i++) {
+                    indexArray[i] = i;
+                }
+                indexCount = count;
+            }
+
+            const scaledPosArray = new Float32Array(posArray.length);
+            for (let i = 0; i < posArray.length; i++) {
+                scaledPosArray[i] = posArray[i] * SHELL_SCALE;
+            }
+
+            const positionBuf = device.createBuffer({
+                size: scaledPosArray.byteLength,
+                usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+            });
+            device.queue.writeBuffer(positionBuf, 0, scaledPosArray);
+
+            const uvBuf = device.createBuffer({
+                size: uvArrayFinal.byteLength,
+                usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+            });
+            device.queue.writeBuffer(uvBuf, 0, uvArrayFinal);
+
+            const normalBuf = device.createBuffer({
+                size: normalArray.byteLength,
+                usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+            });
+            device.queue.writeBuffer(normalBuf, 0, normalArray);
+
+            const tangentBuf = device.createBuffer({
+                size: tangentArrayFinal.byteLength,
+                usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+            });
+            device.queue.writeBuffer(tangentBuf, 0, tangentArrayFinal);
+
+            const indexBuf = device.createBuffer({
+                size: indexArray.byteLength,
+                usage: GPUBufferUsage.INDEX | GPUBufferUsage.COPY_DST
+            });
+            device.queue.writeBuffer(indexBuf, 0, indexArray);
+
+            const sampler = device.createSampler({
+                addressModeU: "repeat",
+                addressModeV: "repeat",
+                magFilter: "linear",
+                minFilter: "linear",
+            });
+
+            const buffers = [{
+                position: positionBuf,
+                uv: uvBuf,
+                normal: normalBuf,
+                tangent: tangentBuf,
+                index: indexBuf,
+                count: indexCount,
+            }];
+
+            return {
+                buffers,
+                diffuseView,
+                materialView,
+                normalMapView,
+                sampler,
+            };
+
+            async function loadImage(url) {
+                return new Promise((resolve, reject) => {
+                    textureLoader.load(url, resolve, undefined, reject);
+                });
+            }
+
+            async function createGPUTexture(device, image) {
+                const gpuTexture = device.createTexture({
+                    size: [image.width, image.height, 1],
+                    format: "rgba8unorm",
+                    usage: GPUTextureUsage.TEXTURE_BINDING |
+                        GPUTextureUsage.COPY_DST |
+                        GPUTextureUsage.RENDER_ATTACHMENT,
+                });
+                const imageBitmap = await createImageBitmap(image);
+                device.queue.copyExternalImageToTexture(
+                    { source: imageBitmap },
+                    { texture: gpuTexture },
+                    [image.width, image.height, 1]
+                );
+                return gpuTexture.createView();
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // 3) Initialize pipeline(s)
+        // ----------------------------------------------------------------
+        function init_pipeline(device, colorFormat) {
+            // Grid pipeline
+            const gridShader = device.createShaderModule({
+                code: `
+                    struct Uniforms {
+                        MVP : mat4x4<f32>
+                    };
+                    @group(0) @binding(0) var<uniform> uniforms : Uniforms;
+
+                    struct VertexOut {
+                        @builtin(position) position : vec4f,
+                        @location(1) v_color : vec3f
+                    };
+
+                    @vertex
+                    fn main_vert(
+                        @location(0) position : vec3f,
+                        @location(1) color    : vec3f
+                    ) -> VertexOut {
+                        var out : VertexOut;
+                        out.position = uniforms.MVP * vec4f(position, 1.0);
+                        out.v_color  = color;
+                        return out;
+                    }
+
+                    @fragment
+                    fn main_frag(@location(1) v_color : vec3f) -> @location(0) vec4f {
+                        return vec4f(v_color, 1.0);
+                    }
+                `
+            });
+            const gridPipeline = device.createRenderPipeline({
+                layout: "auto",
+                vertex: {
+                    module: gridShader,
+                    entryPoint: "main_vert",
+                    buffers: [{
+                        arrayStride: 6 * 4,
+                        attributes: [
+                            { shaderLocation: loc_position, offset: 0, format: "float32x3" },
+                            { shaderLocation: loc_color, offset: 12, format: "float32x3" }
+                        ],
+                    }],
+                },
+                fragment: {
+                    module: gridShader,
+                    entryPoint: "main_frag",
+                    targets: [{ format: colorFormat }],
+                },
+                primitive: { topology: "line-list", cullMode: "none" },
+                depthStencil: {
+                    depthWriteEnabled: true,
+                    depthCompare: 'less',
+                    format: FORMAT_DEPTH_TEXTURE,
+                },
+            });
+
+            // Tank pipeline
+            const tankShader = device.createShaderModule({
+                code: `
+                    struct Uniforms {
+                        MVP       : mat4x4<f32>,
+                        cameraPos : vec3f,
+                        padding   : f32,
+                    };
+
+                    @group(1) @binding(0) var<uniform> uniforms : Uniforms;
+
+                    @group(0) @binding(0) var diffuseTexture : texture_2d<f32>;
+                    @group(0) @binding(1) var diffuseSampler : sampler;
+                    @group(0) @binding(2) var materialTexture: texture_2d<f32>;
+                    @group(0) @binding(3) var normalTexture  : texture_2d<f32>;
+
+                    struct VertexOut {
+                        @builtin(position) position : vec4f,
+                        @location(0) worldPos : vec3f,
+                        @location(1) uv       : vec2f,
+                        @location(2) normal   : vec3f,
+                        @location(3) tangent  : vec4f
+                    };
+
+                    @vertex
+                    fn main_vert(
+                        @location(${loc_position}) position : vec3f,
+                        @location(${loc_uv})       uv       : vec2f,
+                        @location(${loc_normal})   normal   : vec3f,
+                        @location(${loc_tangent})  tangent  : vec4f
+                    ) -> VertexOut {
+                        var out : VertexOut;
+                        out.position = uniforms.MVP * vec4f(position, 1.0);
+                        out.worldPos = position;
+                        out.uv       = uv;
+                        out.normal   = normal;
+                        out.tangent  = tangent;
+                        return out;
+                    }
+
+                    @fragment
+                    fn main_frag(
+                        @location(0) worldPos : vec3f,
+                        @location(1) uv       : vec2f,
+                        @location(2) N_in     : vec3f,
+                        @location(3) T_in     : vec4f
+                    ) -> @location(0) vec4f {
+                        let texColor    = textureSample(diffuseTexture, diffuseSampler, uv);
+                        let materialCol = textureSample(materialTexture, diffuseSampler, uv);
+                        let texNormal   = textureSample(normalTexture, diffuseSampler, uv).xyz * 2.0 - 1.0;
+
+                        let N = normalize(N_in);
+                        let T = normalize(T_in.xyz);
+                        let B = cross(N, T) * T_in.w;
+                        let TBN = mat3x3f(T, B, N);
+                        let worldNormal = normalize(TBN * texNormal);
+
+                        let lightPos  = vec3f(5.0,5.0,5.0);
+                        let lightCol  = vec3f(1.0, 0.95, 0.8) * 1.2;   // point light
+                        let dirLight  = normalize(vec3f(1.0,1.0,1.0));
+                        let dirColor  = vec3f(0.9,0.9,1.0) * 1.2;      // directional
+                        
+                        let ao    = materialCol.r;
+                        let rough = materialCol.g * 0.8;
+                        let metal = materialCol.b * 1.5;
+
+                        let baseShininess   = mix(128.0, 8.0, rough);
+                        let finalShininess  = mix(baseShininess, baseShininess * 16.0, metal);
+
+                        let viewDir = normalize(uniforms.cameraPos - worldPos);
+
+                        // point light calc
+                        let Lp   = normalize(lightPos - worldPos);
+                        let dist = length(lightPos - worldPos);
+                        let att  = 1.0 / (1.0 + 0.045*dist + 0.0075*dist*dist);
+                        let halfwayP = normalize(Lp + viewDir);
+
+                        // directional light calc
+                        let halfwayD = normalize(dirLight + viewDir);
+
+                        let specularBase  = mix(0.04, 8.0, metal);
+                        let specularColor = mix(vec3f(1.0), texColor.rgb, metal);
+
+                        let specP = pow(max(dot(worldNormal, halfwayP), 0.0), finalShininess)*1.5;
+                        let specD = pow(max(dot(worldNormal, halfwayD), 0.0), finalShininess)*1.5;
+
+                        let specP_final = specP*specularBase*specularColor*att*lightCol;
+                        let specD_final = specD*specularBase*specularColor*dirColor;
+
+                        let diffP = max(dot(worldNormal, Lp), 0.0)*
+                                    mix(vec3f(1.0),vec3f(0.02),metal)*att*lightCol;
+                        let diffD = max(dot(worldNormal, dirLight), 0.0)*
+                                    mix(vec3f(1.0),vec3f(0.02),metal)*dirColor;
+
+                        let ambient  = 0.15*ao*mix(vec3f(1.0), texColor.rgb, metal*0.5);
+                        let lighting = ambient + 0.8*(diffP+specP_final) + 0.6*(diffD+specD_final);
+
+                        return vec4f(texColor.rgb * lighting, texColor.a);
+                    }
+                `
+            });
+            const tankPipeline = device.createRenderPipeline({
+                layout: "auto",
+                vertex: {
+                    module: tankShader,
+                    entryPoint: "main_vert",
+                    buffers: [
+                        {
+                            arrayStride: 4 * 3,
+                            attributes: [{ format: "float32x3", offset: 0, shaderLocation: loc_position }]
+                        },
+                        {
+                            arrayStride: 4 * 2,
+                            attributes: [{ format: "float32x2", offset: 0, shaderLocation: loc_uv }]
+                        },
+                        {
+                            arrayStride: 4 * 3,
+                            attributes: [{ format: "float32x3", offset: 0, shaderLocation: loc_normal }]
+                        },
+                        {
+                            arrayStride: 4 * 4,
+                            attributes: [{ format: "float32x4", offset: 0, shaderLocation: loc_tangent }]
+                        },
+                    ],
+                },
+                fragment: {
+                    module: tankShader,
+                    entryPoint: "main_frag",
+                    targets: [{ format: colorFormat }],
+                },
+                primitive: { topology: "triangle-list" },
+                depthStencil: {
+                    depthWriteEnabled: true,
+                    depthCompare: 'less',
+                    format: FORMAT_DEPTH_TEXTURE,
+                },
+            });
+
+            return { gridPipeline, tankPipeline };
+        }
+
+        // Shell pipeline
+        function init_shell_pipeline(device, colorFormat) {
+            const shellShader = device.createShaderModule({
+                code: `
+                    struct Uniforms {
+                        MVP       : mat4x4<f32>,
+                        cameraPos : vec3f,
+                        pad       : f32,
+                    };
+
+                    @group(0) @binding(0) var diffuseTexture : texture_2d<f32>;
+                    @group(0) @binding(1) var diffuseSampler : sampler;
+                    @group(0) @binding(2) var materialTexture: texture_2d<f32>;
+                    @group(0) @binding(3) var normalTexture  : texture_2d<f32>;
+
+                    @group(1) @binding(0) var<uniform> uniforms : Uniforms;
+
+                    struct VertexOut {
+                        @builtin(position) position : vec4f,
+                        @location(0) worldPos : vec3f,
+                        @location(1) uv       : vec2f,
+                        @location(2) normal   : vec3f,
+                        @location(3) tangent  : vec4f
+                    };
+
+                    @vertex
+                    fn main_vert(
+                        @location(${loc_position}) position : vec3f,
+                        @location(${loc_uv})       uv       : vec2f,
+                        @location(${loc_normal})   normal   : vec3f,
+                        @location(${loc_tangent})  tangent  : vec4f
+                    ) -> VertexOut {
+                        var out : VertexOut;
+                        out.position = uniforms.MVP * vec4f(position, 1.0);
+                        out.worldPos = position;
+                        out.uv = vec2f(uv.x, uv.y);
+                        out.normal   = normal;
+                        out.tangent  = tangent;
+                        return out;
+                    }
+
+                    @fragment
+                    fn main_frag(
+                        @location(0) worldPos : vec3f,
+                        @location(1) uv       : vec2f,
+                        @location(2) N_in     : vec3f,
+                        @location(3) T_in     : vec4f
+                    ) -> @location(0) vec4f {
+                        let texColor = textureSample(diffuseTexture, diffuseSampler, uv);
+                        let materialCol = textureSample(materialTexture, diffuseSampler, uv);
+                        let texNormal = textureSample(normalTexture, diffuseSampler, uv).xyz * 2.0 - 1.0;
+                        
+                        let ao = materialCol.r;
+                        let roughness = materialCol.g * 0.8;
+                        let metalness = materialCol.b * 1.5;
+                        
+                        let N = normalize(N_in);
+                        let T = normalize(T_in.xyz);
+                        let B = cross(N, T) * T_in.w;
+                        let TBN = mat3x3f(T, B, N);
+                        let normal = normalize(TBN * texNormal);
+                        
+                        let viewDir = normalize(uniforms.cameraPos - worldPos);
+                        
+                        let lightDir = normalize(vec3f(1.0, 1.0, 1.0));
+                        let lightColor = vec3f(1.0, 0.95, 0.8) * 1.2;
+                        
+                        let specularColor = mix(vec3f(0.04), texColor.rgb, metalness);
+                        let specularStrength = mix(0.5, 2.0, metalness);
+                        
+                        let diffuse = max(dot(normal, lightDir), 0.0);
+                        let diffuseColor = mix(texColor.rgb, texColor.rgb * 0.04, metalness);
+                        
+                        let halfwayDir = normalize(lightDir + viewDir);
+                        let baseShininess = mix(64.0, 8.0, roughness);
+                        let finalShininess = mix(baseShininess, baseShininess * 4.0, metalness);
+                        let specular = pow(max(dot(normal, halfwayDir), 0.0), finalShininess);
+                        
+                        let ambient = 0.4;
+                        let aoFactor = mix(1.0, ao, 0.3);
+                        
+                        let diffuseTerm = diffuseColor * diffuse * lightColor;
+                        let specularTerm = specularColor * specular * specularStrength * lightColor;
+                        
+                        let lighting = aoFactor * (
+                            ambient + 
+                            diffuseTerm +
+                            specularTerm
+                        );
+
+                        return vec4f(texColor.rgb * lighting, texColor.a);
+                    }
+                `
+            });
+
+            return device.createRenderPipeline({
+                layout: "auto",
+                vertex: {
+                    module: shellShader,
+                    entryPoint: "main_vert",
+                    buffers: [
+                        {
+                            arrayStride: 4 * 3,
+                            attributes: [{ format: "float32x3", offset: 0, shaderLocation: loc_position }],
+                        },
+                        {
+                            arrayStride: 4 * 2,
+                            attributes: [{ format: "float32x2", offset: 0, shaderLocation: loc_uv }],
+                        },
+                        {
+                            arrayStride: 4 * 3,
+                            attributes: [{ format: "float32x3", offset: 0, shaderLocation: loc_normal }],
+                        },
+                        {
+                            arrayStride: 4 * 4,
+                            attributes: [{ format: "float32x4", offset: 0, shaderLocation: loc_tangent }],
+                        },
+                    ]
+                },
+                fragment: {
+                    module: shellShader,
+                    entryPoint: "main_frag",
+                    targets: [{ format: colorFormat }],
+                },
+                primitive: { topology: "triangle-list", cullMode: "none" },
+                depthStencil: {
+                    depthWriteEnabled: true,
+                    depthCompare: "less",
+                    format: FORMAT_DEPTH_TEXTURE,
+                },
+            });
+        }
+
+        function createShell(device, shellPipeline) {
+            const uniformBuffer = device.createBuffer({
+                size: 20 * 4,
+                usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+            });
+
+            const bindGroup = device.createBindGroup({
+                layout: shellPipeline.getBindGroupLayout(1),
+                entries: [
+                    { binding: 0, resource: { buffer: uniformBuffer } },
+                ],
+            });
+
+            return {
+                meshIndex: 0,
+                position: [0, 0, 0],
+                velocity: [0, 0, 0],
+                lifetime: 3.0,
+                uniformBuffer: uniformBuffer,
+                bindGroup: bindGroup,
+            };
+        }
+
+        // ----------------------------------------------------------------
+        // 4) init_grid_part, init_tank_part, etc.
+        // ----------------------------------------------------------------
+        function init_grid_part(device, pipeline) {
+            const data = createGridAndAxesData();
+            const vertexBuffer = device.createBuffer({
+                size: data.byteLength,
+                usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST,
+            });
+            device.queue.writeBuffer(vertexBuffer, 0, data);
+
+            const vertexCount = data.length / 6;
+            const uniformBuffer = device.createBuffer({
+                size: 16 * 4,
+                usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
+            });
+
+            const bindGroup = device.createBindGroup({
+                layout: pipeline.getBindGroupLayout(0),
+                entries: [{ binding: 0, resource: { buffer: uniformBuffer } }],
+            });
+
+            return { vertexBuffer, vertexCount, uniformBuffer, bindGroup };
+        }
+
+        function init_local_axes_part(device, pipeline) {
+            const data = createLocalAxesData();
+
+            const vertexBuffer = device.createBuffer({
+                size: data.byteLength,
+                usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST,
+            });
+            device.queue.writeBuffer(vertexBuffer, 0, data);
+
+            const vertexCount = data.length / 6;
+
+            const uniformBuffer = device.createBuffer({
+                size: 16 * 4,
+                usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
+            });
+
+            const bindGroup = device.createBindGroup({
+                layout: pipeline.getBindGroupLayout(0),
+                entries: [
+                    { binding: 0, resource: { buffer: uniformBuffer } }
+                ],
+            });
+
+            return { vertexBuffer, vertexCount, uniformBuffer, bindGroup };
+        }
+
+        function init_tank_part(device, pipeline, tankData) {
+            const uniformBuffers = tankData.buffers.map(() =>
+                device.createBuffer({
+                    size: 20 * 4,
+                    usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+                })
+            );
+
+            const textureBindGroup = device.createBindGroup({
+                layout: pipeline.getBindGroupLayout(0),
+                entries: [
+                    { binding: 0, resource: tankData.diffuseView },
+                    { binding: 1, resource: tankData.sampler },
+                    { binding: 2, resource: tankData.materialView },
+                    { binding: 3, resource: tankData.normalMapView },
+                ],
+            });
+
+            const uniformBindGroups = uniformBuffers.map(buf =>
+                device.createBindGroup({
+                    layout: pipeline.getBindGroupLayout(1),
+                    entries: [{ binding: 0, resource: { buffer: buf } }],
+                })
+            );
+
+            return {
+                buffers: tankData.buffers,
+                uniformBuffers,
+                textureBG: textureBindGroup,
+                uniformBindGroups,
+            };
+        }
+
+        function init_shell_part(device, pipeline, shellData) {
+            const uniformBuffers = shellData.buffers.map(() =>
+                device.createBuffer({
+                    size: 20 * 4,
+                    usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+                })
+            );
+
+            const textureBindGroup = device.createBindGroup({
+                layout: pipeline.getBindGroupLayout(0),
+                entries: [
+                    { binding: 0, resource: shellData.diffuseView },
+                    { binding: 1, resource: shellData.sampler },
+                    { binding: 2, resource: shellData.materialView },
+                    { binding: 3, resource: shellData.normalMapView },
+                ],
+            });
+
+            const uniformBindGroups = uniformBuffers.map(buf =>
+                device.createBindGroup({
+                    layout: pipeline.getBindGroupLayout(1),
+                    entries: [{ binding: 0, resource: { buffer: buf } }],
+                })
+            );
+
+            return {
+                buffers: shellData.buffers,
+                uniformBuffers,
+                textureBG: textureBindGroup,
+                uniformBindGroups,
+            };
+        }
+
+        function setup_grid_part(device, passEncoder, part, MVP) {
+            device.queue.writeBuffer(part.uniformBuffer, 0, MVP);
+            passEncoder.setBindGroup(0, part.bindGroup);
+            passEncoder.setVertexBuffer(0, part.vertexBuffer);
+            passEncoder.draw(part.vertexCount);
+        }
+
+        function setup_tank_part(device, passEncoder, part, MVP, cameraPos, meshIndex) {
+            const uniformData = new Float32Array(20);
+            uniformData.set(MVP, 0);
+            uniformData.set(cameraPos, 16);
+            device.queue.writeBuffer(part.uniformBuffers[meshIndex], 0, uniformData);
+
+            passEncoder.setBindGroup(0, part.textureBG);
+            passEncoder.setBindGroup(1, part.uniformBindGroups[meshIndex]);
+        }
+
+        function drawMesh(device, pass, tankPart, MVP, cameraPos, buf, meshIndex) {
+            setup_tank_part(device, pass, tankPart, MVP, cameraPos, meshIndex);
+            pass.setVertexBuffer(0, buf.position);
+            pass.setVertexBuffer(1, buf.uv);
+            pass.setVertexBuffer(2, buf.normal);
+            pass.setVertexBuffer(3, buf.tangent);
+            pass.setIndexBuffer(buf.index, 'uint32');
+            pass.drawIndexed(buf.count);
+        }
+
+        function createOrientationMatrix(velocity) {
+            const forward = vec3.normalize(velocity);
+            const worldUp = vec3.create(0, 1, 0);
+            const right = vec3.normalize(vec3.cross(forward, worldUp));
+            const up = vec3.normalize(vec3.cross(right, forward));
+
+            return new Float32Array([
+                right[0], right[1], right[2], 0,
+                up[0], up[1], up[2], 0,
+                forward[0], forward[1], forward[2], 0,
+                0, 0, 0, 1
+            ]);
+        }
+
+        // ----------------------------------------------------------------
+        // 5) Main function
+        // ----------------------------------------------------------------
+        async function main() {
+            const adapter = await navigator.gpu?.requestAdapter();
+            const device = await adapter?.requestDevice();
+            if (!device) {
+                alert("WebGPU not supported or cannot get device.");
+                return;
+            }
+
+            const canvas = document.getElementById("webgpu");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const context = canvas.getContext("webgpu");
+            const format = navigator.gpu.getPreferredCanvasFormat();
+
+            context.configure({
+                device,
+                format,
+                alphaMode: "opaque",
+            });
+
+            let depthTexture = device.createTexture({
+                size: [canvas.width, canvas.height],
+                format: FORMAT_DEPTH_TEXTURE,
+                usage: GPUTextureUsage.RENDER_ATTACHMENT,
+            });
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                context.configure({ device, format, alphaMode: "opaque" });
+                depthTexture = device.createTexture({
+                    size: [canvas.width, canvas.height],
+                    format: FORMAT_DEPTH_TEXTURE,
+                    usage: GPUTextureUsage.RENDER_ATTACHMENT,
+                });
+                UI.update_VP(canvas);
+            });
+
+            canvas.onmousedown = (ev) => onMouseDown(ev);
+            canvas.onmouseup = (ev) => onMouseUp(ev);
+            canvas.onmousemove = (ev) => onMouseMove(ev, canvas);
+            window.addEventListener("wheel", (ev) => onWheel(ev, canvas), { passive: false });
+
+            // Key states
+            window.addEventListener('keydown', (ev) => {
+                let keyName = ev.key === " " ? "Spacebar" : ev.key;
+                if (keyState.hasOwnProperty(ev.key)) {
+                    document.getElementById('messageArea').textContent = `The key '${keyName}' is down.`;
+                    keyState[ev.key] = true;
+                }
+            });
+            window.addEventListener('keyup', (ev) => {
+                if (keyState.hasOwnProperty(ev.key)) {
+                    document.getElementById('messageArea').textContent = "No key is down.";
+                    keyState[ev.key] = false;
+                }
+            });
+            window.addEventListener('keydown', (ev) => {
+                if (ev.code === 'KeyP') {
+                    isPaused = !isPaused; // Toggle pause state
+                }
+            });
+
+            const shells = [];
+
+            window.addEventListener('keydown', (ev) => {
+                if (ev.code === 'Space') {
+                    let barrelModel = mat4.identity();
+                    barrelModel = mat4.translate(barrelModel, tankPosition);
+                    barrelModel = mat4.rotate(barrelModel, [0, 1, 0], utils.degToRad(bodyAngle));
+
+                    // Turret
+                    barrelModel = mat4.translate(barrelModel, [turretXOffset, 0, 0]);
+                    barrelModel = mat4.rotate(barrelModel, [0, 1, 0], utils.degToRad(turretAngle));
+                    barrelModel = mat4.translate(barrelModel, [-turretXOffset, 0, 0]);
+
+                    // Barrel
+                    barrelModel = mat4.translate(barrelModel, [barrelXOffset, barrelYOffset, 0]);
+                    barrelModel = mat4.rotate(barrelModel, [0, 0, 1], utils.degToRad(barrelAngle));
+                    barrelModel = mat4.translate(barrelModel, [-barrelXOffset, -barrelYOffset, 0]);
+
+                    let localTip = vec4.create(0.6, 0.42, 0.0, 1.0);
+
+                    let worldTip = vec4.transformMat4(localTip, barrelModel);
+                    let tipPos = [worldTip[0], worldTip[1], worldTip[2]];
+
+                    const newShell = createShell(device, shellPipeline);
+                    newShell.position = tipPos;
+
+                    let dirX = [barrelModel[0], barrelModel[1], barrelModel[2]];
+                    let direction = vec3.normalize(dirX);
+
+                    newShell.velocity = [
+                        direction[0] * shellSpeed,
+                        direction[1] * shellSpeed,
+                        direction[2] * shellSpeed
+                    ];
+
+                    newShell.lifetime = 3;
+
+                    shells.push(newShell);
+                }
+            });
+
+            function updateTankControls() {
+                let forward = vec3.create(
+                    Math.cos(utils.degToRad(bodyAngle)),
+                    0,
+                    -Math.sin(utils.degToRad(bodyAngle))
+                );
+                let right = vec3.create(
+                    Math.cos(utils.degToRad(bodyAngle + 90)),
+                    0,
+                    -Math.sin(utils.degToRad(bodyAngle + 90))
+                );
+
+                if (keyState.ArrowUp) {
+                    tankPosition[0] += forward[0] * tankSpeed;
+                    tankPosition[2] += forward[2] * tankSpeed;
+                }
+                if (keyState.ArrowDown) {
+                    tankPosition[0] -= forward[0] * tankSpeed;
+                    tankPosition[2] -= forward[2] * tankSpeed;
+                }
+                if (keyState.ArrowRight) {
+                    bodyAngle -= tankSpeed * 50;
+                }
+                if (keyState.ArrowLeft) {
+                    bodyAngle += tankSpeed * 50;
+                }
+
+                // Turret
+                if (keyState.a) turretAngle += turretRotationSpeed;
+                if (keyState.d) turretAngle -= turretRotationSpeed;
+
+                // Barrel
+                if (keyState.w) barrelAngle = Math.min(barrelAngle + barrelElevationSpeed, 40);
+                if (keyState.s) barrelAngle = Math.max(barrelAngle - barrelElevationSpeed, -20);
+            }
+
+            UI.update_VP(canvas);
+
+            // Create pipelines
+            const { gridPipeline, tankPipeline } = init_pipeline(device, format);
+            shellPipeline = init_shell_pipeline(device, format);
+
+            // Create grid part
+            gridPart = init_grid_part(device, gridPipeline);
+
+            const localAxesPart = init_local_axes_part(device, gridPipeline);
+
+            // Load tank data
+            const tankData = await init_tank(device);
+            const shellData = await init_shell(device);
+
+            // Create tank part
+            tankPart = init_tank_part(device, tankPipeline, tankData);
+            const shellPart = init_shell_part(device, shellPipeline, shellData);
+
+            // RENDER LOOP
+            function render() {
+                const currentTime = performance.now();
+                let dt = (currentTime - lastTime) / 1000.0;
+                lastTime = currentTime;
+
+                UI.update_VP(canvas);
+
+                const encoder = device.createCommandEncoder();
+                const pass = encoder.beginRenderPass({
+                    colorAttachments: [{
+                        view: context.getCurrentTexture().createView(),
+                        loadOp: "clear",
+                        clearValue: { r: 0.2, g: 0.2, b: 0.2, a: 1 },
+                        storeOp: "store"
+                    }],
+                    depthStencilAttachment: {
+                        view: depthTexture.createView(),
+                        depthLoadOp: 'clear',
+                        depthStoreOp: 'store',
+                        depthClearValue: 1.0,
+                    }
+                });
+
+                // Draw the Grid
+                pass.setPipeline(gridPipeline);
+                setup_grid_part(device, pass, gridPart, UI.matrices.VP);
+                pass.draw(gridPart.vertexCount);
+
+                // Draw the Tank
+                pass.setPipeline(tankPipeline);
+                updateTankControls();
+
+                let matStack = [];
+                let MVP = mat4.multiply(UI.matrices.VP, mat4.identity());
+                MVP = mat4.translate(MVP, tankPosition);
+                MVP = mat4.rotate(MVP, [0, 1, 0], utils.degToRad(bodyAngle));
+
+                drawMesh(device, pass, tankPart, MVP, UI.camera.position, tankPart.buffers[bodyMeshIndex], bodyMeshIndex);
+
+                matStack.push(mat4.clone(MVP));
+                {
+                    MVP = mat4.translate(MVP, [turretXOffset, 0, 0]);
+                    MVP = mat4.rotate(MVP, [0, 1, 0], utils.degToRad(turretAngle));
+                    MVP = mat4.translate(MVP, [-turretXOffset, 0, 0]);
+
+                    drawMesh(device, pass, tankPart, MVP, UI.camera.position, tankPart.buffers[turretMeshIndex], turretMeshIndex);
+
+                    matStack.push(mat4.clone(MVP));
+                    {
+                        MVP = mat4.translate(MVP, [barrelXOffset, barrelYOffset, 0]);
+                        MVP = mat4.rotate(MVP, [0, 0, 1], utils.degToRad(barrelAngle));
+                        MVP = mat4.translate(MVP, [-barrelXOffset, -barrelYOffset, 0]);
+                        drawMesh(device, pass, tankPart, MVP, UI.camera.position, tankPart.buffers[barrelMeshIndex], barrelMeshIndex);
+                    }
+                    MVP = matStack.pop();
+                }
+                MVP = matStack.pop();
+
+                // Draw shells
+                pass.setPipeline(shellPipeline);
+                pass.setBindGroup(0, shellPart.textureBG);
+
+                for (let i = shells.length - 1; i >= 0; i--) {
+                    let shell = shells[i];
+
+                    if (!isPaused) {
+                        shell.velocity[1] += gravity * dt;
+
+                        shell.position[0] += shell.velocity[0] * dt;
+                        shell.position[1] += shell.velocity[1] * dt;
+                        shell.position[2] += shell.velocity[2] * dt;
+
+                        shell.lifetime -= dt;
+                        if (shell.lifetime <= 0.0) {
+                            shells.splice(i, 1);
+                            continue;
+                        }
+                    }
+
+                    let model = mat4.identity();
+                    model = mat4.translate(model, shell.position);
+
+                    const orientationMatrix = createOrientationMatrix(shell.velocity);
+                    model = mat4.multiply(model, orientationMatrix);
+                    model = mat4.rotate(model, [0, 1, 0], - Math.PI / 2);
+                    let MVP_shell = mat4.multiply(UI.matrices.VP, model);
+
+                    const uniformData = new Float32Array(20);
+                    uniformData.set(MVP_shell, 0);
+                    uniformData.set(UI.camera.position, 16);
+                    device.queue.writeBuffer(
+                        shell.uniformBuffer,
+                        0,
+                        uniformData
+                    );
+
+                    pass.setBindGroup(1, shell.bindGroup);
+
+                    const buf = shellPart.buffers[shell.meshIndex];
+                    pass.setVertexBuffer(0, buf.position);
+                    pass.setVertexBuffer(1, buf.uv);
+                    pass.setVertexBuffer(2, buf.normal);
+                    pass.setVertexBuffer(3, buf.tangent);
+                    pass.setIndexBuffer(buf.index, 'uint32');
+                    pass.drawIndexed(buf.count);
+                }
+
+                pass.setPipeline(gridPipeline);
+                {
+                    device.queue.writeBuffer(
+                        localAxesPart.uniformBuffer,
+                        0,
+                        MVP
+                    );
+                    pass.setBindGroup(0, localAxesPart.bindGroup);
+                    pass.setVertexBuffer(0, localAxesPart.vertexBuffer);
+                    pass.draw(localAxesPart.vertexCount);
+                }
+
+                pass.end();
+                device.queue.submit([encoder.finish()]);
+                requestAnimationFrame(render);
+            }
+            requestAnimationFrame(render);
+        }
+
+        main();
+    </script>
+</body>
+
+</html>
