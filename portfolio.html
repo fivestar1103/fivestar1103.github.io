@@ -1,1204 +1,880 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hwany - Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hwany - Portfolio</title>
 
-  <!-- Bootstrap 5 CSS -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-  />
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 
-  <!-- Google Fonts: Roboto (Optional) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-    rel="stylesheet"
-  />
+    <!-- Google Fonts: Roboto (Optional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
 
-  <style>
-    /* Base Font & Body */
-    body {
-      font-family: "Roboto", sans-serif;
-      background-color: #f8f9fa; /* Slightly off-white BG */
-      margin: 0;
-      padding-top: 56px; /* Offset for fixed navbar */
-      line-height: 1.6; /* Improved readability */
-    }
+    <style>
+        /* Base Font & Body */
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding-top: 56px;
+            /* Offset for fixed navbar */
+            line-height: 1.6;
+        }
 
-    /* Navbar Styling */
-    .navbar-brand {
-      font-weight: 700;
-    }
-    .navbar-nav .nav-link.active {
-      font-weight: 600;
-      text-decoration: underline;
-    }
+        /* Navbar Styling */
+        .navbar-brand {
+            font-weight: 700;
+        }
 
-    /* Hero Section */
-    .hero {
-      background: #e9ecef; /* Light gray background */
-      padding: 60px 20px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .hero h1 {
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
+        .navbar-nav .nav-link.active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
 
-    /* Table of Contents card */
-    .toc-card {
-      background-color: #fff;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      margin-bottom: 1.5rem;
-    }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #a7d1a7 0%, #013220 100%);
+            padding: 100px 20px;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+        }
 
-    /* Cards & Hover Effect */
-    .card.mb-4 {
-      background-color: #fff;
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-      border-left: 5px solid #35cf94; /* Accent border */
-      padding-left: 10px;
-    }
-    .card.mb-4:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
+        .hero h1 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
 
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
+        /* Alternating Section Background Colors for Projects */
+        .card:nth-child(odd) {
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    /* Horizontal Scroll for screenshots */
-    .screenshot-container {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 0.5rem 0;
-      margin-bottom: 1rem;
-    }
-    .screenshot-container img {
-      max-height: 300px;
-      flex-shrink: 0;
-      border-radius: 5px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      border: 1px solid #ddd; /* subtle border */
-      background-color: #fff; /* ensures transparent images stand out */
-    }
-    .screenshot-container img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    }
+        .card:nth-child(even) {
+            background-color: #f0f0f0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    /* Project Link Headings */
-    .project-links h5 {
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
+        /* Cards & Hover Effect */
+        .card.mb-4 {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border-left: 5px solid #e98f11;
+            padding-left: 10px;
+        }
 
-    /* Footer styling */
-    footer {
-      background-color: #212529;
-      color: #fff;
-      padding: 30px 0;
-      margin-top: 2rem;
-      text-align: center;
-    }
-    footer a {
-      color: #fff;
-      text-decoration: underline;
-      transition: color 0.3s ease;
-    }
-    footer a:hover {
-      color: #ced4da;
-    }
+        .card.mb-4:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
-    /* Button hover effect */
-    .btn-custom {
-      background-color: #90ee90;
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      font-size: 0.9rem;
-    }
-    .btn-custom:hover {
-      background-color: #013220;
-      transform: scale(1.05);
-    }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
 
-    /* Modal image for enlargement */
-    #modalImage {
-      max-height: 80vh;
-      object-fit: contain;
-    }
+        /* Horizontal Scroll for screenshots */
+        .screenshot-container {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+        }
 
-    /* Responsive */
-    @media (max-width: 767px) {
-      .card.mb-4:hover {
-        transform: none;
-        box-shadow: none;
-      }
-      .screenshot-container img {
-        max-height: 200px; /* slightly smaller images on mobile */
-      }
-    }
+        .screenshot-container img {
+            max-height: 300px;
+            flex-shrink: 0;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
 
-    /* Back to Top Button */
-    #backToTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-weight: bold;
-      text-align: center;
-      padding: 0;
-      justify-content: center;
-      align-items: center;
-    }
-  </style>
+        .screenshot-container img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 30px 0;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ced4da;
+        }
+
+        /* Back to Top Button */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-weight: bold;
+            text-align: center;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Hwany's Portfolio</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarContent"
-        aria-controls="navbarContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hwany's Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="portfolio.html">Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/CV.pdf">Download CV</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+            <!-- Apply alignment classes here -->
+            <div class="collapse navbar-collapse justify-content-center justify-content-md-end" id="navbarContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="portfolio.html">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/CV.pdf">Download CV</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="container">
-      <h1>Welcome to My Portfolio!</h1>
-      <p class="lead mb-0">
-        Explore a selection of my projects below, complete with screenshots
-        and interactive demos where available.
-      </p>
-    </div>
-  </section>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to My Portfolio!</h1>
+            <p class="lead mb-0">
+                Explore a selection of my projects below, complete with screenshots
+                and interactive demos where available.
+            </p>
+        </div>
+    </section>
 
-  <!-- MAIN CONTENT -->
-  <main class="container mb-5">
-    <!-- Table of Contents -->
-    <div class="toc-card">
-      <h2 class="mb-3">Table of Contents</h2>
-      <ol class="ps-3">
-        <li>
-          <a
-            href="#procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai"
-            class="text-decoration-none"
-            >Procedurally Generated Puzzle Adventure Enhanced by Speech and
-            Emotion AI</a
-          >
-        </li>
-        <li>
-          <a href="#webgpu-interactive-tank" class="text-decoration-none"
-            >WebGPU Interactive Tank</a
-          >
-        </li>
-        <li>
-          <a href="#seoul-cheer-up" class="text-decoration-none"
-            >Seoul Cheer-up</a
-          >
-        </li>
-        <li>
-          <a
-            href="#ppukkus-grand-adventure-grow-longer"
-            class="text-decoration-none"
-            >Ppukku’s Grand Adventure: Grow Longer!</a
-          >
-        </li>
-        <li>
-          <a href="#fate-and-coincidence" class="text-decoration-none"
-            >Fate and Coincidence</a
-          >
-        </li>
-        <li>
-          <a href="#polar-polar" class="text-decoration-none"
-            >Polar Polar</a
-          >
-        </li>
-        <li>
-          <a
-            href="#aida-axie-infinity-data-analyzer"
-            class="text-decoration-none"
-            >AIDA (Axie Infinity Data Analyzer)</a
-          >
-        </li>
-        <li>
-          <a href="#mobile-robot-controller" class="text-decoration-none"
-            >Mobile Robot Controller</a
-          >
-        </li>
-        <li>
-          <a href="#cpong" class="text-decoration-none">Cpong</a>
-        </li>
-        <li>
-          <a href="#tea-text-editor-advanced" class="text-decoration-none"
-            >T.E.A. (Text Editor Advanced)</a
-          >
-        </li>
-        <li>
-          <a
-            href="#library-lobby-noise-signal-light"
-            class="text-decoration-none"
-            >Library Lobby Noise Signal Light</a
-          >
-        </li>
-        <li>
-          <a
-            href="#squidward-the-coin-collector"
-            class="text-decoration-none"
-            >Squidward the Coin Collector</a
-          >
-        </li>
-      </ol>
-    </div>
+    <!-- MAIN CONTENT -->
+    <main class="container mb-5">
+        <!-- Table of Contents -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2 class="mb-3">Table of Contents</h2>
+                <ol class="ps-3">
+                    <li>
+                        <a href="#procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai"
+                            class="text-decoration-none">Procedurally Generated Puzzle Adventure Enhanced by Speech and
+                            Emotion AI</a>
+                    </li>
+                    <li>
+                        <a href="#webgpu-interactive-tank" class="text-decoration-none">WebGPU Interactive Tank</a>
+                    </li>
+                    <li>
+                        <a href="#seoul-cheer-up" class="text-decoration-none">Seoul Cheer-up</a>
+                    </li>
+                    <li>
+                        <a href="#ppukkus-grand-adventure-grow-longer" class="text-decoration-none">Ppukku’s Grand
+                            Adventure: Grow Longer!</a>
+                    </li>
+                    <li>
+                        <a href="#fate-and-coincidence" class="text-decoration-none">Fate and Coincidence</a>
+                    </li>
+                    <li>
+                        <a href="#polar-polar" class="text-decoration-none">Polar Polar</a>
+                    </li>
+                    <li>
+                        <a href="#aida-axie-infinity-data-analyzer" class="text-decoration-none">AIDA (Axie Infinity
+                            Data
+                            Analyzer)</a>
+                    </li>
+                    <li>
+                        <a href="#mobile-robot-controller" class="text-decoration-none">Mobile Robot Controller</a>
+                    </li>
+                    <li>
+                        <a href="#cpong" class="text-decoration-none">Cpong</a>
+                    </li>
+                    <li>
+                        <a href="#tea-text-editor-advanced" class="text-decoration-none">T.E.A. (Text Editor
+                            Advanced)</a>
+                    </li>
+                    <li>
+                        <a href="#library-lobby-noise-signal-light" class="text-decoration-none">Library Lobby Noise
+                            Signal
+                            Light</a>
+                    </li>
+                    <li>
+                        <a href="#squidward-the-coin-collector" class="text-decoration-none">Squidward the Coin
+                            Collector</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
 
-    <!-- Project 1 -->
-    <div
-      class="card mb-4"
-      id="procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai"
-    >
-      <div class="card-body">
-        <h3 class="card-title">
-          1. Procedurally Generated Puzzle Adventure Enhanced by Speech and
-          Emotion AI
-        </h3>
-        <ul>
-          <li>
-            Designed and implemented PCG algorithms to generate unique and
-            dynamic game environments, enhancing replayability.
-          </li>
-          <li>
-            Conceptualized the game idea, integrating Procedural Content
-            Generation (PCG) with Speech-to-Text (STT) and Speech Emotion
-            Recognition (SER) technologies.
-          </li>
-          <li>
-            Led the team, overseeing project integration and managing version
-            control using Git to ensure seamless collaboration.
-          </li>
-          <li>
-            Delivered a functional prototype showcasing dynamic content
-            generation and interactive AI-driven features.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/pcg_game_1.png"
-            alt="Screenshot of PCG Environment"
-          />
-          <img
-            src="images/pcg_game_2.png"
-            alt="Screenshot of AI Mechanics"
-          />
-        </div>
-        <div class="project-links">
-          <h5>Interactive Demo:</h5>
-          <ul>
-            <li>
-              <a
-                href="/webgpu-interactive-tank/proj3.html"
-                target="_blank"
-                >Play the Demo</a
-              >
-            </li>
-          </ul>
-          <h5>GitHub Repository:</h5>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/fivestar1103/capstone"
-                target="_blank"
-                >View on GitHub</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- Project 2 -->
-    <div class="card mb-4" id="webgpu-interactive-tank">
-      <div class="card-body">
-        <h3 class="card-title">2. WebGPU Interactive Tank</h3>
-        <ul>
-          <li>
-            Designed and implemented an interactive 3D tank simulation using
-            WebGPU, showcasing advanced computer graphics techniques and
-            real-time rendering.
-          </li>
-          <li>
-            Developed core functionalities including tank movement with arrow
-            keys, turret rotation with "A" and "D" keys, barrel elevation with
-            "W" and "S" keys, and realistic shell shooting mechanics influenced
-            by gravity.
-          </li>
-          <li>
-            Applied comprehensive texture mapping and normal mapping
-            techniques using multiple texture files to enhance visual realism
-            and material properties.
-          </li>
-          <li>
-            Delivered a fully functional prototype demonstrating smooth tank
-            controls, realistic physics, and visually engaging graphics,
-            fulfilling all assignment requirements for the computer graphics
-            course.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/webgpu_tank_1.png"
-            alt="Screenshot of Tank Simulation"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/webgpu_tank_1.png"
-          />
-          <img
-            src="images/webgpu_tank_2.png"
-            alt="Screenshot of Shell Firing Feature"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/webgpu_tank_2.png"
-          />
-          <img
-            src="images/webgpu_tank_3.png"
-            alt="Screenshot of Pause Feature"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/webgpu_tank_3.png"
-          />
+        <!-- Project 1 -->
+        <div class="card mb-4" id="procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai">
+            <div class="card-body">
+                <h3 class="card-title">
+                    1. Procedurally Generated Puzzle Adventure Enhanced by Speech and
+                    Emotion AI
+                </h3>
+                <ul>
+                    <li>
+                        Designed and implemented PCG algorithms to generate unique and
+                        dynamic game environments, enhancing replayability.
+                    </li>
+                    <li>
+                        Utilized a Cellular Automata algorithm, Delaunay Triangulation, Minimum Spanning Trees, and A* Search Algorithm to put together a complex PCG dungeon.
+                    </li>
+                    <li>
+                        Conceptualized the game idea, integrating Procedural Content
+                        Generation (PCG) with Speech-to-Text (STT) and Speech Emotion
+                        Recognition (SER) technologies.
+                    </li>
+                    <li>
+                        Led the team, overseeing project integration and managing version
+                        control using Git to ensure seamless collaboration.
+                    </li>
+                    <li>
+                        Delivered a functional prototype showcasing dynamic content
+                        generation and interactive AI-driven features.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/pcg_game_1.png" alt="Screenshot of Procedurally Created Dungeon" data-bs-toggle="modal"
+                    data-bs-target="#imageModal" data-bs-whatever="images/pcg_game_1.png" />
+                    <img src="images/pcg_game_2.png" alt="Screenshot of Gameplay Interface" data-bs-toggle="modal"
+                    data-bs-target="#imageModal" data-bs-whatever="images/pcg_game_2.png" />
+                    <img src="images/pcg_game_3.png" alt="Screenshot of In-game Corridor" data-bs-toggle="modal"
+                    data-bs-target="#imageModal" data-bs-whatever="images/pcg_game_3.png" />
+                    <img src="images/pcg_game_4.png" alt="Screenshot of Battle Interface" data-bs-toggle="modal"
+                    data-bs-target="#imageModal" data-bs-whatever="images/pcg_game_4.png" />
+                    <img src="images/pcg_game_5.png" alt="Screenshot of PCG Map Creation Process" data-bs-toggle="modal"
+                    data-bs-target="#imageModal" data-bs-whatever="images/pcg_game_5.png" />
+                    <img src="images/pcg_game_6.png" alt="Screenshot of PCG Class Diagram" data-bs-toggle="modal"
+                    data-bs-target="#imageModal" data-bs-whatever="images/pcg_game_6.png" />
+                </div>
+                <div class="project-links">
+                    <h5>Interactive Demo:</h5>
+                    <ul>
+                        <li>
+                            <a href="/webgpu-interactive-tank/proj3.html" target="_blank">Play the Demo</a>
+                        </li>
+                    </ul>
+                    <h5>GitHub Repository:</h5>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/fivestar1103/capstone" target="_blank">View on GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="project-links">
-          <h5>Interactive Demo:</h5>
-          <ul>
-            <li>
-              <a
-                href="/webgpu-interactive-tank/proj3.html"
-                target="_blank"
-                >Play the Demo</a
-              >
-            </li>
-          </ul>
-          <h5>GitHub Repository:</h5>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/fivestar1103/webgpu-interactive-tank"
-                target="_blank"
-                >View on GitHub</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- Project 3 (Seoul Cheer-up) -->
-    <div class="card mb-4" id="seoul-cheer-up">
-      <div class="card-body">
-        <h3 class="card-title">3. Seoul Cheer-up</h3>
-        <ul>
-          <li>
-            Developed a crowdsourcing platform to efficiently manage abandoned
-            public electric scooters, addressing the issue of neglected
-            scooters.
-          </li>
-          <li>
-            Implemented core frontend features using React, ensuring a
-            user-friendly and responsive interface.
-          </li>
-          <li>
-            Proposed the central idea to create an interactive platform where
-            citizens can easily report abandoned scooters and receive rewards.
-          </li>
-          <li>
-            Introduced gamification elements to boost user participation by
-            offering incentives and rewards.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/seoul_cheerup_1.png"
-            alt="Screenshot of Main Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/seoul_cheerup_1.png"
-          />
-          <img
-            src="images/seoul_cheerup_2.png"
-            alt="Screenshot of Reporting Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/seoul_cheerup_2.png"
-          />
-          <img
-            src="images/seoul_cheerup_3.png"
-            alt="Screenshot of Gamification Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/seoul_cheerup_3.png"
-          />
+        <!-- Project 2 -->
+        <div class="card mb-4" id="webgpu-interactive-tank">
+            <div class="card-body">
+                <h3 class="card-title">2. WebGPU Interactive Tank</h3>
+                <ul>
+                    <li>
+                        Designed and implemented an interactive 3D tank simulation using
+                        WebGPU, showcasing advanced computer graphics techniques and
+                        real-time rendering.
+                    </li>
+                    <li>
+                        Developed core functionalities including tank movement with arrow
+                        keys, turret rotation with "A" and "D" keys, barrel elevation with
+                        "W" and "S" keys, and realistic shell shooting mechanics influenced
+                        by gravity.
+                    </li>
+                    <li>
+                        Applied comprehensive texture mapping and normal mapping
+                        techniques using multiple texture files to enhance visual realism
+                        and material properties.
+                    </li>
+                    <li>
+                        Delivered a fully functional prototype demonstrating smooth tank
+                        controls, realistic physics, and visually engaging graphics,
+                        fulfilling all assignment requirements for the computer graphics
+                        course.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/webgpu_tank_1.png" alt="Screenshot of Tank Simulation" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/webgpu_tank_1.png" />
+                    <img src="images/webgpu_tank_2.png" alt="Screenshot of Shell Firing Feature" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/webgpu_tank_2.png" />
+                    <img src="images/webgpu_tank_3.png" alt="Screenshot of Pause Feature" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/webgpu_tank_3.png" />
+                </div>
+                <div class="project-links">
+                    <h5>Interactive Demo:</h5>
+                    <ul>
+                        <li>
+                            <a href="/webgpu-interactive-tank/proj3.html" target="_blank">Play the Demo</a>
+                        </li>
+                    </ul>
+                    <h5>GitHub Repository:</h5>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/fivestar1103/webgpu-interactive-tank" target="_blank">View on
+                                GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="project-links">
-          <h5>Live Demo:</h5>
-          <ul>
-            <li>
-              <a href="https://mariana.paaran.com/" target="_blank"
-                >Visit Platform</a
-              >
-            </li>
-          </ul>
-          <h5>GitHub Repository:</h5>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/PJW011122/mariana"
-                target="_blank"
-                >View on GitHub</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- Project 4 (Ppukku's Grand Adventure) -->
-    <div class="card mb-4" id="ppukkus-grand-adventure-grow-longer">
-      <div class="card-body">
-        <h3 class="card-title">4. Ppukku’s Grand Adventure: Grow Longer!</h3>
-        <ul>
-          <li>
-            Designed and developed a mini-game as a Unity developer intern,
-            officially released on Play Store and App Store.
-          </li>
-          <li>
-            Implemented snake controls using a virtual joystick, allowing
-            length adjustment by consuming ink and bean items.
-          </li>
-          <li>
-            Created an algorithm utilizing cycle detection and raycasting to
-            determine if the snake fully encircled enemies, enabling the core
-            mechanic of surrounding and defeating foes.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/ppukku_game_1.png"
-            alt="Screenshot of Lobby Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/ppukku_game_1.png"
-          />
-          <img
-            src="images/ppukku_game_2.png"
-            alt="Screenshot of Game Over Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/ppukku_game_2.png"
-          />
-          <img
-            src="images/ppukku_game_3.png"
-            alt="Screenshot of Gameplay Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/ppukku_game_3.png"
-          />
-          <img
-            src="images/ppukku_game_4.png"
-            alt="Description of Encircle to Defeat Feature"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/ppukku_game_4.png"
-          />
+        <!-- Project 3 (Seoul Cheer-up) -->
+        <div class="card mb-4" id="seoul-cheer-up">
+            <div class="card-body">
+                <h3 class="card-title">3. Seoul Cheer-up</h3>
+                <ul>
+                    <li>
+                        Developed a crowdsourcing platform to efficiently manage abandoned
+                        public electric scooters, addressing the issue of neglected
+                        scooters.
+                    </li>
+                    <li>
+                        Implemented core frontend features using React, ensuring a
+                        user-friendly and responsive interface.
+                    </li>
+                    <li>
+                        Proposed the central idea to create an interactive platform where
+                        citizens can easily report abandoned scooters and receive rewards.
+                    </li>
+                    <li>
+                        Introduced gamification elements to boost user participation by
+                        offering incentives and rewards.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/seoul_cheerup_1.png" alt="Screenshot of Main Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/seoul_cheerup_1.png" />
+                    <img src="images/seoul_cheerup_2.png" alt="Screenshot of Reporting Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/seoul_cheerup_2.png" />
+                    <img src="images/seoul_cheerup_3.png" alt="Screenshot of Gamification Interface"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_3.png" />
+                </div>
+                <div class="project-links">
+                    <h5>Live Demo:</h5>
+                    <ul>
+                        <li>
+                            <a href="https://mariana.paaran.com/" target="_blank">Visit Platform</a>
+                        </li>
+                    </ul>
+                    <h5>GitHub Repository:</h5>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/PJW011122/mariana" target="_blank">View on GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <h5>Download/Play Links:</h5>
-        <ul>
-          <li>
-            <a
-              href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EA%B8%B8%EC%96%B4%EC%A0%B8%EB%9D%BC/id6720711350"
-              >Apple App Store</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.FairytaleHero.PUKKUAdventureLong"
-              >Google Play Store</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
 
-    <!-- Project 5 (Fate and Coincidence) -->
-    <div class="card mb-4" id="fate-and-coincidence">
-      <div class="card-body">
-        <h3 class="card-title">5. Fate and Coincidence</h3>
-        <ul>
-          <li>
-            Collaborated in a six-member team to develop an escape room game
-            using Unity, aiming for a December 2024 release.
-          </li>
-          <li>
-            Managed all game data through Google Spreadsheet and built an
-            event system by loading and parsing CSV files via editor
-            functionalities.
-          </li>
-          <li>
-            Developed an organic dialogue system to efficiently handle
-            branching scenarios based on player choices.
-          </li>
-          <li>
-            Implemented a cylindrical lock dial using trigonometric functions
-            and raycasting for independent wheel rotations.
-          </li>
-          <li>
-            Created a diary page drag feature by parsing the "Diary" sheet to
-            display contents and enabling page turns through mouse dragging.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/fate_coincidence_1.png"
-            alt="Screenshot of Dialogue System"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/fate_coincidence_1.png"
-          />
-          <img
-            src="images/fate_coincidence_2.png"
-            alt="Screenshot of Diary Puzzle"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/fate_coincidence_2.png"
-          />
-          <img
-            src="images/fate_coincidence_3.png"
-            alt="Screenshot of Google Sheets Controlling Game Data"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/fate_coincidence_3.png"
-          />
-          <img
-            src="images/fate_coincidence_4.png"
-            alt="Screenshot of Dial Puzzle"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/fate_coincidence_4.png"
-          />
-          <img
-            src="images/fate_coincidence_5.png"
-            alt="Screenshot of Diary Page Flipping Feature"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/fate_coincidence_5.png"
-          />
+        <!-- Project 4 (Ppukku's Grand Adventure) -->
+        <div class="card mb-4" id="ppukkus-grand-adventure-grow-longer">
+            <div class="card-body">
+                <h3 class="card-title">4. Ppukku’s Grand Adventure: Grow Longer!</h3>
+                <ul>
+                    <li>
+                        Designed and developed a mini-game as a Unity developer intern,
+                        officially released on Play Store and App Store.
+                    </li>
+                    <li>
+                        Implemented snake controls using a virtual joystick, allowing
+                        length adjustment by consuming ink and bean items.
+                    </li>
+                    <li>
+                        Created an algorithm utilizing cycle detection and raycasting to
+                        determine if the snake fully encircled enemies, enabling the core
+                        mechanic of surrounding and defeating foes.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/ppukku_game_1.png" alt="Screenshot of Lobby Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/ppukku_game_1.png" />
+                    <img src="images/ppukku_game_2.png" alt="Screenshot of Game Over Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/ppukku_game_2.png" />
+                    <img src="images/ppukku_game_3.png" alt="Screenshot of Gameplay Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/ppukku_game_3.png" />
+                    <img src="images/ppukku_game_4.png" alt="Description of Encircle to Defeat Feature"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/ppukku_game_4.png" />
+                </div>
+                <h5>Download/Play Links:</h5>
+                <ul>
+                    <li>
+                        <a
+                            href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EA%B8%B8%EC%96%B4%EC%A0%B8%EB%9D%BC/id6720711350">Apple
+                            App Store</a>
+                    </li>
+                    <li>
+                        <a href="https://play.google.com/store/apps/details?id=com.FairytaleHero.PUKKUAdventureLong">Google
+                            Play Store</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="project-links">
-          <h5>Interactive Demo:</h5>
-          <ul>
-            <li><a href="" target="_blank">Play the Demo</a></li>
-          </ul>
-          <h5>GitHub Repository:</h5>
-          <ul>
-            <li>
-              <a href="https://github.com/ollan365/Fate" target="_blank"
-                >View on GitHub</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- Project 6 (Polar Polar) -->
-    <div class="card mb-4" id="polar-polar">
-      <div class="card-body">
-        <h3 class="card-title">6. Polar Polar</h3>
-        <ul>
-          <li>
-            Created a 2D platformer game as a solo project at Com2uS Mentoring
-            School, completed in four days.
-          </li>
-          <li>
-            Incorporated magnetic action elements, allowing players to choose
-            between N-pole and S-pole to repel or attract objects.
-          </li>
-          <li>
-            Developed multi-layered backgrounds with parallax effects to
-            enhance depth perception.
-          </li>
-          <li>
-            Utilized free assets from the Unity Asset Store, including
-            tilemaps, animations, UI elements, and snow effect prefabs, to
-            expedite development.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/polar_polar_1.png"
-            alt="Screenshot of Main Gameplay"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/polar_polar_1.png"
-          />
-          <img
-            src="images/polar_polar_2.png"
-            alt="Screenshot of Magnetic Gameplay (Bouncing Off Icicle)"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/polar_polar_2.png"
-          />
-          <img
-            src="images/polar_polar_3.png"
-            alt="Screenshot of UI Indicating Progress"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/polar_polar_3.png"
-          />
-          <img
-            src="images/polar_polar_4.png"
-            alt="Screenshot of Parallax Background"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/polar_polar_4.png"
-          />
-          <img
-            src="images/polar_polar_5.png"
-            alt="Screenshot of Magnetic Gameplay (Super Jump)"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/polar_polar_5.png"
-          />
+        <!-- Project 5 (Fate and Coincidence) -->
+        <div class="card mb-4" id="fate-and-coincidence">
+            <div class="card-body">
+                <h3 class="card-title">5. Fate and Coincidence</h3>
+                <ul>
+                    <li>
+                        Collaborated in a six-member team to develop an escape room game
+                        using Unity, aiming for a December 2024 release.
+                    </li>
+                    <li>
+                        Managed all game data through Google Spreadsheet and built an
+                        event system by loading and parsing CSV files via editor
+                        functionalities.
+                    </li>
+                    <li>
+                        Developed an organic dialogue system to efficiently handle
+                        branching scenarios based on player choices.
+                    </li>
+                    <li>
+                        Implemented a cylindrical lock dial using trigonometric functions
+                        and raycasting for independent wheel rotations.
+                    </li>
+                    <li>
+                        Created a diary page drag feature by parsing the "Diary" sheet to
+                        display contents and enabling page turns through mouse dragging.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/fate_coincidence_1.png" alt="Screenshot of Dialogue System" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/fate_coincidence_1.png" />
+                    <img src="images/fate_coincidence_2.png" alt="Screenshot of Diary Puzzle" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/fate_coincidence_2.png" />
+                    <img src="images/fate_coincidence_3.png" alt="Screenshot of Google Sheets Controlling Game Data"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/fate_coincidence_3.png" />
+                    <img src="images/fate_coincidence_4.png" alt="Screenshot of Dial Puzzle" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/fate_coincidence_4.png" />
+                    <img src="images/fate_coincidence_5.png" alt="Screenshot of Diary Page Flipping Feature"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/fate_coincidence_5.png" />
+                </div>
+                <div class="project-links">
+                    <h5>Interactive Demo:</h5>
+                    <ul>
+                        <li><a href="" target="_blank">Play the Demo</a></li>
+                    </ul>
+                    <h5>GitHub Repository:</h5>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/ollan365/Fate" target="_blank">View on GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="project-links">
-          <h5>Interactive Demo:</h5>
-          <ul>
-            <li><a href="" target="_blank">Play the Demo</a></li>
-          </ul>
-          <h5>GitHub Repository:</h5>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/fivestar1103/Polar-Polar"
-                target="_blank"
-                >View on GitHub</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- Project 7 (AIDA) -->
-    <div class="card mb-4" id="aida-axie-infinity-data-analyzer">
-      <div class="card-body">
-        <h3 class="card-title">7. AIDA (Axie Infinity Data Analyzer)</h3>
-        <ul>
-          <li>
-            Developed a game data analysis service for Web3 game "Axie
-            Infinity" at SKYGG, a blockchain game community startup.
-          </li>
-          <li>
-            Collected and analyzed data using the developer(Sky Mavis)'s API
-            to provide meaningful insights for professional players.
-          </li>
-          <li>
-            Built the database and web services using Python Flask,
-            JavaScript, and MySQL, and deployed them on Google Cloud
-            Platform.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/aida_axie_1.png"
-            alt="Screenshot of Main Page"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/aida_axie_1.png"
-          />
-          <img
-            src="images/aida_axie_2.png"
-            alt="Screenshot of Similar Decks Page"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/aida_axie_3.png"
-          />
-          <img
-            src="images/aida_axie_3.png"
-            alt="Screenshot of Online Users Page"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/aida_axie_3.png"
-          />
-          <img
-            src="images/aida_axie_4.png"
-            alt="Screenshot of Filter Teams Page"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/aida_axie_4.png"
-          />
+        <!-- Project 6 (Polar Polar) -->
+        <div class="card mb-4" id="polar-polar">
+            <div class="card-body">
+                <h3 class="card-title">6. Polar Polar</h3>
+                <ul>
+                    <li>
+                        Created a 2D platformer game as a solo project at Com2uS Mentoring
+                        School, completed in four days.
+                    </li>
+                    <li>
+                        Incorporated magnetic action elements, allowing players to choose
+                        between N-pole and S-pole to repel or attract objects.
+                    </li>
+                    <li>
+                        Developed multi-layered backgrounds with parallax effects to
+                        enhance depth perception.
+                    </li>
+                    <li>
+                        Utilized free assets from the Unity Asset Store, including
+                        tilemaps, animations, UI elements, and snow effect prefabs, to
+                        expedite development.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/polar_polar_1.png" alt="Screenshot of Main Gameplay" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/polar_polar_1.png" />
+                    <img src="images/polar_polar_2.png" alt="Screenshot of Magnetic Gameplay (Bouncing Off Icicle)"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/polar_polar_2.png" />
+                    <img src="images/polar_polar_3.png" alt="Screenshot of UI Indicating Progress"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/polar_polar_3.png" />
+                    <img src="images/polar_polar_4.png" alt="Screenshot of Parallax Background" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/polar_polar_4.png" />
+                    <img src="images/polar_polar_5.png" alt="Screenshot of Magnetic Gameplay (Super Jump)"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/polar_polar_5.png" />
+                </div>
+                <div class="project-links">
+                    <h5>Interactive Demo:</h5>
+                    <ul>
+                        <li><a href="" target="_blank">Play the Demo</a></li>
+                    </ul>
+                    <h5>GitHub Repository:</h5>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/fivestar1103/Polar-Polar" target="_blank">View on GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Project 8 (Mobile Robot Controller) -->
-    <div class="card mb-4" id="mobile-robot-controller">
-      <div class="card-body">
-        <h3 class="card-title">8. Mobile Robot Controller</h3>
-        <ul>
-          <li>
-            Developed a robot control program for navigating obstacles in
-            disaster scenarios as a Software Engineering class project.
-          </li>
-          <li>
-            Implemented the program in Python using an object-oriented
-            approach.
-          </li>
-          <li>
-            Developed the A* algorithm to calculate the shortest path avoiding
-            danger zones and traversing exploration points.
-          </li>
-          <li>
-            Integrated an STT (Speech To Text) module to allow map information
-            modification through voice recognition, incorporating AI
-            elements.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/mobile_robot_1.png"
-            alt="Screenshot of Map Settings Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/mobile_robot_1.png"
-          />
-          <img
-            src="images/mobile_robot_2.png"
-            alt="Screenshot of Path Finding Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/mobile_robot_2.png"
-          />
-          <img
-            src="images/mobile_robot_3.png"
-            alt="Screenshot of Voice Input Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/mobile_robot_3.png"
-          />
-          <img
-            src="images/mobile_robot_4.png"
-            alt="Screenshot of Event Logs on the Right"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/mobile_robot_4.png"
-          />
-          <img
-            src="images/mobile_robot_5.png"
-            alt="Screenshot of the Map Component Diagram"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/mobile_robot_5.png"
-          />
-          <img
-            src="images/mobile_robot_6.png"
-            alt="Screenshot of the Main Class Diagram"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/mobile_robot_6.png"
-          />
+        <!-- Project 7 (AIDA) -->
+        <div class="card mb-4" id="aida-axie-infinity-data-analyzer">
+            <div class="card-body">
+                <h3 class="card-title">7. AIDA (Axie Infinity Data Analyzer)</h3>
+                <ul>
+                    <li>
+                        Developed a game data analysis service for Web3 game "Axie
+                        Infinity" at SKYGG, a blockchain game community startup.
+                    </li>
+                    <li>
+                        Collected and analyzed data using the developer(Sky Mavis)'s API
+                        to provide meaningful insights for professional players.
+                    </li>
+                    <li>
+                        Built the database and web services using Python Flask,
+                        JavaScript, and MySQL, and deployed them on Google Cloud
+                        Platform.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/aida_axie_1.png" alt="Screenshot of Main Page" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/aida_axie_1.png" />
+                    <img src="images/aida_axie_2.png" alt="Screenshot of Similar Decks Page" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/aida_axie_3.png" />
+                    <img src="images/aida_axie_3.png" alt="Screenshot of Online Users Page" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/aida_axie_3.png" />
+                    <img src="images/aida_axie_4.png" alt="Screenshot of Filter Teams Page" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/aida_axie_4.png" />
+                </div>
+            </div>
         </div>
-        <div class="project-links">
-          <!--
+
+        <!-- Project 8 (Mobile Robot Controller) -->
+        <div class="card mb-4" id="mobile-robot-controller">
+            <div class="card-body">
+                <h3 class="card-title">8. Mobile Robot Controller</h3>
+                <ul>
+                    <li>
+                        Developed a robot control program for navigating obstacles in
+                        disaster scenarios as a Software Engineering class project.
+                    </li>
+                    <li>
+                        Implemented the program in Python using an object-oriented
+                        approach.
+                    </li>
+                    <li>
+                        Developed the A* algorithm to calculate the shortest path avoiding
+                        danger zones and traversing exploration points.
+                    </li>
+                    <li>
+                        Integrated an STT (Speech To Text) module to allow map information
+                        modification through voice recognition, incorporating AI
+                        elements.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/mobile_robot_1.png" alt="Screenshot of Map Settings Interface"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_1.png" />
+                    <img src="images/mobile_robot_2.png" alt="Screenshot of Path Finding Interface"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_2.png" />
+                    <img src="images/mobile_robot_3.png" alt="Screenshot of Voice Input Interface"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_3.png" />
+                    <img src="images/mobile_robot_4.png" alt="Screenshot of Event Logs on the Right"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_4.png" />
+                    <img src="images/mobile_robot_5.png" alt="Screenshot of the Map Component Diagram"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_5.png" />
+                    <img src="images/mobile_robot_6.png" alt="Screenshot of the Main Class Diagram"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_6.png" />
+                </div>
+                <div class="project-links">
+                    <!--
           <h5>Demo Video:</h5>
           <ul>
             <li><a href="" target="_blank">Play the Video</a></li>
           </ul>
           -->
-          <h5>GitHub Repository:</h5>
-          <ul>
-            <li>
-              <a
-                href="https://github.com/fivestar1103/mobileRobotController"
-                target="_blank"
-                >View on GitHub</a
-              >
-            </li>
-          </ul>
+                    <h5>GitHub Repository:</h5>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/fivestar1103/mobileRobotController" target="_blank">View on
+                                GitHub</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <!-- Project 9 (Cpong) -->
+        <div class="card mb-4" id="cpong">
+            <div class="card-body">
+                <h3 class="card-title">9. Cpong</h3>
+                <ul>
+                    <li>
+                        Remade Atari’s classic Pong game in C language for a C Programming
+                        and Practice class project.
+                    </li>
+                    <li>
+                        Enabled local 2-player multiplayer functionality.
+                    </li>
+                    <li>
+                        Developed the game using pure C language executable via Windows
+                        command line, utilizing Windows.h for system functions.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/cpong_1.png" alt="Screenshot of Lobby Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/cpong_1.png" />
+                    <img src="images/cpong_2.png" alt="Screenshot of Gameplay Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/cpong_2.png" />
+                    <img src="images/cpong_3.png" alt="Screenshot of 1p Scoring" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/cpong_3.png" />
+                    <img src="images/cpong_4.png" alt="Screenshot of Game Over Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/cpong_4.png" />
+                </div>
+                <h5>Raw Code:</h5>
+                <ul>
+                    <li><a href="/codes/pong.html">Cpong.c</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Project 10 (T.E.A.) -->
+        <div class="card mb-4" id="tea-text-editor-advanced">
+            <div class="card-body">
+                <h3 class="card-title">10. T.E.A. (Text Editor Advanced)</h3>
+                <ul>
+                    <li>
+                        Created a personal notepad application using Python.
+                    </li>
+                    <li>
+                        Added mouse-drawn drawing capabilities to allow users to create
+                        sketches within the notepad.
+                    </li>
+                    <li>
+                        Enabled various font and brush settings to customize text and
+                        drawings.
+                    </li>
+                    <li>
+                        Implemented file creation, saving, and loading functionalities for
+                        user convenience.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/tea_editor_1.png" alt="Screenshot of Text Editor Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/tea_editor_1.png" />
+                    <img src="images/tea_editor_2.png" alt="Screenshot of Font Settings Feature" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/tea_editor_2.png" />
+                    <img src="images/tea_editor_3.png" alt="Screenshot of Drawing Canvas Interface"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/tea_editor_3.png" />
+                    <img src="images/tea_editor_4.png" alt="Screenshot of File Read and Write Feature"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/tea_editor_4.png" />
+                </div>
+                <h5>Raw Code:</h5>
+                <ul>
+                    <li><a href="/codes/TEA.html">TEA.py</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Project 11 (Library Noise Light) -->
+        <div class="card mb-4" id="library-lobby-noise-signal-light">
+            <div class="card-body">
+                <h3 class="card-title">11. Library Lobby Noise Signal Light</h3>
+                <ul>
+                    <li>
+                        Developed a device to visually display noise levels in the library
+                        lobby to raise awareness.
+                    </li>
+                    <li>
+                        Programmed the device using Arduino to calculate average decibel
+                        levels every 3ms.
+                    </li>
+                    <li>
+                        Displayed noise levels using green, orange, and red indicators
+                        based on predefined thresholds.
+                    </li>
+                    <li>
+                        Implemented real-time decibel level display on a scale from 1 to
+                        9 for immediate visual feedback.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/noise_signal_1.png" alt="Photo of Library From Above" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/noise_signal_1.png" />
+                    <img src="images/noise_signal_2.png" alt="Photo of Noise Signal Device - Level 1"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/noise_signal_2.png" />
+                    <img src="images/noise_signal_3.png" alt="Photo of Noise Signal Device - Level 2"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/noise_signal_3.png" />
+                    <img src="images/noise_signal_4.png" alt="Photo of Noise Signal Device - Level 3"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/noise_signal_4.png" />
+                </div>
+                <h5>Raw Code:</h5>
+                <ul>
+                    <li>
+                        <a href="/codes/library-noise-light.html">library-noise-light.ino</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Project 12 (Squidward) -->
+        <div class="card mb-4" id="squidward-the-coin-collector">
+            <div class="card-body">
+                <h3 class="card-title">12. Squidward the Coin Collector</h3>
+                <ul>
+                    <li>
+                        Remade the StarCraft 1 user map "Coin Collector Squidward" using
+                        Scratch for a high school programming club project.
+                    </li>
+                    <li>
+                        Implemented the screen movement feature not available in Scratch
+                        to enable dynamic screen transitions.
+                    </li>
+                    <li>
+                        Designed gameplay where players evade randomly moving clerk enemy
+                        to collect as many coins as possible.
+                    </li>
+                </ul>
+                <h5>Screenshots:</h5>
+                <div class="screenshot-container">
+                    <img src="images/squidward_coins_1.png" alt="Screenshot of Lobby Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/squidward_coins_1.png" />
+                    <img src="images/squidward_coins_2.png" alt="Screenshot of Intro Interface" data-bs-toggle="modal"
+                        data-bs-target="#imageModal" data-bs-whatever="images/squidward_coins_2.png" />
+                    <img src="images/squidward_coins_3.png" alt="Screenshot of Gameplay Interface"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/squidward_coins_3.png" />
+                    <img src="images/squidward_coins_4.png" alt="Screenshot of Game Over Interface"
+                        data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/squidward_coins_4.png" />
+                </div>
+                <div class="project-links">
+                    <h5>Interactive Demo:</h5>
+                    <ul>
+                        <li>
+                            <a href="https://scratch.mit.edu/projects/127460011/" target="_blank">Play the Game</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p class="mb-0">
+                &copy; 2025 Hwany. All rights reserved. |
+                <a href="https://github.com/fivestar1103" target="_blank">GitHub</a> |
+                <a href="https://www.linkedin.com/in/hwanyo" target="_blank">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTopBtn" class="btn btn-custom">↑</button>
+
+    <!-- MODAL FOR ENLARGED IMAGES -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Enlarged Screenshot" class="img-fluid rounded mb-3" />
+                    <p id="modalAltText" class="text-muted"></p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Project 9 (Cpong) -->
-    <div class="card mb-4" id="cpong">
-      <div class="card-body">
-        <h3 class="card-title">9. Cpong</h3>
-        <ul>
-          <li>
-            Remade Atari’s classic Pong game in C language for a C Programming
-            and Practice class project.
-          </li>
-          <li>
-            Enabled local 2-player multiplayer functionality.
-          </li>
-          <li>
-            Developed the game using pure C language executable via Windows
-            command line, utilizing Windows.h for system functions.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/cpong_1.png"
-            alt="Screenshot of Lobby Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/cpong_1.png"
-          />
-          <img
-            src="images/cpong_2.png"
-            alt="Screenshot of Gameplay Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/cpong_2.png"
-          />
-          <img
-            src="images/cpong_3.png"
-            alt="Screenshot of 1p Scoring"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/cpong_3.png"
-          />
-          <img
-            src="images/cpong_4.png"
-            alt="Screenshot of Game Over Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/cpong_4.png"
-          />
-        </div>
-        <h5>Raw Code:</h5>
-        <ul>
-          <li><a href="/codes/pong.html">Cpong.c</a></li>
-        </ul>
-      </div>
-    </div>
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Listen for the modal show event, then update #modalImage src
+        const imageModal = document.getElementById("imageModal");
+        imageModal.addEventListener("show.bs.modal", function (event) {
+            const triggerImg = event.relatedTarget;
+            const imgSrc = triggerImg.getAttribute("data-bs-whatever");
+            const imgAlt = triggerImg.getAttribute("alt"); // Get the alt text
 
-    <!-- Project 10 (T.E.A.) -->
-    <div class="card mb-4" id="tea-text-editor-advanced">
-      <div class="card-body">
-        <h3 class="card-title">10. T.E.A. (Text Editor Advanced)</h3>
-        <ul>
-          <li>
-            Created a personal notepad application using Python.
-          </li>
-          <li>
-            Added mouse-drawn drawing capabilities to allow users to create
-            sketches within the notepad.
-          </li>
-          <li>
-            Enabled various font and brush settings to customize text and
-            drawings.
-          </li>
-          <li>
-            Implemented file creation, saving, and loading functionalities for
-            user convenience.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/tea_editor_1.png"
-            alt="Screenshot of Text Editor Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/tea_editor_1.png"
-          />
-          <img
-            src="images/tea_editor_2.png"
-            alt="Screenshot of Font Settings Feature"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/tea_editor_2.png"
-          />
-          <img
-            src="images/tea_editor_3.png"
-            alt="Screenshot of Drawing Canvas Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/tea_editor_3.png"
-          />
-          <img
-            src="images/tea_editor_4.png"
-            alt="Screenshot of File Read and Write Feature"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/tea_editor_4.png"
-          />
-        </div>
-        <h5>Raw Code:</h5>
-        <ul>
-          <li><a href="/codes/TEA.html">TEA.py</a></li>
-        </ul>
-      </div>
-    </div>
+            const modalImage = imageModal.querySelector("#modalImage");
+            const modalAltText = imageModal.querySelector("#modalAltText");
 
-    <!-- Project 11 (Library Noise Light) -->
-    <div class="card mb-4" id="library-lobby-noise-signal-light">
-      <div class="card-body">
-        <h3 class="card-title">11. Library Lobby Noise Signal Light</h3>
-        <ul>
-          <li>
-            Developed a device to visually display noise levels in the library
-            lobby to raise awareness.
-          </li>
-          <li>
-            Programmed the device using Arduino to calculate average decibel
-            levels every 3ms.
-          </li>
-          <li>
-            Displayed noise levels using green, orange, and red indicators
-            based on predefined thresholds.
-          </li>
-          <li>
-            Implemented real-time decibel level display on a scale from 1 to
-            9 for immediate visual feedback.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/noise_signal_1.png"
-            alt="Photo of Library From Above"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/noise_signal_1.png"
-          />
-          <img
-            src="images/noise_signal_2.png"
-            alt="Photo of Noise Signal Device - Level 1"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/noise_signal_2.png"
-          />
-          <img
-            src="images/noise_signal_3.png"
-            alt="Photo of Noise Signal Device - Level 2"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/noise_signal_3.png"
-          />
-          <img
-            src="images/noise_signal_4.png"
-            alt="Photo of Noise Signal Device - Level 3"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/noise_signal_4.png"
-          />
-        </div>
-        <h5>Raw Code:</h5>
-        <ul>
-          <li>
-            <a href="/codes/library-noise-light.html"
-              >library-noise-light.ino</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
+            modalImage.src = imgSrc; // Set the image source
+            modalAltText.textContent = imgAlt; // Set the alt text
+        });
 
-    <!-- Project 12 (Squidward) -->
-    <div class="card mb-4" id="squidward-the-coin-collector">
-      <div class="card-body">
-        <h3 class="card-title">12. Squidward the Coin Collector</h3>
-        <ul>
-          <li>
-            Remade the StarCraft 1 user map "Coin Collector Squidward" using
-            Scratch for a high school programming club project.
-          </li>
-          <li>
-            Implemented the screen movement feature not available in Scratch
-            to enable dynamic screen transitions.
-          </li>
-          <li>
-            Designed gameplay where players evade randomly moving clerk enemy
-            to collect as many coins as possible.
-          </li>
-        </ul>
-        <h5>Screenshots:</h5>
-        <div class="screenshot-container">
-          <img
-            src="images/squidward_coins_1.png"
-            alt="Screenshot of Lobby Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/squidward_coins_1.png"
-          />
-          <img
-            src="images/squidward_coins_2.png"
-            alt="Screenshot of Intro Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/squidward_coins_2.png"
-          />
-          <img
-            src="images/squidward_coins_3.png"
-            alt="Screenshot of Gameplay Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/squidward_coins_3.png"
-          />
-          <img
-            src="images/squidward_coins_4.png"
-            alt="Screenshot of Game Over Interface"
-            data-bs-toggle="modal"
-            data-bs-target="#imageModal"
-            data-bs-whatever="images/squidward_coins_4.png"
-          />
-        </div>
-        <div class="project-links">
-          <h5>Interactive Demo:</h5>
-          <ul>
-            <li>
-              <a
-                href="https://scratch.mit.edu/projects/127460011/"
-                target="_blank"
-                >Play the Game</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </main>
+        // Back to Top button functionality
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p class="mb-0">
-        &copy; 2025 Hwany. All rights reserved. |
-        <a href="https://github.com/fivestar1103" target="_blank">GitHub</a> |
-        <a href="https://www.linkedin.com/in/hwanyo" target="_blank"
-          >LinkedIn</a
-        >
-      </p>
-    </div>
-  </footer>
-
-  <!-- BACK TO TOP BUTTON -->
-  <button id="backToTopBtn" class="btn btn-custom">↑</button>
-
-  <!-- MODAL FOR ENLARGED IMAGES -->
-  <div
-    class="modal fade"
-    id="imageModal"
-    tabindex="-1"
-    aria-labelledby="imageModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          <img
-            id="modalImage"
-            src=""
-            alt="Enlarged Screenshot"
-            class="img-fluid rounded mb-3"
-          />
-          <p id="modalAltText" class="text-muted"></p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Bootstrap 5 JS -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-  ></script>
-  <script>
-    // Listen for the modal show event, then update #modalImage src
-    const imageModal = document.getElementById("imageModal");
-    imageModal.addEventListener("show.bs.modal", function (event) {
-      const triggerImg = event.relatedTarget;
-      const imgSrc = triggerImg.getAttribute("data-bs-whatever");
-      const imgAlt = triggerImg.getAttribute("alt"); // Get the alt text
-
-      const modalImage = imageModal.querySelector("#modalImage");
-      const modalAltText = imageModal.querySelector("#modalAltText");
-
-      modalImage.src = imgSrc; // Set the image source
-      modalAltText.textContent = imgAlt; // Set the alt text
-    });
-
-    // Back to Top button functionality
-    const backToTopBtn = document.getElementById("backToTopBtn");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    });
-
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  </script>
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
 </body>
+
 </html>
