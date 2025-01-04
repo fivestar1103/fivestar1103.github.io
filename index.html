@@ -1,187 +1,701 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hwany - Personal Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            padding: 0;
-            margin: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hwany - Personal Page</title>
 
-        header {
-            background: #f4f4f4;
-            padding: 10px 0;
-            text-align: center;
-        }
+  <!-- Bootstrap 5 CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
 
-        nav button {
-            margin: 0 10px;
-            padding: 8px 16px;
-            background: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+  <!-- Google Fonts: Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+  />
 
-        nav button:hover {
-            background: #555;
-        }
+  <style>
+    /* Base Font & Body */
+    body {
+      font-family: "Roboto", sans-serif;
+      background-color: #f8f9fa; /* Slightly off-white BG */
+      scroll-behavior: smooth;
+      line-height: 1.6; /* Improved readability */
+      margin: 0;
+      padding-top: 56px; /* Offset for fixed navbar */
+    }
 
-        section {
-            padding: 20px;
-            margin: 20px auto; /* Centers the section with automatic margins */
-            max-width: 800px; /* Adjust this value to control the width of the content area */
-            text-align: left; /* Aligns text to the left within the section */
-        }
+    /* Navbar Styling */
+    .navbar-brand {
+      font-weight: 700;
+    }
+    .navbar-nav .nav-link.active {
+      font-weight: 600;
+      text-decoration: underline;
+    }
 
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
+    /* Header (Hero) */
+    header {
+      padding: 100px 0 60px 0;
+      background: linear-gradient(135deg, #a7d1a7 0%, #013220 100%);
+      text-align: center; /* Only hero content is centered */
+      color: #fff; /* Title color set to white */
+    }
+    header h1 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      font-size: 3rem;
+    }
 
-        .contact-links a {
-            text-decoration: none;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    /* Add spacing between hero and main content */
+    main {
+      margin-top: 40px;
+    }
 
-        .contact-links img {
-            width: 30px; /* Adjust size as needed */
-        }
-    </style>
+    /* Section Styling (left-aligned by default) */
+    section {
+      margin-bottom: 30px;
+      border-radius: 8px;
+      padding: 40px;
+    }
+
+    /* Alternating Section Background Colors */
+    section:nth-child(odd) {
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    section:nth-child(even) {
+      background-color: #f0f0f0; /* Light gray for alternate sections */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    section ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+    section ul li {
+      margin-bottom: 10px;
+    }
+
+    /* Contact Links Styling */
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* left-align contact items */
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .contact-links a {
+      text-decoration: none;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: color 0.3s ease;
+    }
+    .contact-links a:hover {
+      color: #0d6efd;
+    }
+    .contact-links img {
+      width: 30px; /* Adjust size as needed */
+    }
+
+    /* Footer styling */
+    footer {
+      background-color: #212529;
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #ced4da;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 767px) {
+      .navbar-nav .nav-link {
+        text-align: center;
+      }
+      .contact-links {
+        align-items: center;
+      }
+    }
+
+    /* Button Styling */
+    .btn-custom {
+      background-color: #0a734d;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 0.9rem;
+    }
+    .btn-custom:hover {
+      background-color: #013220;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Navigation Buttons Styling */
+    .nav-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    .nav-buttons .btn {
+      min-width: 120px;
+      flex: 1 1 120px;
+      text-align: center;
+      max-width: 180px;
+    }
+
+    /* Back to Top Button */
+    #backToTopBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-weight: bold;
+      text-align: center;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1 id="greeting">Hello!</h1> <!-- Dynamic greeting -->
-        <!-- Navigation buttons -->
-        <nav>
-            <button onclick="scrollToSection('bio')">Bio</button>
-            <button onclick="scrollToSection('experience')">Experience</button>
-            <button onclick="scrollToSection('honors-awards')">Honors</button>
-            <button onclick="scrollToSection('hobbies')">Hobbies</button>
-            <button onclick="scrollToSection('contact')">Contact</button>
-        </nav>
-    </header>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">Hwany's Personal Page</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="portfolio.html">Portfolio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/CV.pdf">Download CV</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER (Hero Section) -->
+  <header id="home">
+    <div class="container">
+      <h1 id="greeting">Hello!</h1> <!-- Dynamic greeting -->
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <a href="#bio" class="btn btn-custom">About Me</a>
+        <a href="#education" class="btn btn-custom">Education</a>
+        <a href="#experience" class="btn btn-custom">Experience</a>
+        <a href="#certifications-test-scores" class="btn btn-custom"
+          >Certifications</a
+        >
+        <a href="#honors-awards" class="btn btn-custom">Honors</a>
+        <a href="#hobbies" class="btn btn-custom">Hobbies</a>
+        <a href="#teaching-experiences" class="btn btn-custom"
+          >Teaching</a
+        >
+        <a href="#contact" class="btn btn-custom">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <!-- Bio Section -->
     <section id="bio">
-        <h2>👨🏻‍💻 About Me</h2>
-        <p>I am an undergraduate student in the Computer Science and Engineering Department at University of Seoul.<br>
-        My interests are related to game development and data analysis.<br>
-        "Baby steps everyday" is my life motto.
-        </p>
+      <h2>👨🏻‍💻 About Me</h2>
+      <p>
+        I am an undergraduate student in the Computer Science and
+        Engineering Department at the University of Seoul.<br />
+        My interests are related to game development and data
+        analysis.<br />
+        "Baby steps every day" is my life motto.
+      </p>
     </section>
 
+    <!-- Education Section -->
+    <section id="education">
+      <h2>🎓 Education</h2>
+      <ul>
+        <li>
+          <strong>San Diego State University (Exchange Program)</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>B.S. in Computer Science (Exchange Semester)</em>
+            <em>January 2025 -- May 2025</em>
+          </div>
+        </li>
+        <li>
+          <strong>University of Seoul</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em
+              >Bachelor of Science in Computer Science, Minor in Data
+              Science (GPA: 3.58/4.00)</em
+            >
+            <em>March 2019 -- February 2026</em>
+          </div>
+        </li>
+        <li>
+          <strong>Dulwich College Beijing</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>Youth Rugby Team (2012--2013 Season MVP)</em>
+            <em>January 2009 -- June 2013</em>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Professional Experience Section -->
     <section id="experience">
-        <h2>🗓️ Professional Experience</h2>
-        <ul>
-            <li><strong>Military Interpreter</strong> at Republic of Korea Air Force Operations Command (February 2021 - November 2022)
-                <ul>
-                    <li>Key responsibilities included handling communications between ROK and US A1(manpower and personnel) forces</li>
-                    <li>Major achievements include the Recognition of Superior Performance awarded by the Commander of ACC(Air Components Command)</li>
-                </ul>
+      <h2>🗓️ Professional Experience</h2>
+      <ul>
+        <li>
+          <strong>Mobile App. Development Cooperation (Internship)</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>Unity Developer</em>
+            <em>August 2024 -- October 2024</em>
+          </div>
+          <ul class="mt-2">
+            <li>
+              Developed and launched two mobile games:
+              <ul>
+                <li>
+                  <a
+                    href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EA%B8%B8%EC%96%B4%EC%A0%B8%EB%9D%BC/id6720711350"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    ><em>Ppukku's Grand Adventure: Grow Longer! (iOS)</em></a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EC%9E%A1%EC%95%84%EB%9D%BC/id6670148912"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    ><em>Ppukku's Grand Adventure: Catch It! (iOS)</em></a
+                  >
+                </li>
+              </ul>
+              Both games are also available on the Apple App Store and
+              Google Play Store.
             </li>
-            <li><strong>Research Assistant</strong> at SKYGG (Blockchain Gaming Community Startup) (December 2022 - May 2023)
-                <ul>
-                    <li>Participated in building a battlelog analyzing web application for 'Axie Infinity: Origins'</li>
-                    <li>Contributed to building a playground for web3 games</li>
-                </ul>
+            <li>
+              Implemented advanced algorithms (DFS-based surround
+              detection, physics-based mechanics) for core gameplay
+              features.
             </li>
-            <li><strong>Undergraduate Research Intern</strong> at HCAIL (Human-Centered Artificial Intelligence Lab) (December 2023 - January 2024)
+            <li>
+              Enhanced user experience with joystick control for precise
+              movement and dynamic UI/UX elements.
             </li>
-            <li><strong>Game Programmer</strong> at GameMakers (United Game Developers Club based in Korea) (March 2024 - July 2024)
-                <ul>
-                    <li>Currently working on a 2.5D room escape game</li>
-                    <li>Responsible for implementing core game systems and puzzles</li>
-                </ul>
+            <li>
+              Authored comprehensive technical guides and debugging
+              instructions for future developers.
             </li>
-            <li><strong>Unity Developer Intern</strong> at Mobile App. Development Cooperation (August 2024 - Present)
-                <!--<ul>
-                    <li>Currently working on a 2.5D room escape game</li>
-                    <li>Responsible for implementing core game systems and puzzles</li>
-                    </ul>-->
-            </li>
-        </ul>
-    </section>
-    
+          </ul>
+        </li>
 
+        <li>
+          <strong>GameMakers</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>Game Programmer</em>
+            <em>March 2024 -- July 2024</em>
+          </div>
+          <ul class="mt-2">
+            <li>
+              Developed a Unity 2D room-escape game in a six-person team,
+              scheduled for launch by March 2025.
+            </li>
+            <li>
+              Designed intricate puzzles and implemented core gameplay
+              systems.
+            </li>
+            <li>
+              Awarded the <strong>Grand Prize (2nd)</strong> for Best Games
+              in the 8th Cohort.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <strong>Human-Centered Artificial Intelligence Lab (HCAIL)</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>Undergraduate Research Intern</em>
+            <em>December 2023 -- January 2024</em>
+          </div>
+          <ul class="mt-2">
+            <li>
+              Investigated gaming-related health issues and game
+              addiction.
+            </li>
+            <li>
+              Analyzed WHO’s classification of game addiction, highlighting
+              mental health benefits of gaming.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <strong>SKYGG</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>Research Assistant (Intern)</em>
+            <em>December 2022 -- May 2023</em>
+          </div>
+          <ul class="mt-2">
+            <li>
+              Contributed to building a playground for Web3 games and
+              blockchain analytics.
+            </li>
+            <li>
+              Developed a web application for analyzing battle logs in
+              <em>Axie Infinity: Origins</em>.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <strong>Republic of Korea Air Force</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>Military Interpreter</em>
+            <em>February 2021 -- November 2022</em>
+          </div>
+          <ul class="mt-2">
+            <li>
+              Facilitated communication between ROKAF and USAF A1 forces
+              at Osan Air Base.
+            </li>
+            <li>
+              Recognized for superior performance by the Commander of ACC
+              (Air Components Command).
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Certifications and Test Scores Section -->
+    <section id="certifications-test-scores">
+      <h2>📜 Certifications and Test Scores</h2>
+      <ul>
+        <li>
+          <strong>Languages:</strong>
+          <ul>
+            <li><strong>English:</strong> Native/Bilingual</li>
+            <li><strong>Korean:</strong> Native/Bilingual</li>
+            <li><strong>Chinese:</strong> Limited Working</li>
+          </ul>
+        </li>
+        <li><strong>TOEFL iBT:</strong> 111</li>
+        <li><strong>TOEIC:</strong> 985</li>
+        <li><strong>OPIc:</strong> AL</li>
+        <li>
+          <strong>Certifications:</strong>
+          <ul>
+            <li>
+              <strong>NVIDIA DLI Workshop</strong> – Transformer Based NLP
+              Applications
+            </li>
+            <li>
+              <strong>Microsoft Office Specialist Master Certification
+                (MOS)</strong>
+            </li>
+            <li>
+              <strong>Com2us Mentoring School</strong> – Game Client Focus
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Honors & Awards Section -->
     <section id="honors-awards">
-        <h2>🏅 Honors, Awards and Certificates</h2>
-        <ul>
-            <li><strong>TOEFL (Score of 111)</strong> - Achieved in July 2024</li>
-            <li><strong>TOEIC (Score of 985)</strong> - Achieved in July 2024</li>
-            <li><strong>Participation Award</strong> at UOSPC (University of Seoul Programming Contest) - Awarded in November 2023
-                <ul>
-                    <li>Acknowledged for active participation and competency in algorithms and programming</li>
-                </ul>
-            </li>
-            <li><strong>TEPS (Level 1)</strong> - Achieved in August 2022</li>
-            <li><strong>MOS MASTER</strong> (Word, Excel, PowerPoint, Outlook) - Achieved in January 2021</li>
-        </ul>
+      <h2>🏆 Honors & Awards</h2>
+      <ul>
+        <li>
+          <strong>Silver Award (3rd)</strong> -- University of Seoul
+          Programming Contest (UOSPC) 2024
+        </li>
+        <li>
+          <strong>Excellence Award (2nd)</strong> -- Plankton Hackathon 2024
+        </li>
+        <li>
+          <strong>Grand Prize (2nd)</strong> for Best Games -- GameMakers 8th
+          Cohort
+        </li>
+        <li>
+          <strong>Participation Award (4th)</strong> -- University of Seoul
+          Programming Contest (UOSPC) 2023
+        </li>
+      </ul>
     </section>
-    
 
+    <!-- Hobbies Section -->
     <section id="hobbies">
-        <h2>🏉 Hobbies</h2>
-        <ul>
-            <li><strong>Collecting albums (mostly Hip-Hop)</strong></li>
-            <li><a href="https://soundcloud.com/fromthekuiperbelt"><strong>Creating music</strong></a></li>
-            <li><strong>Rugby and cycling</strong></li>
-            <li><strong>Video gaming</strong></li>
-            <li><a href="https://www.acmicpc.net/user/fivestar1103"><strong>Algorithm problem solving</strong></a></li>
-        </ul>
+      <h2>🏉 Hobbies</h2>
+      <ul>
+        <li><strong>Collecting Albums (Mostly Hip-Hop)</strong></li>
+        <li>
+          <a
+            href="https://soundcloud.com/fromthekuiperbelt"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><strong>Creating Music</strong></a
+          >
+        </li>
+        <li><strong>Rugby and Cycling</strong></li>
+        <li><strong>Video Gaming</strong></li>
+        <li>
+          <a
+            href="https://www.acmicpc.net/user/fivestar1103"
+            target="_blank"
+            rel="noopener noreferrer"
+            ><strong>Algorithm Problem Solving</strong></a
+          >
+        </li>
+      </ul>
     </section>
-    
 
+    <!-- Teaching Experiences Section -->
+    <section id="teaching-experiences">
+      <h2>📚 Teaching Experiences</h2>
+      <ul>
+        <li>
+          <strong
+            >Tutor – Academic Support for International Students, University
+            of Seoul</strong
+          >
+          <div class="d-flex justify-content-between mt-2">
+            <em>September 2024 -- December 2024</em>
+          </div>
+          <ul class="mt-2">
+            <li>
+              Delivered structured tutoring on programming (Unix, recursion,
+              pointers) and data structures (linked lists, stacks, trees).
+            </li>
+            <li>
+              Introduced algorithmic problem-solving (sorting & graph
+              algorithms) and version control (Git/GitHub).
+            </li>
+            <li>
+              Adapted lessons to language barriers, improving exam
+              performance for international students.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <strong>C Programming Tutor, University of Seoul</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>April 2024 -- June 2024</em>
+          </div>
+          <ul class="mt-2">
+            <li>
+              Taught C basics: pointers, arrays, recursion, Linux-based
+              compilation.
+            </li>
+            <li>
+              Guided students in debugging and optimization best practices.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <strong>English Speaking Tutor, University of Seoul</strong>
+          <div class="d-flex justify-content-between mt-2">
+            <em>April 2020 -- June 2020</em>
+          </div>
+          <ul class="mt-2">
+            <li>
+              Assisted peers in improving spoken English through structured
+              conversation sessions.
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Contact Section -->
     <section id="contact">
-        <h2>🪪 Contact</h2>
-        <div class="contact-links">
-            <a href="mailto:fivestar1103@uos.ac.kr">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/University_of_Seoul.svg/150px-University_of_Seoul.svg.png" alt="Email Icon">
-                fivestar1103@uos.ac.kr
-            </a>
-            <a href="https://www.linkedin.com/in/hwanyo">
-                <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/LinkedIN.png?raw=true" alt="LinkedIn Icon">
-                www.linkedin.com/in/hwanyo
-            </a>
-            <a href="https://github.com/fivestar1103">
-                <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Black/Github_black.png?raw=true" alt="GitHub Icon">
-                https://github.com/fivestar1103
-            </a>
-            <a href="https://twitter.com/shwanyo">
-                <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/Twitter.png?raw=true" alt="Twitter Icon">
-                https://twitter.com/shwanyo
-            </a>
-        </div>
+      <h2>🪪 Contact</h2>
+      <div class="contact-links">
+        <a href="mailto:fivestar1103@uos.ac.kr">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/University_of_Seoul.svg/150px-University_of_Seoul.svg.png"
+            alt="Email Icon"
+          />
+          fivestar1103@uos.ac.kr
+        </a>
+        <a
+          href="https://www.linkedin.com/in/hwanyo"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/LinkedIN.png?raw=true"
+            alt="LinkedIn Icon"
+          />
+          www.linkedin.com/in/hwanyo
+        </a>
+        <a
+          href="https://github.com/fivestar1103"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Black/Github_black.png?raw=true"
+            alt="GitHub Icon"
+          />
+          https://github.com/fivestar1103
+        </a>
+        <a
+          href="https://twitter.com/shwanyo"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/Twitter.png?raw=true"
+            alt="Twitter Icon"
+          />
+          https://twitter.com/shwanyo
+        </a>
+      </div>
     </section>
-    
+  </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            updateGreeting();
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p class="mb-0">
+        &copy; 2025 Hwany. All rights reserved. |
+        <a
+          href="https://github.com/fivestar1103"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >
+        |
+        <a
+          href="https://www.linkedin.com/in/hwanyo"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn</a
+        >
+      </p>
+    </div>
+  </footer>
 
-            // Scroll to specific sections
-            window.scrollToSection = function(sectionId) {
-                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-            };
+  <!-- BACK TO TOP BUTTON -->
+  <button id="backToTopBtn" class="btn btn-custom">↑</button>
+
+  <!-- Bootstrap 5 JS -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      updateGreeting();
+
+      // Highlight active nav link based on scroll position
+      const sections = document.querySelectorAll("main section");
+      const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 150;
+          if (pageYOffset >= sectionTop) {
+            current = section.getAttribute("id");
+          }
         });
 
-        // Update greeting based on time of day
-        function updateGreeting() {
-            const hour = new Date().getHours();
-            let greeting;
-            if (hour < 12) greeting = "😎 Good Morning!";
-            else if (hour < 18) greeting = "☕️ Good Afternoon!";
-            else greeting = "🌆 Good Evening!";
-            document.getElementById('greeting').textContent = greeting + " This is Hwany";
-        }
-    </script>
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          // If link is #home, special condition for top
+          if (
+            link.getAttribute("href") === `#${current}` ||
+            (link.getAttribute("href") === "#home" && !current)
+          ) {
+            link.classList.add("active");
+          }
+        });
+      });
+    });
+
+    // Update greeting based on time of day
+    function updateGreeting() {
+      const hour = new Date().getHours();
+      let greeting;
+      if (hour < 12) {
+        greeting = "😎 Good Morning!";
+      } else if (hour < 18) {
+        greeting = "☕️ Good Afternoon!";
+      } else {
+        greeting = "🌆 Good Evening!";
+      }
+      document.getElementById("greeting").textContent =
+        greeting + " This is Hwany";
+    }
+
+    // Back to Top button functionality
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.style.display = "block";
+      } else {
+        backToTopBtn.style.display = "none";
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
 </body>
 </html>
