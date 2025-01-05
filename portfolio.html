@@ -114,15 +114,17 @@
         }
 
         .screenshot-container figure img {
-            max-width: 100%;
-            height: 350px;
-            object-fit: contain;
-        }
+    max-width: 100%;
+    height: 350px;
+    object-fit: contain;
+    display: block; /* Ensures no extra spacing */
+}
 
-        .screenshot-container figure img:hover {
-            transform: scale(1.03);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        }
+.screenshot-container figure img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
 
         .screenshot-container figure figcaption {
             margin-top: 0.5rem;
