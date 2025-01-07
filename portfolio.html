@@ -432,20 +432,19 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <h5 class="mb-3">Interactive Demo:</h5>
-                <div class="d-flex justify-content-center mb-4 d-none d-md-flex" style="overflow: hidden;">
-                    <div style="width: 1280px; height: 550px; transform: scale(0.65); transform-origin: top center;">
-                      <iframe 
-                        src="/webgpu-interactive-tank/proj3.html"
-                        style="width: 1280px; height: 720px; border: none;"
-                        allowfullscreen>
-                      </iframe>
-                    </div>
+                <!-- Placeholder for the Interactive Demo iframe -->
+                <div id="interactiveDemoContainer" class="d-flex justify-content-center mb-4">
+                    <!-- The iframe will be inserted here by JavaScript if not on mobile -->
+                    <noscript>
+                        <p>Interactive demo is not available. Please enable JavaScript or view on a desktop device.</p>
+                    </noscript>
                 </div>
 
                 <div class="mb-3">
-                    <a href="/webgpu-interactive-tank/proj3.html" target="_blank" class="btn btn-primary btn-sm me-2">Play Demo
+                    <a href="/webgpu-interactive-tank/proj3.html" target="_blank" id="playDemoBtn"
+                        class="btn btn-primary btn-sm me-2">Play Demo
                         (Full Screen)</a>
                     <a href="https://github.com/fivestar1103/webgpu-interactive-tank" target="_blank"
                         class="btn btn-outline-secondary btn-sm">View Project on GitHub</a>
@@ -1119,6 +1118,51 @@
         backToTopBtn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
+    </script>
+    <script>
+        // Function to detect mobile devices
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Function to load the interactive demo iframe
+        function loadInteractiveDemo() {
+            if (!isMobileDevice()) {
+                const demoContainer = document.getElementById('interactiveDemoContainer');
+
+                // Create the responsive wrapper using Bootstrap's ratio class
+                const ratioDiv = document.createElement('div');
+                ratioDiv.classList.add('ratio', 'ratio-16x9', 'w-100'); // Maintains 16:9 aspect ratio and full width
+
+                // Create the iframe element
+                const iframe = document.createElement('iframe');
+                iframe.src = "/webgpu-interactive-tank/proj3.html";
+                iframe.style.border = "none";
+                iframe.allowFullscreen = true;
+
+                // Append iframe to ratioDiv
+                ratioDiv.appendChild(iframe);
+
+                // Append ratioDiv to demoContainer
+                demoContainer.appendChild(ratioDiv);
+            } else {
+                // Hide the "Play Demo" button on mobile devices
+                const playDemoBtn = document.getElementById('playDemoBtn');
+                if (playDemoBtn) {
+                    playDemoBtn.style.display = 'none';
+                }
+
+                // Display a message for mobile users
+                const demoContainer = document.getElementById('interactiveDemoContainer');
+                const message = document.createElement('p');
+                message.textContent = "Interactive demo is not available on mobile devices.";
+                message.classList.add('text-muted');
+                demoContainer.appendChild(message);
+            }
+        }
+
+        // Execute the function after the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', loadInteractiveDemo);
     </script>
 </body>
 
