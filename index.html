@@ -213,7 +213,7 @@
             <a class="nav-link active" href="#home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="portfolio.html">Portfolio</a>
+            <a class="nav-link" id="portfolio-link" href="portfolio.html">Portfolio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/CV.pdf">CV</a>
@@ -665,6 +665,22 @@
             link.classList.add("active");
           }
         });
+
+        // 1. Detect if user is on a mobile device
+        //    (This is a very simplified approach for demonstration.)
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+
+        // 2. Grab the portfolio link using the ID
+        const portfolioLink = document.getElementById("portfolio-link");
+
+        // 3. If on a mobile device, change to portfolio-no-demo.html
+        if (isMobile) {
+          portfolioLink.href = "portfolio-no-demo.html";
+        } else {
+          portfolioLink.href = "portfolio.html";
+        }
       });
     });
 
