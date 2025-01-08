@@ -1032,51 +1032,6 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
-    <script>
-        // Function to detect mobile devices
-        function isMobileDevice() {
-            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-
-        // Function to load the interactive demo iframe
-        function loadInteractiveDemo() {
-            if (!isMobileDevice()) {
-                const demoContainer = document.getElementById('interactiveDemoContainer');
-
-                // Create the responsive wrapper using Bootstrap's ratio class
-                const ratioDiv = document.createElement('div');
-                ratioDiv.classList.add('ratio', 'ratio-16x9', 'w-100'); // Maintains 16:9 aspect ratio and full width
-
-                // Create the iframe element
-                const iframe = document.createElement('iframe');
-                iframe.src = "/webgpu-interactive-tank/proj3.html";
-                iframe.style.border = "none";
-                iframe.allowFullscreen = true;
-
-                // Append iframe to ratioDiv
-                ratioDiv.appendChild(iframe);
-
-                // Append ratioDiv to demoContainer
-                demoContainer.appendChild(ratioDiv);
-            } else {
-                // Hide the "Play Demo" button on mobile devices
-                const playDemoBtn = document.getElementById('playDemoBtn');
-                if (playDemoBtn) {
-                    playDemoBtn.style.display = 'none';
-                }
-
-                // Display a message for mobile users
-                const demoContainer = document.getElementById('interactiveDemoContainer');
-                const message = document.createElement('p');
-                message.textContent = "Interactive demo is not available on mobile devices.";
-                message.classList.add('text-muted');
-                demoContainer.appendChild(message);
-            }
-        }
-
-        // Execute the function after the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', loadInteractiveDemo);
-    </script>
 </body>
 
 </html>
