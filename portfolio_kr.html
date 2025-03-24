@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hwany - 포트폴리오</title>
+
+    <!-- 모바일 사용자를 리디렉션 -->
+    <script>
+        if (/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.location.href = "https://fivestar1103.github.io/portfolio-no-demo.html";
+        }
+    </script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+
+    <!-- Google Fonts: Nanum Gothic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet" />
+
+    <!-- 언어/아이콘용 Devicon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    <style>
+        /* 기본 글꼴 및 본문 */
+        body {
+            font-family: "Nanum Gothic", sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding-top: 56px;
+            /* 고정 네비게이션바를 위한 여백 */
+            line-height: 1.6;
+        }
+
+        /* 네비게이션바 스타일 */
+        .navbar-brand {
+            font-weight: 700;
+        }
+
+        .navbar-nav .nav-link.active {
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            background: linear-gradient(135deg, #a7d1a7 0%, #013220 100%);
+            padding: 100px 20px;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* 카드 스타일 (통일) */
+        .card {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* 카드 제목 */
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* 스크린샷 그리드 */
+        .screenshot-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* 각 figure는 이미지와 캡션이 있는 카드처럼 동작 */
+        .screenshot-container figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .screenshot-container figure img {
+            max-width: 100%;
+            height: 350px;
+            /* 높이를 변수로 하려면 제거 가능 */
+            object-fit: contain;
+            display: block;
+        }
+
+        .screenshot-container figure img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .screenshot-container figure figcaption {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* 기술 아이콘 */
+        .tech-icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tech-icons i:hover {
+            transform: scale(1.2);
+            transition: transform 0.2s;
+        }
+
+        /* 푸터 스타일 */
+        footer {
+            background-color: #212529;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ced4da;
+        }
+
+        /* 반응형 조정 */
+        @media (max-width: 767px) {
+            .navbar-nav .nav-link {
+                text-align: center;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+        }
+
+        /* 맨 위로 버튼 */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #0a734d;
+            /* 커스텀 버튼 색상과 일치 */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #backToTopBtn:hover {
+            background-color: #013220;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 네비게이션바 -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">오성환 포트폴리오</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="네비게이션 전환">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- 정렬 클래스를 적용 -->
+            <div class="collapse navbar-collapse justify-content-center justify-content-md-end" id="navbarContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="portfolio.html">포트폴리오</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/CV_Game.pdf">이력서</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="container">
+            <h1>제 포트폴리오에 오신 것을 환영합니다!</h1>
+            <p class="lead mb-0">
+                제가 진행한 프로젝트들을 스크린샷 및 인터랙티브 데모와 함께 확인해보세요.
+            </p>
+        </div>
+    </section>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="container mb-5">
+        <!-- 목차 -->
+        <div class="card">
+            <div class="card-body">
+                <h2 class="mb-3">목차</h2>
+                <ol class="ps-3">
+                    <li>
+                        <a href="#procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai"
+                            class="text-decoration-none">감정 인식 AI를 활용한 절차적 생성 퍼즐 어드벤처 게임</a>
+                    </li>
+                    <li>
+                        <a href="#webgpu-interactive-tank" class="text-decoration-none">WebGPU로 구현한 탱크</a>
+                    </li>
+                    <li>
+                        <a href="#seoul-cheer-up" class="text-decoration-none">서울 치워러</a>
+                    </li>
+                    <li>
+                        <a href="#ppukkus-grand-adventure-grow-longer" class="text-decoration-none">뿌꾸 대모험: 길어져라!</a>
+                    </li>
+                    <li>
+                        <a href="#fate-and-coincidence" class="text-decoration-none">필연과 우연</a>
+                    </li>
+                    <li>
+                        <a href="#polar-polar" class="text-decoration-none">폴라 폴라</a>
+                    </li>
+                    <li>
+                        <a href="#aida-axie-infinity-data-analyzer" class="text-decoration-none">AIDA (액시 인피니티 데이터 분석 플랫폼)</a>
+                    </li>
+                    <li>
+                        <a href="#mobile-robot-controller" class="text-decoration-none">모바일 로봇 컨트롤러</a>
+                    </li>
+                    <li>
+                        <a href="#cpong" class="text-decoration-none">Cpong</a>
+                    </li>
+                    <li>
+                        <a href="#tea-text-editor-advanced" class="text-decoration-none">T.E.A. (고급 텍스트 에디터)</a>
+                    </li>
+                    <li>
+                        <a href="#library-lobby-noise-signal-light" class="text-decoration-none">도서관 로비 소음 신호등</a>
+                    </li>
+                    <!-- <li>
+                        <a href="#squidward-the-coin-collector" class="text-decoration-none">Squidward the Coin Collector</a>
+                    </li> -->
+                </ol>
+            </div>
+        </div>
+
+        <!-- 프로젝트 1 -->
+        <div class="card" id="procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai">
+            <div class="card-body">
+                <h3 class="card-title mb-3">
+                    1. 감정 인식 AI를 활용한 절차적 생성 퍼즐 어드벤처 게임
+                </h3>
+                <ul class="mb-4">
+                    <li>
+                        동적인 게임 환경을 생성하기 위한 절차적 생성(PCG, Procedural Content Generation) 알고리즘을 설계 및 구현함.
+                    </li>
+                    <li>
+                        복잡한 PCG 던전을 구성하기 위해 셀룰러 오토마타, 들로네 삼각분할, MST(최소 신장 트리) 및 A* 알고리즘을 활용함.
+                    </li>
+                    <li>
+                        음성-텍스트 변환(STT) 및 감정 인식(SER) 기술을 게임 내부에 통합함.
+                    </li>
+                    <li>
+                        팀을 이끌고 프로젝트 병합 및 버전 관리를 총괄하였음.
+                    </li>
+                </ul>
+
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <!-- 각 이미지를 figure와 figcaption으로 감쌈 -->
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/pcg_game_2.png">
+                        <img src="images/pcg_game_2.png" alt="게임플레이 인터페이스 스크린샷" />
+                        <figcaption>게임플레이 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/pcg_game_3.png">
+                        <img src="images/pcg_game_3.png" alt="게임 내 복도 스크린샷" />
+                        <figcaption>게임 내 복도 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/pcg_game_4.png">
+                        <img src="images/pcg_game_4.png" alt="전투 인터페이스 스크린샷" />
+                        <figcaption>전투 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/pcg_game_1.png">
+                        <img src="images/pcg_game_1.png" alt="프로시저 방식으로 생성된 던전 스크린샷" />
+                        <figcaption>절차적으로 생성된 던전 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/pcg_game_5.png">
+                        <img src="images/pcg_game_5.png" alt="PCG 지도 생성 과정 스크린샷" />
+                        <figcaption>PCG 맵 생성 과정 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/pcg_game_6.png">
+                        <img src="images/pcg_game_6.png" alt="PCG 클래스 다이어그램 스크린샷" />
+                        <figcaption>PCG 모듈의 클래스 다이어그램 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1qu2Z7pH85PxNeG9MqW43cJ831Kr4azXt/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mb-3">인터랙티브 데모:</h5>
+                <div class="d-flex justify-content-center mb-4" style="overflow: hidden;">
+                    <div style="width: 1280px; height: 550px; transform: scale(0.8); transform-origin: top center;">
+                        <iframe 
+                        src="/webgl-pcg-game/index.html"
+                        style="width: 1280px; height: 720px; border: none;"
+                        allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="/webgl-pcg-game/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="https://github.com/fivestar1103/capstone" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">GitHub</a>
+                </div>
+
+                <h5 class="mb-3">사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-unity-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-csharp-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-python-plain" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 2 -->
+        <div class="card mb-4" id="webgpu-interactive-tank">
+            <div class="card-body">
+                <h3 class="card-title">2. WebGPU로 구현한 탱크</h3>
+                <ul>
+                    <li>WebGPU를 사용하여 인터랙티브한 3D 탱크 시뮬레이션을 제작함.</li>
+                    <li>탱크 이동, 포탑 회전 및 중력이 적용된 포탄 발사를 구현함.</li>
+                    <li>현실적인 텍스처 구현을 위한 텍스처 매핑 및 노멀 매핑을 적용함.</li>
+                </ul>
+
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_1.png">
+                        <img src="images/webgpu_tank_1.png" alt="탱크 시뮬레이션 스크린샷" />
+                        <figcaption>탱크 시뮬레이션 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_2.png">
+                        <img src="images/webgpu_tank_2.png" alt="포탄 발사 기능 스크린샷" />
+                        <figcaption>포탄 발사 기능 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_3.png">
+                        <img src="images/webgpu_tank_3.png" alt="일시 정지 기능 스크린샷" />
+                        <figcaption>일시 정지 기능 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_4.png">
+                        <img src="images/webgpu_tank_4.png" alt="전면에서 본 탱크 스크린샷" />
+                        <figcaption>전면에서 본 탱크 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_5.png">
+                        <img src="images/webgpu_tank_5.png" alt="상단에서 본 탱크 스크린샷" />
+                        <figcaption>상단에서 본 탱크 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1OL84m1lThuKLJaPht7XkPAZgKIyOWxvm/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <h5 class="mb-3">인터랙티브 데모:</h5>
+                <!-- 인터랙티브 데모 iframe 자리 표시자 -->
+                <div id="interactiveDemoContainer" class="d-flex justify-content-center mb-4">
+                    <!-- 모바일이 아닐 경우 자바스크립트로 iframe이 삽입됩니다 -->
+                    <noscript>
+                        <p>인터랙티브 데모를 사용할 수 없습니다. 자바스크립트를 활성화하거나 데스크탑 기기에서 확인하세요.</p>
+                    </noscript>
+                </div>
+
+                <div class="mb-3">
+                    <a href="/webgpu-interactive-tank/proj3.html" target="_blank" id="playDemoBtn"
+                        class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="https://github.com/fivestar1103/webgpu-interactive-tank" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">GitHub</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-javascript-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-html5-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-css3-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 3 (서울 치어업) -->
+        <div class="card mb-4" id="seoul-cheer-up">
+            <div class="card-body">
+                <h3 class="card-title">3. 서울 치워러</h3>
+                <ul>
+                    <li>버려진 공공 전동 스쿠터를 관리하기 위한 크라우드소싱 플랫폼을 개발함.</li>
+                    <li>React를 사용하여 핵심 프론트엔드 기능을 구축하고 반응형 인터페이스를 구현함.</li>
+                    <li>게이미피케이션 요소 및 프로젝트의 핵심 아이디어를 제안하였음.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_1.png">
+                        <img src="images/seoul_cheerup_1.png" alt="메인 인터페이스 스크린샷" />
+                        <figcaption>메인 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_2.png">
+                        <img src="images/seoul_cheerup_2.png" alt="리포팅 인터페이스 스크린샷" />
+                        <figcaption>포스팅 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_3.png">
+                        <img src="images/seoul_cheerup_3.png" alt="게임화 인터페이스 스크린샷" />
+                        <figcaption>게이미피케이션 인터페이스 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <div class="mb-3">
+                    <a href="https://mariana.paaran.com/" target="_blank" class="btn btn-primary btn-sm me-2">플랫폼 방문 (전체 화면)</a>
+                    <a href="https://github.com/PJW011122/mariana" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">GitHub</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-react-original colored" style="font-size:2rem;"></i>
+                    <i class="devicon-javascript-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-html5-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-css3-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 4 (뿌꾸 대모험: 길어져라!) -->
+        <div class="card mb-4" id="ppukkus-grand-adventure-grow-longer">
+            <div class="card-body">
+                <h3 class="card-title">4. 뿌꾸 대모험: 길어져라!</h3>
+                <ul>
+                    <li>유니티 인턴으로서 미니 게임을 개발하여 Play Store와 App Store에서 출시하였음.</li>
+                    <li>가상 조이스틱을 사용하여 실제 뱀과 유사한 움직임을 구현함.</li>
+                    <li>DFS 및 레이캐스팅을 응용한 사이클 감지 및 ‘포위’ 알고리즘을 구현하였음.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/ppukku_game_1.png">
+                        <img src="images/ppukku_game_1.png" alt="로비 인터페이스 스크린샷" />
+                        <figcaption>로비 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/ppukku_game_2.png">
+                        <img src="images/ppukku_game_2.png" alt="게임 오버 인터페이스 스크린샷" />
+                        <figcaption>게임 오버 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/ppukku_game_3.png">
+                        <img src="images/ppukku_game_3.png" alt="게임플레이 인터페이스 스크린샷" />
+                        <figcaption>게임플레이 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/ppukku_game_4.png">
+                        <img src="images/ppukku_game_4.png" alt="포위를 통한 적 물리치기 기능 설명 스크린샷" />
+                        <figcaption>'포위하여 적 처치' 스킬 설명 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1gQ9Ed8EOpzCf3LQj-AXpwSUpA2rOmgvI/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <h5>다운로드/플레이 링크:</h5>
+                <div class="mb-3">
+                    <a href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EA%B8%B8%EC%96%B4%EC%A0%B8%EB%9D%BC/id6720711350" target="_blank" class="btn btn-primary btn-sm me-2">애플 앱 스토어</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.FairytaleHero.PUKKUAdventureLong" target="_blank" class="btn btn-primary btn-sm me-2">구글 플레이 스토어</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-unity-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-csharp-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 5 (운명과 우연) -->
+        <div class="card mb-4" id="fate-and-coincidence">
+            <div class="card-body">
+                <h3 class="card-title">5. 필연과 우연</h3>
+                <ul>
+                    <li>유니티로 제작한 방 탈출 게임의 개발자로 기여하였으며, 현재 텀블벅에서 펀딩을 진행중임.</li>
+                    <li>구글 시트를 통해 모든 게임 데이터를 관리하고, CSV 파싱을 활용하여 이벤트 기반 아키텍쳐를 설계하고 구축하였음.</li>
+                    <li>분기 기능이 포함되어 있는 유기적인 대화 시스템을 개발함.</li>
+                    <li>삼각함수와 같은 수학적 이론을 활용한 퍼즐 및 마우스 드래그로 페이지를 자연스럽게 넘길 수 있는 다이어리 페이지 드래그 기능 등을 구현함.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/fate_coincidence_1.png">
+                        <img src="images/fate_coincidence_1.png" alt="대화 시스템 스크린샷" />
+                        <figcaption>대화 시스템 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/fate_coincidence_2.png">
+                        <img src="images/fate_coincidence_2.png" alt="다이어리 퍼즐 스크린샷" />
+                        <figcaption>다이어리 퍼즐 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/fate_coincidence_3.png">
+                        <img src="images/fate_coincidence_3.png" alt="Google Sheets로 게임 데이터 관리 스크린샷" />
+                        <figcaption>구글 시트로 게임 데이터 관리 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/fate_coincidence_4.png">
+                        <img src="images/fate_coincidence_4.png" alt="다이얼 퍼즐 스크린샷" />
+                        <figcaption>다이얼 퍼즐 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/fate_coincidence_5.png">
+                        <img src="images/fate_coincidence_5.png" alt="다이어리 페이지 넘김 기능 스크린샷" />
+                        <figcaption>다이어리 페이지 넘김 기능 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1gmHXo80V7LrtdXL-8HuHodvLNaL7ydTf/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mb-3">인터랙티브 데모:</h5>
+                <div class="d-flex justify-content-center mb-4" style="overflow: hidden;">
+                    <div style="width: 1280px; height: 550px; transform: scale(0.8); transform-origin: top center;">
+                      <iframe 
+                        src="/webgl-fate/index.html"
+                        style="width: 1280px; height: 720px; border: none;"
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="/webgl-fate/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="https://github.com/ollan365/Fate" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">GitHub</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-unity-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-csharp-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 6 (Polar Polar) -->
+        <div class="card mb-4" id="polar-polar">
+            <div class="card-body">
+                <h3 class="card-title">6. 폴라 폴라</h3>
+                <ul>
+                    <li>컴투스(Com2uS) 멘토링 스쿨에서 4일 동안 2D 플랫포머 게임을 제작함.</li>
+                    <li>N극과 S극을 이용해 물체를 밀고 당기는 자력 액션 퍼즐을 기획 및 구현하였음.</li>
+                    <li>시차(parallax)를 활용하여 현실적인 배경을 개발하였음.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/polar_polar_1.png">
+                        <img src="images/polar_polar_1.png" alt="메인 게임플레이 스크린샷" />
+                        <figcaption>메인 게임플레이 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/polar_polar_2.png">
+                        <img src="images/polar_polar_2.png"
+                            alt="고드름에 튕기는 자력 게임플레이 스크린샷" />
+                        <figcaption>고드름이 튕겨져 나가는 자력 게임플레이 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/polar_polar_3.png">
+                        <img src="images/polar_polar_3.png" alt="진행 상황 표시 UI 스크린샷" />
+                        <figcaption>진행 상황 표시 UI 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/polar_polar_4.png">
+                        <img src="images/polar_polar_4.png" alt="파랄랙스 배경 스크린샷" />
+                        <figcaption>배경 시차 기능 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/polar_polar_5.png">
+                        <img src="images/polar_polar_5.png" alt="자력 게임플레이 (슈퍼 점프) 스크린샷" />
+                        <figcaption>자력 액션 (슈퍼 점프) 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1f-pWZloPuFUukqfp2MlEzYDrnNTc70iV/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mb-3">인터랙티브 데모:</h5>
+                <div class="d-flex justify-content-center mb-4" style="overflow: hidden;">
+                    <div style="width: 1280px; height: 550px; transform: scale(0.8); transform-origin: top center;">
+                      <iframe 
+                        src="/webgl-polar-polar/index.html"
+                        style="width: 1280px; height: 720px; border: none;"
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="/webgl-polar-polar/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="https://github.com/fivestar1103/Polar-Polar" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">GitHub</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-unity-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-csharp-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 7 (AIDA) -->
+        <div class="card mb-4" id="aida-axie-infinity-data-analyzer">
+            <div class="card-body">
+                <h3 class="card-title">7. AIDA (엑시 인피니티 데이터 분석 플랫폼)</h3>
+                <ul>
+                    <li>SKYGG에서 인턴으로서 Axie Infinity의 게임 데이터 분석 서비스를 개발함.</li>
+                    <li>공식 API를 사용하여 데이터를 수집 및 분석하고 플레이어를 위한 인사이트를 제공하였음.</li>
+                    <li>파이썬 Flask와 MySQL로 데이터베이스 및 웹 서비스를 구축하고 GCP를 사용하여 배포하였음.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/aida_axie_1.png">
+                        <img src="images/aida_axie_1.png" alt="메인 페이지 스크린샷" />
+                        <figcaption>메인 페이지 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/aida_axie_2.png">
+                        <img src="images/aida_axie_2.png" alt="유사 덱 페이지 스크린샷" />
+                        <figcaption>유사한 덱 페이지 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/aida_axie_3.png">
+                        <img src="images/aida_axie_3.png" alt="온라인 사용자 페이지 스크린샷" />
+                        <figcaption>현재 온라인인 사용자 페이지 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/aida_axie_4.png">
+                        <img src="images/aida_axie_4.png" alt="팀 필터 페이지 스크린샷" />
+                        <figcaption>팀 필터링 및 조회 페이지 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-python-plain" style="font-size:2rem;"></i>
+                    <i class="devicon-flask-original colored" style="font-size:2rem;"></i>
+                    <i class="devicon-mysql-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-googlecloud-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 8 (모바일 로봇 컨트롤러) -->
+        <div class="card mb-4" id="mobile-robot-controller">
+            <div class="card-body">
+                <h3 class="card-title">8. 모바일 로봇 컨트롤러</h3>
+                <ul>
+                    <li>재난 상황에서 장애물을 피하기 위한 로봇 제어 시뮬레이션 프로그램을 개발함.</li>
+                    <li>객체 지향 프로그래밍(OOP) 원칙을 사용하여 Python으로 구현하였음.</li>
+                    <li>위험 요소를 피하면서 최단 경로를 찾기 위해 A* 알고리즘을 활용함.</li>
+                    <li>음성 명령을 통해 지도 정보를 수정할 수 있도록 STT(음성-텍스트 변환) 기능을 도입함.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_1.png">
+                        <img src="images/mobile_robot_1.png" alt="지도 설정 인터페이스 스크린샷" />
+                        <figcaption>지도 설정 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_2.png">
+                        <img src="images/mobile_robot_2.png" alt="경로 찾기 인터페이스 스크린샷" />
+                        <figcaption>경로 찾기 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_3.png">
+                        <img src="images/mobile_robot_3.png" alt="음성 입력 인터페이스 스크린샷" />
+                        <figcaption>음성 입력 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_4.png">
+                        <img src="images/mobile_robot_4.png" alt="우측 이벤트 로그 스크린샷" />
+                        <figcaption>우측 이벤트 로그 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_5.png">
+                        <img src="images/mobile_robot_5.png" alt="지도 구성 요소 다이어그램 스크린샷" />
+                        <figcaption>지도 컴포넌트 다이어그램 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/mobile_robot_6.png">
+                        <img src="images/mobile_robot_6.png" alt="메인 클래스 다이어그램 스크린샷" />
+                        <figcaption>메인 클래스 다이어그램 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1CT-U7gQmwd73oUHss1infQ-sr4yG8yJt/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="https://github.com/fivestar1103/mobileRobotController" target="_blank"
+                        class="btn btn-primary btn-sm me-2">GitHub</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-python-plain" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 9 (Cpong) -->
+        <div class="card mb-4" id="cpong">
+            <div class="card-body">
+                <h3 class="card-title">9. Cpong</h3>
+                <ul>
+                    <li>C프로그래밍 수업 프로젝트로 Atari사의 Pong을 C 언어로 구현함.</li>
+                    <li>로컬 2인용 멀티플레이어 기능을 구현하였음.</li>
+                    <li>Windows.h를 사용하여 시스템 함수를 호출하는 순수 C로 전체 게임을 개발함.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-whatever="images/cpong_1.png">
+                        <img src="images/cpong_1.png" alt="로비 인터페이스 스크린샷" />
+                        <figcaption>로비 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-whatever="images/cpong_2.png">
+                        <img src="images/cpong_2.png" alt="게임플레이 인터페이스 스크린샷" />
+                        <figcaption>게임플레이 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-whatever="images/cpong_3.png">
+                        <img src="images/cpong_3.png" alt="1인 플레이 점수 스크린샷" />
+                        <figcaption>플레이어 1 득점 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-whatever="images/cpong_4.png">
+                        <img src="images/cpong_4.png" alt="게임 오버 인터페이스 스크린샷" />
+                        <figcaption>게임 오버 인터페이스 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1Y78P9p7PrrD4Rl6AydXpQp63qYtmhHs8/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="/codes/pong.html" target="_blank"
+                        class="btn btn-primary btn-sm me-2">코드 (cpong.c)</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-c-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 10 (T.E.A. - 고급 텍스트 에디터) -->
+        <div class="card mb-4" id="tea-text-editor-advanced">
+            <div class="card-body">
+                <h3 class="card-title">10. T.E.A. (고급 텍스트 에디터)</h3>
+                <ul>
+                    <li>Python을 사용하여 개인용 메모장 애플리케이션을 제작함.</li>
+                    <li>메모장 내에 마우스로 그림을 그리는 기능을 추가함.</li>
+                    <li>다양한 폰트 및 브러시 설정을 지원함.</li>
+                    <li>파일 생성, 저장 및 불러오기 기능을 구현함.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/tea_editor_1.png">
+                        <img src="images/tea_editor_1.png" alt="텍스트 에디터 인터페이스 스크린샷" />
+                        <figcaption>텍스트 에디터 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/tea_editor_2.png">
+                        <img src="images/tea_editor_2.png" alt="폰트 설정 기능 스크린샷" />
+                        <figcaption>폰트 설정 기능 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/tea_editor_3.png">
+                        <img src="images/tea_editor_3.png" alt="드로잉 캔버스 인터페이스 스크린샷" />
+                        <figcaption>캔버스 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/tea_editor_4.png">
+                        <img src="images/tea_editor_4.png" alt="파일 입출력 기능 스크린샷" />
+                        <figcaption>파일 입출력 기능 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1H7nEui98jgQz4gHlO9ZTftRXpPsP-zUm/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="/codes/TEA.html" target="_blank"
+                        class="btn btn-primary btn-sm me-2">코드 (TEA.py)</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-python-plain" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 11 (도서관 로비 소음 신호등) -->
+        <div class="card mb-4" id="library-lobby-noise-signal-light">
+            <div class="card-body">
+                <h3 class="card-title">11. 도서관 로비 소음 신호등</h3>
+                <ul>
+                    <li>도서관 로비에서 소음 수준을 시각적으로 표시하는 장치를 제작함.</li>
+                    <li>아두이노 프로그래밍을 진행하였으며 3ms마다 평균 데시벨을 계산하는 알고리즘을 구현하였음.</li>
+                    <li>임계값에 따라 신호등에 소음 수준을 표시함.</li>
+                    <li>1부터 9까지의 실시간 데시벨 수준을 표현하는 7-세그먼트 디스플레이를 구현하였음.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/noise_signal_1.png">
+                        <img src="images/noise_signal_1.png" alt="위에서 본 도서관 사진" />
+                        <figcaption>위에서 본 도서관 사진</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/noise_signal_2.png">
+                        <img src="images/noise_signal_2.png" alt="소음 신호 장치 - 레벨 1" />
+                        <figcaption>소음 신호 장치 - 레벨 1</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/noise_signal_3.png">
+                        <img src="images/noise_signal_3.png" alt="소음 신호 장치 - 레벨 2" />
+                        <figcaption>소음 신호 장치 - 레벨 2</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/noise_signal_4.png">
+                        <img src="images/noise_signal_4.png" alt="소음 신호 장치 - 레벨 3" />
+                        <figcaption>소음 신호 장치 - 레벨 3</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1CYa5KAshmbKqHHuQNxJhicypuXB5GHEI/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="/codes/library-noise-light.html" target="_blank"
+                        class="btn btn-primary btn-sm me-2">코드 (library-noise-light.ino)</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-arduino-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 12 (주석 처리됨) -->
+        <!--
+        <div class="card mb-4" id="squidward-the-coin-collector">
+            <div class="card-body">
+                <h3 class="card-title">12. Squidward the Coin Collector</h3>
+                <ul>
+                    <li>학교 프로그래밍 동아리에서 Scratch로 StarCraft 1 UMS "Coin Collector Squidward"를 재현함.</li>
+                    <li>Scratch에서 기본적으로 제공되지 않는 화면 이동을 구현함.</li>
+                    <li>플레이어가 무작위로 움직이는 “서기” 적을 피하며 동전을 수집함.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/squidward_coins_1.png">
+                        <img src="images/squidward_coins_1.png" alt="로비 인터페이스 스크린샷" />
+                        <figcaption>로비 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/squidward_coins_2.png">
+                        <img src="images/squidward_coins_2.png" alt="인트로 인터페이스 스크린샷" />
+                        <figcaption>인트로 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/squidward_coins_3.png">
+                        <img src="images/squidward_coins_3.png" alt="게임플레이 인터페이스 스크린샷" />
+                        <figcaption>게임플레이 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/squidward_coins_4.png">
+                        <img src="images/squidward_coins_4.png" alt="게임 오버 인터페이스 스크린샷" />
+                        <figcaption>게임 오버 인터페이스 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1IAXl8ITvPM-eW0C5ZwuEA-o4rh57jpJ2/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mb-3">인터랙티브 데모:</h5>
+                <div class="d-flex justify-content-center mb-4" style="overflow: hidden;">
+                    <div style="width: 1280px; height: 550px; transform: scale(0.7); transform-origin: top center;">
+                      <iframe 
+                        src="https://scratch.mit.edu/projects/127460011/embed"
+                        style="width: 1280px; height: 720px; border: none;"
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="https://scratch.mit.edu/projects/127460011/" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="https://scratch.mit.edu/projects/127460011/editor/" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">Scratch에서 프로젝트 보기</a>
+                </div>
+
+            </div>
+        </div>
+        -->
+    </main>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <p class="mb-0">
+                &copy; 2025 Hwany. 모든 권리 보유. |
+                <a href="https://github.com/fivestar1103" target="_blank">GitHub</a> |
+                <a href="https://www.linkedin.com/in/hwanyo" target="_blank">LinkedIn</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- 맨 위로 버튼 -->
+    <button id="backToTopBtn" class="btn btn-custom">↑</button>
+
+    <!-- 확대 이미지용 모달 -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="확대된 스크린샷" class="img-fluid rounded mb-3" />
+                    <p id="modalAltText" class="text-muted"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 모달 표시 이벤트를 감지한 후, #modalImage의 src와 캡션을 업데이트함
+        const imageModal = document.getElementById("imageModal");
+        imageModal.addEventListener("show.bs.modal", function (event) {
+            const triggerFigure = event.relatedTarget;
+            const imgSrc = triggerFigure.getAttribute("data-bs-whatever");
+            const img = triggerFigure.querySelector("img");
+            const altText = img.alt;
+
+            const modalImage = imageModal.querySelector("#modalImage");
+            const modalAltText = imageModal.querySelector("#modalAltText");
+
+            modalImage.src = imgSrc;
+            modalImage.alt = altText;  // 접근성을 위해 alt 텍스트 유지
+            modalAltText.textContent = altText;
+        });
+
+        // 맨 위로 버튼 기능
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+    <script>
+        // 모바일 기기 감지 함수
+        function isMobileDevice() {
+            return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // 인터랙티브 데모 iframe을 로드하는 함수
+        function loadInteractiveDemo() {
+            if (!isMobileDevice()) {
+                const demoContainer = document.getElementById('interactiveDemoContainer');
+
+                // Bootstrap의 비율 클래스를 사용하여 반응형 래퍼 생성
+                const ratioDiv = document.createElement('div');
+                ratioDiv.classList.add('ratio', 'ratio-16x9', 'w-100'); // 16:9 비율과 전체 너비 유지
+
+                // iframe 요소 생성
+                const iframe = document.createElement('iframe');
+                iframe.src = "/webgpu-interactive-tank/proj3.html";
+                iframe.style.border = "none";
+                iframe.allowFullscreen = true;
+
+                // iframe을 ratioDiv에 추가
+                ratioDiv.appendChild(iframe);
+
+                // ratioDiv를 demoContainer에 추가
+                demoContainer.appendChild(ratioDiv);
+            } else {
+                // 모바일 기기에서는 "데모 실행" 버튼 숨김
+                const playDemoBtn = document.getElementById('playDemoBtn');
+                if (playDemoBtn) {
+                    playDemoBtn.style.display = 'none';
+                }
+
+                // 모바일 사용자를 위한 메시지 표시
+                const demoContainer = document.getElementById('interactiveDemoContainer');
+                const message = document.createElement('p');
+                message.textContent = "모바일 기기에서는 인터랙티브 데모를 사용할 수 없습니다.";
+                message.classList.add('text-muted');
+                demoContainer.appendChild(message);
+            }
+        }
+
+        // DOM이 완전히 로드된 후 함수 실행
+        document.addEventListener('DOMContentLoaded', loadInteractiveDemo);
+    </script>
+</body>
+
+</html>
