@@ -196,6 +196,45 @@
             background-color: #013220;
             transform: scale(1.1);
         }
+
+        /* 샘플 코드 버튼 스타일 */
+        .sample-code-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.25rem;
+            background-color: transparent;
+            color: #ffc107;
+            /* Bootstrap warning color */
+            font-size: 1.4rem;
+            text-decoration: none;
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #ffc107;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .sample-code-btn:hover {
+            background-color: #ffc107;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-title-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .project-title-container h3 {
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
     </style>
 </head>
 
@@ -231,7 +270,10 @@
         <div class="container">
             <h1>저의 포트폴리오에 오신 것을 환영합니다!</h1>
             <p class="lead mb-0">
-                제가 진행한 프로젝트들을 스크린샷 및 인터랙티브 데모와 함께 확인해보세요.
+                제가 진행한 프로젝트들을 스크린샷 및 <span class="text-warning fw-bold">인터랙티브 데모</span>와 함께 확인해보세요.
+            </p>
+            <p class="lead mb-0">
+                프로젝트 제목 우측 <span class="text-warning fw-bold">샘플 코드</span>를 누르면 샘플 코드 페이지로 이동합니다.
             </p>
         </div>
     </section>
@@ -248,12 +290,6 @@
                             class="text-decoration-none">감정 인식 AI를 활용한 절차적 생성 퍼즐 어드벤처 게임</a>
                     </li>
                     <li>
-                        <a href="#webgpu-interactive-tank" class="text-decoration-none">WebGPU로 구현한 탱크</a>
-                    </li>
-                    <li>
-                        <a href="#seoul-cheer-up" class="text-decoration-none">서울 치워러</a>
-                    </li>
-                    <li>
                         <a href="#ppukkus-grand-adventure-grow-longer" class="text-decoration-none">뿌꾸 대모험: 길어져라!</a>
                     </li>
                     <li>
@@ -263,7 +299,14 @@
                         <a href="#polar-polar" class="text-decoration-none">폴라 폴라</a>
                     </li>
                     <li>
-                        <a href="#aida-axie-infinity-data-analyzer" class="text-decoration-none">AIDA (액시 인피니티 데이터 분석 플랫폼)</a>
+                        <a href="#webgpu-interactive-tank" class="text-decoration-none">WebGPU로 구현한 탱크</a>
+                    </li>
+                    <li>
+                        <a href="#seoul-cheer-up" class="text-decoration-none">서울 치워러</a>
+                    </li>
+                    <li>
+                        <a href="#aida-axie-infinity-data-analyzer" class="text-decoration-none">AIDA (액시 인피니티 데이터 분석
+                            플랫폼)</a>
                     </li>
                     <li>
                         <a href="#mobile-robot-controller" class="text-decoration-none">모바일 로봇 컨트롤러</a>
@@ -287,9 +330,15 @@
         <!-- 프로젝트 1 -->
         <div class="card" id="procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai">
             <div class="card-body">
-                <h3 class="card-title mb-3">
-                    1. 감정 인식 AI를 활용한 절차적 생성 퍼즐 어드벤처 게임
-                </h3>
+                <div class="project-title-container">
+                    <h3 class="card-title">
+                        1. 감정 인식 AI를 활용한 절차적 생성 퍼즐 어드벤처 게임
+                    </h3>
+                    <a href="https://github.com/fivestar1103/capstone/tree/main/Capstone/Assets/Scripts/PCG"
+                        target="_blank" class="sample-code-btn" title="샘플 코드 보기">
+                        샘플 코드
+                    </a>
+                </div>
                 <ul class="mb-4">
                     <li>
                         동적인 게임 환경을 생성하기 위한 절차적 생성(PCG, Procedural Content Generation) 알고리즘을 설계 및 구현함.
@@ -351,20 +400,21 @@
                 </div>
 
                 <h5 class="mb-3">인터랙티브 데모:</h5>
-                <div class="d-flex justify-content-center mb-4" style="overflow: hidden;">
-                    <div style="width: 1280px; height: 550px; transform: scale(0.8); transform-origin: top center;">
-                        <iframe 
-                        src="/webgl-pcg-game/index.html"
-                        style="width: 1280px; height: 720px; border: none;"
-                        allowfullscreen>
-                        </iframe>
+                <div class="lazy-demo-container d-flex justify-content-center mb-4"
+                    data-demo-url="/webgl-pcg-game/index.html" data-is-unity-webgl="true">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">데모가 로드되는 중입니다...</p>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <a href="/webgl-pcg-game/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="/webgl-pcg-game/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체
+                        화면)</a>
                     <a href="https://github.com/fivestar1103/capstone" target="_blank"
-                        class="btn btn-outline-secondary btn-sm">GitHub</a>
+                        class="btn btn-outline-secondary btn-sm">전체 코드</a>
                 </div>
 
                 <h5 class="mb-3">사용 기술:</h5>
@@ -376,130 +426,10 @@
             </div>
         </div>
 
-        <!-- 프로젝트 2 -->
-        <div class="card mb-4" id="webgpu-interactive-tank">
-            <div class="card-body">
-                <h3 class="card-title">2. WebGPU로 구현한 탱크</h3>
-                <ul>
-                    <li>WebGPU를 사용하여 인터랙티브한 3D 탱크 시뮬레이션을 제작함.</li>
-                    <li>탱크 이동, 포탑 회전 및 중력이 적용된 포탄 발사를 구현함.</li>
-                    <li>현실적인 텍스처 구현을 위한 텍스처 매핑 및 노멀 매핑을 적용함.</li>
-                </ul>
-
-                <h5>스크린샷:</h5>
-                <div class="screenshot-container">
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/webgpu_tank_1.png">
-                        <img src="images/webgpu_tank_1.png" alt="탱크 시뮬레이션 스크린샷" />
-                        <figcaption>탱크 시뮬레이션 스크린샷</figcaption>
-                    </figure>
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/webgpu_tank_2.png">
-                        <img src="images/webgpu_tank_2.png" alt="포탄 발사 기능 스크린샷" />
-                        <figcaption>포탄 발사 기능 스크린샷</figcaption>
-                    </figure>
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/webgpu_tank_3.png">
-                        <img src="images/webgpu_tank_3.png" alt="일시 정지 기능 스크린샷" />
-                        <figcaption>일시 정지 기능 스크린샷</figcaption>
-                    </figure>
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/webgpu_tank_4.png">
-                        <img src="images/webgpu_tank_4.png" alt="전면에서 본 탱크 스크린샷" />
-                        <figcaption>전면에서 본 탱크 스크린샷</figcaption>
-                    </figure>
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/webgpu_tank_5.png">
-                        <img src="images/webgpu_tank_5.png" alt="상단에서 본 탱크 스크린샷" />
-                        <figcaption>상단에서 본 탱크 스크린샷</figcaption>
-                    </figure>
-                </div>
-
-                <h5 class="mb-3">비디오 데모:</h5>
-                <div class="row justify-content-center mb-4">
-                    <div class="col-md-10 col-lg-8">
-                        <div class="ratio ratio-16x9">
-                            <iframe src="https://drive.google.com/file/d/1OL84m1lThuKLJaPht7XkPAZgKIyOWxvm/preview"
-                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-                
-                <h5 class="mb-3">인터랙티브 데모:</h5>
-                <!-- 인터랙티브 데모 iframe 자리 표시자 -->
-                <div id="interactiveDemoContainer" class="d-flex justify-content-center mb-4">
-                    <!-- 모바일이 아닐 경우 자바스크립트로 iframe이 삽입됩니다 -->
-                    <noscript>
-                        <p>인터랙티브 데모를 사용할 수 없습니다. 자바스크립트를 활성화하거나 데스크탑 기기에서 확인하세요.</p>
-                    </noscript>
-                </div>
-
-                <div class="mb-3">
-                    <a href="/webgpu-interactive-tank/proj3.html" target="_blank" id="playDemoBtn"
-                        class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
-                    <a href="https://github.com/fivestar1103/webgpu-interactive-tank" target="_blank"
-                        class="btn btn-outline-secondary btn-sm">GitHub</a>
-                </div>
-
-                <!-- 사용 기술 -->
-                <h5>사용 기술:</h5>
-                <div class="tech-icons">
-                    <i class="devicon-javascript-plain colored" style="font-size:2rem;"></i>
-                    <i class="devicon-html5-plain colored" style="font-size:2rem;"></i>
-                    <i class="devicon-css3-plain colored" style="font-size:2rem;"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- 프로젝트 3 (서울 치어업) -->
-        <div class="card mb-4" id="seoul-cheer-up">
-            <div class="card-body">
-                <h3 class="card-title">3. 서울 치워러</h3>
-                <ul>
-                    <li>버려진 공공 전동 스쿠터를 관리하기 위한 크라우드소싱 플랫폼을 개발함.</li>
-                    <li>React를 사용하여 핵심 프론트엔드 기능을 구축하고 반응형 인터페이스를 구현함.</li>
-                    <li>게이미피케이션 요소 및 프로젝트의 핵심 아이디어를 제안하였음.</li>
-                </ul>
-                <h5>스크린샷:</h5>
-                <div class="screenshot-container">
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/seoul_cheerup_1.png">
-                        <img src="images/seoul_cheerup_1.png" alt="메인 인터페이스 스크린샷" />
-                        <figcaption>메인 인터페이스 스크린샷</figcaption>
-                    </figure>
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/seoul_cheerup_2.png">
-                        <img src="images/seoul_cheerup_2.png" alt="리포팅 인터페이스 스크린샷" />
-                        <figcaption>포스팅 인터페이스 스크린샷</figcaption>
-                    </figure>
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/seoul_cheerup_3.png">
-                        <img src="images/seoul_cheerup_3.png" alt="게임화 인터페이스 스크린샷" />
-                        <figcaption>게이미피케이션 인터페이스 스크린샷</figcaption>
-                    </figure>
-                </div>
-
-                <div class="mb-3">
-                    <a href="https://mariana.paaran.com/" target="_blank" class="btn btn-primary btn-sm me-2">플랫폼 방문 (전체 화면)</a>
-                    <a href="https://github.com/PJW011122/mariana" target="_blank"
-                        class="btn btn-outline-secondary btn-sm">GitHub</a>
-                </div>
-
-                <!-- 사용 기술 -->
-                <h5>사용 기술:</h5>
-                <div class="tech-icons">
-                    <i class="devicon-react-original colored" style="font-size:2rem;"></i>
-                    <i class="devicon-javascript-plain colored" style="font-size:2rem;"></i>
-                    <i class="devicon-html5-plain colored" style="font-size:2rem;"></i>
-                    <i class="devicon-css3-plain colored" style="font-size:2rem;"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- 프로젝트 4 (뿌꾸 대모험: 길어져라!) -->
+        <!-- 프로젝트 2 (뿌꾸 대모험: 길어져라!) -->
         <div class="card mb-4" id="ppukkus-grand-adventure-grow-longer">
             <div class="card-body">
-                <h3 class="card-title">4. 뿌꾸 대모험: 길어져라!</h3>
+                <h3 class="card-title">2. 뿌꾸 대모험: 길어져라!</h3>
                 <ul>
                     <li>유니티 인턴으로서 미니 게임을 개발하여 Play Store와 App Store에서 출시하였음.</li>
                     <li>가상 조이스틱을 사용하여 실제 뱀과 유사한 움직임을 구현함.</li>
@@ -541,8 +471,10 @@
 
                 <h5>다운로드/플레이 링크:</h5>
                 <div class="mb-3">
-                    <a href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EA%B8%B8%EC%96%B4%EC%A0%B8%EB%9D%BC/id6720711350" target="_blank" class="btn btn-primary btn-sm me-2">애플 앱 스토어</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.FairytaleHero.PUKKUAdventureLong" target="_blank" class="btn btn-primary btn-sm me-2">구글 플레이 스토어</a>
+                    <a href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EA%B8%B8%EC%96%B4%EC%A0%B8%EB%9D%BC/id6720711350"
+                        target="_blank" class="btn btn-primary btn-sm me-2">애플 앱 스토어</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.FairytaleHero.PUKKUAdventureLong"
+                        target="_blank" class="btn btn-primary btn-sm me-2">구글 플레이 스토어</a>
                 </div>
 
                 <!-- 사용 기술 -->
@@ -554,10 +486,16 @@
             </div>
         </div>
 
-        <!-- 프로젝트 5 (운명과 우연) -->
+        <!-- 프로젝트 3 (필연과 우연) -->
         <div class="card mb-4" id="fate-and-coincidence">
             <div class="card-body">
-                <h3 class="card-title">5. 필연과 우연</h3>
+                <div class="project-title-container">
+                    <h3 class="card-title">3. 필연과 우연</h3>
+                    <a href="https://github.com/ollan365/Fate/tree/main/Assets/1.%20Scripts/EventObjects/Tin%20Case"
+                        target="_blank" class="sample-code-btn" title="샘플 코드 보기">
+                        샘플 코드
+                    </a>
+                </div>
                 <ul>
                     <li>유니티로 제작한 방 탈출 게임의 개발자로 기여하였으며, 현재 텀블벅에서 펀딩을 진행중임.</li>
                     <li>구글 시트를 통해 모든 게임 데이터를 관리하고, CSV 파싱을 활용하여 이벤트 기반 아키텍쳐를 설계하고 구축하였음.</li>
@@ -604,20 +542,21 @@
                 </div>
 
                 <h5 class="mb-3">인터랙티브 데모:</h5>
-                <div class="d-flex justify-content-center mb-4" style="overflow: hidden;">
-                    <div style="width: 1280px; height: 550px; transform: scale(0.8); transform-origin: top center;">
-                      <iframe 
-                        src="/webgl-fate/index.html"
-                        style="width: 1280px; height: 720px; border: none;"
-                        allowfullscreen>
-                      </iframe>
+                <div class="lazy-demo-container d-flex justify-content-center mb-4"
+                    data-demo-url="/webgl-fate/index.html" data-is-unity-webgl="true">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">데모가 로드되는 중입니다...</p>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <a href="/webgl-fate/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="/webgl-fate/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체
+                        화면)</a>
                     <a href="https://github.com/ollan365/Fate" target="_blank"
-                        class="btn btn-outline-secondary btn-sm">GitHub</a>
+                        class="btn btn-outline-secondary btn-sm">전체 코드</a>
                 </div>
 
                 <!-- 사용 기술 -->
@@ -629,10 +568,16 @@
             </div>
         </div>
 
-        <!-- 프로젝트 6 (Polar Polar) -->
+        <!-- 프로젝트 4 (Polar Polar) -->
         <div class="card mb-4" id="polar-polar">
             <div class="card-body">
-                <h3 class="card-title">6. 폴라 폴라</h3>
+                <div class="project-title-container">
+                    <h3 class="card-title">4. 폴라 폴라</h3>
+                    <a href="https://github.com/fivestar1103/Polar-Polar/tree/main/Assets/Scripts" target="_blank"
+                        class="sample-code-btn" title="샘플 코드 보기">
+                        샘플 코드
+                    </a>
+                </div>
                 <ul>
                     <li>컴투스(Com2uS) 멘토링 스쿨에서 4일 동안 2D 플랫포머 게임을 제작함.</li>
                     <li>N극과 S극을 이용해 물체를 밀고 당기는 자력 액션 퍼즐을 기획 및 구현하였음.</li>
@@ -647,8 +592,7 @@
                     </figure>
                     <figure data-bs-toggle="modal" data-bs-target="#imageModal"
                         data-bs-whatever="images/polar_polar_2.png">
-                        <img src="images/polar_polar_2.png"
-                            alt="고드름에 튕기는 자력 게임플레이 스크린샷" />
+                        <img src="images/polar_polar_2.png" alt="고드름에 튕기는 자력 게임플레이 스크린샷" />
                         <figcaption>고드름이 튕겨져 나가는 자력 게임플레이 스크린샷</figcaption>
                     </figure>
                     <figure data-bs-toggle="modal" data-bs-target="#imageModal"
@@ -679,20 +623,21 @@
                 </div>
 
                 <h5 class="mb-3">인터랙티브 데모:</h5>
-                <div class="d-flex justify-content-center mb-4" style="overflow: hidden;">
-                    <div style="width: 1280px; height: 550px; transform: scale(0.8); transform-origin: top center;">
-                      <iframe 
-                        src="/webgl-polar-polar/index.html"
-                        style="width: 1280px; height: 720px; border: none;"
-                        allowfullscreen>
-                      </iframe>
+                <div class="lazy-demo-container d-flex justify-content-center mb-4"
+                    data-demo-url="/webgl-polar-polar/index.html" data-is-unity-webgl="true">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">데모가 로드되는 중입니다...</p>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <a href="/webgl-polar-polar/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="/webgl-polar-polar/index.html" target="_blank" class="btn btn-primary btn-sm me-2">데모 실행
+                        (전체 화면)</a>
                     <a href="https://github.com/fivestar1103/Polar-Polar" target="_blank"
-                        class="btn btn-outline-secondary btn-sm">GitHub</a>
+                        class="btn btn-outline-secondary btn-sm">전체 코드</a>
                 </div>
 
                 <!-- 사용 기술 -->
@@ -700,6 +645,129 @@
                 <div class="tech-icons">
                     <i class="devicon-unity-plain colored" style="font-size:2rem;"></i>
                     <i class="devicon-csharp-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 5 -->
+        <div class="card mb-4" id="webgpu-interactive-tank">
+            <div class="card-body">
+                <h3 class="card-title">5. WebGPU로 구현한 탱크</h3>
+                <ul>
+                    <li>WebGPU를 사용하여 인터랙티브한 3D 탱크 시뮬레이션을 제작함.</li>
+                    <li>탱크 이동, 포탑 회전 및 중력이 적용된 포탄 발사를 구현함.</li>
+                    <li>현실적인 텍스처 구현을 위한 텍스처 매핑 및 노멀 매핑을 적용함.</li>
+                </ul>
+
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_1.png">
+                        <img src="images/webgpu_tank_1.png" alt="탱크 시뮬레이션 스크린샷" />
+                        <figcaption>탱크 시뮬레이션 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_2.png">
+                        <img src="images/webgpu_tank_2.png" alt="포탄 발사 기능 스크린샷" />
+                        <figcaption>포탄 발사 기능 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_3.png">
+                        <img src="images/webgpu_tank_3.png" alt="일시 정지 기능 스크린샷" />
+                        <figcaption>일시 정지 기능 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_4.png">
+                        <img src="images/webgpu_tank_4.png" alt="전면에서 본 탱크 스크린샷" />
+                        <figcaption>전면에서 본 탱크 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/webgpu_tank_5.png">
+                        <img src="images/webgpu_tank_5.png" alt="상단에서 본 탱크 스크린샷" />
+                        <figcaption>상단에서 본 탱크 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5 class="mb-3">비디오 데모:</h5>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-10 col-lg-8">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://drive.google.com/file/d/1OL84m1lThuKLJaPht7XkPAZgKIyOWxvm/preview"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mb-3">인터랙티브 데모:</h5>
+                <div class="lazy-demo-container d-flex justify-content-center mb-4"
+                    data-demo-url="/webgpu-interactive-tank/proj3.html" data-is-unity-webgl="true">
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">데모가 로드되는 중입니다...</p>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <a href="/webgpu-interactive-tank/proj3.html" target="_blank" id="playDemoBtn"
+                        class="btn btn-primary btn-sm me-2">데모 실행 (전체 화면)</a>
+                    <a href="https://github.com/fivestar1103/webgpu-interactive-tank" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">전체 코드</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-javascript-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-html5-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-css3-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 6 (서울 치어업) -->
+        <div class="card mb-4" id="seoul-cheer-up">
+            <div class="card-body">
+                <h3 class="card-title">6. 서울 치워러</h3>
+                <ul>
+                    <li>버려진 공공 전동 스쿠터를 관리하기 위한 크라우드소싱 플랫폼을 개발함.</li>
+                    <li>React를 사용하여 핵심 프론트엔드 기능을 구축하고 반응형 인터페이스를 구현함.</li>
+                    <li>게이미피케이션 요소 및 프로젝트의 핵심 아이디어를 제안하였음.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_1.png">
+                        <img src="images/seoul_cheerup_1.png" alt="메인 인터페이스 스크린샷" />
+                        <figcaption>메인 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_2.png">
+                        <img src="images/seoul_cheerup_2.png" alt="리포팅 인터페이스 스크린샷" />
+                        <figcaption>포스팅 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_3.png">
+                        <img src="images/seoul_cheerup_3.png" alt="게임화 인터페이스 스크린샷" />
+                        <figcaption>게이미피케이션 인터페이스 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <div class="mb-3">
+                    <a href="https://mariana.paaran.com/" target="_blank" class="btn btn-primary btn-sm me-2">플랫폼 방문 (전체
+                        화면)</a>
+                    <a href="https://github.com/PJW011122/mariana" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">전체 코드</a>
+                </div>
+
+                <!-- 사용 기술 -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-react-original colored" style="font-size:2rem;"></i>
+                    <i class="devicon-javascript-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-html5-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-css3-plain colored" style="font-size:2rem;"></i>
                 </div>
             </div>
         </div>
@@ -804,7 +872,7 @@
 
                 <div class="mb-3">
                     <a href="https://github.com/fivestar1103/mobileRobotController" target="_blank"
-                        class="btn btn-primary btn-sm me-2">GitHub</a>
+                        class="btn btn-primary btn-sm me-2">전체 코드</a>
                 </div>
 
                 <!-- 사용 기술 -->
@@ -855,8 +923,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <a href="/codes/pong.html" target="_blank"
-                        class="btn btn-primary btn-sm me-2">코드 (cpong.c)</a>
+                    <a href="/codes/pong.html" target="_blank" class="btn btn-primary btn-sm me-2">코드 (cpong.c)</a>
                 </div>
 
                 <!-- 사용 기술 -->
@@ -912,8 +979,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <a href="/codes/TEA.html" target="_blank"
-                        class="btn btn-primary btn-sm me-2">코드 (TEA.py)</a>
+                    <a href="/codes/TEA.html" target="_blank" class="btn btn-primary btn-sm me-2">코드 (TEA.py)</a>
                 </div>
 
                 <!-- 사용 기술 -->
@@ -969,8 +1035,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <a href="/codes/library-noise-light.html" target="_blank"
-                        class="btn btn-primary btn-sm me-2">코드 (library-noise-light.ino)</a>
+                    <a href="/codes/library-noise-light.html" target="_blank" class="btn btn-primary btn-sm me-2">코드
+                        (library-noise-light.ino)</a>
                 </div>
 
                 <!-- 사용 기술 -->
@@ -1015,7 +1081,7 @@
                     </figure>
                 </div>
 
-                <h5 class="mb-3">비디오 데모:</h5>
+                <h5 class="mb3">비디오 데모:</h5>
                 <div class="row justify-content-center mb-4">
                     <div class="col-md-10 col-lg-8">
                         <div class="ratio ratio-16x9">
@@ -1052,7 +1118,7 @@
         <div class="container">
             <p class="mb-0">
                 &copy; 2025 Hwan. All rights reserved. |
-                <a href="https://github.com/fivestar1103" target="_blank">GitHub</a> |
+                <a href="https://github.com/fivestar1103" target="_blank">전체 코드</a> |
                 <a href="https://www.linkedin.com/in/hwanyo" target="_blank">LinkedIn</a>
             </p>
         </div>
@@ -1148,8 +1214,91 @@
             }
         }
 
-        // DOM이 완전히 로드된 후 함수 실행
-        document.addEventListener('DOMContentLoaded', loadInteractiveDemo);
+        // Function to lazy load iframe content when section is visible
+        function setupLazyLoadingForDemos() {
+            // Get all containers that should have lazy-loaded demos
+            const demoContainers = document.querySelectorAll('.lazy-demo-container');
+
+            // Create an observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // If the element is in the viewport
+                    if (entry.isIntersecting) {
+                        const container = entry.target;
+                        const demoUrl = container.dataset.demoUrl;
+                        const isUnityWebGL = container.dataset.isUnityWebgl === 'true';
+
+                        if (demoUrl && !container.classList.contains('loaded')) {
+                            // Clear the loading spinner
+                            container.innerHTML = '';
+
+                            if (isUnityWebGL) {
+                                // For Unity WebGL games, create a responsive container that maintains aspect ratio
+                                // Unity WebGL typically uses 16:9 or similar aspect ratios
+                                const wrapperDiv = document.createElement('div');
+                                wrapperDiv.style.width = '100%';
+                                wrapperDiv.style.position = 'relative';
+                                wrapperDiv.style.paddingTop = '62.5%'; // 16:10 aspect ratio (safer for most Unity games)
+                                wrapperDiv.style.overflow = 'hidden';
+
+                                const iframe = document.createElement('iframe');
+                                iframe.src = demoUrl;
+                                iframe.style.position = 'absolute';
+                                iframe.style.top = '0';
+                                iframe.style.left = '0';
+                                iframe.style.width = '100%';
+                                iframe.style.height = '100%';
+                                iframe.style.border = 'none';
+                                iframe.allowFullscreen = true;
+                                iframe.setAttribute('scrolling', 'no'); // Prevent scrollbars
+
+                                wrapperDiv.appendChild(iframe);
+                                container.appendChild(wrapperDiv);
+                            } else {
+                                // Standard responsive iframes (16:9)
+                                const ratioDiv = document.createElement('div');
+                                ratioDiv.classList.add('ratio', 'ratio-16x9', 'w-100');
+
+                                const iframe = document.createElement('iframe');
+                                iframe.src = demoUrl;
+                                iframe.style.border = "none";
+                                iframe.allowFullscreen = true;
+                                iframe.setAttribute('scrolling', 'no'); // Prevent scrollbars
+
+                                ratioDiv.appendChild(iframe);
+                                container.appendChild(ratioDiv);
+                            }
+
+                            container.classList.add('loaded');
+                            // Unobserve after loading (no need to keep observing)
+                            observer.unobserve(container);
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '100px 0px', // Load when element is 100px from viewport
+                threshold: 0.1 // Trigger when at least 10% of the element is visible
+            });
+
+            // Observe each container
+            demoContainers.forEach(container => {
+                if (!isMobileDevice()) {
+                    observer.observe(container);
+                } else {
+                    // For mobile devices, show message instead
+                    container.innerHTML = ''; // Clear loading spinner
+                    const message = document.createElement('p');
+                    message.textContent = "모바일 기기에서는 인터랙티브 데모를 사용할 수 없습니다.";
+                    message.classList.add('text-muted');
+                    container.appendChild(message);
+                }
+            });
+        }
+
+        // Initialize the lazy loading system when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setupLazyLoadingForDemos();
+        });
     </script>
 </body>
 
