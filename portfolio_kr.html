@@ -235,6 +235,94 @@
             margin-bottom: 0;
             margin-right: 10px;
         }
+
+        /* 미니맵/목차 스크롤러 스타일 */
+        .toc-scroller {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px 5px;
+            display: none;
+            /* 모바일에서는 기본적으로 숨김 */
+        }
+
+        .toc-scroller ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .toc-scroller li {
+            margin: 5px 0;
+        }
+
+        .toc-scroller .toc-dot {
+            display: block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            border: 2px solid #ddd;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .toc-scroller .toc-dot:hover {
+            background-color: #e0e0e0;
+        }
+
+        .toc-scroller .toc-dot.active {
+            background-color: #ffc107;
+            border-color: #013220;
+        }
+
+        .toc-scroller .toc-tooltip {
+            position: absolute;
+            right: 40px;
+            top: 0;
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(-50%);
+        }
+
+        .toc-scroller .toc-dot:hover .toc-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .toc-scroller .toc-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .toc-scroller .toc-dot.active .toc-number {
+            color: white;
+        }
+
+        /* 데스크톱에서만 표시 */
+        @media (min-width: 992px) {
+            .toc-scroller {
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -1113,12 +1201,84 @@
         -->
     </main>
 
+    <!-- 미니맵/목차 스크롤러 -->
+    <div class="toc-scroller">
+        <ul>
+            <li>
+                <a class="toc-dot" href="#procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai">
+                    <span class="toc-number">1</span>
+                    <span class="toc-tooltip">감정 인식 AI를 활용한 절차적 생성 퍼즐 어드벤처 게임</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#ppukkus-grand-adventure-grow-longer">
+                    <span class="toc-number">2</span>
+                    <span class="toc-tooltip">뿌꾸 대모험: 길어져라!</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#fate-and-coincidence">
+                    <span class="toc-number">3</span>
+                    <span class="toc-tooltip">필연과 우연</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#polar-polar">
+                    <span class="toc-number">4</span>
+                    <span class="toc-tooltip">폴라 폴라</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#webgpu-interactive-tank">
+                    <span class="toc-number">5</span>
+                    <span class="toc-tooltip">WebGPU로 구현한 탱크</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#seoul-cheer-up">
+                    <span class="toc-number">6</span>
+                    <span class="toc-tooltip">서울 치워러</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#aida-axie-infinity-data-analyzer">
+                    <span class="toc-number">7</span>
+                    <span class="toc-tooltip">AIDA (액시 인피니티 데이터 분석 플랫폼)</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#mobile-robot-controller">
+                    <span class="toc-number">8</span>
+                    <span class="toc-tooltip">모바일 로봇 컨트롤러</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#cpong">
+                    <span class="toc-number">9</span>
+                    <span class="toc-tooltip">Cpong</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#tea-text-editor-advanced">
+                    <span class="toc-number">10</span>
+                    <span class="toc-tooltip">T.E.A. (고급 텍스트 에디터)</span>
+                </a>
+            </li>
+            <li>
+                <a class="toc-dot" href="#library-lobby-noise-signal-light">
+                    <span class="toc-number">11</span>
+                    <span class="toc-tooltip">도서관 로비 소음 신호등</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
     <!-- 푸터 -->
     <footer>
         <div class="container">
             <p class="mb-0">
                 &copy; 2025 Hwan. All rights reserved. |
-                <a href="https://github.com/fivestar1103" target="_blank">전체 코드</a> |
+                <a href="https://github.com/fivestar1103" target="_blank">GitHub</a> |
                 <a href="https://www.linkedin.com/in/hwanyo" target="_blank">LinkedIn</a>
             </p>
         </div>
@@ -1298,6 +1458,54 @@
         // Initialize the lazy loading system when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             setupLazyLoadingForDemos();
+        });
+
+        // 목차 스크롤러 기능
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.card[id]');
+            const navDots = document.querySelectorAll('.toc-dot');
+
+            // 부드러운 스크롤링 처리
+            navDots.forEach(dot => {
+                dot.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 80; // 네비게이션바 높이 고려
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 스크롤 시 현재 섹션 하이라이트
+            function highlightCurrentSection() {
+                const scrollPosition = window.scrollY + 100; // 조금 오프셋을 추가
+
+                sections.forEach((section, index) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        // 현재 활성화된 도트에서 active 클래스 제거
+                        navDots.forEach(dot => dot.classList.remove('active'));
+
+                        // 현재 섹션에 해당하는 도트에 active 클래스 추가
+                        if (index < navDots.length) {
+                            navDots[index].classList.add('active');
+                        }
+                    }
+                });
+            }
+
+            // 초기 로딩 시와 스크롤 시 하이라이트 업데이트
+            highlightCurrentSection();
+            window.addEventListener('scroll', highlightCurrentSection);
         });
     </script>
 </body>
