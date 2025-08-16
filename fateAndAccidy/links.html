@@ -12,6 +12,7 @@
   <meta name="theme-color" content="#f6f7fb" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Maplestory/subsets/Maplestory-dynamic-subset.css" type="text/css"/>
   <style>
     :root {
       --bg: #f6f7fb;       /* 전체 배경 */
@@ -45,7 +46,9 @@
       padding: 24px;
     }
     .card {
-      width: min(680px, 92vw);
+      width: min(680px, calc(100vw - 48px));
+      max-width: 680px;
+      margin: 0 auto;
       background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(10px) saturate(120%);
       -webkit-backdrop-filter: blur(10px) saturate(120%);
@@ -88,10 +91,10 @@
       object-fit: cover;
     }
     .title {
-      font-family: 'Poppins', sans-serif;
+      font-family: "Maplestory", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
       line-height: 1.15;
       font-size: clamp(20px, 3vw, 28px);
-      font-weight: 700;
+      font-weight: normal;
       letter-spacing: -0.2px;
       margin: 0;
     }
