@@ -189,6 +189,45 @@
             background-color: #013220;
             transform: scale(1.1);
         }
+
+        /* 샘플 코드 버튼 스타일 */
+        .sample-code-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.25rem;
+            background-color: transparent;
+            color: #ffc107;
+            /* Bootstrap warning color */
+            font-size: 1.4rem;
+            text-decoration: none;
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #ffc107;
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .sample-code-btn:hover {
+            background-color: #ffc107;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-title-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .project-title-container h3 {
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
     </style>
 </head>
 
@@ -226,6 +265,9 @@
             <p class="lead mb-0">
                 제가 진행한 프로젝트들을 스크린샷과 함께 확인해보세요.
             </p>
+            <p class="lead mb-0">
+                프로젝트 제목 우측 <span class="text-warning fw-bold">샘플 코드</span>를 누르면 샘플 코드 페이지로 이동합니다.
+            </p>
         </div>
     </section>
 
@@ -253,10 +295,10 @@
                         <a href="#fate-and-coincidence" class="text-decoration-none">필연과 우연</a>
                     </li>
                     <li>
-                        <a href="#seoul-cheer-up" class="text-decoration-none">서울 치워러</a>
+                        <a href="#polar-polar" class="text-decoration-none">폴라 폴라</a>
                     </li>
                     <li>
-                        <a href="#polar-polar" class="text-decoration-none">폴라 폴라</a>
+                        <a href="#seoul-cheer-up" class="text-decoration-none">서울 치워러</a>
                     </li>
                     <li>
                         <a href="#aida-axie-infinity-data-analyzer" class="text-decoration-none">AIDA (액시 인피니티 데이터 분석 플랫폼)</a>
@@ -287,6 +329,10 @@
                     <h3 class="card-title">
                         1. Emoji Swipe Rescue (2025.04.23. ~ 2025.05.06.)
                     </h3>
+                    <a href="https://github.com/fivestar1103/emoji-swipe-rescue-codebase" target="_blank"
+                        class="sample-code-btn" title="샘플 코드 보기">
+                        샘플 코드
+                    </a>
                 </div>
                 <ul class="mb-4">
                     <li>
@@ -363,9 +409,15 @@
         <!-- 프로젝트 2 -->
         <div class="card" id="procedurally-generated-puzzle-adventure-enhanced-by-speech-and-emotion-ai">
             <div class="card-body">
-                <h3 class="card-title mb-3">
+                <div class="project-title-container">
+                    <h3 class="card-title">
                     2. 감정 인식 AI를 활용한 절차적 생성 퍼즐 어드벤처 게임 (2024.09.10. ~ 2024.12.10.)
-                </h3>
+                    </h3>
+                    <a href="https://github.com/fivestar1103/capstone/tree/main/Capstone/Assets/Scripts/PCG"
+                        target="_blank" class="sample-code-btn" title="샘플 코드 보기">
+                        샘플 코드
+                    </a>
+                </div>
                 <ul class="mb-4">
                     <li>
                         동적인 게임 환경을 생성하기 위한 <strong>절차적 생성(PCG, Procedural Content Generation)</strong> 알고리즘을 설계 및 구현함.
@@ -490,10 +542,16 @@
             </div>
         </div>
 
-        <!-- 프로젝트 4 (운명과 우연) -->
+        <!-- 프로젝트 4 (필연과 우연) -->
         <div class="card mb-4" id="fate-and-coincidence">
             <div class="card-body">
-                <h3 class="card-title">4. 필연과 우연 (2024.03.10. ~ 현재)</h3>
+                <div class="project-title-container">
+                    <h3 class="card-title">4. 필연과 우연 (2024.03.10. ~ 현재)</h3>
+                    <a href="https://github.com/ollan365/Fate/tree/main/Assets/1.%20Scripts"
+                        target="_blank" class="sample-code-btn" title="샘플 코드 보기">
+                        샘플 코드
+                    </a>
+                </div>
                 <ul>
                     <li><strong>유니티</strong>로 제작한 <strong>멀티엔딩 방 탈출 게임</strong>의 <strong>개발 리드</strong>로 활동하였으며, <strong><a href="https://tumblbug.com/fateandaccidy" target="_blank">텀블벅</a>에서 펀딩을 완료</strong>하였고 <strong>BIC 2025 전시작</strong>으로 선정되었음.</li>
                     <li><strong>구글 시트</strong>를 통해 모든 게임 데이터를 관리하고, <strong>CSV 파싱</strong>을 활용하여 <strong>이벤트 기반 아키텍쳐</strong>를 설계하고 구축하였음.</li>
@@ -550,60 +608,16 @@
             </div>
         </div>
 
-        <!-- 프로젝트 5 (서울 치워러) -->
-        <div class="card mb-4" id="seoul-cheer-up">
-            <div class="card-body">
-                <h3 class="card-title">5. 서울 치워러 (2024.11.08. ~ 2024.11.10.)</h3>
-                <ul>
-                    <li>버려진 <strong>공공 전동 스쿠터</strong>를 관리하기 위한 <strong>크라우드소싱 플랫폼</strong>을 개발함.</li>
-                    <li><strong>React</strong>를 사용하여 핵심 프론트엔드 기능을 구축하고 <strong>반응형 인터페이스</strong>를 구현함.</li>
-                    <li><strong>게이미피케이션 요소</strong> 및 프로젝트의 핵심 아이디어를 제안하였음.</li>
-                </ul>
-                <h5>스크린샷:</h5>
-                <div class="screenshot-container">
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/seoul_cheerup_1.png">
-                        <img src="images/seoul_cheerup_1.png" alt="메인 인터페이스 스크린샷" />
-                        <figcaption>메인 인터페이스 스크린샷</figcaption>
-                    </figure>
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/seoul_cheerup_2.png">
-                        <img src="images/seoul_cheerup_2.png" alt="리포팅 인터페이스 스크린샷" />
-                        <figcaption>포스팅 인터페이스 스크린샷</figcaption>
-                    </figure>
-                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
-                        data-bs-whatever="images/seoul_cheerup_3.png">
-                        <img src="images/seoul_cheerup_3.png" alt="게임화 인터페이스 스크린샷" />
-                        <figcaption>게이미피케이션 인터페이스 스크린샷</figcaption>
-                    </figure>
-                </div>
-
-                <h5>데모:</h5>
-                <div class="mb-3">
-                    <a href="https://mariana.paaran.com/" target="_blank" class="btn btn-primary btn-sm me-2">플랫폼 방문</a>
-                </div>
-
-                <h5>코드:</h5>
-                <div class="mb-3">
-                    <a href="https://github.com/PJW011122/mariana" target="_blank"
-                        class="btn btn-outline-secondary btn-sm">깃허브</a>
-                </div>
-
-                <!-- Technologies Used -->
-                <h5>사용 기술:</h5>
-                <div class="tech-icons">
-                    <i class="devicon-react-original colored" style="font-size:2rem;"></i>
-                    <i class="devicon-javascript-plain colored" style="font-size:2rem;"></i>
-                    <i class="devicon-html5-plain colored" style="font-size:2rem;"></i>
-                    <i class="devicon-css3-plain colored" style="font-size:2rem;"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- 프로젝트 6 (Polar Polar) -->
+        <!-- 프로젝트 5 (Polar Polar) -->
         <div class="card mb-4" id="polar-polar">
             <div class="card-body">
-                <h3 class="card-title">6. 폴라 폴라 (2024.02.19. ~ 2024.02.23.)</h3>
+                <div class="project-title-container">
+                    <h3 class="card-title">5. 폴라 폴라 (2024.02.19. ~ 2024.02.23.)</h3>
+                    <a href="https://github.com/fivestar1103/Polar-Polar/tree/main/Assets/Scripts"
+                        target="_blank" class="sample-code-btn" title="샘플 코드 보기">
+                        샘플 코드
+                    </a>
+                </div>
                 <ul>
                     <li><strong>컴투스(Com2uS) 멘토링 스쿨</strong>에서 <strong>4일 동안 2D 플랫포머 게임</strong>을 제작함.</li>
                     <li><strong>N극과 S극</strong>을 이용해 물체를 밀고 당기는 <strong>자력 액션 퍼즐</strong>을 기획 및 구현하였음.</li>
@@ -656,6 +670,56 @@
                 <div class="tech-icons">
                     <i class="devicon-unity-plain colored" style="font-size:2rem;"></i>
                     <i class="devicon-csharp-plain colored" style="font-size:2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로젝트 6 (서울 치워러) -->
+        <div class="card mb-4" id="seoul-cheer-up">
+            <div class="card-body">
+                <h3 class="card-title">6. 서울 치워러 (2024.11.08. ~ 2024.11.10.)</h3>
+                <ul>
+                    <li>버려진 <strong>공공 전동 스쿠터</strong>를 관리하기 위한 <strong>크라우드소싱 플랫폼</strong>을 개발함.</li>
+                    <li><strong>React</strong>를 사용하여 핵심 프론트엔드 기능을 구축하고 <strong>반응형 인터페이스</strong>를 구현함.</li>
+                    <li><strong>게이미피케이션 요소</strong> 및 프로젝트의 핵심 아이디어를 제안하였음.</li>
+                </ul>
+                <h5>스크린샷:</h5>
+                <div class="screenshot-container">
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_1.png">
+                        <img src="images/seoul_cheerup_1.png" alt="메인 인터페이스 스크린샷" />
+                        <figcaption>메인 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_2.png">
+                        <img src="images/seoul_cheerup_2.png" alt="리포팅 인터페이스 스크린샷" />
+                        <figcaption>포스팅 인터페이스 스크린샷</figcaption>
+                    </figure>
+                    <figure data-bs-toggle="modal" data-bs-target="#imageModal"
+                        data-bs-whatever="images/seoul_cheerup_3.png">
+                        <img src="images/seoul_cheerup_3.png" alt="게임화 인터페이스 스크린샷" />
+                        <figcaption>게이미피케이션 인터페이스 스크린샷</figcaption>
+                    </figure>
+                </div>
+
+                <h5>데모:</h5>
+                <div class="mb-3">
+                    <a href="https://mariana.paaran.com/" target="_blank" class="btn btn-primary btn-sm me-2">플랫폼 방문</a>
+                </div>
+
+                <h5>코드:</h5>
+                <div class="mb-3">
+                    <a href="https://github.com/PJW011122/mariana" target="_blank"
+                        class="btn btn-outline-secondary btn-sm">깃허브</a>
+                </div>
+
+                <!-- Technologies Used -->
+                <h5>사용 기술:</h5>
+                <div class="tech-icons">
+                    <i class="devicon-react-original colored" style="font-size:2rem;"></i>
+                    <i class="devicon-javascript-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-html5-plain colored" style="font-size:2rem;"></i>
+                    <i class="devicon-css3-plain colored" style="font-size:2rem;"></i>
                 </div>
             </div>
         </div>
