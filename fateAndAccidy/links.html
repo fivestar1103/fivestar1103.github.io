@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>필연과 우연 — 공식 링크 모음</title>
-  <meta name="description" content="필연과 우연 공식 링크 모음: X, YouTube, 텀블벅." />
+  <meta name="description" content="필연과 우연 공식 링크 모음: X, YouTube, 텀블벅, 스토브 스토어." />
   <meta property="og:title" content="필연과 우연 — 공식 링크 모음" />
-  <meta property="og:description" content="X, YouTube, 텀블벅 링크를 한 곳에." />
+  <meta property="og:description" content="X, YouTube, 텀블벅, 스토브 스토어 링크를 한 곳에." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR" />
   <meta name="theme-color" content="#f6f7fb" />
@@ -26,6 +26,8 @@
       --x: #000000;            /* X: black */
       --yt: #ff0033;           /* YouTube official red */
       --tb: #fe5a59;           /* Tumblbug persimmon */
+      --stove: #ff6b35;        /* STOVE orange */
+      --steam: #171a21;        /* Steam dark blue */
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -113,7 +115,7 @@
       gap: 14px;
       margin: 18px 0 10px;
     }
-    @media (min-width: 520px) { .links { grid-template-columns: 1fr 1fr 1fr; } }
+    @media (min-width: 520px) { .links { grid-template-columns: 1fr 1fr; } }
 
     .btn {
       --accent: #000; /* default */
@@ -149,10 +151,46 @@
       width: 52px;
       height: 22px;
     }
+    .btn-steam .icon {
+      width: 60px;
+      height: 24px;
+    }
+    .btn-stove .icon {
+      width: 24px;
+      height: 24px;
+    }
 
     .btn-x { --accent: var(--x) }
     .btn-yt { --accent: var(--yt) }
     .btn-tb { --accent: var(--tb) }
+    .btn-stove { --accent: var(--stove) }
+    .btn-steam { --accent: var(--steam) }
+    
+    /* Disabled button styling */
+    .btn-disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+      position: relative;
+    }
+    .btn-disabled::after {
+      content: "준비중";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .btn-disabled:hover::after {
+      opacity: 1;
+    }
 
     .footnote {
       text-align: center; color: white; font-size: 12px; margin-top: 14px;
@@ -212,6 +250,16 @@
         </svg>
         텀블벅
       </a>
+      
+      <a class="btn btn-stove" href="https://store.onstove.com/games/102828" target="_blank" rel="noopener" aria-label="STOVE 스토어">
+        <img class="icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMiAxLjVDMTcuNzk5IDEuNSAyMi41IDYuMjAxMDEgMjIuNSAxMkMyMi41IDE3Ljc5OSAxNy43OTkgMjIuNSAxMiAyMi41QzYuMjAxMDEgMjIuNSAxLjUgMTcuNzk5IDEuNSAxMkMxLjUgNi4yMDEwMSA2LjIwMTAxIDEuNSAxMiAxLjVaIiBmaWxsPSIjRkM0NDIwIiBzdHlsZT0iZmlsbDojRkM0NDIwO2ZpbGw6Y29sb3IoZGlzcGxheS1wMyAwLjk4ODIgMC4yNjY3IDAuMTI1NSk7ZmlsbC1vcGFjaXR5OjE7Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTAuODY4MyAxMC4wMDU0QzEwLjc5OTMgOS45MDAxNyAxMC43NzU1IDkuODEyODkgMTAuNzc1NSA5LjcyMjQ1QzEwLjc3NTUgOS4yNzg2MSAxMS4yOTQ2IDkuMTcxODUgMTEuOTg1MSA5LjE3MTg1QzEzLjA5MjQgOS4xNzE4NSAxMy45MjM2IDkuNTk0NzcgMTQuMzgzOCA5LjU5NDc3QzE1LjA0NTUgOS41OTQ3NyAxNS40NTczIDkuMTM1NjIgMTUuNDU3MyA4LjUxOTc0QzE1LjQ1NzMgOC4xMjM3OSAxNS4zMzY4IDcuODE1ODggMTUuMDkyMyA3LjU2NjYxQzE0LjQ1OTQgNi45MjEzNSAxMi44NDggNi43NSAxMi4wNTcgNi43NUM5Ljc2OTk3IDYuNzUgOC4xNjU5OSA3Ljg5NDY1IDguMTY1OTkgOS43NTY5NkM4LjE2NTk5IDEzLjAwMTcgMTIuMjg2MiAxMi44NTk2IDEzLjIyMTIgMTMuNzY4N0MxMy4zMzYyIDEzLjg4NiAxMy40MDgxIDEzLjk5NDcgMTMuNDA4MSAxNC4xODUzQzEzLjQwODEgMTQuNTg0NCAxMi45OTcyIDE0Ljc3NiAxMi4xMjggMTQuNzc2QzEwLjU0NzMgMTQuNzc2IDkuNjUyMzMgMTMuOTk1NSA5LjAxOTk3IDEzLjk5NTVDOC4zNTgzMiAxMy45OTU1IDcuOTUwMiAxNC41NTE5IDcuOTUwMiAxNS4xOTcxQzcuOTUwMiAxNi42MDQ4IDEwLjI1OSAxNy4yNSAxMS44NyAxNy4yNUMxNC4xODU3IDE3LjI1IDE2LjA1MDIgMTYuMjA5IDE2LjA1MDIgMTMuOTk0N0MxNi4wNTAyIDEwLjY2Mjg4IDExLjk0NTkgMTAuOTY3MyAxMS4wMjA2IDEwLjE2ODlDMTAuOTU0MiAxMC4xMTQ4IDEwLjkwNDMgMTAuMDYwNCAxMC44NjgzIDEwLjAwNTRaIiBmaWxsPSJ3aGl0ZSIgc3R5bGU9ImZpbGw6d2hpdGU7ZmlsbDp3aGl0ZTtmaWxsLW9wYWNpdHk6MTsiLz4KPC9zdmc+Cg==" alt="STOVE" />
+        스토브
+      </a>
+
+      <div class="btn btn-steam btn-disabled" aria-label="Steam 스토어 (준비중)">
+        <img class="icon" src="https://store.fastly.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam" />
+        스팀
+      </div>
     </section>
 
     <p class="footnote">© <span id="y"></span> Team Fate</p>
