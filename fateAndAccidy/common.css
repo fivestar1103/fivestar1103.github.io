@@ -1,0 +1,159 @@
+* { box-sizing: border-box }
+html, body { height: 100% }
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: #fff;
+    background: url('images/bg.png') center center / cover no-repeat fixed;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+body:lang(ko) {
+    font-family: "Apple SD Gothic Neo", system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+}
+.card {
+    width: min(680px, calc(100vw - 48px));
+    max-width: 680px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px) saturate(110%);
+    -webkit-backdrop-filter: blur(12px) saturate(110%);
+    border-radius: 28px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        0 1px 0 rgba(255, 255, 255, 0.8) inset,
+        0 -1px 0 rgba(255, 255, 255, 0.3) inset;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.3),
+            0 1px 0 rgba(255, 255, 255, 0.1) inset,
+            0 -1px 0 rgba(255, 255, 255, 0.05) inset;
+    }
+}
+header {
+    margin-bottom: 24px;
+}
+h1 {
+    font-size: clamp(24px, 4vw, 32px);
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.2;
+}
+.support-page h1 {
+    margin-bottom: 12px;
+}
+header p {
+    margin: 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+}
+.support-page header p {
+    color: rgba(255, 255, 255, 0.95);
+}
+header p:not(:last-child) {
+    margin-bottom: 24px;
+}
+section {
+    margin-bottom: 24px;
+}
+h2 {
+    font-size: 20px;
+    margin: 0 0 12px 0;
+    font-weight: 600;
+    color: #fff;
+}
+.support-page h2 {
+    margin-bottom: 16px;
+}
+p {
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 16px 0;
+}
+ul {
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0;
+    padding-left: 24px;
+}
+li {
+    margin-bottom: 12px;
+}
+a {
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    transition: text-decoration-color 0.2s ease;
+}
+a:hover {
+    text-decoration-color: rgba(255, 255, 255, 0.8);
+}
+nav {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-links-left {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.nav-links a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.nav-links a:hover {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.6);
+}
+.nav-links a.active {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 600;
+}
+.nav-links a.active:hover {
+    text-decoration: none;
+}
+.lang-switcher {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.lang-switcher span {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+}
+.lang-switcher a:first-child {
+    padding-right: 8px;
+}
+.lang-switcher a:last-child {
+    padding-left: 8px;
+}
+footer {
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
