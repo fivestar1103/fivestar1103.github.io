@@ -27,7 +27,9 @@
       --yt: #ff0033;           /* YouTube official red */
       --tb: #fe5a59;           /* Tumblbug persimmon */
       --stove: #ff6b35;        /* STOVE orange */
+      --ios: #000000;          /* iOS App Store black */
       --steam: #171a21;        /* Steam dark blue */
+      --disabled-text: "준비중";
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -159,11 +161,16 @@
       width: 24px;
       height: 24px;
     }
+    .btn-ios .icon {
+      width: 24px;
+      height: 24px;
+    }
 
     .btn-x { --accent: var(--x) }
     .btn-yt { --accent: var(--yt) }
     .btn-tb { --accent: var(--tb) }
     .btn-stove { --accent: var(--stove) }
+    .btn-ios { --accent: var(--ios) }
     .btn-steam { --accent: var(--steam) }
     
     /* Disabled button styling */
@@ -174,7 +181,7 @@
       position: relative;
     }
     .btn-disabled::after {
-      content: "준비중";
+      content: var(--disabled-text);
       position: absolute;
       top: 50%;
       left: 50%;
@@ -192,29 +199,99 @@
       opacity: 1;
     }
 
+    section:not(:first-of-type) {
+      margin-top: 24px;
+    }
+
+    .section-title {
+      font-family: "Maplestory", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-size: 18px;
+      font-weight: normal;
+      color: white;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.2px;
+    }
+
     .footnote {
       text-align: center; color: white; font-size: 12px; margin-top: 14px;
+    }
+
+    .lang-switcher {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: white;
+    }
+    .lang-switcher a {
+      color: white;
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+    .lang-switcher a:hover {
+      opacity: 1;
+    }
+    .lang-switcher a.active {
+      opacity: 1;
+      font-weight: 700;
+    }
+    .lang-switcher span {
+      opacity: 0.5;
     }
   </style>
 </head>
 <body>
   <main class="card" role="main">
+    <div class="lang-switcher">
+      <a href="#" data-lang="ko" class="lang-btn active">KO</a>
+      <span>|</span>
+      <a href="#" data-lang="en" class="lang-btn">EN</a>
+    </div>
+
     <header class="header">
       <div class="logo" aria-hidden="true">
         <img src="images/logo.png" alt="필연과 우연 로고" />
       </div>
       <div>
-        <h1 class="title">필연과 우연</h1>
-        <p class="subtitle">공식 링크 모음 — 팔로우와 응원 부탁드립니다♡</p>
+        <h1 class="title" data-i18n="title">필연과 우연</h1>
+        <p class="subtitle" data-i18n="subtitle">공식 링크 모음 — 팔로우와 응원 부탁드립니다♡</p>
       </div>
     </header>
 
-    <section class="links" aria-label="공식 채널 바로가기">
-      <a class="btn btn-x" href="https://x.com/FateAndAccidy" target="_blank" rel="noopener" aria-label="X">
+    <section aria-label="다운로드">
+      <h2 class="section-title" data-i18n="downloads-title">다운로드</h2>
+      <div class="links">
+        <a class="btn btn-stove" href="https://store.onstove.com/games/102828" target="_blank" rel="noopener" aria-label="STOVE 스토어">
+          <img class="icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMiAxLjVDMTcuNzk5IDEuNSAyMi41IDYuMjAxMDEgMjIuNSAxMkMyMi41IDE3Ljc5OSAxNy43OTkgMjIuNSAxMiAyMi41QzYuMjAxMDEgMjIuNSAxLjUgMTcuNzk5IDEuNSAxMkMxLjUgNi4yMDEwMSA2LjIwMTAxIDEuNSAxMiAxLjVaIiBmaWxsPSIjRkM0NDIwIiBzdHlsZT0iZmlsbDojRkM0NDIwO2ZpbGw6Y29sb3IoZGlzcGxheS1wMyAwLjk4ODIgMC4yNjY3IDAuMTI1NSk7ZmlsbC1vcGFjaXR5OjE7Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTAuODY4MyAxMC4wMDU0QzEwLjc5OTMgOS45MDAxNyAxMC43NzU1IDkuODEyODkgMTAuNzc1NSA5LjcyMjQ1QzEwLjc3NTUgOS4yNzg2MSAxMS4yOTQ2IDkuMTcxODUgMTEuOTg1MSA5LjE3MTg1QzEzLjA5MjQgOS4xNzE4NSAxMy45MjM2IDkuNTk0NzcgMTQuMzgzOCA5LjU5NDc3QzE1LjA0NTUgOS41OTQ3NyAxNS40NTczIDkuMTM1NjIgMTUuNDU3MyA4LjUxOTc0QzE1LjQ1NzMgOC4xMjM3OSAxNS4zMzY4IDcuODE1ODggMTUuMDkyMyA3LjU2NjYxQzE0LjQ1OTQgNi45MjEzNSAxMi44NDggNi43NSAxMi4wNTcgNi43NUM5Ljc2OTk3IDYuNzUgOC4xNjU5OSA3Ljg5NDY1IDguMTY1OTkgOS43NTY5NkM4LjE2NTk5IDEzLjAwMTcgMTIuMjg2MiAxMi44NTk2IDEzLjIyMTIgMTMuNzY4N0MxMy4zMzYyIDEzLjg4NiAxMy40MDgxIDEzLjk5NDcgMTMuNDA4MSAxNC4xODUzQzEzLjQwODEgMTQuNTg0NCAxMi45OTcyIDE0Ljc3NiAxMi4xMjggMTQuNzc2QzEwLjU0NzMgMTQuNzc2IDkuNjUyMzMgMTMuOTk1NSA5LjAxOTk3IDEzLjk5NTVDOC4zNTgzMiAxMy45OTU1IDcuOTUwMiAxNC41NTE5IDcuOTUwMiAxNS4xOTcxQzcuOTUwMiAxNi42MDQ4IDEwLjI1OSAxNy4yNSAxMS44NyAxNy4yNUMxNC4xODU3IDE3LjI1IDE2LjA1MDIgMTYuMjA5IDE2LjA1MDIgMTMuOTk0N0MxNi4wNTAyIDEwLjY2Mjg4IDExLjk0NTkgMTAuOTY3MyAxMS4wMjA2IDEwLjE2ODlDMTAuOTU0MiAxMC4xMTQ4IDEwLjkwNDMgMTAuMDYwNCAxMC44NjgzIDEwLjAwNTRaIiBmaWxsPSJ3aGl0ZSIgc3R5bGU9ImZpbGw6d2hpdGU7ZmlsbDp3aGl0ZTtmaWxsLW9wYWNpdHk6MTsiLz4KPC9zdmc+Cg==" alt="STOVE" />
+          <span data-i18n="btn-stove">스토브</span>
+        </a>
+
+        <div class="btn btn-ios btn-disabled" aria-label="앱 스토어 (준비중)">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" fill="currentColor"/>
+          </svg>
+          <span data-i18n="btn-appstore">앱 스토어</span>
+        </div>
+
+        <div class="btn btn-steam btn-disabled" aria-label="Steam 스토어 (준비중)">
+          <img class="icon" src="https://store.fastly.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam" />
+          <span data-i18n="btn-steam">스팀</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="공식 채널 바로가기">
+      <h2 class="section-title" data-i18n="channels-title">공식 채널</h2>
+      <div class="links">
+        <a class="btn btn-x" href="https://x.com/FateAndAccidy" target="_blank" rel="noopener" aria-label="X">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <g><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></g>
         </svg>
-        X
+        <span data-i18n="btn-x">X</span>
       </a>
 
       <a class="btn btn-yt" href="https://youtube.com/@fateandaccidy" target="_blank" rel="noopener" aria-label="유튜브">
@@ -233,7 +310,7 @@
             <path d="M92.6517 11.4999C92.6517 8.51994 92.3517 6.30994 88.9217 6.30994C85.6917 6.30994 84.9717 8.45994 84.9717 11.6199V13.7899C84.9717 16.8699 85.6317 19.1099 88.8417 19.1099C91.3817 19.1099 92.6917 17.8399 92.5417 15.3799L90.2917 15.2599C90.2617 16.7799 89.9117 17.3999 88.9017 17.3999C87.6317 17.3999 87.5717 16.1899 87.5717 14.3899V13.5499H92.6517V11.4999ZM88.8617 7.96994C90.0817 7.96994 90.1717 9.11994 90.1717 11.0699V12.0799H87.5717V11.0699C87.5717 9.13994 87.6517 7.96994 88.8617 7.96994Z"/>
           </g>
         </svg>
-        유튜브
+        <span data-i18n="btn-youtube">유튜브</span>
       </a>
 
       <a class="btn btn-tb" href="https://tumblbug.com/fateandaccidy" target="_blank" rel="noopener" aria-label="텀블벅">
@@ -248,17 +325,8 @@
           <path d="M495.671 176.182C493.02 174.819 490.688 175.674 489.805 177.667C487.342 183.261 481.09 193.066 467.515 193.132C453.508 193.197 444.097 186.626 439.519 179.547C438.344 177.733 435.975 177.141 434.189 178.363L428.322 182.405C426.705 183.524 426.188 185.695 427.175 187.397C433.145 197.653 447.698 207.553 466.678 207.553C489.109 207.553 498.961 193.038 503.004 183.984C503.822 182.142 503.107 179.998 501.311 179.077L495.671 176.182Z" fill="black"/>
           <path d="M803.346 63.9901C791.623 58.0957 782.344 70.8904 782.335 70.8998C782.335 70.8998 773.93 59.8254 756.698 59.8254C737.304 59.8254 718.634 75.0268 716.481 93.6783C715.87 98.9805 716.359 103.878 717.571 108.165C715.494 108.889 706.591 112.405 702.426 120.612C695.714 133.839 702.426 146.324 704.147 148.166C690.036 156.279 686.511 168.557 686.746 176.463C687 185.084 690.337 192.454 696.4 197.775C705.369 205.644 718.85 207.872 731.24 207.872C735.461 207.872 739.56 207.609 743.321 207.233C785.71 202.899 791.219 178.56 790.946 168.303C790.739 160.651 788.285 155.33 782.523 149.717C773.893 141.313 762.856 137.365 745.436 139.508C736.054 140.664 729.153 144.415 722.93 141.294C718.004 138.822 716.265 133.04 719.405 126.657C720.589 124.25 723.983 122.21 725.421 121.552C731.673 128.029 739.4 131.245 750.334 131.583C768.487 132.156 788.53 118.516 790.73 99.6855C792.102 87.9249 788.257 80.3289 788.257 80.3289C788.267 80.3195 796.135 70.1007 798.88 76.4746C799.388 77.6497 798.739 79.6803 798.119 81.175C797.668 82.2655 798.166 83.5159 799.219 84.0329L805.235 86.9754C806.373 87.5301 807.736 87.0506 808.272 85.9037C810.491 81.222 814.495 69.6025 803.346 63.9901ZM775.162 168.002C776.798 185.874 754.169 190.649 741.723 191.994C708.274 195.594 701.966 182.32 701.956 175.598C701.947 167.607 710.041 160.463 720.711 157.238C727.264 158.583 735.424 158.46 744.928 155.208C748.219 154.079 751.725 153.703 755.185 154.098C762.696 154.963 774.231 157.924 775.162 168.002ZM775.218 96.4328C774.005 106.83 763.373 115.658 750.353 115.658C740.698 115.658 730.394 108.626 732.453 95.2107C734.568 81.4289 749.234 75.1584 758.428 75.7977C769.249 76.5498 776.619 84.409 775.218 96.4328Z" fill="black"/>
         </svg>
-        텀블벅
+        <span data-i18n="btn-tumblbug">텀블벅</span>
       </a>
-      
-      <a class="btn btn-stove" href="https://store.onstove.com/games/102828" target="_blank" rel="noopener" aria-label="STOVE 스토어">
-        <img class="icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMiAxLjVDMTcuNzk5IDEuNSAyMi41IDYuMjAxMDEgMjIuNSAxMkMyMi41IDE3Ljc5OSAxNy43OTkgMjIuNSAxMiAyMi41QzYuMjAxMDEgMjIuNSAxLjUgMTcuNzk5IDEuNSAxMkMxLjUgNi4yMDEwMSA2LjIwMTAxIDEuNSAxMiAxLjVaIiBmaWxsPSIjRkM0NDIwIiBzdHlsZT0iZmlsbDojRkM0NDIwO2ZpbGw6Y29sb3IoZGlzcGxheS1wMyAwLjk4ODIgMC4yNjY3IDAuMTI1NSk7ZmlsbC1vcGFjaXR5OjE7Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTAuODY4MyAxMC4wMDU0QzEwLjc5OTMgOS45MDAxNyAxMC43NzU1IDkuODEyODkgMTAuNzc1NSA5LjcyMjQ1QzEwLjc3NTUgOS4yNzg2MSAxMS4yOTQ2IDkuMTcxODUgMTEuOTg1MSA5LjE3MTg1QzEzLjA5MjQgOS4xNzE4NSAxMy45MjM2IDkuNTk0NzcgMTQuMzgzOCA5LjU5NDc3QzE1LjA0NTUgOS41OTQ3NyAxNS40NTczIDkuMTM1NjIgMTUuNDU3MyA4LjUxOTc0QzE1LjQ1NzMgOC4xMjM3OSAxNS4zMzY4IDcuODE1ODggMTUuMDkyMyA3LjU2NjYxQzE0LjQ1OTQgNi45MjEzNSAxMi44NDggNi43NSAxMi4wNTcgNi43NUM5Ljc2OTk3IDYuNzUgOC4xNjU5OSA3Ljg5NDY1IDguMTY1OTkgOS43NTY5NkM4LjE2NTk5IDEzLjAwMTcgMTIuMjg2MiAxMi44NTk2IDEzLjIyMTIgMTMuNzY4N0MxMy4zMzYyIDEzLjg4NiAxMy40MDgxIDEzLjk5NDcgMTMuNDA4MSAxNC4xODUzQzEzLjQwODEgMTQuNTg0NCAxMi45OTcyIDE0Ljc3NiAxMi4xMjggMTQuNzc2QzEwLjU0NzMgMTQuNzc2IDkuNjUyMzMgMTMuOTk1NSA5LjAxOTk3IDEzLjk5NTVDOC4zNTgzMiAxMy45OTU1IDcuOTUwMiAxNC41NTE5IDcuOTUwMiAxNS4xOTcxQzcuOTUwMiAxNi42MDQ4IDEwLjI1OSAxNy4yNSAxMS44NyAxNy4yNUMxNC4xODU3IDE3LjI1IDE2LjA1MDIgMTYuMjA5IDE2LjA1MDIgMTMuOTk0N0MxNi4wNTAyIDEwLjY2Mjg4IDExLjk0NTkgMTAuOTY3MyAxMS4wMjA2IDEwLjE2ODlDMTAuOTU0MiAxMC4xMTQ4IDEwLjkwNDMgMTAuMDYwNCAxMC44NjgzIDEwLjAwNTRaIiBmaWxsPSJ3aGl0ZSIgc3R5bGU9ImZpbGw6d2hpdGU7ZmlsbDp3aGl0ZTtmaWxsLW9wYWNpdHk6MTsiLz4KPC9zdmc+Cg==" alt="STOVE" />
-        스토브
-      </a>
-
-      <div class="btn btn-steam btn-disabled" aria-label="Steam 스토어 (준비중)">
-        <img class="icon" src="https://store.fastly.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016" alt="Steam" />
-        스팀
       </div>
     </section>
 
@@ -268,6 +336,107 @@
   <script>
     // 연도 자동 업데이트
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Localization
+    const translations = {
+      ko: {
+        'title': '필연과 우연',
+        'subtitle': '공식 링크 모음 — 팔로우와 응원 부탁드립니다♡',
+        'downloads-title': '다운로드',
+        'channels-title': '공식 채널',
+        'disabled': '준비중',
+        'btn-stove': '스토브',
+        'btn-appstore': '앱 스토어',
+        'btn-steam': '스팀',
+        'btn-x': 'X',
+        'btn-youtube': '유튜브',
+        'btn-tumblbug': '텀블벅'
+      },
+      en: {
+        'title': 'Fate and Accidy',
+        'subtitle': 'Official Links — Follow and support us♡',
+        'downloads-title': 'Downloads',
+        'channels-title': 'Official Channels',
+        'disabled': 'Coming Soon',
+        'btn-stove': 'Stove',
+        'btn-appstore': 'App Store',
+        'btn-steam': 'Steam',
+        'btn-x': 'X',
+        'btn-youtube': 'YouTube',
+        'btn-tumblbug': 'Tumblbug'
+      }
+    };
+
+    // Detect user's preferred language
+    function detectLanguage() {
+      // First check if user has a saved preference
+      const savedLang = localStorage.getItem('lang');
+      if (savedLang) {
+        return savedLang;
+      }
+      
+      // Detect browser language
+      const browserLang = navigator.language || navigator.userLanguage;
+      if (browserLang.startsWith('en')) {
+        return 'en';
+      } else if (browserLang.startsWith('ko')) {
+        return 'ko';
+      }
+      
+      // Default to Korean if no match
+      return 'ko';
+    }
+    
+    let currentLang = detectLanguage();
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+      
+      // Update CSS variable for disabled text
+      document.documentElement.style.setProperty('--disabled-text', `"${translations[lang]['disabled']}"`);
+      
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      // Update language switcher active state
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      // Update meta tags
+      if (lang === 'ko') {
+        document.title = '필연과 우연 — 공식 링크 모음';
+        document.querySelector('meta[name="description"]').setAttribute('content', '필연과 우연 공식 링크 모음: X, YouTube, 텀블벅, 스토브 스토어.');
+        document.querySelector('meta[property="og:title"]').setAttribute('content', '필연과 우연 — 공식 링크 모음');
+        document.querySelector('meta[property="og:description"]').setAttribute('content', 'X, YouTube, 텀블벅, 스토브 스토어 링크를 한 곳에.');
+        document.querySelector('meta[property="og:locale"]').setAttribute('content', 'ko_KR');
+      } else {
+        document.title = 'Fate and Accidy — Official Links';
+        document.querySelector('meta[name="description"]').setAttribute('content', 'Fate and Accidy official links: X, YouTube, Tumblbug, STOVE Store.');
+        document.querySelector('meta[property="og:title"]').setAttribute('content', 'Fate and Accidy — Official Links');
+        document.querySelector('meta[property="og:description"]').setAttribute('content', 'X, YouTube, Tumblbug, STOVE Store links in one place.');
+        document.querySelector('meta[property="og:locale"]').setAttribute('content', 'en_US');
+      }
+    }
+
+    // Initialize language
+    setLanguage(currentLang);
+
+    // Language switcher event listeners
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = btn.getAttribute('data-lang');
+        setLanguage(lang);
+      });
+    });
   </script>
 </body>
 </html>
