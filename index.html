@@ -1,673 +1,436 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hwany - Personal Page</title>
+  <title>Hwany Jo | Game & Software Engineer</title>
+  <meta name="description"
+    content="채용팀 관점에서 핵심 성과와 역량을 빠르게 확인할 수 있도록 구성한 Hwany Jo의 포트폴리오 메인 페이지" />
 
-  <!-- Bootstrap 5 CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-
-  <!-- Google Fonts: Roboto -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfeff',
+              100: '#cffafe',
+              500: '#06b6d4',
+              600: '#0891b2',
+              700: '#0e7490',
+              900: '#164e63'
+            }
+          },
+          boxShadow: {
+            glow: '0 20px 40px -20px rgba(6, 182, 212, 0.35)'
+          }
+        }
+      }
+    }
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* Base Font & Body */
     body {
-      font-family: "Roboto", sans-serif;
-      background-color: #f8f9fa;
-      /* Slightly off-white BG */
-      scroll-behavior: smooth;
-      line-height: 1.6;
-      /* Improved readability */
-      margin: 0;
-      padding-top: 56px;
-      /* Offset for fixed navbar */
-    }
-
-    /* Navbar Styling */
-    .navbar-brand {
-      font-weight: 700;
-    }
-
-    .navbar-nav .nav-link.active {
-      font-weight: 600;
-      text-decoration: underline;
-    }
-
-    /* Header (Hero) */
-    header {
-      padding: 100px 0 60px 0;
-      background: linear-gradient(135deg, #a7d1a7 0%, #013220 100%);
-      text-align: center;
-      /* Only hero content is centered */
-      color: #fff;
-      /* Title color set to white */
-    }
-
-    header h1 {
-      font-weight: 700;
-      margin-bottom: 1rem;
-      font-size: 3rem;
-    }
-
-    /* Add spacing between hero and main content */
-    main {
-      margin-top: 40px;
-    }
-
-    /* Section Styling (left-aligned by default) */
-    section {
-      margin-bottom: 30px;
-      border-radius: 8px;
-      padding: 40px;
-    }
-
-    /* Alternating Section Background Colors */
-    section:nth-child(odd) {
-      background-color: #ffffff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    section:nth-child(even) {
-      background-color: #f0f0f0;
-      /* Light gray for alternate sections */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    section h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    section ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-
-    section ul li {
-      margin-bottom: 10px;
-    }
-
-    /* Contact Links Styling */
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      /* left-align contact items */
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .contact-links a {
-      text-decoration: none;
-      color: #333;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      transition: color 0.3s ease;
-    }
-
-    .contact-links a:hover {
-      color: #0d6efd;
-    }
-
-    .contact-links img {
-      width: 30px;
-      /* Adjust size as needed */
-    }
-
-    /* Footer styling */
-    footer {
-      background-color: #212529;
-      color: #fff;
-      padding: 30px 0;
-      text-align: center;
-    }
-
-    footer a {
-      color: #fff;
-      text-decoration: underline;
-      transition: color 0.3s ease;
-    }
-
-    footer a:hover {
-      color: #ced4da;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 767px) {
-      .navbar-nav .nav-link {
-        text-align: center;
-      }
-
-      .contact-links {
-        align-items: center;
-      }
-    }
-
-    /* Button Styling */
-    .btn-custom {
-      background-color: #0a734d;
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      font-size: 0.9rem;
-    }
-
-    .btn-custom:hover {
-      background-color: #013220;
-      color: #fff;
-      transform: scale(1.05);
-    }
-
-    /* Navigation Buttons Styling */
-    .nav-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-
-    .nav-buttons .btn {
-      min-width: 120px;
-      flex: 1 1 120px;
-      text-align: center;
-      max-width: 180px;
-    }
-
-    /* Back to Top Button */
-    #backToTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-weight: bold;
-      text-align: center;
-      padding: 0;
-      justify-content: center;
-      align-items: center;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 0% 0%, #ecfeff 0%, #f8fafc 35%, #f8fafc 100%);
     }
   </style>
 </head>
 
-<body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#home">Hwany's Personal Page</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="#home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="portfolio-link" href="portfolio.html">Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/CV_Game.pdf">CV</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HEADER (Hero Section) -->
-  <header id="home">
-    <div class="container">
-      <h1 id="greeting">Hello!</h1> <!-- Dynamic greeting -->
-
-      <!-- Navigation Buttons -->
-      <div class="nav-buttons">
-        <a href="#bio" class="btn btn-custom">About Me</a>
-        <a href="#education" class="btn btn-custom">Education</a>
-        <a href="#experience" class="btn btn-custom">Experience</a>
-        <a href="#certifications-test-scores" class="btn btn-custom">Certifications</a>
-        <a href="#honors-awards" class="btn btn-custom">Honors</a>
-        <a href="#hobbies" class="btn btn-custom">Hobbies</a>
-        <a href="#teaching-experiences" class="btn btn-custom">Teaching</a>
-        <a href="#contact" class="btn btn-custom">Contact</a>
+<body class="text-slate-800" x-data="profilePage()">
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex w-[min(1120px,92vw)] items-center justify-between py-3">
+      <a href="#top" class="text-sm font-extrabold tracking-wide text-slate-900">HWANY JO</a>
+      <nav class="hidden gap-6 text-sm font-medium text-slate-600 md:flex">
+        <a href="#summary" class="hover:text-slate-900">Summary</a>
+        <a href="#experience" class="hover:text-slate-900">Experience</a>
+        <a href="#projects" class="hover:text-slate-900">Projects</a>
+        <a href="#education" class="hover:text-slate-900">Education</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a :href="isKo ? 'portfolio_kr.html' : 'portfolio.html'"
+          class="rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-900 hover:text-slate-900">Portfolio</a>
+        <a :href="isKo ? 'CV_KR.pdf' : 'CV_Game.pdf'"
+          class="rounded-xl bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700">CV</a>
+        <button @click="toggleLang"
+          class="rounded-xl border border-cyan-200 bg-cyan-50 px-3 py-2 text-xs font-semibold text-cyan-700 transition hover:bg-cyan-100"
+          x-text="isKo ? 'EN' : 'KR'"></button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="container">
-    <!-- Bio Section -->
-    <section id="bio">
-      <h2>👨🏻‍💻 About Me</h2>
-      <p>
-        I am an undergraduate student in the Computer Science and
-        Engineering Department at the University of Seoul.<br />
-        My interests are related to game development and data
-        analysis.<br />
-        "Baby steps every day" is my life motto.
-      </p>
+  <main id="top" class="mx-auto w-[min(1120px,92vw)] pb-16 pt-10 md:pt-14">
+    <section class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+      <div>
+        <p class="mb-4 inline-flex items-center rounded-full border border-cyan-200 bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-800"
+          x-text="t('badge')"></p>
+        <h1 class="text-3xl font-extrabold leading-tight text-slate-900 md:text-5xl" x-text="t('headline')"></h1>
+        <p class="mt-5 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg" x-text="t('intro')"></p>
+
+        <div class="mt-7 grid gap-3 sm:grid-cols-3">
+          <template x-for="metric in t('metrics')" :key="metric.label">
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p class="text-2xl font-extrabold text-slate-900" x-text="metric.value"></p>
+              <p class="mt-1 text-xs font-medium text-slate-500" x-text="metric.label"></p>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <aside class="rounded-3xl border border-slate-200 bg-white p-6 shadow-glow">
+        <h2 class="text-sm font-bold uppercase tracking-wide text-slate-500" x-text="t('coreTitle')"></h2>
+        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-slate-700">
+          <template x-for="item in t('corePoints')" :key="item">
+            <li class="flex gap-2"><span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-cyan-500"></span><span x-text="item"></span>
+            </li>
+          </template>
+        </ul>
+      </aside>
     </section>
 
-    <!-- Education Section -->
-    <section id="education">
-      <h2>🎓 Education</h2>
-      <ul>
-        <li>
-          <strong>San Diego State University (Exchange Program)</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>B.S. in Computer Science (Exchange Semester)</em>
-            <em>January 2025 -- May 2025</em>
-          </div>
-        </li>
-        <li>
-          <strong>University of Seoul</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Bachelor of Science in Computer Science, Minor in Data
-              Science (GPA: 3.58/4.00)</em>
-            <em>March 2019 -- February 2026</em>
-          </div>
-        </li>
-        <li>
-          <strong>Dulwich College Beijing</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Youth Rugby Team (2012--2013 Season MVP)</em>
-            <em>January 2009 -- June 2013</em>
-          </div>
-        </li>
-      </ul>
+    <section id="summary" class="mt-10 rounded-3xl border border-slate-200 bg-white p-6 md:p-8">
+      <h2 class="text-xl font-bold text-slate-900" x-text="t('summaryTitle')"></h2>
+      <div class="mt-4 grid gap-4 md:grid-cols-2">
+        <template x-for="block in t('summaryBlocks')" :key="block.title">
+          <article class="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+            <h3 class="font-semibold text-slate-900" x-text="block.title"></h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600" x-text="block.body"></p>
+          </article>
+        </template>
+      </div>
     </section>
 
-    <!-- Professional Experience Section -->
-    <section id="experience">
-      <h2>🗓️ Professional Experience</h2>
-      <ul>
-        <li>
-          <strong>Mobile App. Development Cooperation (Internship)</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Unity Developer</em>
-            <em>August 2024 -- October 2024</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Developed and launched two mobile games:
-              <ul>
-                <li>
-                  <a href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EA%B8%B8%EC%96%B4%EC%A0%B8%EB%9D%BC/id6720711350"
-                    target="_blank" rel="noopener noreferrer"><em>Ppukku's Grand Adventure: Grow Longer! (iOS)</em></a>
-                </li>
-                <li>
-                  <a href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EC%9E%A1%EC%95%84%EB%9D%BC/id6670148912"
-                    target="_blank" rel="noopener noreferrer"><em>Ppukku's Grand Adventure: Catch It! (iOS)</em></a>
-                </li>
-              </ul>
-              Both games are also available on the Apple App Store and
-              Google Play Store.
-            </li>
-            <li>
-              Implemented advanced algorithms (DFS-based surround
-              detection, physics-based mechanics) for core gameplay
-              features.
-            </li>
-            <li>
-              Enhanced user experience with joystick control for precise
-              movement and dynamic UI/UX elements.
-            </li>
-            <li>
-              Authored comprehensive technical guides and debugging
-              instructions for future developers.
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <strong>GameMakers</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Game Programmer</em>
-            <em>March 2024 -- July 2024</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Developed a Unity 2D room-escape game in a six-person team,
-              scheduled for launch by March 2025.
-            </li>
-            <li>
-              Designed intricate puzzles and implemented core gameplay
-              systems.
-            </li>
-            <li>
-              Awarded the <strong>Grand Prize (2nd)</strong> for Best Games
-              in the 8th Cohort.
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <strong>Human-Centered Artificial Intelligence Lab (HCAIL)</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Undergraduate Research Intern</em>
-            <em>December 2023 -- January 2024</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Investigated gaming-related health issues and game
-              addiction.
-            </li>
-            <li>
-              Analyzed WHO’s classification of game addiction, highlighting
-              mental health benefits of gaming.
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <strong>SKYGG</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Research Assistant (Intern)</em>
-            <em>December 2022 -- May 2023</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Contributed to building a playground for Web3 games and
-              blockchain analytics.
-            </li>
-            <li>
-              Developed a web application for analyzing battle logs in
-              <em>Axie Infinity: Origins</em>.
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <strong>Republic of Korea Air Force</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Military Interpreter</em>
-            <em>February 2021 -- November 2022</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Facilitated communication between ROKAF and USAF A1 forces
-              at Osan Air Base.
-            </li>
-            <li>
-              Recognized for superior performance by the Commander of ACC
-              (Air Components Command).
-            </li>
-          </ul>
-        </li>
-      </ul>
+    <section id="experience" class="mt-10">
+      <div class="mb-4 flex items-end justify-between">
+        <h2 class="text-xl font-bold text-slate-900" x-text="t('experienceTitle')"></h2>
+        <p class="text-xs font-medium uppercase tracking-wide text-slate-400" x-text="t('experienceSub')"></p>
+      </div>
+      <div class="space-y-4">
+        <template x-for="exp in t('experiences')" :key="exp.company + exp.period">
+          <article class="rounded-3xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:shadow-md">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900" x-text="exp.company"></h3>
+                <p class="text-sm font-semibold text-cyan-700" x-text="exp.role"></p>
+              </div>
+              <span class="rounded-lg bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600" x-text="exp.period"></span>
+            </div>
+            <ul class="mt-4 space-y-2 text-sm leading-relaxed text-slate-600">
+              <template x-for="point in exp.points" :key="point">
+                <li class="flex gap-2"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span><span
+                    x-text="point"></span></li>
+              </template>
+            </ul>
+          </article>
+        </template>
+      </div>
     </section>
 
-    <!-- Certifications and Test Scores Section -->
-    <section id="certifications-test-scores">
-      <h2>📜 Certifications and Test Scores</h2>
-      <ul>
-        <li>
-          <strong>Languages:</strong>
-          <ul>
-            <li><strong>English:</strong> Native/Bilingual</li>
-            <li><strong>Korean:</strong> Native/Bilingual</li>
-            <li><strong>Chinese:</strong> Limited Working</li>
-          </ul>
-        </li>
-        <li><strong>TOEFL iBT:</strong> 111</li>
-        <li><strong>TOEIC:</strong> 985</li>
-        <li><strong>OPIc:</strong> AL</li>
-        <li>
-          <strong>Certifications:</strong>
-          <ul>
-            <li>
-              <strong>NVIDIA DLI Workshop</strong> – Transformer Based NLP
-              Applications
-            </li>
-            <li>
-              <strong>Microsoft Office Specialist Master Certification
-                (MOS)</strong>
-            </li>
-            <li>
-              <strong>Com2us Mentoring School</strong> – Game Client Focus
-            </li>
-          </ul>
-        </li>
-      </ul>
+    <section id="projects" class="mt-10 rounded-3xl border border-slate-200 bg-white p-6 md:p-8">
+      <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <h2 class="text-xl font-bold text-slate-900" x-text="t('projectsTitle')"></h2>
+        <a :href="isKo ? 'portfolio_kr.html' : 'portfolio.html'"
+          class="rounded-xl border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 hover:border-slate-900 hover:text-slate-900"
+          x-text="t('projectsCta')"></a>
+      </div>
+      <div class="grid gap-4 md:grid-cols-3">
+        <template x-for="project in t('projectCards')" :key="project.title">
+          <article class="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+            <h3 class="font-bold text-slate-900" x-text="project.title"></h3>
+            <p class="mt-2 text-sm text-slate-600" x-text="project.desc"></p>
+            <p class="mt-3 text-xs font-medium text-cyan-700" x-text="project.stack"></p>
+          </article>
+        </template>
+      </div>
     </section>
 
-    <!-- Honors & Awards Section -->
-    <section id="honors-awards">
-      <h2>🏆 Honors & Awards</h2>
-      <ul>
-        <li>
-          <strong>Silver Award (3rd)</strong> -- University of Seoul
-          Programming Contest (UOSPC) 2024
-        </li>
-        <li>
-          <strong>Excellence Award (2nd)</strong> -- Plankton Hackathon 2024
-        </li>
-        <li>
-          <strong>Grand Prize (2nd)</strong> for Best Games -- GameMakers 8th
-          Cohort
-        </li>
-        <li>
-          <strong>Participation Award (4th)</strong> -- University of Seoul
-          Programming Contest (UOSPC) 2023
-        </li>
-      </ul>
+    <section class="mt-10 grid gap-4 md:grid-cols-2">
+      <article id="education" class="rounded-3xl border border-slate-200 bg-white p-6">
+        <h2 class="text-xl font-bold text-slate-900" x-text="t('educationTitle')"></h2>
+        <div class="mt-4 space-y-4 text-sm text-slate-600">
+          <template x-for="edu in t('education')" :key="edu.school + edu.period">
+            <div>
+              <p class="font-semibold text-slate-900" x-text="edu.school"></p>
+              <p x-text="edu.detail"></p>
+              <p class="text-xs text-slate-500" x-text="edu.period"></p>
+            </div>
+          </template>
+        </div>
+      </article>
+
+      <article class="rounded-3xl border border-slate-200 bg-white p-6">
+        <h2 class="text-xl font-bold text-slate-900" x-text="t('honorsTitle')"></h2>
+        <ul class="mt-4 space-y-2 text-sm text-slate-600">
+          <template x-for="award in t('honors')" :key="award">
+            <li class="flex gap-2"><span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-cyan-500"></span><span
+                x-text="award"></span></li>
+          </template>
+        </ul>
+        <h3 class="mt-6 text-sm font-bold uppercase tracking-wide text-slate-500" x-text="t('certTitle')"></h3>
+        <ul class="mt-3 space-y-2 text-sm text-slate-600">
+          <template x-for="cert in t('certs')" :key="cert">
+            <li x-text="cert"></li>
+          </template>
+        </ul>
+      </article>
     </section>
 
-    <!-- Hobbies Section -->
-    <section id="hobbies">
-      <h2>🏉 Hobbies</h2>
-      <ul>
-        <li><strong>Collecting Albums (Mostly Hip-Hop)</strong></li>
-        <li>
-          <a href="https://soundcloud.com/fromthekuiperbelt" target="_blank" rel="noopener noreferrer"><strong>Creating
-              Music</strong></a>
-        </li>
-        <li><strong>Rugby and Cycling</strong></li>
-        <li><strong>Video Gaming</strong></li>
-        <li>
-          <a href="https://www.acmicpc.net/user/fivestar1103" target="_blank"
-            rel="noopener noreferrer"><strong>Algorithm Problem Solving</strong></a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Teaching Experiences Section -->
-    <section id="teaching-experiences">
-      <h2>📚 Teaching Experiences</h2>
-      <ul>
-        <li>
-          <strong>Tutor – Academic Support for International Students, University
-            of Seoul</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>September 2024 -- December 2024</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Delivered structured tutoring on programming (Unix, recursion,
-              pointers) and data structures (linked lists, stacks, trees).
-            </li>
-            <li>
-              Introduced algorithmic problem-solving (sorting & graph
-              algorithms) and version control (Git/GitHub).
-            </li>
-            <li>
-              Adapted lessons to language barriers, improving exam
-              performance for international students.
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <strong>C Programming Tutor, University of Seoul</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>April 2024 -- June 2024</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Taught C basics: pointers, arrays, recursion, Linux-based
-              compilation.
-            </li>
-            <li>
-              Guided students in debugging and optimization best practices.
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <strong>English Speaking Tutor, University of Seoul</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>April 2020 -- June 2020</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Assisted peers in improving spoken English through structured
-              conversation sessions.
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <h2>🪪 Contact</h2>
-      <div class="contact-links">
-        <a href="mailto:fivestar1103@uos.ac.kr">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/University_of_Seoul.svg/150px-University_of_Seoul.svg.png"
-            alt="Email Icon" />
-          fivestar1103@uos.ac.kr
-        </a>
-        <a href="https://www.linkedin.com/in/hwanyo" target="_blank" rel="noopener noreferrer">
-          <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/LinkedIN.png?raw=true"
-            alt="LinkedIn Icon" />
-          www.linkedin.com/in/hwanyo
-        </a>
-        <a href="https://github.com/fivestar1103" target="_blank" rel="noopener noreferrer">
-          <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Black/Github_black.png?raw=true"
-            alt="GitHub Icon" />
-          https://github.com/fivestar1103
-        </a>
-        <a href="https://twitter.com/shwanyo" target="_blank" rel="noopener noreferrer">
-          <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/Twitter.png?raw=true"
-            alt="Twitter Icon" />
-          https://twitter.com/shwanyo
-        </a>
+    <section class="mt-10 rounded-3xl border border-slate-200 bg-slate-900 p-6 text-white md:p-8">
+      <h2 class="text-2xl font-bold" x-text="t('finalTitle')"></h2>
+      <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300" x-text="t('finalDesc')"></p>
+      <div class="mt-5 flex flex-wrap gap-2">
+        <a href="mailto:fivestar1103@uos.ac.kr"
+          class="rounded-xl bg-white px-3 py-2 text-xs font-semibold text-slate-900 hover:bg-slate-100">Email</a>
+        <a href="https://www.linkedin.com/in/hwanyo" target="_blank" rel="noopener noreferrer"
+          class="rounded-xl border border-slate-600 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800">LinkedIn</a>
+        <a href="https://github.com/fivestar1103" target="_blank" rel="noopener noreferrer"
+          class="rounded-xl border border-slate-600 px-3 py-2 text-xs font-semibold text-white hover:bg-slate-800">GitHub</a>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p class="mb-0">
-        &copy; 2025 Hwany. All rights reserved. |
-        <a href="https://github.com/fivestar1103" target="_blank" rel="noopener noreferrer">GitHub</a>
-        |
-        <a href="https://www.linkedin.com/in/hwanyo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        |
-        <span>Last Updated: February 6, 2025, 06:30 UTC</span>
-      </p>
-    </div>
-  </footer>
-
-  <!-- BACK TO TOP BUTTON -->
-  <button id="backToTopBtn" class="btn btn-custom">↑</button>
-
-  <!-- Bootstrap 5 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      updateGreeting();
-
-      // Highlight active nav link based on scroll position
-      const sections = document.querySelectorAll("main section");
-      const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
-
-      window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach((section) => {
-          const sectionTop = section.offsetTop - 150;
-          if (pageYOffset >= sectionTop) {
-            current = section.getAttribute("id");
+    function profilePage() {
+      return {
+        isKo: (localStorage.getItem('lang') || (navigator.language || '').toLowerCase().startsWith('ko') ? 'ko' : 'en') === 'ko',
+        dict: {
+          ko: {
+            badge: '채용팀을 위한 핵심 요약 포트폴리오',
+            headline: '게임/소프트웨어 엔지니어로 성장 중인 조환의입니다.',
+            intro: 'Unity 실무 인턴십, 연구 인턴, 해커톤/공모전 수상, 교환학생 경험을 바탕으로 제품 중심 개발 역량을 키워왔습니다. 이 페이지는 실제 채용 검토에서 중요한 성과와 역량을 빠르게 확인할 수 있도록 이력서 기준으로 구성했습니다.',
+            metrics: [
+              { value: '5+', label: '실무/팀 프로젝트 경험' },
+              { value: '111', label: 'TOEFL iBT' },
+              { value: '3.58/4.00', label: '전공 GPA' }
+            ],
+            coreTitle: 'Core Strengths',
+            corePoints: [
+              'Unity 기반 게임 클라이언트 개발 및 핵심 게임플레이 시스템 구현',
+              '알고리즘/자료구조 기반 문제 해결력과 디버깅 역량',
+              '영어·한국어 Native/Bilingual 수준의 글로벌 커뮤니케이션',
+              '실험/분석부터 프로토타입 제작까지 빠른 실행력'
+            ],
+            summaryTitle: '채용 관점 핵심 요약',
+            summaryBlocks: [
+              {
+                title: '제품 개발 임팩트',
+                body: '모바일 게임 인턴십에서 게임 2종 개발 및 스토어 출시 경험을 확보했으며, 핵심 로직(DFS 기반 감지, 물리 시스템)을 직접 구현했습니다.'
+              },
+              {
+                title: '팀 협업 및 리더십',
+                body: '6인 팀 게임 프로젝트에서 퍼즐 및 시스템 개발을 주도하고, 문서화/인수인계까지 고려해 유지보수 가능성을 높였습니다.'
+              },
+              {
+                title: '연구 및 분석 기반 사고',
+                body: 'HCAIL/웹3 분석 인턴 경험으로 데이터 해석, 사용자 행동 이해, 문제 구조화 능력을 강화했습니다.'
+              },
+              {
+                title: '글로벌 적응력',
+                body: '공군 통역병 근무 및 SDSU 교환학생 경험을 통해 다문화 환경에서 정확한 의사소통과 실행력을 입증했습니다.'
+              }
+            ],
+            experienceTitle: 'Professional Experience',
+            experienceSub: 'resume-based',
+            experiences: [
+              {
+                company: 'Mobile App Development Cooperation',
+                role: 'Unity Developer Intern',
+                period: '2024.08 - 2024.10',
+                points: [
+                  '모바일 게임 2종 개발 및 출시 경험 확보 (iOS/Android 스토어 배포)',
+                  'DFS 기반 포위 판정, 물리 기반 메커닉 등 핵심 게임 로직 구현',
+                  '조이스틱 입력/동적 UI 적용으로 사용자 조작감 및 UX 개선',
+                  '기술 가이드 및 디버깅 문서 작성으로 인수인계 체계화'
+                ]
+              },
+              {
+                company: 'GameMakers',
+                role: 'Game Programmer',
+                period: '2024.03 - 2024.07',
+                points: [
+                  '6인 팀 Unity 2D 방탈출 게임 개발 참여',
+                  '퍼즐 설계 및 핵심 시스템 구현',
+                  '8기 최우수 게임 부문 대상(2등) 수상'
+                ]
+              },
+              {
+                company: 'Human-Centered AI Lab (HCAIL)',
+                role: 'Undergraduate Research Intern',
+                period: '2023.12 - 2024.01',
+                points: [
+                  '게임 관련 건강 이슈 및 중독 분류 체계 리서치',
+                  'WHO 분류 기준 기반 분석 및 시사점 도출'
+                ]
+              },
+              {
+                company: 'SKYGG',
+                role: 'Research Assistant Intern',
+                period: '2022.12 - 2023.05',
+                points: [
+                  'Web3 게임 플레이그라운드 및 블록체인 분석 업무 지원',
+                  'Axie Infinity: Origins 전투 로그 분석 웹 도구 개발'
+                ]
+              },
+              {
+                company: 'Republic of Korea Air Force',
+                role: 'Military Interpreter',
+                period: '2021.02 - 2022.11',
+                points: [
+                  '오산기지 내 ROKAF-USAF 협업 통역 업무 수행',
+                  'ACC 지휘관 표창 수준의 우수 수행 평가'
+                ]
+              }
+            ],
+            projectsTitle: 'Selected Projects Snapshot',
+            projectsCta: '포트폴리오 전체 보기',
+            projectCards: [
+              { title: 'WebGPU Interactive Tank', desc: 'WebGPU 기반 3D 탱크 인터랙션 실험 프로젝트', stack: 'WebGPU · 3D Graphics · Interaction' },
+              { title: 'Fate & Coincidence', desc: 'Unity 기반 내러티브/게임플레이 구현 프로젝트', stack: 'Unity · C# · Game Systems' },
+              { title: 'PCG Game', desc: '절차적 콘텐츠 생성 및 실시간 게임 적용 실험', stack: 'Unity · PCG · Runtime Logic' }
+            ],
+            educationTitle: 'Education',
+            education: [
+              { school: 'University of Seoul', detail: '컴퓨터과학 전공 · 데이터사이언스 부전공 (GPA 3.58/4.00)', period: '2019.03 - 2026.02' },
+              { school: 'San Diego State University', detail: 'Computer Science 교환학기', period: '2025.01 - 2025.05' },
+              { school: 'Dulwich College Beijing', detail: '학창 시절 및 럭비 팀 활동', period: '2009 - 2013' }
+            ],
+            honorsTitle: 'Honors & Certifications',
+            honors: [
+              'UOS Programming Contest 2024 은상(3등)',
+              'Plankton Hackathon 2024 우수상(2등)',
+              'GameMakers 8기 최우수 게임 부문 대상(2등)',
+              'UOS Programming Contest 2023 참가상(4등)'
+            ],
+            certTitle: 'Language & Certificates',
+            certs: [
+              'TOEFL iBT 111 · TOEIC 985 · OPIc AL',
+              'NVIDIA DLI - Transformer Based NLP Applications',
+              'MOS Master Certification',
+              'Com2us Mentoring School (Game Client Focus)'
+            ],
+            finalTitle: '함께 성과를 만드는 팀을 찾고 있습니다.',
+            finalDesc: '게임/소프트웨어 엔지니어 포지션에서 빠른 실행력과 제품 집착으로 팀의 결과를 끌어올리겠습니다. 포트폴리오와 CV에서 상세 구현 내용을 확인해주세요.'
+          },
+          en: {
+            badge: 'Resume-focused profile for recruiting teams',
+            headline: 'I am Hwany Jo, an aspiring Game & Software Engineer.',
+            intro: 'Built through hands-on Unity internships, research experience, competition awards, and international exposure. This page highlights recruiting-relevant outcomes from my resume: shipped work, technical depth, communication, and growth trajectory.',
+            metrics: [
+              { value: '5+', label: 'Professional/Team Experiences' },
+              { value: '111', label: 'TOEFL iBT' },
+              { value: '3.58/4.00', label: 'Major GPA' }
+            ],
+            coreTitle: 'Core Strengths',
+            corePoints: [
+              'Unity game client development with production-oriented gameplay systems',
+              'Strong problem-solving through algorithms, data structures, and debugging',
+              'Bilingual communication in Korean and English for global collaboration',
+              'Fast execution from analysis to prototyping and iteration'
+            ],
+            summaryTitle: 'Recruiting Summary',
+            summaryBlocks: [
+              { title: 'Product Impact', body: 'Shipped two mobile games during internship and implemented core gameplay algorithms including DFS-based detection and physics mechanics.' },
+              { title: 'Team Delivery', body: 'Contributed as a game programmer in a six-member team, owning puzzle/system implementation and maintainability-focused documentation.' },
+              { title: 'Analytical Thinking', body: 'Strengthened research and data interpretation skills through HCAIL and Web3 analytics internship experiences.' },
+              { title: 'Global Adaptability', body: 'Demonstrated communication and execution in multicultural contexts via military interpreter service and SDSU exchange semester.' }
+            ],
+            experienceTitle: 'Professional Experience',
+            experienceSub: 'resume-based',
+            experiences: [
+              {
+                company: 'Mobile App Development Cooperation',
+                role: 'Unity Developer Intern',
+                period: 'Aug 2024 - Oct 2024',
+                points: [
+                  'Developed and shipped two mobile games for app stores',
+                  'Implemented key gameplay logic including DFS-based surround detection and physics mechanics',
+                  'Improved UX with joystick input and dynamic UI systems',
+                  'Wrote technical guides and debugging documentation for handover'
+                ]
+              },
+              {
+                company: 'GameMakers',
+                role: 'Game Programmer',
+                period: 'Mar 2024 - Jul 2024',
+                points: [
+                  'Built a Unity 2D escape-room game with a six-person team',
+                  'Designed puzzles and implemented core gameplay systems',
+                  'Won Grand Prize (2nd) for Best Games in cohort'
+                ]
+              },
+              {
+                company: 'Human-Centered AI Lab (HCAIL)',
+                role: 'Undergraduate Research Intern',
+                period: 'Dec 2023 - Jan 2024',
+                points: [
+                  'Researched game-related health issues and addiction frameworks',
+                  'Analyzed WHO classification and derived practical insights'
+                ]
+              },
+              {
+                company: 'SKYGG',
+                role: 'Research Assistant Intern',
+                period: 'Dec 2022 - May 2023',
+                points: [
+                  'Supported Web3 game playground and blockchain analytics work',
+                  'Built battle-log analysis web app for Axie Infinity: Origins'
+                ]
+              },
+              {
+                company: 'Republic of Korea Air Force',
+                role: 'Military Interpreter',
+                period: 'Feb 2021 - Nov 2022',
+                points: [
+                  'Facilitated communication between ROKAF and USAF at Osan Air Base',
+                  'Recognized for high performance at command level'
+                ]
+              }
+            ],
+            projectsTitle: 'Selected Projects Snapshot',
+            projectsCta: 'View Full Portfolio',
+            projectCards: [
+              { title: 'WebGPU Interactive Tank', desc: 'Interactive 3D graphics experiment powered by WebGPU.', stack: 'WebGPU · 3D Graphics · Interaction' },
+              { title: 'Fate & Coincidence', desc: 'Unity project focusing on gameplay and narrative implementation.', stack: 'Unity · C# · Game Systems' },
+              { title: 'PCG Game', desc: 'Procedural content generation experiments integrated in real-time gameplay.', stack: 'Unity · PCG · Runtime Logic' }
+            ],
+            educationTitle: 'Education',
+            education: [
+              { school: 'University of Seoul', detail: 'B.S. in Computer Science, Minor in Data Science (GPA 3.58/4.00)', period: 'Mar 2019 - Feb 2026' },
+              { school: 'San Diego State University', detail: 'Exchange Semester in Computer Science', period: 'Jan 2025 - May 2025' },
+              { school: 'Dulwich College Beijing', detail: 'Early academic years and rugby activities', period: '2009 - 2013' }
+            ],
+            honorsTitle: 'Honors & Certifications',
+            honors: [
+              'Silver Award (3rd), UOS Programming Contest 2024',
+              'Excellence Award (2nd), Plankton Hackathon 2024',
+              'Grand Prize (2nd), GameMakers 8th Cohort',
+              'Participation Award (4th), UOS Programming Contest 2023'
+            ],
+            certTitle: 'Language & Certificates',
+            certs: [
+              'TOEFL iBT 111 · TOEIC 985 · OPIc AL',
+              'NVIDIA DLI - Transformer Based NLP Applications',
+              'MOS Master Certification',
+              'Com2us Mentoring School (Game Client Focus)'
+            ],
+            finalTitle: 'Open to impact-driven engineering teams.',
+            finalDesc: 'I am looking for game/software engineering roles where fast execution and product ownership matter. See portfolio and CV for implementation details.'
           }
-        });
-
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          // If link is #home, special condition for top
-          if (
-            link.getAttribute("href") === `#${current}` ||
-            (link.getAttribute("href") === "#home" && !current)
-          ) {
-            link.classList.add("active");
-          }
-        });
-      });
-
-      // *** Mobile Device Detection and Portfolio Link Update ***
-
-      // 1. Detect if user is on a mobile device
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
-
-      // 2. Grab the portfolio link using the ID
-      const portfolioLink = document.getElementById("portfolio-link");
-
-      // 3. If on a mobile device, change to portfolio-no-demo.html
-      if (isMobile) {
-        portfolioLink.href = "portfolio-no-demo.html";
-        console.log("Mobile device detected. Portfolio link updated.");
-      } else {
-        portfolioLink.href = "portfolio.html";
-        console.log("Desktop device detected. Portfolio link remains unchanged.");
+        },
+        t(key) {
+          return this.dict[this.isKo ? 'ko' : 'en'][key];
+        },
+        toggleLang() {
+          this.isKo = !this.isKo;
+          localStorage.setItem('lang', this.isKo ? 'ko' : 'en');
+        }
       }
-      // *** End of Mobile Device Detection ***
-    });
-
-    // Update greeting based on time of day
-    function updateGreeting() {
-      const hour = new Date().getHours();
-      let greeting;
-      if (hour < 12) {
-        greeting = "😎 Good Morning!";
-      } else if (hour < 18) {
-        greeting = "☕️ Good Afternoon!";
-      } else {
-        greeting = "🌆 Good Evening!";
-      }
-      document.getElementById("greeting").textContent =
-        greeting + " This is Hwany";
     }
-
-    // Back to Top button functionality
-    const backToTopBtn = document.getElementById("backToTopBtn");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    });
-
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
   </script>
 </body>
 
