@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>르 불규칙 | Korean Grammar: ㄹㄹ Irregular</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e17;
+    --surface: #1a1928;
+    --card: #201f31;
+    --accent1: #ff6b6b;
+    --accent2: #ffd93d;
+    --accent3: #6bcb77;
+    --accent4: #4d96ff;
+    --text: #fffffe;
+    --muted: #a7a9be;
+    --border: #2e2d45;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV TABS ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,14,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+
+  .nav-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 18px;
+    border-radius: 40px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .25s;
+    white-space: nowrap;
+  }
+  .nav-btn.active, .nav-btn:hover {
+    background: var(--accent1);
+    border-color: var(--accent1);
+    color: #fff;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,107,107,.15) 0%, transparent 70%);
+    top: -200px; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent1);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 8vw, 80px);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .hero-title span { color: var(--accent2); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+  .level-badge {
+    display: inline-block;
+    background: var(--accent4);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    display: none;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 20px 60px;
+  }
+  .section.active { display: block; }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .section-title span { color: var(--accent1); }
+  .section-desc {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  /* ── EXPLANATION CARDS ── */
+  .rule-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .rule-box h3 {
+    font-size: 16px;
+    color: var(--accent2);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .rule-box h3 .icon { font-size: 20px; }
+
+  .formula-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .formula-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    text-align: center;
+  }
+  .formula-box.ko { font-size: 18px; font-weight: 700; }
+  .formula-box.highlight { border-color: var(--accent1); color: var(--accent1); }
+  .formula-arrow { color: var(--muted); font-size: 18px; }
+
+  .step-list { list-style: none; }
+  .step-list li {
+    display: flex;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    background: var(--accent1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    margin-top: 2px;
+  }
+
+  /* ── CONJUGATION TABLE ── */
+  .table-wrap { overflow-x: auto; margin-bottom: 20px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    background: var(--surface);
+    color: var(--accent2);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--accent2);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  tr:hover td { background: var(--surface); }
+  .ko-word { font-size: 16px; font-weight: 700; }
+  .changed { color: var(--accent1); }
+  .eng { color: var(--muted); font-size: 12px; }
+
+  /* ── EXAMPLE CARDS ── */
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .ex-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    transition: border-color .2s, transform .2s;
+    cursor: default;
+  }
+  .ex-card:hover {
+    border-color: var(--accent4);
+    transform: translateY(-2px);
+  }
+  .ex-ko {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .ex-ko .hl { color: var(--accent1); }
+  .ex-en {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── FLIP CARDS (Practice) ── */
+  .flip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .flip-card {
+    height: 130px;
+    perspective: 800px;
+    cursor: pointer;
+  }
+  .flip-inner {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .45s cubic-bezier(.4,0,.2,1);
+  }
+  .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+  .flip-front, .flip-back {
+    position: absolute; width: 100%; height: 100%;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .flip-front {
+    background: var(--card);
+  }
+  .flip-back {
+    background: var(--surface);
+    border-color: var(--accent3);
+    transform: rotateY(180deg);
+  }
+  .flip-front .verb { font-size: 22px; font-weight: 700; }
+  .flip-front .hint { font-size: 11px; color: var(--muted); margin-top: 6px; }
+  .flip-back .answer { font-size: 20px; font-weight: 700; color: var(--accent3); }
+  .flip-back .meaning { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .flip-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent1);
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 4px;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-wrap { max-width: 620px; }
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  .quiz-counter {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+  }
+  .quiz-q {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  .quiz-eng { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+  .choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .choice-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .choice-btn:hover:not(:disabled) {
+    border-color: var(--accent4);
+    background: rgba(77,150,255,.1);
+  }
+  .choice-btn.correct { background: rgba(107,203,119,.2); border-color: var(--accent3); color: var(--accent3); }
+  .choice-btn.wrong { background: rgba(255,107,107,.15); border-color: var(--accent1); color: var(--accent1); }
+  .choice-btn:disabled { cursor: default; }
+
+  .quiz-feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: rgba(107,203,119,.1); border: 1px solid var(--accent3); color: var(--accent3); }
+  .quiz-feedback.fail { background: rgba(255,107,107,.1); border: 1px solid var(--accent1); color: #ffb3b3; }
+
+  .quiz-nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    background: var(--accent1);
+    color: #fff;
+    border: none;
+    padding: 11px 24px;
+    border-radius: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .2s, transform .2s;
+  }
+  .btn:hover { opacity: .85; transform: translateY(-1px); }
+  .btn.secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+  .btn:disabled { opacity: .4; cursor: default; transform: none; }
+
+  .score-box {
+    background: var(--card);
+    border: 1px solid var(--accent2);
+    border-radius: 16px;
+    padding: 36px;
+    text-align: center;
+    display: none;
+  }
+  .score-box.show { display: block; }
+  .score-big { font-family: 'DM Serif Display', serif; font-size: 64px; color: var(--accent2); }
+  .score-msg { font-size: 18px; margin: 10px 0 20px; }
+  .score-sub { color: var(--muted); font-size: 14px; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar-wrap {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent1);
+    border-radius: 2px;
+    transition: width .4s;
+  }
+
+  /* ── CHEAT SHEET ── */
+  .cheatsheet {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .cs-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .cs-verb { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+  .cs-eng { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .cs-forms { font-size: 13px; color: var(--text); line-height: 2; }
+  .cs-forms .label { color: var(--muted); font-size: 11px; }
+
+  /* ── LISTENING (AUDIO) ── */
+  .audio-note {
+    background: rgba(255,217,61,.08);
+    border: 1px solid rgba(255,217,61,.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .audio-note strong { color: var(--accent2); }
+
+  /* ── FILL BLANK (Writing practice) ── */
+  .fill-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+  }
+  .fill-q {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.8;
+  }
+  .fill-hint { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+  .fill-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .fill-input {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    width: 140px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .fill-input:focus { border-color: var(--accent4); }
+  .fill-input.correct-input { border-color: var(--accent3); background: rgba(107,203,119,.1); }
+  .fill-input.wrong-input { border-color: var(--accent1); background: rgba(255,107,107,.1); }
+  .fill-check {
+    background: var(--accent4);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .fill-check:hover { opacity: .85; }
+  .fill-result { font-size: 13px; margin-top: 8px; display: none; }
+  .fill-result.show { display: block; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 500px) {
+    .choices { grid-template-columns: 1fr; }
+    .hero-title { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Korean Grammar · 한국어 문법</div>
+  <div class="hero-title">르 <span>불규칙</span></div>
+  <div class="hero-sub">ㄹㄹ Irregular Verbs &amp; Adjectives<br>When verbs ending in <strong>르</strong> change their form</div>
+  <span class="level-badge">TOPIK 1–2 · Beginner</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="showSection('learn')">📖 배워요 Learn</button>
+  <button class="nav-btn" onclick="showSection('table')">📊 활용표 Table</button>
+  <button class="nav-btn" onclick="showSection('examples')">💬 예문 Examples</button>
+  <button class="nav-btn" onclick="showSection('flip')">🃏 플래시카드 Flashcards</button>
+  <button class="nav-btn" onclick="showSection('fill')">✏️ 빈칸 Fill in</button>
+  <button class="nav-btn" onclick="showSection('quiz')">🎯 퀴즈 Quiz</button>
+  <button class="nav-btn" onclick="showSection('sheet')">📋 요약 Summary</button>
+</nav>
+
+<!-- ══════════ SECTION 1: LEARN ══════════ -->
+<section id="learn" class="section active">
+  <div class="section-title">어떻게 바뀌어요? <span>How does it change?</span></div>
+  <div class="section-desc">Some Korean verbs and adjectives ending in <strong>르</strong> follow a special rule. Let's see how! / <strong>르</strong>로 끝나는 동사와 형용사는 특별하게 바뀌어요.</div>
+
+  <!-- Rule box 1 -->
+  <div class="rule-box">
+    <h3><span class="icon">🔴</span> 규칙 (Rule): 르 불규칙이란? What is the 르 irregular?</h3>
+    <p style="font-size:14px; color:var(--muted); line-height:1.8; margin-bottom:18px;">
+      When a verb or adjective ends in <strong style="color:var(--text)">르</strong> and the next ending starts with <strong style="color:var(--accent1)">아/어</strong>, the <strong style="color:var(--text)">르</strong> changes in a special way.<br>
+      동사·형용사가 <strong>르</strong>로 끝날 때, 뒤에 <strong style="color:var(--accent1)">아/어</strong>가 오면 특별하게 바뀌어요.
+    </p>
+
+    <div class="formula-row">
+      <div class="formula-box ko">르</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-box ko highlight">ㄹ + 러</div>
+    </div>
+
+    <ul class="step-list">
+      <li>
+        <div class="step-num">1</div>
+        <div>
+          <strong>르 is removed / 르를 빼요.</strong><br>
+          <span style="color:var(--muted)">모르다 → 모<del style="color:var(--accent1)">르</del> + ?</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div>
+          <strong>Add ㄹ to the syllable before / 앞 글자에 ㄹ을 받침으로 붙여요.</strong><br>
+          <span style="color:var(--muted)">모 → <span style="color:var(--accent2)">몰</span></span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div>
+          <strong>Add 러 at the end / 뒤에 러를 붙여요.</strong><br>
+          <span style="color:var(--muted)">몰 + <span style="color:var(--accent1)">러</span> → <span style="color:var(--accent3)">몰라</span></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Rule box 2 -->
+  <div class="rule-box">
+    <h3><span class="icon">✅</span> 공식 (Formula)</h3>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Ending 어미</th>
+            <th>르 before vowel 모음</th>
+            <th>Example 예시</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>아/어요 <span class="eng">(polite present)</span></td>
+            <td><span class="changed">ㄹ + 러요</span></td>
+            <td>모르다 → <span class="changed">몰라요</span></td>
+          </tr>
+          <tr>
+            <td>았/었어요 <span class="eng">(past)</span></td>
+            <td><span class="changed">ㄹ + 랐/렀어요</span></td>
+            <td>모르다 → <span class="changed">몰랐어요</span></td>
+          </tr>
+          <tr>
+            <td>아/어서 <span class="eng">(because/so)</span></td>
+            <td><span class="changed">ㄹ + 러서</span></td>
+            <td>다르다 → <span class="changed">달라서</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:14px; padding:14px; background:var(--surface); border-radius:10px; font-size:13px; color:var(--muted); line-height:1.8;">
+      💡 <strong style="color:var(--accent2)">Regular endings stay the same!</strong> 르 irregular only happens with <strong style="color:var(--text)">아/어</strong> vowel endings.<br>
+      다른 어미(고, 지만, ㄹ거예요…)는 그냥 <strong>르</strong> 그대로 써요!<br>
+      예: 모르고 / 모르지만 / 모를 거예요 ✅
+    </div>
+  </div>
+
+  <!-- Rule box 3 -->
+  <div class="rule-box">
+    <h3><span class="icon">📝</span> 주요 단어 Key Vocabulary (TOPIK 1–2)</h3>
+    <div class="example-grid" style="margin-bottom:0">
+      <div class="ex-card">
+        <div class="ex-ko">모르다</div>
+        <div class="ex-en">to not know</div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-ko">다르다</div>
+        <div class="ex-en">to be different</div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-ko">빠르다</div>
+        <div class="ex-en">to be fast</div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-ko">부르다</div>
+        <div class="ex-en">to call / to sing</div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-ko">고르다</div>
+        <div class="ex-en">to choose / to pick</div>
+      </div>
+      <div class="ex-card">
+        <div class="ex-ko">흐르다</div>
+        <div class="ex-en">to flow</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SECTION 2: TABLE ══════════ -->
+<section id="table" class="section">
+  <div class="section-title">활용표 <span>Conjugation Table</span></div>
+  <div class="section-desc">See how each verb changes with different endings / 각 동사가 어떻게 바뀌는지 확인해요.</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>기본형 Base</th>
+          <th>English</th>
+          <th>아/어요 <br><span style="font-weight:400;color:var(--muted)">Present polite</span></th>
+          <th>았/었어요 <br><span style="font-weight:400;color:var(--muted)">Past polite</span></th>
+          <th>아/어서 <br><span style="font-weight:400;color:var(--muted)">Because / So</span></th>
+          <th>고 <br><span style="font-weight:400;color:var(--muted)">And (no change)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="ko-word">모르다</td>
+          <td class="eng">not know</td>
+          <td class="ko-word changed">몰<strong>라</strong>요</td>
+          <td class="ko-word changed">몰<strong>랐</strong>어요</td>
+          <td class="ko-word changed">몰<strong>라</strong>서</td>
+          <td class="ko-word">모르고</td>
+        </tr>
+        <tr>
+          <td class="ko-word">다르다</td>
+          <td class="eng">be different</td>
+          <td class="ko-word changed">달<strong>라</strong>요</td>
+          <td class="ko-word changed">달<strong>랐</strong>어요</td>
+          <td class="ko-word changed">달<strong>라</strong>서</td>
+          <td class="ko-word">다르고</td>
+        </tr>
+        <tr>
+          <td class="ko-word">빠르다</td>
+          <td class="eng">be fast</td>
+          <td class="ko-word changed">빨<strong>라</strong>요</td>
+          <td class="ko-word changed">빨<strong>랐</strong>어요</td>
+          <td class="ko-word changed">빨<strong>라</strong>서</td>
+          <td class="ko-word">빠르고</td>
+        </tr>
+        <tr>
+          <td class="ko-word">부르다</td>
+          <td class="eng">call / sing</td>
+          <td class="ko-word changed">불<strong>러</strong>요</td>
+          <td class="ko-word changed">불<strong>렀</strong>어요</td>
+          <td class="ko-word changed">불<strong>러</strong>서</td>
+          <td class="ko-word">부르고</td>
+        </tr>
+        <tr>
+          <td class="ko-word">고르다</td>
+          <td class="eng">choose / pick</td>
+          <td class="ko-word changed">골<strong>라</strong>요</td>
+          <td class="ko-word changed">골<strong>랐</strong>어요</td>
+          <td class="ko-word changed">골<strong>라</strong>서</td>
+          <td class="ko-word">고르고</td>
+        </tr>
+        <tr>
+          <td class="ko-word">흐르다</td>
+          <td class="eng">flow</td>
+          <td class="ko-word changed">흘<strong>러</strong>요</td>
+          <td class="ko-word changed">흘<strong>렀</strong>어요</td>
+          <td class="ko-word changed">흘<strong>러</strong>서</td>
+          <td class="ko-word">흐르고</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="background:rgba(77,150,255,.1); border:1px solid rgba(77,150,255,.3); border-radius:10px; padding:14px 18px; font-size:13px; color:var(--muted); line-height:1.8;">
+    🔵 <strong style="color:var(--accent4)">Tip:</strong> Red columns = 르 irregular change happens / 빨간 칸 = 르 불규칙이 일어나요!<br>
+    Gray column (고) = no change, use base form / 회색 칸 = 기본형 그대로 써요.
+  </div>
+</section>
+
+<!-- ══════════ SECTION 3: EXAMPLES ══════════ -->
+<section id="examples" class="section">
+  <div class="section-title">예문 <span>Example Sentences</span></div>
+  <div class="section-desc">Read and listen to natural example sentences / 자연스러운 예문을 읽어 보세요. (TOPIK 1–2 vocabulary only)</div>
+
+  <div class="audio-note">
+    <strong>💡 Classroom tip:</strong> Read each sentence aloud and have students identify the 르 irregular form. / 각 문장을 소리 내어 읽고 르 불규칙 형태를 찾아보세요.
+  </div>
+
+  <h4 style="color:var(--accent2); font-size:13px; letter-spacing:2px; margin-bottom:12px; font-family:'Space Mono',monospace;">모르다 · NOT KNOW</h4>
+  <div class="example-grid">
+    <div class="ex-card">
+      <div class="ex-ko">이름을 <span class="hl">몰라요</span>.</div>
+      <div class="ex-en">I don't know the name.</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ko">어제 <span class="hl">몰랐어요</span>.</div>
+      <div class="ex-en">I didn't know yesterday.</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ko"><span class="hl">몰라서</span> 물어봤어요.</div>
+      <div class="ex-en">I asked because I didn't know.</div>
+    </div>
+  </div>
+
+  <h4 style="color:var(--accent2); font-size:13px; letter-spacing:2px; margin-bottom:12px; font-family:'Space Mono',monospace;">다르다 · DIFFERENT</h4>
+  <div class="example-grid">
+    <div class="ex-card">
+      <div class="ex-ko">두 사람이 <span class="hl">달라요</span>.</div>
+      <div class="ex-en">The two people are different.</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ko">색이 <span class="hl">달랐어요</span>.</div>
+      <div class="ex-en">The colors were different.</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ko"><span class="hl">달라서</span> 재미있어요.</div>
+      <div class="ex-en">It's fun because it's different.</div>
+    </div>
+  </div>
+
+  <h4 style="color:var(--accent2); font-size:13px; letter-spacing:2px; margin-bottom:12px; font-family:'Space Mono',monospace;">빠르다 · FAST</h4>
+  <div class="example-grid">
+    <div class="ex-card">
+      <div class="ex-ko">지하철이 <span class="hl">빨라요</span>.</div>
+      <div class="ex-en">The subway is fast.</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ko">어제 버스가 <span class="hl">빨랐어요</span>.</div>
+      <div class="ex-en">The bus was fast yesterday.</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ko">배달이 <span class="hl">빨라서</span> 좋아요.</div>
+      <div class="ex-en">I like it because delivery is fast.</div>
+    </div>
+  </div>
+
+  <h4 style="color:var(--accent2); font-size:13px; letter-spacing:2px; margin-bottom:12px; font-family:'Space Mono',monospace;">부르다 · CALL / SING</h4>
+  <div class="example-grid">
+    <div class="ex-card">
+      <div class="ex-ko">노래를 <span class="hl">불러요</span>.</div>
+      <div class="ex-en">I sing a song.</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ko">친구를 <span class="hl">불렀어요</span>.</div>
+      <div class="ex-en">I called my friend.</div>
+    </div>
+    <div class="ex-card">
+      <div class="ex-ko">이름을 <span class="hl">불러서</span> 갔어요.</div>
+      <div class="ex-en">I went because they called my name.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SECTION 4: FLASHCARDS ══════════ -->
+<section id="flip" class="section">
+  <div class="section-title">플래시카드 <span>Flashcards</span></div>
+  <div class="section-desc">Tap each card to flip and see the answer! / 카드를 눌러서 정답을 확인하세요.</div>
+
+  <p style="font-size:13px; color:var(--muted); margin-bottom:18px;">→ <strong style="color:var(--text)">아/어요</strong> form (polite present) / 합쇼체 현재형</p>
+  <div class="flip-grid" id="flipGrid1"></div>
+
+  <p style="font-size:13px; color:var(--muted); margin:24px 0 18px;">→ <strong style="color:var(--text)">았/었어요</strong> form (past) / 과거형</p>
+  <div class="flip-grid" id="flipGrid2"></div>
+
+  <button class="btn secondary" onclick="resetFlips()">🔄 다시 보기 Reset</button>
+</section>
+
+<!-- ══════════ SECTION 5: FILL IN ══════════ -->
+<section id="fill" class="section">
+  <div class="section-title">빈칸 채우기 <span>Fill in the Blank</span></div>
+  <div class="section-desc">Write the correct form of the verb / 동사를 올바른 형태로 쓰세요.</div>
+
+  <div id="fillItems"></div>
+  <button class="btn secondary" onclick="resetFill()">🔄 다시 풀기 Reset</button>
+</section>
+
+<!-- ══════════ SECTION 6: QUIZ ══════════ -->
+<section id="quiz" class="section">
+  <div class="section-title">퀴즈 <span>Quiz</span></div>
+  <div class="section-desc">Choose the correct answer / 맞는 답을 고르세요.</div>
+
+  <div class="quiz-wrap">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+
+    <div id="quizCard" class="quiz-card">
+      <div class="quiz-counter" id="quizCounter"></div>
+      <div class="quiz-q" id="quizQ"></div>
+      <div class="quiz-eng" id="quizEng"></div>
+      <div class="choices" id="choicesWrap"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+    </div>
+
+    <div class="score-box" id="scoreBox">
+      <div class="score-big" id="scoreBig"></div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <div class="score-sub" id="scoreSub"></div>
+      <br>
+      <button class="btn" onclick="restartQuiz()">🔄 다시 풀기 Try Again</button>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>다음 Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SECTION 7: SUMMARY ══════════ -->
+<section id="sheet" class="section">
+  <div class="section-title">요약 <span>Summary Sheet</span></div>
+  <div class="section-desc">A quick reference for students / 학생들을 위한 빠른 참고 자료예요.</div>
+
+  <div class="rule-box" style="margin-bottom:24px;">
+    <h3><span class="icon">📌</span> 기억하세요! Remember!</h3>
+    <div style="font-size:15px; line-height:2.2;">
+      <span style="color:var(--muted)">동사/형용사 어간이 <strong style="color:var(--text)">르</strong>로 끝날 때</span><br>
+      + <strong style="color:var(--accent1)">아/어</strong> 계열 → <strong style="color:var(--accent3)">르 → ㄹ + 러/라</strong><br>
+      <span style="color:var(--muted); font-size:13px;">When the stem ends in <strong style="color:var(--text)">르</strong> + <strong style="color:var(--accent1)">아/어</strong> endings → add ㄹ before 러/라</span><br><br>
+      + Other endings (고, 지만, (으)ㄹ…) → <strong style="color:var(--accent4)">No change / 변화 없음</strong>
+    </div>
+  </div>
+
+  <div class="cheatsheet" id="cheatSheet"></div>
+
+  <div class="rule-box">
+    <h3><span class="icon">⚠️</span> 주의! Watch out!</h3>
+    <p style="font-size:14px; color:var(--muted); line-height:1.9;">
+      Not ALL verbs ending in 르 are irregular! / 르로 끝나는 모든 동사가 불규칙은 아니에요!<br>
+      <strong style="color:var(--text)">Regular:</strong> <span style="color:var(--accent4)">따르다 → 따라요</span> (to follow) — this IS 르 irregular ✅<br>
+      <strong style="color:var(--text)">Regular 으 verb:</strong> <span style="color:var(--accent4)">나쁘다 → 나빠요</span> (to be bad) — this is 으 irregular, NOT 르!<br>
+      <span style="font-size:12px;">Tip: 르 irregular ALWAYS has TWO syllables ending in 르. / 르 불규칙은 항상 르 앞에 다른 음절이 있어요.</span>
+    </p>
+  </div>
+</section>
+
+<script>
+// ══ DATA ══
+const verbs = [
+  { base:'모르다', en:'not know', stem:'모', vowel:'아', pres:'몰라요', past:'몰랐어요', so:'몰라서', go:'모르고' },
+  { base:'다르다', en:'be different', stem:'다', vowel:'아', pres:'달라요', past:'달랐어요', so:'달라서', go:'다르고' },
+  { base:'빠르다', en:'be fast', stem:'빠', vowel:'아', pres:'빨라요', past:'빨랐어요', so:'빨라서', go:'빠르고' },
+  { base:'부르다', en:'call / sing', stem:'부', vowel:'어', pres:'불러요', past:'불렀어요', so:'불러서', go:'부르고' },
+  { base:'고르다', en:'choose / pick', stem:'고', vowel:'아', pres:'골라요', past:'골랐어요', so:'골라서', go:'고르고' },
+  { base:'흐르다', en:'flow', stem:'흐', vowel:'어', pres:'흘러요', past:'흘렀어요', so:'흘러서', go:'흐르고' },
+];
+
+// ══ NAV ══
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'quiz') initQuiz();
+}
+
+// ══ FLASHCARDS ══
+function buildFlip(containerId, form, label) {
+  const wrap = document.getElementById(containerId);
+  wrap.innerHTML = '';
+  verbs.forEach((v,i) => {
+    const answer = form === 'pres' ? v.pres : v.past;
+    wrap.innerHTML += `
+      <div class="flip-card" id="fc_${containerId}_${i}" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="flip-label">TAP TO FLIP</div>
+            <div class="verb">${v.base}</div>
+            <div class="hint">${v.en} · ${label}</div>
+          </div>
+          <div class="flip-back">
+            <div class="flip-label">✓ ANSWER</div>
+            <div class="answer">${answer}</div>
+            <div class="meaning">${v.en}</div>
+          </div>
+        </div>
+      </div>`;
+  });
+}
+buildFlip('flipGrid1','pres','아/어요');
+buildFlip('flipGrid2','past','았/었어요');
+
+function resetFlips() {
+  document.querySelectorAll('.flip-card').forEach(c => c.classList.remove('flipped'));
+}
+
+// ══ FILL IN ══
+const fillData = [
+  { sentence:'저는 그 사람 이름을 ___ .', hint:'모르다 + 아/어요', answer:'몰라요', eng:"I don't know that person's name." },
+  { sentence:'두 사람이 많이 ___ .', hint:'다르다 + 아/어요', answer:'달라요', eng:'The two people are very different.' },
+  { sentence:'지하철이 아주 ___ .', hint:'빠르다 + 아/어요', answer:'빨라요', eng:'The subway is very fast.' },
+  { sentence:'노래를 ___ .', hint:'부르다 + 아/어요', answer:'불러요', eng:'I sing a song.' },
+  { sentence:'저는 파란색을 ___ .', hint:'고르다 + 았/었어요', answer:'골랐어요', eng:'I chose the blue color.' },
+  { sentence:'강물이 ___ .', hint:'흐르다 + 아/어요', answer:'흘러요', eng:'The river flows.' },
+  { sentence:'어제 한국어를 ___ .', hint:'모르다 + 았/었어요', answer:'몰랐어요', eng:"I didn't know Korean yesterday." },
+  { sentence:'두 색이 ___ 새로 샀어요.', hint:'다르다 + 아/어서', answer:'달라서', eng:'I bought a new one because the colors were different.' },
+];
+
+function buildFill() {
+  const wrap = document.getElementById('fillItems');
+  wrap.innerHTML = '';
+  fillData.forEach((item, i) => {
+    wrap.innerHTML += `
+      <div class="fill-item">
+        <div class="fill-q">${item.sentence}</div>
+        <div class="fill-hint">💡 ${item.hint} | "${item.eng}"</div>
+        <div class="fill-row">
+          <input type="text" class="fill-input" id="fi_${i}" placeholder="답을 쓰세요..." oninput="resetFillItem(${i})">
+          <button class="fill-check" onclick="checkFill(${i}, '${item.answer}')">확인 Check</button>
+        </div>
+        <div class="fill-result" id="fr_${i}"></div>
+      </div>`;
+  });
+}
+buildFill();
+
+function checkFill(i, answer) {
+  const input = document.getElementById(`fi_${i}`);
+  const result = document.getElementById(`fr_${i}`);
+  const val = input.value.trim();
+  if (val === answer) {
+    input.classList.add('correct-input'); input.classList.remove('wrong-input');
+    result.innerHTML = `✅ 정답이에요! Correct! <strong>${answer}</strong>`;
+    result.style.color = 'var(--accent3)';
+  } else {
+    input.classList.add('wrong-input'); input.classList.remove('correct-input');
+    result.innerHTML = `❌ 다시 해 보세요. Try again. (답: <strong>${answer}</strong>)`;
+    result.style.color = 'var(--accent1)';
+  }
+  result.classList.add('show');
+}
+function resetFillItem(i) {
+  const input = document.getElementById(`fi_${i}`);
+  input.classList.remove('correct-input','wrong-input');
+  document.getElementById(`fr_${i}`).classList.remove('show');
+}
+function resetFill() {
+  buildFill();
+}
+
+// ══ QUIZ ══
+const quizData = [
+  { q:'모르다 + 아요 = ?', eng:"What is the polite present form of 모르다 (not know)?", choices:['모라요','몰라요','모러요','모랐어요'], correct:1 },
+  { q:'다르다 + 아요 = ?', eng:"What is the polite present form of 다르다 (be different)?", choices:['다라요','다어요','달라요','달러요'], correct:2 },
+  { q:'빠르다 + 았어요 = ?', eng:"What is the past form of 빠르다 (be fast)?", choices:['빠랐어요','빨랐어요','빠렀어요','빠었어요'], correct:1 },
+  { q:'부르다 + 어요 = ?', eng:"What is the polite present form of 부르다 (call/sing)?", choices:['부러요','부라요','불러요','불라요'], correct:2 },
+  { q:'고르다 + 았어요 = ?', eng:"What is the past form of 고르다 (choose)?", choices:['고랐어요','고렀어요','골랐어요','골렸어요'], correct:2 },
+  { q:'이 문장에서 맞는 것은? / Choose the correct form:', eng:'"The river flows." → 강물이 ___', choices:['흐라요','흘러요','흐러요','흘라요'], correct:1 },
+  { q:'다르다 + 아서 = ?', eng:"Complete: '달리기가 ___ 좋아요.' (I like it because it's different.)", choices:['다르아서','달라서','달라요서','다라서'], correct:1 },
+  { q:'몰라서 = ?', eng:"Which base verb does 몰라서 come from?", choices:['모르다','물다','모다','몰다'], correct:0 },
+  { q:'고 형태는? What is the -고 form of 모르다?', eng:"No irregular rule applies here!", choices:['몰고','모라고','모르고','몰라고'], correct:2 },
+  { q:'Which sentence is CORRECT? / 맞는 문장은?', eng:"", choices:['노래를 부라요.','노래를 불러요.','노래를 부러요.','노래를 불라요.'], correct:1 },
+];
+
+let qIndex = 0, score = 0, answered = false;
+
+function initQuiz() {
+  qIndex = 0; score = 0; answered = false;
+  document.getElementById('quizCard').style.display = '';
+  document.getElementById('scoreBox').classList.remove('show');
+  document.getElementById('nextBtn').disabled = true;
+  loadQuestion();
+}
+
+function loadQuestion() {
+  if (qIndex >= quizData.length) { showScore(); return; }
+  const q = quizData[qIndex];
+  answered = false;
+  document.getElementById('quizCounter').textContent = `Q ${qIndex+1} / ${quizData.length}`;
+  document.getElementById('quizQ').textContent = q.q;
+  document.getElementById('quizEng').textContent = q.eng;
+  document.getElementById('progressBar').style.width = `${(qIndex/quizData.length)*100}%`;
+  const fb = document.getElementById('quizFeedback');
+  fb.classList.remove('show','ok','fail');
+
+  const wrap = document.getElementById('choicesWrap');
+  wrap.innerHTML = '';
+  q.choices.forEach((c,i) => {
+    wrap.innerHTML += `<button class="choice-btn" onclick="pickAnswer(${i})">${c}</button>`;
+  });
+  document.getElementById('nextBtn').disabled = true;
+}
+
+function pickAnswer(i) {
+  if (answered) return;
+  answered = true;
+  const q = quizData[qIndex];
+  const btns = document.querySelectorAll('.choice-btn');
+  btns.forEach((b,idx) => {
+    b.disabled = true;
+    if (idx === q.correct) b.classList.add('correct');
+    else if (idx === i) b.classList.add('wrong');
+  });
+  const fb = document.getElementById('quizFeedback');
+  if (i === q.correct) {
+    score++;
+    fb.innerHTML = `✅ 정답이에요! Correct! <strong>${q.choices[q.correct]}</strong>`;
+    fb.classList.add('show','ok');
+  } else {
+    fb.innerHTML = `❌ 틀렸어요. Wrong. 정답: <strong>${q.choices[q.correct]}</strong>`;
+    fb.classList.add('show','fail');
+  }
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  qIndex++;
+  loadQuestion();
+}
+
+function showScore() {
+  document.getElementById('quizCard').style.display = 'none';
+  document.getElementById('progressBar').style.width = '100%';
+  const box = document.getElementById('scoreBox');
+  box.classList.add('show');
+  document.getElementById('scoreBig').textContent = `${score} / ${quizData.length}`;
+  const pct = Math.round((score/quizData.length)*100);
+  let msg, sub;
+  if (pct === 100) { msg = '완벽해요! 🎉 Perfect!'; sub = '르 불규칙 마스터! You mastered 르 irregular!'; }
+  else if (pct >= 70) { msg = '잘했어요! 👍 Great job!'; sub = '조금 더 연습해요! A little more practice!'; }
+  else { msg = '다시 해 봐요! 💪 Keep trying!'; sub = '처음으로 돌아가서 다시 공부해요! Review the rules and try again!'; }
+  document.getElementById('scoreMsg').textContent = msg;
+  document.getElementById('scoreSub').textContent = sub;
+  document.getElementById('nextBtn').disabled = true;
+}
+
+function restartQuiz() { initQuiz(); }
+
+// ══ CHEAT SHEET ══
+function buildCheatSheet() {
+  const wrap = document.getElementById('cheatSheet');
+  wrap.innerHTML = '';
+  verbs.forEach(v => {
+    wrap.innerHTML += `
+      <div class="cs-card">
+        <div class="cs-verb">${v.base}</div>
+        <div class="cs-eng">${v.en}</div>
+        <div class="cs-forms">
+          <span class="label">아/어요</span> ${v.pres}<br>
+          <span class="label">았/었어요</span> ${v.past}<br>
+          <span class="label">아/어서</span> ${v.so}<br>
+          <span class="label">고</span> ${v.go}
+        </div>
+      </div>`;
+  });
+}
+buildCheatSheet();
+
+// init quiz ready
+initQuiz();
+</script>
+</body>
+</html>
