@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Subtitle Overlay</title>
+  <meta name="description" content="Privacy policy for the Subtitle Overlay Chrome extension. Local-first by design.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a2a23">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #0a2a23;
+      --bg-deeper: #051a14;
+      --cream: #f6efe0;
+      --cream-warm: #efe6d2;
+      --teal: #82bbb5;
+      --teal-dark: #013220;
+      --teal-darker: #012117;
+      --yellow: #ffde59;
+      --yellow-soft: #fff3b0;
+      --yellow-deep: #b8541f;
+      --ink: #16201d;
+      --ink-soft: #2b3531;
+      --ink-light: #4e5854;
+      --line: rgba(20, 32, 28, 0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection { background: var(--yellow); color: var(--bg-deep); }
+
+    /* ============ HERO ============ */
+    .hero {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(130,187,181,0.14), transparent 65%),
+        linear-gradient(180deg, var(--bg-deeper) 0%, var(--bg-deep) 100%);
+      color: var(--cream);
+      padding: 4rem 1.5rem 4.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .breadcrumb {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+    }
+    .breadcrumb .slash { opacity: 0.5; margin: 0 0.4em; }
+
+    /* Official extension icon */
+    .logo {
+      display: inline-block;
+      margin-bottom: 2.25rem;
+      width: 96px;
+      height: 96px;
+      border-radius: 20px;
+      box-shadow:
+        0 18px 50px rgba(0,0,0,0.45),
+        0 1px 0 rgba(255,255,255,0.08) inset;
+      transform: rotate(-3deg);
+      transition: transform .4s cubic-bezier(.16,.84,.44,1);
+    }
+    .logo:hover { transform: rotate(0deg) scale(1.05); }
+
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--cream);
+      margin-bottom: 1.25rem;
+    }
+    .hero-sub {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: rgba(246,239,224,0.65);
+      font-size: 1rem;
+      line-height: 1.5;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.38rem 0.85rem;
+      border-radius: 999px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .pill-version {
+      background: var(--yellow);
+      color: var(--bg-deep);
+      box-shadow: 0 4px 14px rgba(255,222,89,0.25);
+    }
+    .pill-date {
+      background: rgba(246,239,224,0.06);
+      color: var(--cream);
+      border: 1px solid rgba(246,239,224,0.18);
+    }
+    .pill-date strong { color: var(--yellow); font-weight: 700; }
+
+    /* simple divider between hero and main */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(1,33,23,0.18), transparent);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ============ MAIN — PRINTED CONTENT ============ */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem 5rem;
+    }
+
+    .lede {
+      font-family: 'Fraunces', serif;
+      font-size: 1.32rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 4.5rem;
+      padding: 0.25rem 0 0.25rem 1.5rem;
+      border-left: 3px solid var(--yellow);
+      letter-spacing: -0.005em;
+    }
+    .lede strong {
+      font-weight: 600;
+      background: linear-gradient(180deg, transparent 60%, var(--yellow-soft) 60%);
+      padding: 0 0.15em;
+    }
+
+    section.policy {
+      margin-bottom: 4rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+      opacity: 0.55;
+    }
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 1.7rem;
+      line-height: 1.15;
+      color: var(--ink);
+      letter-spacing: -0.015em;
+    }
+
+    h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-top: 2rem;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.005em;
+    }
+    h3:first-of-type { margin-top: 0; }
+
+    p {
+      margin-bottom: 1.1rem;
+      color: var(--ink-soft);
+    }
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 1.25rem;
+    }
+    li {
+      position: relative;
+      padding-left: 1.6rem;
+      margin-bottom: 0.7rem;
+      color: var(--ink-soft);
+    }
+    li::before {
+      content: '▸';
+      position: absolute;
+      left: 0; top: 0;
+      color: var(--teal);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+    li strong { color: var(--ink); font-weight: 700; }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85em;
+      background: rgba(1,50,32,0.07);
+      color: var(--teal-dark);
+      padding: 0.14em 0.42em;
+      border-radius: 3px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    a {
+      color: var(--teal-dark);
+      border-bottom: 1px solid currentColor;
+      text-decoration: none;
+      transition: color .15s, background .15s;
+    }
+    a:hover {
+      color: var(--ink);
+      background: var(--yellow-soft);
+    }
+
+    /* "Never collect" — highlighted manuscript box */
+    .never-block {
+      background:
+        linear-gradient(135deg, rgba(255,222,89,0.20) 0%, rgba(255,222,89,0.06) 100%);
+      border: 1px solid rgba(255,222,89,0.55);
+      border-radius: 6px;
+      padding: 1.5rem 1.75rem 1.35rem;
+      position: relative;
+    }
+    .never-block::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 18px; right: 18px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+    }
+    .never-tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--yellow-deep);
+      margin-bottom: 0.9rem;
+      display: block;
+      font-weight: 700;
+    }
+    .never-block li::before {
+      content: '✕';
+      color: var(--yellow-deep);
+      font-weight: 700;
+      font-size: 0.78rem;
+      top: 2px;
+    }
+    .never-block li strong { color: var(--ink); }
+    .never-block li { color: #3a342a; }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: var(--bg-deep);
+      color: var(--cream);
+      padding: 2.5rem 1.5rem 2.5rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(130,187,181,0.12);
+    }
+    .footer-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem 2rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-brand {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(246,239,224,0.7);
+      letter-spacing: 0.02em;
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .footer-links a {
+      color: var(--teal);
+      border-bottom: 1px dotted rgba(130,187,181,0.45);
+      padding-bottom: 1px;
+    }
+    .footer-links a:hover {
+      color: var(--yellow);
+      background: transparent;
+      border-bottom-color: var(--yellow);
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .hero { padding: 3rem 1.25rem 4rem; }
+      main { padding: 3rem 1.25rem 3.5rem; }
+      .breadcrumb { font-size: 0.66rem; margin-bottom: 2rem; }
+      h1 { font-size: 2.2rem; letter-spacing: -0.025em; }
+      .hero-sub { font-size: 0.95rem; }
+      .lede { font-size: 1.12rem; padding-left: 1.1rem; margin-bottom: 3.5rem; }
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.65rem;
+      }
+      h2 { font-size: 1.4rem; }
+      .timecode { font-size: 0.7rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* Print: chrome reviewer might print this */
+    @media print {
+      body { font-size: 11pt; color: #000; background: #fff; }
+      .hero, footer, .perforations, .footer-perforations { background: #fff !important; color: #000 !important; }
+      .hero::before, .hero::after { display: none; }
+      .breadcrumb, .end-card, .footer-links { display: none; }
+      h1, h2, h3 { color: #000; }
+      a { color: #000; text-decoration: underline; }
+      .never-block { border: 1px solid #000; background: #fff; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">
+      hwany<span class="slash">/</span>subtitle-overlay<span class="slash">/</span>privacy
+    </div>
+
+    <img src="./icon128.png" alt="Subtitle Overlay" class="logo" width="96" height="96">
+
+
+    <div class="eyebrow">Subtitle Overlay</div>
+
+    <h1>Privacy Policy</h1>
+
+    <p class="hero-sub">A summary of what data the extension stores, what (very little) it sends, and what it never touches.</p>
+
+    <div class="hero-meta">
+      <span class="pill pill-version">v1.4.0</span>
+      <span class="pill pill-date">Effective&nbsp;<strong>2026-05-25</strong></span>
+    </div>
+  </div>
+</header>
+
+<div class="divider" aria-hidden="true"></div>
+
+<main>
+  <p class="lede">
+    Subtitle Overlay is a Chrome extension that lets you overlay subtitles on
+    any video playing in your browser. We take privacy seriously and follow
+    the principle of collecting <strong>only what is strictly necessary</strong>
+    to make the extension work.
+  </p>
+
+  <section class="policy" id="local">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Data stored on your device</h2>
+    </div>
+    <p>The extension uses <code>chrome.storage.local</code> (Chrome's per-extension local storage) to remember:</p>
+    <ul>
+      <li><strong>Your settings</strong> — appearance, position, keyboard preferences, toggles.</li>
+      <li><strong>Downloaded subtitles</strong> — subtitle files you have downloaded through the built-in OpenSubtitles search.</li>
+      <li><strong>Auto-restore cache</strong> — for each video you load subtitles on, we store the subtitle content and your sync offset so the extension can restore them the next time you visit the same video. The cache is keyed by a <strong>SHA-256 hash</strong> of the page origin + path + rounded video duration; the original URL is <strong>not</strong> stored. The cache is capped at 5&nbsp;MB and oldest entries are evicted automatically.</li>
+    </ul>
+    <p>All of the above stays on your device. None of it is transmitted anywhere unless you explicitly perform an action that requires a network request (see below).</p>
+  </section>
+
+  <section class="policy" id="external">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Data sent to external services</h2>
+    </div>
+
+    <h3>1. OpenSubtitles.com — only when you search</h3>
+    <p>When you type a query in the Subtitles tab and press search, the extension sends your search text and your OpenSubtitles API key (if configured) to <code>api.opensubtitles.com</code> so it can return matching subtitles. See <a href="https://www.opensubtitles.com/en/privacy" target="_blank" rel="noopener noreferrer">OpenSubtitles' own privacy policy</a> for how they handle that request.</p>
+
+    <h3>2. Anonymous usage analytics — opt-out via Settings</h3>
+    <p>If you leave the "Share anonymous usage data" toggle enabled (Settings&nbsp;→&nbsp;General), the extension sends anonymous product analytics to <a href="https://posthog.com" target="_blank" rel="noopener noreferrer">PostHog</a> (US/EU region). This is used to understand which features matter to users and prioritize future work. We send:</p>
+    <ul>
+      <li><strong>Hashed URL</strong> (SHA-256 of the page URL) — lets us see whether a user returns to the same site without revealing which site or which video.</li>
+      <li><strong>Feature events</strong> — e.g. "subtitle loaded", "sync adjusted", "auto-restore accepted", "side panel opened". No content, no input text.</li>
+      <li><strong>Anonymous installation ID</strong> generated locally; not tied to any account.</li>
+    </ul>
+    <p>You can disable analytics at any time in Settings — once disabled, no analytics requests are made.</p>
+  </section>
+
+  <section class="policy" id="never">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>What we never collect</h2>
+    </div>
+    <div class="never-block">
+      <span class="never-tagline">We never collect</span>
+      <ul>
+        <li>The <strong>text content of any subtitle file</strong> — neither files you upload nor files you download.</li>
+        <li><strong>Raw URLs</strong> of pages you visit. URLs are SHA-256 hashed before they leave your device, and the unhashed URL is never logged or transmitted.</li>
+        <li><strong>Video content</strong>, audio, screenshots, or anything from the page DOM other than the active video's duration.</li>
+        <li><strong>Personal information</strong> such as name, email, address, payment info, or account identifiers.</li>
+        <li><strong>Browsing history</strong> outside of subtitles you actively load.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="policy" id="permissions">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Permissions</h2>
+    </div>
+    <ul>
+      <li><code>activeTab</code>, <code>scripting</code> — to inject the subtitle overlay into the page you're actively viewing.</li>
+      <li><code>storage</code> — for the local data described above.</li>
+      <li><code>host_permissions</code> for <code>api.opensubtitles.com</code> (subtitle search) and <code>us.i.posthog.com</code>&nbsp;/&nbsp;<code>eu.i.posthog.com</code> (analytics, if enabled).</li>
+    </ul>
+  </section>
+
+  <section class="policy" id="controls">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Your controls</h2>
+    </div>
+    <ul>
+      <li><strong>Disable analytics:</strong> Settings&nbsp;→&nbsp;General&nbsp;→ toggle off "Share anonymous usage data".</li>
+      <li><strong>Disable auto-restore:</strong> Settings&nbsp;→&nbsp;General&nbsp;→ toggle off "Auto-restore subtitles".</li>
+      <li><strong>Clear all stored data:</strong> Visit <code>chrome://extensions</code>, find Subtitle Overlay, click "Details"&nbsp;→&nbsp;"Extension options" or remove and reinstall the extension.</li>
+    </ul>
+  </section>
+
+  <section class="policy" id="children">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2>Children</h2>
+    </div>
+    <p>Subtitle Overlay is not directed at children under 13 and does not knowingly collect data from them.</p>
+  </section>
+
+  <section class="policy" id="changes">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <h2>Changes to this policy</h2>
+    </div>
+    <p>If we materially change what data is collected or how it is used, this document will be updated and the effective date at the top revised. The latest version always lives at this URL.</p>
+  </section>
+
+  <section class="policy" id="contact">
+    <div class="section-head">
+      <span class="section-num">08</span>
+      <h2>Contact</h2>
+    </div>
+    <p>Questions or concerns? Contact the maintainer through the Chrome Web Store listing's support tab.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Subtitle Overlay — Privacy Policy v1.4.0</div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="https://buymeacoffee.com/hwano" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee</a>
+      <a href="https://chromewebstore.google.com/" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>
+      <a href="#top">↑ Top</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
