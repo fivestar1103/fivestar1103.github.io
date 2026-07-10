@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스팸독 지원 · FAQ</title>
+<style>
+  :root { --bg:#F3F5F8; --card:#FFF; --ink:#12233A; --sub:#5A6B80; --line:#E2E7EE; --seal:#C03A2B; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0B1624; --card:#1A2A3F; --ink:#E8EDF3; --sub:#93A3B5; --line:#26374E; --seal:#E05543; }
+  }
+  :root[data-theme="dark"] { --bg:#0B1624; --card:#1A2A3F; --ink:#E8EDF3; --sub:#93A3B5; --line:#26374E; --seal:#E05543; }
+  :root[data-theme="light"] { --bg:#F3F5F8; --card:#FFF; --ink:#12233A; --sub:#5A6B80; --line:#E2E7EE; --seal:#C03A2B; }
+  body { margin:0; background:var(--bg); color:var(--ink); line-height:1.7;
+         font-family:-apple-system,"Apple SD Gothic Neo","Pretendard",system-ui,sans-serif; }
+  main { max-width:680px; margin:0 auto; padding:48px 22px 80px; }
+  a { color:var(--seal); text-decoration:none; }
+  h1 { font-size:26px; font-weight:900; margin:8px 0 28px; }
+  details { background:var(--card); border:1px solid var(--line); border-radius:14px;
+            padding:16px 18px; margin-bottom:10px; }
+  summary { font-weight:700; font-size:15.5px; cursor:pointer; }
+  details p { font-size:14.5px; color:var(--sub); margin:10px 0 0; }
+  details b { color:var(--ink); }
+  .contact { margin-top:36px; background:var(--card); border:1px solid var(--line);
+             border-radius:14px; padding:18px; font-size:15px; }
+  footer { margin-top:56px; padding-top:24px; border-top:1px solid var(--line);
+           font-size:13.5px; color:var(--sub); }
+</style>
+</head>
+<body>
+<main>
+  <a href="index.html">← 스팸독</a>
+  <h1>지원 · 자주 묻는 질문</h1>
+
+  <details open>
+    <summary>밀봉했는데 차단이 안 돼요</summary>
+    <p>① <b>iOS 설정 → 전화 → 통화 차단 및 발신자 확인</b>에서 스팸독이 켜져 있는지
+    확인해 주세요. 애플 정책상 이 스위치는 직접 켜야 합니다.<br>
+    ② 켜져 있는데도 특정 번호가 뚫린다면: <b>내가 최근에 발신한 적 있는 번호는
+    iOS 자체 버그로 차단이 무시될 수 있습니다.</b> 최근 통화 기록에서 해당 발신 기록을
+    삭제하면 차단이 다시 동작합니다. (애플이 인지하고 있는 iOS 문제입니다)</p>
+  </details>
+
+  <details>
+    <summary>060, 070 같은 스팸을 한 번에 막고 싶어요</summary>
+    <p>번호를 입력할 때 <b>국번 통밀봉</b>을 선택하세요. 예를 들어 060-123까지만 입력하면
+    "뒤 4자리 전체 밀봉" 카드가 나타나고, 선택하면 060-123-0000부터 9999까지 10,000개가
+    한 번에 차단됩니다. 완전한 번호를 붙여넣어도 같은 제안이 떠요 — 스팸은 번호를 바꿔도
+    국번은 같기 때문입니다.</p>
+  </details>
+
+  <details>
+    <summary>차단을 되돌리고 싶어요 (개봉)</summary>
+    <p>홈 → 전체 보기(내 캔)에서 해당 번호를 <b>왼쪽으로 스와이프</b>하면 개봉(차단 해제)됩니다.
+    길게 누르면 차단 ↔ 라벨(경고만 표시) 전환도 가능해요.</p>
+  </details>
+
+  <details>
+    <summary>몇 통이나 차단됐는지 왜 안 보여주나요?</summary>
+    <p>iOS는 차단이 실행돼도 <b>그 사실을 앱에 알려주지 않습니다.</b> 통화에 대한 정보가
+    앱에 전달되지 않는 구조라서, 어떤 앱이든 "차단된 통화 수"를 정확히 보여줄 수 없습니다.
+    스팸독은 대신 캔에 밀봉된 번호 수를 보여드리며 — 같은 이유로 스팸독은 회원님의 통화를
+    전혀 볼 수 없습니다.</p>
+  </details>
+
+  <details>
+    <summary>정말 전부 무료인가요?</summary>
+    <p>네. 번호 차단과 국번 통밀봉은 개수 제한 없이 무료입니다(기술적 상한 약 150만 개).
+    추후 커뮤니티 기반 자동 차단 등 서버가 필요한 기능은 유료 멤버십으로 제공될 수 있지만,
+    지금 쓰시는 차단 기능이 나중에 유료로 바뀌는 일은 없습니다.</p>
+  </details>
+
+  <div class="contact">
+    해결되지 않았나요? 메일 주시면 직접 답변드립니다:<br>
+    <a href="mailto:fivestar1103@uos.ac.kr"><b>fivestar1103@uos.ac.kr</b></a>
+  </div>
+
+  <footer>© 2026 스팸독 · <a href="index.html">홈</a> · <a href="privacy.html">개인정보처리방침</a></footer>
+</main>
+</body>
+</html>

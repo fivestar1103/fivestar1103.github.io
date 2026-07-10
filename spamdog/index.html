@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스팸독 — 스팸은 캔 속으로</title>
+<meta name="description" content="번호를 밀봉하면 다시는 울리지 않아요. 무제한 무료 스팸 차단, 국번 통밀봉, 추적 없는 프라이버시. iPhone 전용.">
+<style>
+  :root {
+    --bg: #F3F5F8; --card: #FFFFFF; --ink: #12233A; --sub: #5A6B80;
+    --line: #E2E7EE; --seal: #C03A2B; --mint: #1F9D6E;
+    --tin-hi: #E3E8EE; --tin-lo: #AEB9C7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0B1624; --card: #1A2A3F; --ink: #E8EDF3; --sub: #93A3B5;
+            --line: #26374E; --seal: #E05543; --mint: #37C08F;
+            --tin-hi: #3C5069; --tin-lo: #233650; }
+  }
+  :root[data-theme="dark"] { --bg: #0B1624; --card: #1A2A3F; --ink: #E8EDF3;
+    --sub: #93A3B5; --line: #26374E; --seal: #E05543; --mint: #37C08F;
+    --tin-hi: #3C5069; --tin-lo: #233650; }
+  :root[data-theme="light"] { --bg: #F3F5F8; --card: #FFFFFF; --ink: #12233A;
+    --sub: #5A6B80; --line: #E2E7EE; --seal: #C03A2B; --mint: #1F9D6E;
+    --tin-hi: #E3E8EE; --tin-lo: #AEB9C7; }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "Apple SD Gothic Neo", "Pretendard", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  a { color: var(--seal); text-decoration: none; }
+  main { max-width: 720px; margin: 0 auto; padding: 0 22px 80px; }
+
+  header.hero { text-align: center; padding: 72px 0 48px; }
+  .wordmark { font-size: 17px; font-weight: 800; letter-spacing: 4px; color: var(--sub); }
+  .hero h1 {
+    font-size: clamp(30px, 6vw, 44px); font-weight: 900; letter-spacing: -0.5px;
+    margin: 14px 0 10px; text-wrap: balance;
+  }
+  .hero p.lede { font-size: 17px; color: var(--sub); margin: 0 0 34px; }
+  .hero .can { margin: 0 auto 34px; width: 170px; }
+  .badge {
+    display: inline-block; background: var(--ink); color: var(--bg);
+    font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 14px;
+  }
+  .badge small { display: block; font-size: 11px; font-weight: 500; opacity: 0.7; }
+
+  section { margin-top: 64px; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; color: var(--sub); margin-bottom: 14px; }
+  .cards { display: grid; gap: 14px; }
+  @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 22px 20px;
+  }
+  .card h3 { margin: 0 0 8px; font-size: 17px; }
+  .card p { margin: 0; font-size: 14px; color: var(--sub); }
+  .card .big { font-size: 26px; font-weight: 900; color: var(--seal); display: block; margin-bottom: 6px;
+               font-variant-numeric: tabular-nums; }
+
+  .steps { display: grid; gap: 12px; counter-reset: step; }
+  .step { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+          padding: 16px 18px; display: flex; gap: 14px; align-items: baseline; }
+  .step::before {
+    counter-increment: step; content: counter(step);
+    font-weight: 900; color: var(--seal); font-size: 18px;
+  }
+  .step b { font-size: 15.5px; }
+  .step span { color: var(--sub); font-size: 14px; }
+
+  .stampline { text-align: center; margin-top: 70px; }
+  .stamp {
+    display: inline-block; color: var(--seal); border: 3px solid var(--seal);
+    border-radius: 8px; padding: 4px 14px; font-weight: 900; font-size: 20px;
+    transform: rotate(-6deg); letter-spacing: 2px;
+  }
+  footer {
+    margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--line);
+    font-size: 13.5px; color: var(--sub); display: flex; flex-wrap: wrap; gap: 8px 20px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div class="wordmark">스팸독 · SPAMDOG</div>
+    <h1>스팸은 캔 속으로,<br>벨소리는 조용히</h1>
+    <p class="lede">번호를 밀봉하면 다시는 울리지 않아요. 무제한, 무료.</p>
+    <div class="can">
+      <svg viewBox="0 0 120 120" role="img" aria-label="스팸독 캔">
+        <rect x="34" y="26" width="52" height="68" fill="var(--tin-lo)"/>
+        <rect x="34" y="26" width="26" height="68" fill="var(--tin-hi)"/>
+        <rect x="42" y="26" width="5" height="68" fill="#FFFFFF" opacity="0.45"/>
+        <rect x="34" y="47" width="52" height="27" fill="#F3F5F8"/>
+        <g transform="rotate(-8 60 60.5)">
+          <rect x="46" y="53" width="28" height="15" rx="3" fill="var(--seal)"/>
+        </g>
+        <rect x="29" y="17" width="62" height="10" rx="5" fill="var(--tin-hi)"/>
+        <rect x="29" y="93" width="62" height="10" rx="5" fill="var(--tin-hi)"/>
+      </svg>
+    </div>
+    <span class="badge">App Store에서 다운로드<small>출시 준비 중</small></span>
+  </header>
+
+  <section>
+    <div class="eyebrow">왜 스팸독인가</div>
+    <div class="cards">
+      <div class="card">
+        <span class="big">무제한</span>
+        <h3>차단은 전부 무료</h3>
+        <p>몇 개까지만 무료, 그 다음은 결제 — 스팸독엔 그런 계단이 없습니다. 번호 150만 개까지, 전부 무료.</p>
+      </div>
+      <div class="card">
+        <span class="big">×10,000</span>
+        <h3>국번 통밀봉</h3>
+        <p>스팸은 번호를 바꿔도 국번은 같습니다. 060-123을 밀봉하면 뒤 4자리 전체, 10,000개가 한 번에 조용해져요.</p>
+      </div>
+      <div class="card">
+        <span class="big">0바이트</span>
+        <h3>우리도 못 봅니다</h3>
+        <p>계정 없음, 서버 없음, 추적 없음. 차단은 전부 아이폰 안에서 일어나고, 누가 전화했는지는 스팸독도 모릅니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">3초면 조용해집니다</div>
+    <div class="steps">
+      <div class="step"><div><b>번호를 밀봉하세요</b><br><span>붙여넣으면 국번 통밀봉까지 제안해 드려요.</span></div></div>
+      <div class="step"><div><b>iOS 설정에서 스팸독을 켜세요</b><br><span>애플 정책상 딱 한 번, 직접 켜야 해요.</span></div></div>
+      <div class="step"><div><b>끝. 다시는 안 울립니다</b><br><span>밀봉된 번호는 벨도, 부재중 기록도 남기지 않아요.</span></div></div>
+    </div>
+  </section>
+
+  <div class="stampline"><span class="stamp">밀봉</span></div>
+
+  <footer>
+    <a href="privacy.html">개인정보처리방침</a>
+    <a href="support.html">지원 · FAQ</a>
+    <a href="mailto:fivestar1103@uos.ac.kr">문의</a>
+    <span>© 2026 스팸독</span>
+  </footer>
+</main>
+</body>
+</html>
