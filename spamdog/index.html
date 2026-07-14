@@ -3,25 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>스팸독 — 패턴 차단 150만 개까지 무료</title>
-<meta name="description" content="패턴 차단 150만 개까지 광고 시청이나 결제 없이 무료. 끝자리만 바꿔서 또 오는 전화는 가운데 번호 하나로 10,000개를 한 번에 차단하세요.">
+<title>스팸독 — 반복 스팸 번호 80만 개까지 무료</title>
+<meta name="description" content="끝자리만 바꿔 오는 스팸 전화를 가운데 번호 하나로 10,000개씩 차단하세요. 패턴 80개, 번호 80만 개까지 광고나 결제 없이 무료입니다.">
 <style>
   :root {
     --bg: #F3F5F8; --card: #FFFFFF; --ink: #12233A; --sub: #5A6B80;
     --line: #E2E7EE; --seal: #C03A2B; --mint: #1F9D6E;
-    --tin-hi: #E3E8EE; --tin-lo: #AEB9C7;
   }
   @media (prefers-color-scheme: dark) {
     :root { --bg: #0B1624; --card: #1A2A3F; --ink: #E8EDF3; --sub: #93A3B5;
-            --line: #26374E; --seal: #E05543; --mint: #37C08F;
-            --tin-hi: #3C5069; --tin-lo: #233650; }
+            --line: #26374E; --seal: #E05543; --mint: #37C08F; }
   }
   :root[data-theme="dark"] { --bg: #0B1624; --card: #1A2A3F; --ink: #E8EDF3;
-    --sub: #93A3B5; --line: #26374E; --seal: #E05543; --mint: #37C08F;
-    --tin-hi: #3C5069; --tin-lo: #233650; }
+    --sub: #93A3B5; --line: #26374E; --seal: #E05543; --mint: #37C08F; }
   :root[data-theme="light"] { --bg: #F3F5F8; --card: #FFFFFF; --ink: #12233A;
-    --sub: #5A6B80; --line: #E2E7EE; --seal: #C03A2B; --mint: #1F9D6E;
-    --tin-hi: #E3E8EE; --tin-lo: #AEB9C7; }
+    --sub: #5A6B80; --line: #E2E7EE; --seal: #C03A2B; --mint: #1F9D6E; }
 
   * { box-sizing: border-box; }
   body {
@@ -39,7 +35,6 @@
     margin: 14px 0 10px; text-wrap: balance;
   }
   .hero p.lede { font-size: 17px; color: var(--sub); margin: 0 0 34px; }
-  .hero .can { margin: 0 auto 34px; width: 170px; }
   .badge {
     display: inline-block; background: var(--ink); color: var(--bg);
     font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 14px;
@@ -49,7 +44,7 @@
   section { margin-top: 64px; }
   .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; color: var(--sub); margin-bottom: 14px; }
   .cards { display: grid; gap: 14px; }
-  @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
   .card {
     background: var(--card); border: 1px solid var(--line); border-radius: 18px;
     padding: 22px 20px;
@@ -69,12 +64,8 @@
   .step b { font-size: 15.5px; }
   .step span { color: var(--sub); font-size: 14px; }
 
-  .stampline { text-align: center; margin-top: 70px; }
-  .stamp {
-    display: inline-block; color: var(--seal); border: 3px solid var(--seal);
-    border-radius: 8px; padding: 4px 14px; font-weight: 900; font-size: 20px;
-    transform: rotate(-6deg); letter-spacing: 2px;
-  }
+  .proofline { text-align: center; margin-top: 70px; color: var(--seal);
+               font-size: 19px; font-weight: 900; }
   footer {
     margin-top: 72px; padding-top: 28px; border-top: 1px solid var(--line);
     font-size: 13.5px; color: var(--sub); display: flex; flex-wrap: wrap; gap: 8px 20px;
@@ -85,21 +76,8 @@
 <main>
   <header class="hero">
     <div class="wordmark">스팸독 · SPAMDOG</div>
-    <h1>패턴 차단 150만 개,<br>광고도 결제도 없이</h1>
-    <p class="lede">끝자리만 바꿔 오는 전화는 가운데 번호 하나로 10,000개를 한 번에.</p>
-    <div class="can">
-      <svg viewBox="0 0 120 120" role="img" aria-label="스팸독 캔">
-        <rect x="34" y="26" width="52" height="68" fill="var(--tin-lo)"/>
-        <rect x="34" y="26" width="26" height="68" fill="var(--tin-hi)"/>
-        <rect x="42" y="26" width="5" height="68" fill="#FFFFFF" opacity="0.45"/>
-        <rect x="34" y="47" width="52" height="27" fill="#F3F5F8"/>
-        <g transform="rotate(-8 60 60.5)">
-          <rect x="46" y="53" width="28" height="15" rx="3" fill="var(--seal)"/>
-        </g>
-        <rect x="29" y="17" width="62" height="10" rx="5" fill="var(--tin-hi)"/>
-        <rect x="29" y="93" width="62" height="10" rx="5" fill="var(--tin-hi)"/>
-      </svg>
-    </div>
+    <h1>끝자리만 바꿔 오는 전화,<br>가운데 번호로 한 번에 차단</h1>
+    <p class="lede">패턴 80개 · 번호 80만 개까지 광고도 결제도 없이.</p>
     <span class="badge">App Store에서 다운로드<small>출시 준비 중</small></span>
   </header>
 
@@ -107,14 +85,19 @@
     <div class="eyebrow">왜 스팸독인가</div>
     <div class="cards">
       <div class="card">
-        <span class="big">1,500,000</span>
-        <h3>차단 개수로 장사하지 않아요</h3>
-        <p>일괄 차단 150개 대역, 번호 150만 개까지 광고 시청이나 결제 없이 무료입니다.</p>
+        <span class="big">800,000</span>
+        <h3>패턴 80개까지 무료</h3>
+        <p>가운데 번호 패턴 80개, 고유 번호 80만 개까지 광고 시청이나 결제 없이 사용할 수 있습니다.</p>
       </div>
       <div class="card">
         <span class="big">×10,000</span>
         <h3>가운데 번호 일괄 차단</h3>
         <p>스팸은 번호를 바꿔도 가운데 번호는 같습니다. 060-123을 일괄 차단하면 뒤 4자리 전체, 10,000개가 한 번에 조용해져요.</p>
+      </div>
+      <div class="card">
+        <span class="big">차단함</span>
+        <h3>작동한 흔적이 남아요</h3>
+        <p>차단된 전화는 벨 없이 음성사서함으로 넘어가며, 통화 기록에는 <b>스팸독: 차단함</b>으로 표시됩니다.</p>
       </div>
       <div class="card">
         <span class="big">내 iPhone</span>
@@ -129,11 +112,11 @@
     <div class="steps">
       <div class="step"><div><b>번호를 등록하세요</b><br><span>붙여넣으면 가운데 번호 일괄 차단까지 제안해 드려요.</span></div></div>
       <div class="step"><div><b>iOS 설정에서 스팸독을 켜세요</b><br><span>애플 정책상 딱 한 번, 직접 켜야 해요.</span></div></div>
-      <div class="step"><div><b>끝. 벨이 울리지 않아요</b><br><span>등록한 번호의 전화는 벨 없이 음성사서함으로 보내집니다.</span></div></div>
+      <div class="step"><div><b>끝. 벨은 멈추고 기록은 남아요</b><br><span>차단된 전화는 통화 기록에 <b>스팸독: 차단함</b>으로 표시됩니다.</span></div></div>
     </div>
   </section>
 
-  <div class="stampline"><span class="stamp">밀봉</span></div>
+  <div class="proofline">스팸은 막고, 작동한 흔적은 남깁니다.</div>
 
   <footer>
     <a href="privacy.html">개인정보처리방침</a>
