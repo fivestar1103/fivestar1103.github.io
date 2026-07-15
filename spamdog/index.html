@@ -38,8 +38,10 @@
   .badge {
     display: inline-block; background: var(--ink); color: var(--bg);
     font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 14px;
+    transition: transform 160ms ease, opacity 160ms ease;
   }
-  .badge small { display: block; font-size: 11px; font-weight: 500; opacity: 0.7; }
+  .badge:hover { transform: translateY(-1px); opacity: 0.9; }
+  .badge:focus-visible { outline: 3px solid var(--mint); outline-offset: 4px; }
 
   section { margin-top: 64px; }
   .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; color: var(--sub); margin-bottom: 14px; }
@@ -78,7 +80,8 @@
     <div class="wordmark">스팸독 · SPAMDOG</div>
     <h1>끝자리만 바꿔 오는 전화,<br>가운데 번호로 한 번에 차단</h1>
     <p class="lede">자체 개발한 저메모리 엔진 · 번호 80만 개까지 안정적으로.</p>
-    <span class="badge">App Store에서 다운로드<small>출시 준비 중</small></span>
+    <a class="badge" href="https://apps.apple.com/kr/app/id6790863507"
+       target="_blank" rel="noopener noreferrer">App Store에서 다운로드</a>
   </header>
 
   <section>
