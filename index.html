@@ -1,674 +1,279 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="en" data-language="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hwany - Personal Page</title>
-
-  <!-- Bootstrap 5 CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-
-  <!-- Google Fonts: Roboto -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
-
-  <style>
-    /* Base Font & Body */
-    body {
-      font-family: "Roboto", sans-serif;
-      background-color: #f8f9fa;
-      /* Slightly off-white BG */
-      scroll-behavior: smooth;
-      line-height: 1.6;
-      /* Improved readability */
-      margin: 0;
-      padding-top: 56px;
-      /* Offset for fixed navbar */
-    }
-
-    /* Navbar Styling */
-    .navbar-brand {
-      font-weight: 700;
-    }
-
-    .navbar-nav .nav-link.active {
-      font-weight: 600;
-      text-decoration: underline;
-    }
-
-    /* Header (Hero) */
-    header {
-      padding: 100px 0 60px 0;
-      background: linear-gradient(135deg, #a7d1a7 0%, #013220 100%);
-      text-align: center;
-      /* Only hero content is centered */
-      color: #fff;
-      /* Title color set to white */
-    }
-
-    header h1 {
-      font-weight: 700;
-      margin-bottom: 1rem;
-      font-size: 3rem;
-    }
-
-    /* Add spacing between hero and main content */
-    main {
-      margin-top: 40px;
-    }
-
-    /* Section Styling (left-aligned by default) */
-    section {
-      margin-bottom: 30px;
-      border-radius: 8px;
-      padding: 40px;
-    }
-
-    /* Alternating Section Background Colors */
-    section:nth-child(odd) {
-      background-color: #ffffff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    section:nth-child(even) {
-      background-color: #f0f0f0;
-      /* Light gray for alternate sections */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    section h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    section ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-
-    section ul li {
-      margin-bottom: 10px;
-    }
-
-    /* Contact Links Styling */
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      /* left-align contact items */
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .contact-links a {
-      text-decoration: none;
-      color: #333;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      transition: color 0.3s ease;
-    }
-
-    .contact-links a:hover {
-      color: #0d6efd;
-    }
-
-    .contact-links img {
-      width: 30px;
-      /* Adjust size as needed */
-    }
-
-    /* Footer styling */
-    footer {
-      background-color: #212529;
-      color: #fff;
-      padding: 30px 0;
-      text-align: center;
-    }
-
-    footer a {
-      color: #fff;
-      text-decoration: underline;
-      transition: color 0.3s ease;
-    }
-
-    footer a:hover {
-      color: #ced4da;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 767px) {
-      .navbar-nav .nav-link {
-        text-align: center;
-      }
-
-      .contact-links {
-        align-items: center;
-      }
-    }
-
-    /* Button Styling */
-    .btn-custom {
-      background-color: #0a734d;
-      color: #fff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 5px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      font-size: 0.9rem;
-    }
-
-    .btn-custom:hover {
-      background-color: #013220;
-      color: #fff;
-      transform: scale(1.05);
-    }
-
-    /* Navigation Buttons Styling */
-    .nav-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 30px;
-      margin-bottom: 30px;
-    }
-
-    .nav-buttons .btn {
-      min-width: 120px;
-      flex: 1 1 120px;
-      text-align: center;
-      max-width: 180px;
-    }
-
-    /* Back to Top Button */
-    #backToTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      display: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-weight: bold;
-      text-align: center;
-      padding: 0;
-      justify-content: center;
-      align-items: center;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1ea">
+  <meta name="description" content="Seonghwan Oh is a gameplay programmer at NCSOFT, independent product builder, and open-source contributor in Seoul.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fivestar1103.github.io/">
+  <meta property="og:title" content="Seonghwan Oh — Gameplay Programmer & Independent Builder">
+  <meta property="og:description" content="AAA gameplay, useful independent products, and open-source tools—built by following hard problems all the way through.">
+  <meta property="og:image" content="https://fivestar1103.github.io/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://fivestar1103.github.io/">
+  <link rel="stylesheet" href="/assets/site.css">
+  <title>Seonghwan Oh — Gameplay Programmer & Independent Builder</title>
 </head>
-
 <body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#home">Hwany's Personal Page</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+  <a class="skip-link" href="#main">
+    <span class="copy-en">Skip to content</span>
+    <span class="copy-ko">본문으로 이동</span>
+  </a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="#top" aria-label="Seonghwan Oh, home">SHO<span class="wordmark-dot">.</span></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#work"><span class="copy-en">Work</span><span class="copy-ko">작업</span></a>
+        <a href="#experience"><span class="copy-en">Experience</span><span class="copy-ko">경력</span></a>
+        <a href="#about"><span class="copy-en">About</span><span class="copy-ko">소개</span></a>
+        <a href="#contact"><span class="copy-en">Contact</span><span class="copy-ko">연락</span></a>
+      </nav>
+      <button class="language-toggle" type="button" data-language-toggle aria-label="한국어로 보기">
+        <span class="language-option" data-language-option="en">EN</span>
+        <span aria-hidden="true">/</span>
+        <span class="language-option" data-language-option="ko">KO</span>
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="#home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="portfolio-link" href="portfolio.html">Portfolio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/CV_Game.pdf">CV</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HEADER (Hero Section) -->
-  <header id="home">
-    <div class="container">
-      <h1 id="greeting">Hello!</h1> <!-- Dynamic greeting -->
-
-      <!-- Navigation Buttons -->
-      <div class="nav-buttons">
-        <a href="#bio" class="btn btn-custom">About Me</a>
-        <a href="#education" class="btn btn-custom">Education</a>
-        <a href="#experience" class="btn btn-custom">Experience</a>
-        <a href="#certifications-test-scores" class="btn btn-custom">Certifications</a>
-        <a href="#honors-awards" class="btn btn-custom">Honors</a>
-        <a href="#hobbies" class="btn btn-custom">Hobbies</a>
-        <a href="#teaching-experiences" class="btn btn-custom">Teaching</a>
-        <a href="#contact" class="btn btn-custom">Contact</a>
-      </div>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="container">
-    <!-- Bio Section -->
-    <section id="bio">
-      <h2>👨🏻‍💻 About Me</h2>
-      <p>
-        I am an undergraduate student in the Computer Science and
-        Engineering Department at the University of Seoul.<br />
-        My interests are related to game development and data
-        analysis.<br />
-        "Baby steps every day" is my life motto.
+  <main id="main">
+    <section class="hero shell" id="top">
+      <p class="eyebrow">
+        <span class="copy-en">Gameplay programmer · Independent builder · Open-source contributor</span>
+        <span class="copy-ko">클라이언트 프로그래머 · 인디 빌더 · 오픈소스 기여자</span>
       </p>
+      <h1>
+        <span class="copy-en">I build software for<br>the stubborn problems.</span>
+        <span class="copy-ko">끝까지 파고들어,<br>쓸모 있는 것을 만듭니다.</span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-intro">
+          <span class="copy-en">I’m Seonghwan “Hwan” Oh, a gameplay programmer at NCSOFT in Seoul. I work across AAA gameplay, developer tools, browser extensions, and iOS—wherever curiosity finds a problem worth finishing.</span>
+          <span class="copy-ko">서울에서 NCSOFT의 AAA 게임 클라이언트 프로그래머로 일하는 오성환입니다. 게임플레이부터 개발 도구, 브라우저 확장, iOS까지—호기심이 발견한 문제라면 분야를 가리지 않고 끝까지 해결합니다.</span>
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work">
+            <span class="copy-en">See selected work</span><span class="copy-ko">주요 작업 보기</span>
+          </a>
+          <a class="text-link" href="https://github.com/fivestar1103" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education">
-      <h2>🎓 Education</h2>
-      <ul>
-        <li>
-          <strong>San Diego State University (Exchange Program)</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>B.S. in Computer Science (Exchange Semester)</em>
-            <em>January 2025 -- May 2025</em>
-          </div>
-        </li>
-        <li>
-          <strong>University of Seoul</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Bachelor of Science in Computer Science, Minor in Data
-              Science (GPA: 3.58/4.00)</em>
-            <em>March 2019 -- February 2026</em>
-          </div>
-        </li>
-        <li>
-          <strong>Dulwich College Beijing</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Youth Rugby Team (2012--2013 Season MVP)</em>
-            <em>January 2009 -- June 2013</em>
-          </div>
-        </li>
-      </ul>
+    <section class="proof shell" aria-label="Highlights">
+      <div class="proof-item">
+        <strong>≈1,000</strong>
+        <span class="copy-en">weekly users</span><span class="copy-ko">주간 사용자</span>
+      </div>
+      <div class="proof-item">
+        <strong>2 weeks</strong>
+        <span class="copy-en">idea to App Store</span><span class="copy-ko">아이디어에서 앱 출시까지</span>
+      </div>
+      <div class="proof-item">
+        <strong>Merged</strong>
+        <span class="copy-en">upstream OSS fix</span><span class="copy-ko">오픈소스 기여</span>
+      </div>
+      <div class="proof-item">
+        <strong>EN / KO</strong>
+        <span class="copy-en">native bilingual</span><span class="copy-ko">언어 장벽 없는 협업</span>
+      </div>
     </section>
 
-    <!-- Professional Experience Section -->
-    <section id="experience">
-      <h2>🗓️ Professional Experience</h2>
-      <ul>
-        <li>
-          <strong>Mobile App. Development Cooperation (Internship)</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Unity Developer</em>
-            <em>August 2024 -- October 2024</em>
-          </div>
-          <ul class="mt-2">
-            <li>
-              Developed and launched two mobile games:
-              <ul>
-                <li>
-                  <a href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EA%B8%B8%EC%96%B4%EC%A0%B8%EB%9D%BC/id6720711350"
-                    target="_blank" rel="noopener noreferrer"><em>Ppukku's Grand Adventure: Grow Longer! (iOS)</em></a>
-                </li>
-                <li>
-                  <a href="https://apps.apple.com/us/app/%EB%BF%8C%EA%BE%B8-%EB%8C%80%EB%AA%A8%ED%97%98-%EC%9E%A1%EC%95%84%EB%9D%BC/id6670148912"
-                    target="_blank" rel="noopener noreferrer"><em>Ppukku's Grand Adventure: Catch It! (iOS)</em></a>
-                </li>
-              </ul>
-              Both games are also available on the Apple App Store and
-              Google Play Store.
-            </li>
-            <li>
-              Implemented advanced algorithms (DFS-based surround
-              detection, physics-based mechanics) for core gameplay
-              features.
-            </li>
-            <li>
-              Enhanced user experience with joystick control for precise
-              movement and dynamic UI/UX elements.
-            </li>
-            <li>
-              Authored comprehensive technical guides and debugging
-              instructions for future developers.
-            </li>
-          </ul>
-        </li>
+    <section class="section shell" id="work">
+      <div class="section-heading">
+        <p class="section-index">01</p>
+        <div>
+          <p class="eyebrow"><span class="copy-en">Selected work</span><span class="copy-ko">주요 작업</span></p>
+          <h2><span class="copy-en">Things I finished and shipped.</span><span class="copy-ko">끝까지 만들어 세상에 내놓은 것들.</span></h2>
+        </div>
+      </div>
 
-        <li>
-          <strong>GameMakers</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Game Programmer</em>
-            <em>March 2024 -- July 2024</em>
+      <div class="work-list">
+        <article class="work-item">
+          <div class="work-number">01</div>
+          <div class="work-main">
+            <p class="work-kicker">Chrome · Independent product · 2025—</p>
+            <h3>Subtitle Overlay</h3>
+            <p>
+              <span class="copy-en">A local-first subtitle tool for language learners and anyone watching video without reliable captions. Grown to nearly 1,000 weekly users, with a paid Pro edition now in market.</span>
+              <span class="copy-ko">영상 위에 자막을 직접 띄우는 로컬 우선 Chrome 도구입니다. 외국어 학습자와 자막이 부족한 콘텐츠 시청자를 위해 만들었고, 주간 사용자 약 1,000명까지 성장해 유료 Pro 버전도 출시했습니다.</span>
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>Chrome Extension</li><li>JavaScript</li><li>Local-first</li>
+            </ul>
           </div>
-          <ul class="mt-2">
-            <li>
-              Developed a Unity 2D room-escape game in a six-person team,
-              scheduled for launch by March 2025.
-            </li>
-            <li>
-              Designed intricate puzzles and implemented core gameplay
-              systems.
-            </li>
-            <li>
-              Awarded the <strong>Grand Prize (2nd)</strong> for Best Games
-              in the 8th Cohort.
-            </li>
-          </ul>
-        </li>
+          <div class="work-links">
+            <a href="https://chromewebstore.google.com/detail/subtitle-overlay/bhedjidakhbabmcepaadmpefnajiegjm" target="_blank" rel="noreferrer"><span class="copy-en">Chrome Store</span><span class="copy-ko">Chrome 스토어</span> <span aria-hidden="true">↗</span></a>
+            <a href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro" target="_blank" rel="noreferrer">Pro <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
 
-        <li>
-          <strong>Human-Centered Artificial Intelligence Lab (HCAIL)</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Undergraduate Research Intern</em>
-            <em>December 2023 -- January 2024</em>
+        <article class="work-item">
+          <div class="work-number">02</div>
+          <div class="work-main">
+            <p class="work-kicker">iOS · Independent product · 2026</p>
+            <h3>SpamDog</h3>
+            <p>
+              <span class="copy-en">An on-device iPhone spam blocker built and shipped in two weeks. It turns a small set of editable number patterns into coverage for hundreds of thousands of likely spam numbers—without uploading the user’s contacts.</span>
+              <span class="copy-ko">2주 만에 개발해 출시한 온디바이스 iPhone 스팸 차단 앱입니다. 사용자가 편집할 수 있는 소수의 번호 패턴으로 수십만 개의 의심 번호를 포괄하며, 연락처를 외부로 전송하지 않습니다.</span>
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>Swift</li><li>CallKit</li><li>On-device</li>
+            </ul>
           </div>
-          <ul class="mt-2">
-            <li>
-              Investigated gaming-related health issues and game
-              addiction.
-            </li>
-            <li>
-              Analyzed WHO’s classification of game addiction, highlighting
-              mental health benefits of gaming.
-            </li>
-          </ul>
-        </li>
+          <div class="work-links">
+            <a href="https://apps.apple.com/kr/app/id6790863507" target="_blank" rel="noreferrer">App Store <span aria-hidden="true">↗</span></a>
+            <a href="/spamdog/"><span class="copy-en">Details</span><span class="copy-ko">자세히</span> <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
 
-        <li>
-          <strong>SKYGG</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Research Assistant (Intern)</em>
-            <em>December 2022 -- May 2023</em>
+        <article class="work-item">
+          <div class="work-number">03</div>
+          <div class="work-main">
+            <p class="work-kicker">Open source · Developer tooling · 2026</p>
+            <h3>VS-MCPServer</h3>
+            <p>
+              <span class="copy-en">Contributed an asynchronous build and clean workflow to CodingWithCalvin/VS-MCPServer, fixing UI freezes I encountered while using AI tooling in a real Unreal Engine 5 workflow. The pull request was reviewed and merged upstream.</span>
+              <span class="copy-ko">실제 Unreal Engine 5 개발에서 AI 도구를 쓰다 발견한 UI 멈춤 문제를 비동기 빌드·클린 방식으로 해결했습니다. CodingWithCalvin/VS-MCPServer에 제출한 수정은 리뷰를 거쳐 정식 병합됐습니다.</span>
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>C#</li><li>Visual Studio</li><li>MCP</li><li>UE5 workflow</li>
+            </ul>
           </div>
-          <ul class="mt-2">
-            <li>
-              Contributed to building a playground for Web3 games and
-              blockchain analytics.
-            </li>
-            <li>
-              Developed a web application for analyzing battle logs in
-              <em>Axie Infinity: Origins</em>.
-            </li>
-          </ul>
-        </li>
+          <div class="work-links">
+            <a href="https://github.com/CodingWithCalvin/VS-MCPServer/pull/96" target="_blank" rel="noreferrer"><span class="copy-en">Merged PR</span><span class="copy-ko">병합된 PR</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
 
-        <li>
-          <strong>Republic of Korea Air Force</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>Military Interpreter</em>
-            <em>February 2021 -- November 2022</em>
+        <article class="work-item">
+          <div class="work-number">04</div>
+          <div class="work-main">
+            <p class="work-kicker">Game · Team of six · 2024—2026</p>
+            <h3>Fate and Accidy</h3>
+            <p>
+              <span class="copy-en">A multi-ending escape-room game developed over two years with a six-person team. I led development from systems and gameplay through the long, unglamorous work of actually shipping it on the App Store.</span>
+              <span class="copy-ko">6인 팀과 2년간 개발한 멀티 엔딩 방탈출 게임입니다. 시스템과 게임플레이 구현부터 출시를 위해 필요한 지난한 마무리까지 개발 전반을 이끌었습니다.</span>
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>Unity</li><li>C#</li><li>Gameplay systems</li>
+            </ul>
           </div>
-          <ul class="mt-2">
-            <li>
-              Facilitated communication between ROKAF and USAF A1 forces
-              at Osan Air Base.
-            </li>
-            <li>
-              Recognized for superior performance by the Commander of ACC
-              (Air Components Command).
-            </li>
-          </ul>
-        </li>
-      </ul>
+          <div class="work-links">
+            <a href="/fateAndAccidy/links.html">App Store <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <!-- Certifications and Test Scores Section -->
-    <section id="certifications-test-scores">
-      <h2>📜 Certifications and Test Scores</h2>
-      <ul>
-        <li>
-          <strong>Languages:</strong>
-          <ul>
-            <li><strong>English:</strong> Native/Bilingual</li>
-            <li><strong>Korean:</strong> Native/Bilingual</li>
-            <li><strong>Chinese:</strong> Limited Working</li>
-          </ul>
-        </li>
-        <li><strong>TOEFL iBT:</strong> 111</li>
-        <li><strong>TOEIC:</strong> 985</li>
-        <li><strong>OPIc:</strong> AL</li>
-        <li>
-          <strong>Certifications:</strong>
-          <ul>
-            <li>
-              <strong>NVIDIA DLI Workshop</strong> – Transformer Based NLP
-              Applications
-            </li>
-            <li>
-              <strong>Microsoft Office Specialist Master Certification
-                (MOS)</strong>
-            </li>
-            <li>
-              <strong>Com2us Mentoring School</strong> – Game Client Focus
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </section>
+    <section class="section shell" id="experience">
+      <div class="section-heading">
+        <p class="section-index">02</p>
+        <div>
+          <p class="eyebrow"><span class="copy-en">Experience</span><span class="copy-ko">경력</span></p>
+          <h2><span class="copy-en">Games, research, and real-world systems.</span><span class="copy-ko">게임과 연구, 현실의 문제를 넘나드는 경험.</span></h2>
+        </div>
+      </div>
 
-    <!-- Honors & Awards Section -->
-    <section id="honors-awards">
-      <h2>🏆 Honors & Awards</h2>
-      <ul>
-        <li>
-          <strong>Silver Award (3rd)</strong> -- University of Seoul
-          Programming Contest (UOSPC) 2024
-        </li>
-        <li>
-          <strong>Excellence Award (2nd)</strong> -- Plankton Hackathon 2024
-        </li>
-        <li>
-          <strong>Grand Prize (2nd)</strong> for Best Games -- GameMakers 8th
-          Cohort
-        </li>
-        <li>
-          <strong>Participation Award (4th)</strong> -- University of Seoul
-          Programming Contest (UOSPC) 2023
-        </li>
-      </ul>
-    </section>
-
-    <!-- Hobbies Section -->
-    <section id="hobbies">
-      <h2>🏉 Hobbies</h2>
-      <ul>
-        <li><strong>Collecting Albums (Mostly Hip-Hop)</strong></li>
-        <li>
-          <a href="https://soundcloud.com/fromthekuiperbelt" target="_blank" rel="noopener noreferrer"><strong>Creating
-              Music</strong></a>
-        </li>
-        <li><strong>Rugby and Cycling</strong></li>
-        <li><strong>Video Gaming</strong></li>
-        <li>
-          <a href="https://www.acmicpc.net/user/fivestar1103" target="_blank"
-            rel="noopener noreferrer"><strong>Algorithm Problem Solving</strong></a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Teaching Experiences Section -->
-    <section id="teaching-experiences">
-      <h2>📚 Teaching Experiences</h2>
-      <ul>
-        <li>
-          <strong>Tutor – Academic Support for International Students, University
-            of Seoul</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>September 2024 -- December 2024</em>
+      <div class="timeline">
+        <article class="timeline-item">
+          <p class="timeline-date"><span class="copy-en">2026—Present</span><span class="copy-ko">2026—현재</span></p>
+          <div>
+            <h3>NCSOFT</h3>
+            <p class="timeline-role"><span class="copy-en">Gameplay Programmer · Core Gameplay</span><span class="copy-ko">클라이언트 프로그래머 · 코어 게임플레이</span></p>
+            <p><span class="copy-en">Building AAA gameplay for <em>Horizon Steel Frontiers</em> in collaboration with PlayStation.</span><span class="copy-ko">PlayStation과 협업하는 AAA 게임 <em>Horizon Steel Frontiers</em>의 게임플레이를 개발하고 있습니다.</span></p>
           </div>
-          <ul class="mt-2">
-            <li>
-              Delivered structured tutoring on programming (Unix, recursion,
-              pointers) and data structures (linked lists, stacks, trees).
-            </li>
-            <li>
-              Introduced algorithmic problem-solving (sorting & graph
-              algorithms) and version control (Git/GitHub).
-            </li>
-            <li>
-              Adapted lessons to language barriers, improving exam
-              performance for international students.
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <strong>C Programming Tutor, University of Seoul</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>April 2024 -- June 2024</em>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-date">2025</p>
+          <div>
+            <h3>San Diego State University · RTEC</h3>
+            <p class="timeline-role"><span class="copy-en">Research Engineer</span><span class="copy-ko">연구 엔지니어</span></p>
+            <p><span class="copy-en">Built an IoT structural monitoring system with Dr. Hyunjong Choi, connecting sensor data to practical engineering decisions.</span><span class="copy-ko">최현종 박사 연구팀에서 센서 데이터를 실제 공학적 판단으로 연결하는 IoT 구조물 모니터링 시스템을 개발했습니다.</span></p>
           </div>
-          <ul class="mt-2">
-            <li>
-              Taught C basics: pointers, arrays, recursion, Linux-based
-              compilation.
-            </li>
-            <li>
-              Guided students in debugging and optimization best practices.
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <strong>English Speaking Tutor, University of Seoul</strong>
-          <div class="d-flex justify-content-between mt-2">
-            <em>April 2020 -- June 2020</em>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-date">2024—2026</p>
+          <div>
+            <h3>GameMakers</h3>
+            <p class="timeline-role"><span class="copy-en">Lead Programmer</span><span class="copy-ko">리드 프로그래머</span></p>
+            <p><span class="copy-en">Led engineering for <em>Fate and Accidy</em>, coordinating a six-person team from prototype to release.</span><span class="copy-ko">6인 팀의 <em>Fate and Accidy</em> 개발을 이끌며 프로토타입부터 출시까지 완주했습니다.</span></p>
           </div>
-          <ul class="mt-2">
-            <li>
-              Assisted peers in improving spoken English through structured
-              conversation sessions.
-            </li>
-          </ul>
-        </li>
-      </ul>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-date">2021—2022</p>
+          <div>
+            <h3><span class="copy-en">Republic of Korea Air Force</span><span class="copy-ko">대한민국 공군</span></h3>
+            <p class="timeline-role"><span class="copy-en">Military Interpreter · Osan Air Base</span><span class="copy-ko">군 통역병 · 오산 공군기지</span></p>
+            <p><span class="copy-en">Worked across Korean and English in a high-stakes operational environment.</span><span class="copy-ko">정확성과 신뢰가 중요한 작전 환경에서 한국어와 영어의 장벽을 없애는 역할을 했습니다.</span></p>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-      <h2>🪪 Contact</h2>
+    <section class="section shell" id="about">
+      <div class="section-heading">
+        <p class="section-index">03</p>
+        <div>
+          <p class="eyebrow"><span class="copy-en">About</span><span class="copy-ko">소개</span></p>
+          <h2><span class="copy-en">Curiosity is only useful when it ships.</span><span class="copy-ko">호기심의 가치는 끝을 봤을 때 생깁니다.</span></h2>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>
+            <span class="copy-en">My advantage is range without fear. I can move between Korean and English, gameplay and product, low-level debugging and customer-facing design. More importantly, I keep going after the interesting part is over.</span>
+            <span class="copy-ko">제 강점은 경계를 두려워하지 않는 폭넓음입니다. 한국어와 영어, 게임플레이와 제품, 저수준 디버깅과 사용자 디자인 사이를 자유롭게 오갑니다. 그리고 재미있는 구간이 끝난 뒤에도 계속 갑니다.</span>
+          </p>
+          <p>
+            <span class="copy-en">I use AI as a serious engineering multiplier: to inspect wider systems, test ideas faster, and turn recurring pain into tools. The judgment, taste, and responsibility for the result stay mine.</span>
+            <span class="copy-ko">AI는 더 넓은 시스템을 살피고, 아이디어를 빠르게 검증하고, 반복되는 고통을 도구로 바꾸는 강력한 엔지니어링 증폭기로 활용합니다. 결과에 대한 판단과 취향, 책임은 언제나 제가 집니다.</span>
+          </p>
+        </div>
+        <aside class="details" aria-label="Background details">
+          <div class="detail-row">
+            <span><span class="copy-en">Languages</span><span class="copy-ko">언어</span></span>
+            <strong><span class="copy-en">Korean & English, native/bilingual</span><span class="copy-ko">한국어·영어 원어민 수준</span></strong>
+          </div>
+          <div class="detail-row">
+            <span><span class="copy-en">Education</span><span class="copy-ko">학력</span></span>
+            <strong><span class="copy-en">University of Seoul · CS, Data Science minor</span><span class="copy-ko">서울시립대학교 · 컴퓨터과학, 데이터과학 부전공</span></strong>
+          </div>
+          <div class="detail-row">
+            <span><span class="copy-en">Recognition</span><span class="copy-ko">수상</span></span>
+            <strong><span class="copy-en">UOSPC Silver · Plankton Hackathon Excellence</span><span class="copy-ko">UOSPC 은상 · 플랑크톤 해커톤 우수상</span></strong>
+          </div>
+          <div class="detail-row">
+            <span><span class="copy-en">Away from code</span><span class="copy-ko">코드 밖에서는</span></span>
+            <strong><span class="copy-en">Music, rugby, cycling, and the next rabbit hole</span><span class="copy-ko">음악, 럭비, 자전거, 그리고 다음 탐구거리</span></strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="contact shell" id="contact">
+      <p class="eyebrow"><span class="copy-en">Have a hard problem?</span><span class="copy-ko">풀기 어려운 문제가 있나요?</span></p>
+      <h2>
+        <span class="copy-en">Let’s make something<br>worth finishing.</span>
+        <span class="copy-ko">끝까지 만들 가치가 있는 것을<br>함께 시작해 봅시다.</span>
+      </h2>
+      <a class="contact-email" href="mailto:fivestar1103@uos.ac.kr">fivestar1103@uos.ac.kr <span aria-hidden="true">↗</span></a>
       <div class="contact-links">
-        <a href="mailto:fivestar1103@uos.ac.kr">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/University_of_Seoul.svg/150px-University_of_Seoul.svg.png"
-            alt="Email Icon" />
-          fivestar1103@uos.ac.kr
-        </a>
-        <a href="https://www.linkedin.com/in/hwanyo" target="_blank" rel="noopener noreferrer">
-          <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/LinkedIN.png?raw=true"
-            alt="LinkedIn Icon" />
-          www.linkedin.com/in/hwanyo
-        </a>
-        <a href="https://github.com/fivestar1103" target="_blank" rel="noopener noreferrer">
-          <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Black/Github_black.png?raw=true"
-            alt="GitHub Icon" />
-          https://github.com/fivestar1103
-        </a>
-        <a href="https://twitter.com/shwanyo" target="_blank" rel="noopener noreferrer">
-          <img src="https://github.com/gauravghongde/social-icons/blob/master/PNG/Color/Twitter.png?raw=true"
-            alt="Twitter Icon" />
-          https://twitter.com/shwanyo
-        </a>
+        <a href="https://www.linkedin.com/in/hwanyo/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/fivestar1103" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <a href="https://soundcloud.com/fromthekuiperbelt" target="_blank" rel="noreferrer">SoundCloud <span aria-hidden="true">↗</span></a>
+        <a href="/legacy/portfolio.html"><span class="copy-en">Portfolio archive</span><span class="copy-ko">이전 포트폴리오</span> <span aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <p class="mb-0">
-        &copy; 2025 Hwany. All rights reserved. |
-        <a href="https://github.com/fivestar1103" target="_blank" rel="noopener noreferrer">GitHub</a>
-        |
-        <a href="https://www.linkedin.com/in/hwanyo" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        |
-        <span>Last Updated: February 6, 2025, 06:30 UTC</span>
-      </p>
-    </div>
+  <footer class="site-footer shell">
+    <p>© <span data-current-year>2026</span> Seonghwan Oh</p>
+    <a href="#top"><span class="copy-en">Back to top</span><span class="copy-ko">맨 위로</span> <span aria-hidden="true">↑</span></a>
   </footer>
 
-  <!-- BACK TO TOP BUTTON -->
-  <button id="backToTopBtn" class="btn btn-custom">↑</button>
-
-  <!-- Bootstrap 5 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      updateGreeting();
-
-      // Highlight active nav link based on scroll position
-      const sections = document.querySelectorAll("main section");
-      const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
-
-      window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach((section) => {
-          const sectionTop = section.offsetTop - 150;
-          if (pageYOffset >= sectionTop) {
-            current = section.getAttribute("id");
-          }
-        });
-
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-          // If link is #home, special condition for top
-          if (
-            link.getAttribute("href") === `#${current}` ||
-            (link.getAttribute("href") === "#home" && !current)
-          ) {
-            link.classList.add("active");
-          }
-        });
-      });
-
-      // *** Mobile Device Detection and Portfolio Link Update ***
-
-      // 1. Detect if user is on a mobile device
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
-
-      // 2. Grab the portfolio link using the ID
-      const portfolioLink = document.getElementById("portfolio-link");
-
-      // 3. If on a mobile device, change to portfolio-no-demo.html
-      if (isMobile) {
-        portfolioLink.href = "portfolio-no-demo.html";
-        console.log("Mobile device detected. Portfolio link updated.");
-      } else {
-        portfolioLink.href = "portfolio.html";
-        console.log("Desktop device detected. Portfolio link remains unchanged.");
-      }
-      // *** End of Mobile Device Detection ***
-    });
-
-    // Update greeting based on time of day
-    function updateGreeting() {
-      const hour = new Date().getHours();
-      let greeting;
-      if (hour < 12) {
-        greeting = "😎 Good Morning!";
-      } else if (hour < 18) {
-        greeting = "☕️ Good Afternoon!";
-      } else {
-        greeting = "🌆 Good Evening!";
-      }
-      document.getElementById("greeting").textContent =
-        greeting + " This is Hwany";
-    }
-
-    // Back to Top button functionality
-    const backToTopBtn = document.getElementById("backToTopBtn");
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.style.display = "block";
-      } else {
-        backToTopBtn.style.display = "none";
-      }
-    });
-
-    backToTopBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  </script>
+  <script src="/assets/site.js"></script>
 </body>
-
 </html>
