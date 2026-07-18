@@ -2,14 +2,23 @@
 
 Seonghwan Oh's personal site and the static pages for independently shipped products.
 
-## Structure
+## Repository layout
 
-- `/index.html` — personal homepage
-- `/assets/` — homepage styles, scripts, and social preview
-- `/spamdog/` — SpamDog product, privacy, and support pages
-- `/subtitle-overlay/` — Subtitle Overlay privacy page
-- `/fateAndAccidy/` — Fate and Accidy links, privacy, and support pages
-- `/legacy/` — archived portfolio pages kept for historical reference
-- `/ESR/`, `/webgl-*`, `/webgpu-*`, `/codes/` — older releases, demos, and experiments
+```text
+.
+├── branding/          # Repository and Finder icon artwork
+├── docs/              # GitHub Pages document root
+│   ├── assets/        # Homepage styles, scripts, and social preview
+│   ├── spamdog/       # SpamDog product, privacy, and support pages
+│   ├── subtitle-overlay/
+│   ├── fateAndAccidy/
+│   ├── legacy/        # Archived portfolio pages
+│   ├── webgl-*/       # Historical interactive demos
+│   └── index.html     # Personal homepage
+├── .gitignore
+└── README.md
+```
 
-Product and legal URLs are intentionally kept stable. Old root-level portfolio URLs redirect to the current homepage; their full versions remain in `/legacy/`.
+GitHub Pages publishes from `main:/docs`. Because `docs/` is the document root, existing public paths such as `/spamdog/`, `/subtitle-overlay/privacy.html`, and `/fateAndAccidy/links.html` remain unchanged.
+
+Historical releases, demos, source snippets, screenshots, and resumes stay inside `docs/` because old portfolio pages still reference them. The root directory is reserved for repository-level files only.
