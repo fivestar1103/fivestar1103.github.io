@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Threads Lab 개인정보처리방침</title>
+  <style>
+    :root { --bg:#f4f4f0; --card:#fff; --ink:#171717; --sub:#62625f; --line:#d8d8d2; --accent:#3157d5; color-scheme:light dark; }
+    @media (prefers-color-scheme:dark) { :root { --bg:#111; --card:#1c1c1c; --ink:#f5f5f5; --sub:#aaa; --line:#333; --accent:#8ca5ff; } }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.7; }
+    main { width:min(44rem,calc(100% - 2.5rem)); margin:0 auto; padding:3.5rem 0 5rem; }
+    article { padding:clamp(1.4rem,5vw,2.5rem); border:1px solid var(--line); border-radius:1.25rem; background:var(--card); }
+    h1 { margin:.2rem 0 0; font-size:clamp(2rem,8vw,3.2rem); line-height:1.1; letter-spacing:-.055em; }
+    h2 { margin:2.2rem 0 .4rem; font-size:1.15rem; letter-spacing:-.025em; }
+    p,li { font-size:.98rem; }
+    a { color:var(--accent); }
+    .eyebrow,.date,footer { color:var(--sub); font-size:.88rem; }
+    .summary { margin:2rem 0 0; padding:1rem 1.1rem; border-radius:.85rem; background:var(--bg); font-weight:650; }
+    footer { margin-top:2.8rem; padding-top:1.4rem; border-top:1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <main>
+    <article>
+      <div class="eyebrow">THREADS LAB</div>
+      <h1>개인정보처리방침</h1>
+      <p class="date">시행일: 2026년 7월 19일</p>
+
+      <p class="summary">요약: Threads Lab은 사용자가 명시적으로 승인한 Threads API 데이터를 개인용 연구 목적으로 처리하는 로컬 도구입니다. 자격증명과 수집 결과를 운영자의 Mac 밖에 별도로 저장하거나 판매하지 않습니다.</p>
+
+      <h2>1. 서비스와 운영자</h2>
+      <p>Threads Lab은 Threads의 관련 대화 후보를 검토하기 위해 Seonghwan Oh가 운영하는 개인용 연구 도구입니다. 이 방침은 Threads Lab이 Meta Threads API를 통해 처리하는 정보에 적용됩니다.</p>
+
+      <h2>2. 처리하는 정보</h2>
+      <ul>
+        <li>OAuth를 승인한 Threads 계정의 사용자 ID와 사용자 이름</li>
+        <li>검색어와 검색 실행 시각</li>
+        <li>Threads API가 반환한 게시물 ID, 본문, 대체 텍스트, 게시 시각, 영구 링크, 미디어 유형, 주제 태그와 공개 반응 지표</li>
+        <li>운영자가 기록한 후보 게시물의 보관·제외 결정과 메모</li>
+      </ul>
+      <p>Threads Lab은 비밀번호를 수집하지 않으며, 승인된 API 범위를 벗어난 비공개 Threads 정보에 접근하지 않습니다.</p>
+
+      <h2>3. 이용 목적</h2>
+      <p>정보는 관련 대화의 흐름과 표현 방식을 연구하고, 사람이 검수할 비공개 후보 목록을 만들며, API 연결 상태를 점검하는 데만 사용됩니다. 현재 Threads Lab은 게시물을 자동으로 게시하지 않습니다.</p>
+
+      <h2>4. 저장 위치와 보유 기간</h2>
+      <p>API 토큰과 앱 자격증명은 운영자의 macOS Keychain에 저장됩니다. 수집 결과와 검수 기록은 운영자의 Mac에 있는 비공개 SQLite 데이터베이스와 로컬 문서에 저장됩니다. 게시물 원문 필드는 수집 시점부터 30일의 만료 시점을 가지며 정리 작업에서 제거됩니다. 나머지 메타데이터와 검수 기록은 연구 목적에 필요한 기간 동안 보유한 뒤 로컬 데이터베이스와 백업에서 삭제합니다.</p>
+
+      <h2>5. 외부 제공과 판매</h2>
+      <p>Threads Lab은 개인정보를 판매하거나 광고 목적으로 공유하지 않습니다. 인증과 데이터 조회 과정에서 Meta의 Threads API와 통신하는 것 외에는, 현재 수집 데이터를 외부 분석·광고 서비스나 별도의 운영 서버로 전송하지 않습니다.</p>
+
+      <h2>6. 보호 조치</h2>
+      <p>자격증명은 소스 코드와 데이터베이스에 기록하지 않고 macOS Keychain으로 분리합니다. 수집 데이터가 있는 디렉터리는 공개 저장소에서 제외하며, 필요한 최소 API 권한만 요청합니다.</p>
+
+      <h2>7. 승인 철회와 데이터 삭제</h2>
+      <p>사용자는 Threads의 웹사이트 권한 설정에서 언제든 앱 승인을 철회할 수 있습니다. 삭제를 요청하면 해당 사용자와 연결된 OAuth 자격증명, 로컬 수집 결과와 검수 기록을 확인하여 삭제합니다. 요청하려면 아래 이메일로 Threads 사용자 이름과 함께 연락해 주세요.</p>
+
+      <h2>8. 방침 변경</h2>
+      <p>LLM 분석, 외부 서버, 자동 게시 등 데이터 처리 방식이 추가되면 적용 전에 이 방침을 갱신하고 시행일을 표시합니다.</p>
+
+      <h2>9. 문의</h2>
+      <p>개인정보 및 데이터 삭제 문의: <a href="mailto:fivestar1103@uos.ac.kr">fivestar1103@uos.ac.kr</a></p>
+
+      <footer>© 2026 Seonghwan Oh · Threads Lab</footer>
+    </article>
+  </main>
+</body>
+</html>
