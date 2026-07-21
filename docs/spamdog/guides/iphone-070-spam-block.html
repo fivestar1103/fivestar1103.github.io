@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아이폰 070 스팸전화 차단 방법: 끝자리 바뀌는 번호 한 번에 막기</title>
+<meta name="description" content="아이폰에서 070 스팸전화가 끝자리만 바꿔 반복될 때 차단하는 방법을 알아보세요. 특정 가운데 번호를 골라 뒤 4자리 10,000개를 차단하고 작동 여부를 확인하는 법까지 설명합니다.">
+<link rel="canonical" href="https://fivestar1103.github.io/spamdog/guides/iphone-070-spam-block.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="스팸독">
+<meta property="og:title" content="아이폰 070 스팸전화 차단 방법">
+<meta property="og:description" content="끝자리만 바뀌는 070 번호를 가운데 번호 패턴으로 한 번에 차단하는 방법">
+<meta property="og:url" content="https://fivestar1103.github.io/spamdog/guides/iphone-070-spam-block.html">
+<meta property="og:image" content="https://fivestar1103.github.io/spamdog/assets/spamdog-og.png">
+<meta property="og:image:width" content="1729">
+<meta property="og:image:height" content="910">
+<meta property="og:image:alt" content="스팸독 강아지가 반복되는 070 가운데 번호를 지키는 모습">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fivestar1103.github.io/spamdog/assets/spamdog-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "아이폰 070 스팸전화 차단 방법: 끝자리 바뀌는 번호 한 번에 막기",
+  "description": "특정 가운데 번호를 골라 뒤 4자리 10,000개를 차단하고 작동 여부를 확인하는 방법",
+  "datePublished": "2026-07-21",
+  "dateModified": "2026-07-21",
+  "inLanguage": "ko-KR",
+  "author": { "@type": "Organization", "name": "스팸독" },
+  "publisher": { "@type": "Organization", "name": "스팸독" },
+  "mainEntityOfPage": "https://fivestar1103.github.io/spamdog/guides/iphone-070-spam-block.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "아이폰에서 070 번호 전체를 차단할 수 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "필요한 전화까지 막힐 수 있어 070 전체 차단은 권하지 않습니다. 스팸독은 사용자가 실제로 반복 수신한 특정 가운데 번호 대역만 골라 차단합니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "차단된 전화가 음성사서함에 남는 것은 정상인가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "네. iPhone에서는 차단된 발신자도 음성사서함을 남길 수 있습니다. 벨과 수신 알림이 없고 통화 기록에 스팸독: 차단함이 표시되면 차단이 작동한 것입니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "가운데 번호 하나로 왜 10,000개가 차단되나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "070-1234처럼 가운데 번호를 고정하고 뒤 4자리 0000부터 9999까지 모든 조합을 차단 대상으로 등록하기 때문입니다." }
+    }
+  ]
+}
+</script>
+<style>
+  :root { --bg:#F3F5F8; --card:#FFF; --ink:#12233A; --sub:#5A6B80; --line:#E2E7EE; --seal:#C03A2B; --soft:#E9EEF4; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0B1624; --card:#1A2A3F; --ink:#E8EDF3; --sub:#A7B4C4; --line:#26374E; --seal:#F06A58; --soft:#132238; } }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); line-height:1.75; font-family:-apple-system,"Apple SD Gothic Neo","Pretendard",system-ui,sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:40px 22px 80px; }
+  a { color:var(--seal); text-decoration:none; }
+  nav { display:flex; justify-content:space-between; gap:20px; font-size:14px; font-weight:750; }
+  article { margin-top:54px; }
+  .article-hero { display:grid; grid-template-columns:minmax(0,1fr) 210px; gap:18px; align-items:center; }
+  .article-hero img { width:230px; height:auto; max-width:100%; margin:-18px 0 -42px; filter:drop-shadow(0 18px 20px color-mix(in srgb, var(--ink) 18%, transparent)); }
+  .eyebrow { color:var(--seal); font-size:13px; font-weight:850; }
+  h1 { font-size:clamp(32px,7vw,46px); line-height:1.2; letter-spacing:-1px; margin:10px 0 18px; text-wrap:balance; }
+  .lede { color:var(--sub); font-size:18px; margin:0 0 12px; }
+  .date { color:var(--sub); font-size:13px; }
+  h2 { font-size:25px; line-height:1.35; margin:52px 0 12px; letter-spacing:-0.3px; }
+  h3 { font-size:18px; margin:28px 0 8px; }
+  p, li { font-size:16px; }
+  li { margin-bottom:8px; }
+  .summary, .example, .notice, .cta { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:20px; }
+  .summary { margin-top:28px; }
+  .summary strong { display:block; margin-bottom:6px; }
+  .example { text-align:center; margin:20px 0; }
+  .example .number { font-size:clamp(26px,7vw,38px); font-weight:950; letter-spacing:1px; margin:4px 0; }
+  mark { color:var(--seal); background:transparent; border-bottom:4px solid var(--seal); }
+  .caption { color:var(--sub); font-size:13.5px; margin:7px 0 0; }
+  .notice { background:var(--soft); }
+  .steps { counter-reset:step; list-style:none; padding:0; }
+  .steps li { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px 16px 52px; position:relative; }
+  .steps li::before { counter-increment:step; content:counter(step); position:absolute; left:18px; color:var(--seal); font-weight:950; }
+  details { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:15px 18px; margin-bottom:10px; }
+  summary { cursor:pointer; font-weight:800; }
+  details p { color:var(--sub); font-size:14.5px; margin:10px 0 0; }
+  .cta { text-align:center; margin-top:56px; }
+  .cta h2 { margin:0 0 8px; }
+  .cta p { color:var(--sub); }
+  .button { display:inline-block; background:var(--ink); color:var(--bg); font-weight:850; padding:13px 24px; border-radius:13px; }
+  footer { margin-top:64px; padding-top:24px; border-top:1px solid var(--line); color:var(--sub); font-size:13.5px; display:flex; flex-wrap:wrap; gap:8px 18px; }
+  @media (max-width:600px) {
+    .article-hero { grid-template-columns:1fr; text-align:center; }
+    .article-hero img { width:220px; margin:-12px auto -34px; order:-1; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <nav aria-label="주요 메뉴">
+    <a href="../index.html">← 스팸독</a>
+    <a href="../support.html">지원 · FAQ</a>
+  </nav>
+
+  <article>
+    <header class="article-hero">
+      <div>
+        <div class="eyebrow">아이폰 스팸전화 차단 가이드</div>
+        <h1>끝자리만 바뀌는 070 전화, 하나씩 차단하지 마세요</h1>
+        <p class="lede">같은 가운데 번호를 쓰면서 뒤 네 자리만 바꿔 오는 스팸이라면, 반복되는 대역 하나를 등록해 10,000개를 한 번에 차단할 수 있습니다.</p>
+        <p class="date">작성·업데이트: 2026년 7월 21일</p>
+      </div>
+      <img src="../assets/candog-hero.png" width="760" height="760" alt="070 스팸전화 차단 방법을 안내하는 스팸독 강아지">
+    </header>
+
+    <div class="summary">
+      <strong>30초 요약</strong>
+      반복되는 070 전화의 가운데 네 자리를 확인하고, 스팸독에 해당 대역을 등록한 뒤 iOS의 통화 차단 설정을 켜면 됩니다. 070 전체가 아니라 직접 고른 대역만 차단하는 방식입니다.
+    </div>
+
+    <h2>왜 한 번호씩 차단해도 계속 걸려올까요?</h2>
+    <p>발신 측이 한 대역 안에서 뒤 네 자리만 바꾸면, 보이는 전화번호는 매번 달라도 가운데 번호는 그대로일 수 있습니다. 이때 완전한 번호 하나만 차단하면 다음 번호는 다시 울립니다.</p>
+    <div class="example" aria-label="070 가운데 번호 반복 예시">
+      <p class="number">070-<mark>1234</mark>-0182</p>
+      <p class="number">070-<mark>1234</mark>-6741</p>
+      <p class="number">070-<mark>1234</mark>-9903</p>
+      <p class="caption">끝 네 자리는 달라도 가운데 1234는 같습니다.</p>
+    </div>
+    <p>가운데 번호 <b>070-1234</b>를 패턴으로 등록하면 070-1234-0000부터 070-1234-9999까지, 총 10,000개 조합이 차단 대상이 됩니다.</p>
+
+    <h2>아이폰에서 070 스팸전화 차단하는 순서</h2>
+    <ol class="steps">
+      <li><b>최근 통화에서 반복되는 번호를 확인하세요.</b><br>서로 다른 전화의 가운데 네 자리가 같은지 비교합니다.</li>
+      <li><b>스팸독에 전화번호를 입력하거나 붙여넣으세요.</b><br>완전한 번호를 넣으면 앱이 가운데 번호 일괄 차단을 제안합니다.</li>
+      <li><b>‘10,000개 일괄 차단’을 선택해 밀봉하세요.</b><br>연락처 보호를 켜 두면 저장된 번호는 일괄 차단에서 제외됩니다.</li>
+      <li><b>iOS 설정에서 스팸독을 활성화하세요.</b><br>설정 → 앱 → 전화 → 통화 차단 및 발신자 확인에서 스팸독을 켭니다.</li>
+    </ol>
+
+    <div class="notice">
+      <b>070 전체 차단과는 다릅니다.</b> 070 인터넷전화에는 정상적인 병원, 배달, 회사 전화도 있을 수 있습니다. 실제로 스팸이 반복된 특정 가운데 번호만 등록하는 편이 안전합니다.
+    </div>
+
+    <h2>차단이 작동했는지 확인하는 법</h2>
+    <p>차단 대상 전화는 벨과 수신 알림 없이 음성사서함으로 넘어갈 수 있습니다. iPhone 통화 기록에 <b>스팸독: 차단함</b>이 표시됐다면 정상적으로 작동한 것입니다.</p>
+    <p>iOS의 Call Directory 구조상 스팸독 앱은 사용자의 실제 수신 기록이나 통화 내용을 볼 수 없습니다. 그래서 앱 안에 ‘몇 통 차단’ 통계를 만드는 대신, iPhone 통화 기록의 표시로 확인합니다.</p>
+
+    <h2>자주 묻는 질문</h2>
+    <details open>
+      <summary>아이폰에서 070 번호 전체를 차단할 수 있나요?</summary>
+      <p>필요한 전화까지 막힐 수 있어 070 전체 차단은 권하지 않습니다. 스팸독은 사용자가 실제로 반복 수신한 특정 가운데 번호 대역만 골라 차단합니다.</p>
+    </details>
+    <details>
+      <summary>차단된 전화가 음성사서함에 남는 것은 정상인가요?</summary>
+      <p>네. iPhone에서는 차단된 발신자도 음성사서함을 남길 수 있습니다. 벨과 수신 알림이 없고 통화 기록에 <b>스팸독: 차단함</b>이 표시되면 차단이 작동한 것입니다.</p>
+    </details>
+    <details>
+      <summary>가운데 번호 하나로 왜 10,000개가 차단되나요?</summary>
+      <p>뒤 네 자리는 0000부터 9999까지 10,000가지입니다. 가운데 번호를 고정하고 이 조합 전체를 차단 대상으로 등록하기 때문입니다.</p>
+    </details>
+    <details>
+      <summary>문자 스팸도 차단되나요?</summary>
+      <p>아니요. 현재 스팸독은 전화 수신 차단과 발신자 표시에 집중하며 문자 차단 기능은 제공하지 않습니다.</p>
+    </details>
+
+    <div class="cta">
+      <h2>반복되는 번호를 찾았다면 바로 막아보세요</h2>
+      <p>가운데 번호 패턴 80개, 최대 80만 번호까지 광고와 결제 없이 사용할 수 있습니다.</p>
+      <a class="button" href="https://apps.apple.com/kr/app/id6790863507" target="_blank" rel="noopener noreferrer">App Store에서 스팸독 받기</a>
+    </div>
+  </article>
+
+  <footer>
+    <a href="../index.html">스팸독 홈</a>
+    <a href="../privacy.html">개인정보처리방침</a>
+    <a href="../support.html">지원 · FAQ</a>
+    <span>© 2026 스팸독</span>
+  </footer>
+</main>
+</body>
+</html>
