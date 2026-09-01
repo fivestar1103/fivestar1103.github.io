@@ -50,6 +50,21 @@
   --kb-step-4:  clamp(38px, 5.4vw, 64px);
   --kb-step-5:  clamp(48px, 8vw, 104px);
 
+  /* --- vertical rhythm --------------------------------------------------- */
+  /* One fluid scale instead of a desktop value plus a hand-picked value at
+     each breakpoint. Every step interpolates linearly from a 390px phone to a
+     1280px desktop and clamps at both ends, so there is no width where the
+     spacing is left over from the wrong breakpoint.
+
+     Picked against the phone first: 208px of dead space between two sections
+     is a quarter of an 844px screen. The desktop ends are unchanged. */
+  --kb-space-3xl: clamp(76px, 13.9vw + 22px, 200px);  /* closing section    */
+  --kb-space-2xl: clamp(64px, 9.7vw + 26px, 150px);   /* section to section */
+  --kb-space-xl:  clamp(40px, 4vw + 24px, 76px);      /* heading to content */
+  --kb-space-lg:  clamp(30px, 1.8vw + 23px, 46px);    /* list row           */
+  --kb-space-md:  clamp(26px, 1.35vw + 21px, 38px);   /* dense list row     */
+  --kb-space-sm:  clamp(16px, 1vw + 12px, 24px);
+
   /* --- motion ----------------------------------------------------------- */
   /* Entering / responding: starts fast so the interface feels immediate. */
   --kb-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -107,6 +122,14 @@ html[data-language="ko"] {
 .kb-label-muted {
   color: inherit;
   opacity: 0.62;
+}
+
+/* Tracking that reads as deliberate at desktop width just costs line breaks
+   on a phone, where these labels are the widest unbroken runs on the page. */
+@media (max-width: 560px) {
+  .kb-label {
+    letter-spacing: 0.09em;
+  }
 }
 
 /* Numbers that sit in columns or get compared should not jitter. */
