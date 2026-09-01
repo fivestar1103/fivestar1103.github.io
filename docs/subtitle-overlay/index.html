@@ -19,7 +19,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/kuiper.css">
 
   <!-- Structured data. The point of this page is partly to be quotable: an
        assistant asked "what puts custom subtitles on a video" should have
@@ -50,7 +53,7 @@
       { "@type": "Offer", "price": "34.99", "priceCurrency": "USD", "name": "Pro, founding lifetime", "url": "https://iknowhim.gumroad.com/l/subtitleoverlay-pro" }
     ],
     "author": { "@type": "Person", "name": "Seonghwan Oh", "url": "https://fivestar1103.github.io/" },
-    "privacyPolicy": "https://fivestar1103.github.io/subtitle-overlay/privacy"
+    "privacyPolicy": "https://fivestar1103.github.io/subtitle-overlay/privacy.html"
   }
   </script>
   <script type="application/ld+json">
@@ -100,11 +103,15 @@
       --ink-soft: #2b3531;
       --ink-light: #4e5854;
       --line: rgba(20, 32, 28, 0.12);
+
+      /* Contract with kuiper.css. */
+      --kb-accent: #0d5546;
+      --kb-accent-ink: #f6efe0;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--kb-body);
       background: var(--cream);
       color: var(--ink);
       line-height: 1.65;
@@ -126,14 +133,14 @@
     }
     .hero-inner { max-width: 780px; margin: 0 auto; }
     .breadcrumb {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--kb-mono);
       font-size: .78rem; letter-spacing: .04em;
       color: rgba(246,239,224,.55); margin-bottom: 2rem;
     }
     .breadcrumb .slash { color: var(--teal); padding: 0 .3rem; }
     .logo { width: 96px; height: 96px; margin: 0 auto 1.5rem; }
     h1 {
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: var(--kb-display);
       font-weight: 900; font-size: clamp(2.1rem, 5.5vw, 3.4rem);
       line-height: 1.08; letter-spacing: -.02em; margin-bottom: 1rem;
     }
@@ -153,7 +160,7 @@
     .btn-ghost { border: 1.5px solid rgba(246,239,224,.32); color: var(--cream); }
     .hero-meta {
       margin-top: 1.6rem; display: flex; gap: .5rem; justify-content: center;
-      flex-wrap: wrap; font-family: 'JetBrains Mono', monospace; font-size: .76rem;
+      flex-wrap: wrap; font-family: var(--kb-mono); font-size: .76rem;
     }
     .pill {
       padding: .3rem .7rem; border-radius: 999px;
@@ -167,11 +174,11 @@
     section { margin-bottom: 3.5rem; }
     .section-head { display: flex; align-items: baseline; gap: .9rem; margin-bottom: 1.1rem; }
     .section-num {
-      font-family: 'JetBrains Mono', monospace; font-size: .8rem;
+      font-family: var(--kb-mono); font-size: .8rem;
       color: var(--teal); font-weight: 700;
     }
     h2 {
-      font-family: 'Fraunces', Georgia, serif; font-weight: 700;
+      font-family: var(--kb-display); font-weight: 700;
       font-size: 1.75rem; letter-spacing: -.01em;
     }
     h3 { font-size: 1.05rem; margin: 1.6rem 0 .4rem; }
@@ -195,8 +202,8 @@
     }
     .pro h2 { color: var(--cream); }
     .pro p { color: rgba(246,239,224,.82); }
-    .price { font-family: 'Fraunces', Georgia, serif; font-size: 2.6rem; font-weight: 900; }
-    .price small { font-size: .95rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; opacity: .8; }
+    .price { font-family: var(--kb-display); font-size: 2.6rem; font-weight: 900; }
+    .price small { font-size: .95rem; font-family: var(--kb-body); font-weight: 500; opacity: .8; }
     .faq dt { font-weight: 700; margin-top: 1.4rem; }
     .faq dd { margin: .35rem 0 0; color: var(--ink-soft); }
     footer { border-top: 1px solid var(--line); margin-top: 3rem; padding: 2rem 1.5rem 3rem; }
@@ -291,7 +298,7 @@
       <li><strong>Sent when you search:</strong> your query, to OpenSubtitles, so it can return files.</li>
       <li><strong>Optional:</strong> anonymous usage analytics, which you can switch off in Settings.</li>
     </ul>
-    <p>The <a href="./privacy">full privacy policy</a> spells out every case.</p>
+    <p>The <a href="./privacy.html">full privacy policy</a> spells out every case.</p>
   </section>
 
   <section id="pro">
@@ -328,7 +335,7 @@
     <div>Subtitle Overlay &middot; built by <a href="https://fivestar1103.github.io/">Seonghwan Oh</a></div>
     <nav class="footer-links" aria-label="Footer">
       <a href="https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm">Chrome Web Store</a>
-      <a href="./privacy">Privacy</a>
+      <a href="./privacy.html">Privacy</a>
       <a href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro">Pro</a>
       <a href="#top">&uarr; Top</a>
     </nav>
