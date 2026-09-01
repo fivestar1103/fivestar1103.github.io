@@ -112,6 +112,14 @@
         navToggle.focus();
       }
     });
+
+    // Tapping the page behind an open menu should close it. Without this the
+    // panel stays over the content and the only way out is the Menu button.
+    document.addEventListener("click", function (event) {
+      if (nav.getAttribute("data-open") !== "true") return;
+      if (nav.contains(event.target) || navToggle.contains(event.target)) return;
+      closeNav();
+    });
   }
 
   var year = document.querySelector("[data-current-year]");
