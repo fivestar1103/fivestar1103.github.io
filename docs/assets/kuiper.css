@@ -1,0 +1,273 @@
+/* ==========================================================================
+   Kuiper — shared identity layer
+   --------------------------------------------------------------------------
+   Loaded by the personal site and every product page, BEFORE that page's own
+   stylesheet. It owns the things that should look the same everywhere:
+   typefaces, the type scale, label treatment, focus, press feedback, motion.
+
+   It does NOT own colour. Each page keeps its own ground and mood and simply
+   fills in --kb-accent (plus --kb-accent-ink if its ground is dark). That is
+   the whole contract:
+
+       :root {
+         --kb-ground: #edece7;
+         --kb-accent: #145a43;
+       }
+
+   Fonts are linked from each page's <head>, not @import-ed here, so they
+   download in parallel with this file:
+
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+   ========================================================================== */
+
+:root {
+  /* --- typefaces -------------------------------------------------------- */
+  /* Display: Fraunces. Already the face on /subtitle-overlay/; promoted to
+     the shared display face so the sites read as one hand. Replaces the old
+     `Iowan Old Style, Baskerville` stack, which silently fell back to Times
+     New Roman on every non-Apple machine. */
+  --kb-display: "Fraunces", Georgia, "Times New Roman", serif;
+
+  /* Body: Pretendard Variable. Carries Latin and Hangul in one family with a
+     real variable weight axis, so 450/550/650 render as themselves instead of
+     being rounded to 400/700 and faux-bolded. */
+  --kb-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+             "Apple SD Gothic Neo", "Segoe UI", "Malgun Gothic", system-ui, sans-serif;
+
+  /* Utility: JetBrains Mono. Already on /subtitle-overlay/; used here for
+     eyebrows, dates, counts, and anything that reads as instrument output. */
+  --kb-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* --- type scale ------------------------------------------------------- */
+  --kb-step--1: 13px;
+  --kb-step-0:  16px;
+  --kb-step-1:  clamp(18px, 1.4vw, 21px);
+  --kb-step-2:  clamp(22px, 2.2vw, 28px);
+  --kb-step-3:  clamp(28px, 3.4vw, 40px);
+  --kb-step-4:  clamp(38px, 5.4vw, 64px);
+  --kb-step-5:  clamp(48px, 8vw, 104px);
+
+  /* --- motion ----------------------------------------------------------- */
+  /* Entering / responding: starts fast so the interface feels immediate. */
+  --kb-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  /* Moving on screen: accelerates and settles. */
+  --kb-ease-move: cubic-bezier(0.77, 0, 0.175, 1);
+  --kb-press: 140ms;
+  --kb-hover: 160ms;
+
+  /* --- fallbacks -------------------------------------------------------- */
+  /* Pages are expected to override these. Defined so the layer never renders
+     an unstyled or invisible state on its own. */
+  --kb-accent: #145a43;
+  --kb-accent-ink: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Latin vs Hangul tracking
+
+   Negative tracking that flatters Latin display type crushes Hangul, because
+   a syllable block is already a dense square. Anything tighter than about
+   -0.02em makes 받침 collide with the next block. Pages set their Latin
+   tracking freely and lean on these two hooks for Korean.
+   -------------------------------------------------------------------------- */
+:root {
+  --kb-track-display: -0.035em;  /* Latin display */
+  --kb-track-tight:   -0.02em;   /* Latin headings */
+}
+
+html[lang="ko"],
+html[data-language="ko"] {
+  --kb-track-display: -0.015em;
+  --kb-track-tight:   -0.008em;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+.kb-body-type {
+  font-family: var(--kb-body);
+  font-feature-settings: "ss01";
+}
+
+/* Mono label. The one repeated device across all three sites: small, spaced,
+   upper, in the page's own accent. Eyebrows, kickers, dates, counts. */
+.kb-label {
+  font-family: var(--kb-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--kb-accent);
+}
+
+.kb-label-muted {
+  color: inherit;
+  opacity: 0.62;
+}
+
+/* Numbers that sit in columns or get compared should not jitter. */
+.kb-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   Focus
+
+   One ring everywhere, in the page's accent, always visible on keyboard.
+   -------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--kb-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Interaction
+
+   Two rules, applied by opting in with a class rather than by blanket
+   element selectors, so a page can keep any control out of the system.
+   -------------------------------------------------------------------------- */
+
+/* Anything pressable answers the press. Without it the interface reads as if
+   it did not hear the click. */
+.kb-press {
+  transition: transform var(--kb-press) var(--kb-ease-out),
+              background-color var(--kb-hover) ease,
+              border-color var(--kb-hover) ease,
+              color var(--kb-hover) ease;
+}
+
+.kb-press:active {
+  transform: scale(0.97);
+}
+
+/* Colour changes on links should ease rather than snap. On a page with many
+   links the difference compounds. */
+.kb-link {
+  transition: color var(--kb-hover) ease,
+              opacity var(--kb-hover) ease;
+}
+
+/* Lift on hover is gated: a touch device fires :hover on tap, which leaves
+   the element stuck in its hovered state after the finger lifts. */
+@media (hover: hover) and (pointer: fine) {
+  .kb-lift {
+    transition: transform var(--kb-hover) var(--kb-ease-out),
+                box-shadow var(--kb-hover) var(--kb-ease-out);
+  }
+
+  .kb-lift:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Skip link
+
+   The first thing a keyboard user meets. It slides rather than snaps.
+   -------------------------------------------------------------------------- */
+.kb-skip {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 3px;
+  background: var(--kb-accent);
+  color: var(--kb-accent-ink);
+  font-family: var(--kb-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transform: translateY(-180%);
+  transition: transform 150ms var(--kb-ease-out);
+}
+
+.kb-skip:focus {
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   Footer signature
+
+   The connective tissue. Same strip at the foot of every page, so a visitor
+   who lands on /spamdog/ from the App Store can see where they are.
+   -------------------------------------------------------------------------- */
+.kb-sig {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  font-family: var(--kb-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.kb-sig a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--kb-hover) ease;
+}
+
+.kb-sig a:hover,
+.kb-sig a:focus-visible {
+  color: var(--kb-accent);
+}
+
+.kb-sig-dot::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--kb-accent);
+  vertical-align: 0.12em;
+}
+
+/* --------------------------------------------------------------------------
+   Language swap
+
+   Bilingual pages hold both languages in the DOM and hide one. Swapping is a
+   content change, not a transition — but the two languages set different line
+   counts, so the page jumps. A short blur-and-fade covers the reflow: the eye
+   reads one thing changing shape instead of two things trading places.
+   -------------------------------------------------------------------------- */
+.kb-swapping {
+  opacity: 0.35;
+  filter: blur(2px);
+}
+
+.kb-swap-target {
+  transition: opacity 140ms ease, filter 140ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   Motion preferences
+
+   Reduced motion means less movement, not no feedback. Colour and opacity
+   transitions stay because they aid comprehension; transforms go.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .kb-press:active,
+  .kb-lift:hover {
+    transform: none;
+  }
+
+  .kb-skip {
+    transition: none;
+  }
+
+  .kb-swapping {
+    filter: none;
+  }
+}

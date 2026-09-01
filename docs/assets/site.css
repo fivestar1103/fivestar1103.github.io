@@ -1,14 +1,20 @@
+/* Personal site. Typography, focus, press feedback and motion come from
+   kuiper.css; this file owns the ground, the accent, and the layout. */
+
 :root {
-  --paper: #f4f1ea;
+  /* Ground. Deliberately off #f4f1ea — a bone with a cool grey cast rather
+     than the warm cream that every generated page currently lands on. */
+  --paper: #edece7;
   --ink: #171b19;
-  --muted: #626762;
+  --muted: #5f6663;
   --line: #c9cbc3;
   --accent: #145a43;
-  --accent-light: #dbe8df;
   --white: #fffdf8;
   --shell: min(1180px, calc(100vw - 48px));
-  --serif: Iowan Old Style, Baskerville, "Times New Roman", serif;
-  --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* The contract with kuiper.css. */
+  --kb-accent: var(--accent);
+  --kb-accent-ink: var(--white);
 }
 
 * {
@@ -24,7 +30,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--sans);
+  font-family: var(--kb-body);
   font-size: 16px;
   line-height: 1.65;
   text-rendering: optimizeLegibility;
@@ -50,41 +56,32 @@ button {
   margin-inline: auto;
 }
 
-.skip-link {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 100;
-  padding: 10px 14px;
-  background: var(--ink);
-  color: white;
-  transform: translateY(-160%);
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
 .copy-ko,
 html[data-language="ko"] .copy-en {
   display: none;
 }
 
 html[data-language="ko"] .copy-ko {
-  display: initial;
+  display: inline;
 }
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 20;
   border-bottom: 1px solid rgba(23, 27, 25, 0.12);
-  background: rgba(244, 241, 234, 0.9);
+  background: rgba(237, 236, 231, 0.9); /* fallback: --paper at 90% */
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
 
 .header-inner {
+  position: relative;
   min-height: 72px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -110,34 +107,43 @@ html[data-language="ko"] .copy-ko {
   gap: 28px;
 }
 
-.site-nav a,
-.language-toggle {
-  border: 0;
-  background: none;
+.site-nav a {
   color: var(--muted);
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-decoration: none;
 }
 
 .site-nav a:hover,
-.site-nav a:focus-visible,
-.language-toggle:hover,
-.language-toggle:focus-visible {
+.site-nav a:focus-visible {
   color: var(--ink);
 }
 
-.language-toggle {
+.header-controls {
   justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.language-toggle {
   display: flex;
   gap: 6px;
   padding: 8px 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-family: var(--kb-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   cursor: pointer;
 }
 
 .language-option {
   opacity: 0.42;
+  transition: opacity var(--kb-hover) ease, color var(--kb-hover) ease;
 }
 
 html[data-language="en"] [data-language-option="en"],
@@ -145,6 +151,32 @@ html[data-language="ko"] [data-language-option="ko"] {
   color: var(--accent);
   opacity: 1;
 }
+
+/* Shown only where the horizontal nav is not. */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: none;
+  color: var(--ink);
+  font-family: var(--kb-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
 
 .hero {
   min-height: calc(100vh - 72px);
@@ -157,30 +189,28 @@ html[data-language="ko"] [data-language-option="ko"] {
 
 .eyebrow {
   margin: 0;
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
-  text-transform: uppercase;
 }
 
 .hero h1 {
   max-width: 1020px;
   margin: 26px 0 56px;
-  font-family: var(--serif);
-  font-size: clamp(60px, 9.4vw, 136px);
+  font-family: var(--kb-display);
+  font-size: clamp(56px, 8.8vw, 124px);
   font-weight: 400;
-  letter-spacing: -0.07em;
-  line-height: 0.87;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  letter-spacing: var(--kb-track-display);
+  line-height: 0.95;
 }
 
+/* Fraunces carries no Hangul, so Korean headings run on Pretendard at a
+   heavier weight — which now resolves properly against a variable axis
+   instead of being faux-bolded by the system face. */
 html[data-language="ko"] .hero h1 {
-  font-family: var(--sans);
-  font-size: clamp(48px, 8.2vw, 112px);
+  font-family: var(--kb-body);
+  font-size: clamp(44px, 7.6vw, 100px);
   font-weight: 750;
-  letter-spacing: -0.075em;
-  line-height: 1.02;
+  font-variation-settings: normal;
+  line-height: 1.14;
 }
 
 .hero-bottom {
@@ -193,7 +223,8 @@ html[data-language="ko"] .hero h1 {
 
 .hero-intro {
   margin: 0;
-  color: #393e3a;
+  max-width: 62ch;
+  color: #3a403c;
   font-size: clamp(17px, 1.65vw, 21px);
   line-height: 1.62;
 }
@@ -213,7 +244,7 @@ html[data-language="ko"] .hero h1 {
   padding: 12px 20px;
   border: 1px solid var(--ink);
   font-size: 14px;
-  font-weight: 750;
+  font-weight: 650;
   text-decoration: none;
 }
 
@@ -231,9 +262,9 @@ html[data-language="ko"] .hero h1 {
 .text-link,
 .work-links a,
 .contact-links a,
-.site-footer a {
+.back-to-top {
   font-size: 14px;
-  font-weight: 750;
+  font-weight: 650;
   text-decoration: none;
 }
 
@@ -243,10 +274,14 @@ html[data-language="ko"] .hero h1 {
 .work-links a:focus-visible,
 .contact-links a:hover,
 .contact-links a:focus-visible,
-.site-footer a:hover,
-.site-footer a:focus-visible {
+.back-to-top:hover,
+.back-to-top:focus-visible {
   color: var(--accent);
 }
+
+/* --------------------------------------------------------------------------
+   Proof
+   -------------------------------------------------------------------------- */
 
 .proof {
   display: grid;
@@ -272,10 +307,10 @@ html[data-language="ko"] .hero h1 {
 }
 
 .proof-item strong {
-  font-family: var(--serif);
-  font-size: 29px;
-  font-weight: 400;
-  letter-spacing: -0.035em;
+  font-family: var(--kb-display);
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   line-height: 1.2;
 }
 
@@ -284,6 +319,10 @@ html[data-language="ko"] .hero h1 {
   color: var(--muted);
   font-size: 13px;
 }
+
+/* --------------------------------------------------------------------------
+   Sections
+   -------------------------------------------------------------------------- */
 
 .section {
   padding-block: 150px;
@@ -297,27 +336,26 @@ html[data-language="ko"] .hero h1 {
 }
 
 .section-index {
-  margin: 2px 0 0;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 750;
+  margin: 3px 0 0;
 }
 
 .section-heading h2 {
   margin: 16px 0 0;
-  font-family: var(--serif);
-  font-size: clamp(42px, 5.4vw, 70px);
+  font-family: var(--kb-display);
+  font-size: clamp(40px, 5vw, 64px);
   font-weight: 400;
-  letter-spacing: -0.055em;
-  line-height: 1.02;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  letter-spacing: var(--kb-track-display);
+  line-height: 1.08;
+  text-wrap: balance;
 }
 
 html[data-language="ko"] .section-heading h2,
 html[data-language="ko"] .contact h2 {
-  font-family: var(--sans);
-  font-weight: 730;
-  letter-spacing: -0.06em;
-  line-height: 1.15;
+  font-family: var(--kb-body);
+  font-weight: 700;
+  font-variation-settings: normal;
+  line-height: 1.28;
 }
 
 .work-list {
@@ -327,23 +365,12 @@ html[data-language="ko"] .contact h2 {
 .work-item {
   display: grid;
   grid-template-columns: 70px minmax(0, 1fr) 160px;
-  gap: 0;
   padding-block: 46px;
   border-bottom: 1px solid var(--line);
 }
 
-.work-number,
-.work-kicker,
-.timeline-date {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-}
-
 .work-number {
-  padding-top: 7px;
+  padding-top: 8px;
 }
 
 .work-kicker {
@@ -354,15 +381,15 @@ html[data-language="ko"] .contact h2 {
 .timeline-item h3 {
   margin: 0;
   font-size: clamp(25px, 2.8vw, 34px);
-  font-weight: 720;
-  letter-spacing: -0.045em;
-  line-height: 1.2;
+  font-weight: 650;
+  letter-spacing: var(--kb-track-tight);
+  line-height: 1.24;
 }
 
 .work-main > p:not(.work-kicker) {
-  max-width: 690px;
+  max-width: 66ch;
   margin: 17px 0 0;
-  color: #444944;
+  color: #434841;
 }
 
 .tag-list {
@@ -375,12 +402,14 @@ html[data-language="ko"] .contact h2 {
 }
 
 .tag-list li {
-  padding: 4px 9px;
+  padding: 4px 10px;
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
-  font-size: 11px;
-  font-weight: 650;
+  font-family: var(--kb-mono);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .work-links {
@@ -388,8 +417,12 @@ html[data-language="ko"] .contact h2 {
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
-  padding-top: 5px;
+  padding-top: 6px;
 }
+
+/* --------------------------------------------------------------------------
+   Timeline
+   -------------------------------------------------------------------------- */
 
 .timeline {
   max-width: 960px;
@@ -406,21 +439,25 @@ html[data-language="ko"] .contact h2 {
 }
 
 .timeline-date {
-  margin: 5px 0 0;
+  margin: 6px 0 0;
 }
 
 .timeline-role {
   margin: 7px 0 14px;
   color: var(--accent);
   font-size: 14px;
-  font-weight: 750;
+  font-weight: 650;
 }
 
 .timeline-item div > p:last-child {
-  max-width: 650px;
+  max-width: 62ch;
   margin-bottom: 0;
   color: var(--muted);
 }
+
+/* --------------------------------------------------------------------------
+   About
+   -------------------------------------------------------------------------- */
 
 .about-grid {
   display: grid;
@@ -430,22 +467,27 @@ html[data-language="ko"] .contact h2 {
 }
 
 .about-copy {
-  font-family: var(--serif);
-  font-size: clamp(24px, 2.8vw, 35px);
-  letter-spacing: -0.03em;
-  line-height: 1.35;
+  font-family: var(--kb-display);
+  font-size: clamp(23px, 2.6vw, 33px);
+  font-weight: 400;
+  letter-spacing: var(--kb-track-tight);
+  line-height: 1.42;
 }
 
 html[data-language="ko"] .about-copy {
-  font-family: var(--sans);
-  font-size: clamp(21px, 2.35vw, 29px);
-  font-weight: 520;
-  letter-spacing: -0.035em;
-  line-height: 1.58;
+  font-family: var(--kb-body);
+  font-size: clamp(20px, 2.2vw, 27px);
+  font-weight: 500;
+  line-height: 1.62;
 }
 
 .about-copy p {
+  max-width: 34ch;
   margin: 0 0 1.1em;
+}
+
+html[data-language="ko"] .about-copy p {
+  max-width: 30ch;
 }
 
 .details {
@@ -459,20 +501,20 @@ html[data-language="ko"] .about-copy {
 
 .detail-row > span {
   display: block;
-  margin-bottom: 5px;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-size: 10.5px;
 }
 
 .detail-row strong {
   display: block;
   font-size: 14px;
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1.5;
 }
+
+/* --------------------------------------------------------------------------
+   Contact
+   -------------------------------------------------------------------------- */
 
 .contact {
   padding-block: clamp(130px, 18vw, 220px);
@@ -481,18 +523,25 @@ html[data-language="ko"] .about-copy {
 .contact h2 {
   max-width: 990px;
   margin: 25px 0 52px;
-  font-family: var(--serif);
-  font-size: clamp(54px, 8.6vw, 116px);
+  font-family: var(--kb-display);
+  font-size: clamp(48px, 7.6vw, 104px);
   font-weight: 400;
-  letter-spacing: -0.07em;
-  line-height: 0.92;
+  font-variation-settings: "SOFT" 0, "WONK" 1;
+  letter-spacing: var(--kb-track-display);
+  line-height: 1;
+}
+
+html[data-language="ko"] .contact h2 {
+  font-size: clamp(40px, 6.6vw, 88px);
+  font-weight: 750;
+  line-height: 1.2;
 }
 
 .contact-email {
   display: inline-block;
   font-size: clamp(19px, 2.6vw, 31px);
-  font-weight: 650;
-  letter-spacing: -0.03em;
+  font-weight: 600;
+  letter-spacing: var(--kb-track-tight);
   text-decoration: none;
 }
 
@@ -510,14 +559,18 @@ html[data-language="ko"] .about-copy {
   border-top: 1px solid var(--line);
 }
 
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
 .site-footer {
   min-height: 94px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px 24px;
   border-top: 1px solid var(--ink);
   color: var(--muted);
-  font-size: 12px;
 }
 
 .site-footer p {
@@ -529,10 +582,9 @@ html[data-language="ko"] .about-copy {
   color: white;
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-}
+/* --------------------------------------------------------------------------
+   Narrow
+   -------------------------------------------------------------------------- */
 
 @media (max-width: 820px) {
   :root {
@@ -542,10 +594,40 @@ html[data-language="ko"] .about-copy {
   .header-inner {
     grid-template-columns: 1fr auto;
     min-height: 64px;
+    gap: 16px;
   }
 
+  /* The nav becomes a panel under the header rather than disappearing. */
   .site-nav {
     display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 6px 0 12px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-nav[data-open="true"] {
+    display: flex;
+  }
+
+  .site-nav a {
+    padding: 12px 2px;
+    border-bottom: 1px solid rgba(23, 27, 25, 0.08);
+    font-size: 15px;
+  }
+
+  .site-nav a:last-child {
+    border-bottom: 0;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
   }
 
   .hero {
@@ -621,16 +703,25 @@ html[data-language="ko"] .about-copy {
     grid-template-columns: 1fr;
     gap: 60px;
   }
+
+  .about-copy p,
+  html[data-language="ko"] .about-copy p {
+    max-width: none;
+  }
+
+  .site-footer {
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 560px) {
   .hero h1 {
-    font-size: clamp(48px, 16vw, 72px);
-    line-height: 0.92;
+    font-size: clamp(44px, 14vw, 68px);
+    line-height: 1;
   }
 
   html[data-language="ko"] .hero h1 {
-    font-size: clamp(42px, 13vw, 62px);
+    font-size: clamp(38px, 12vw, 58px);
   }
 
   .hero-actions {
@@ -657,10 +748,6 @@ html[data-language="ko"] .about-copy {
     padding-block: 38px;
   }
 
-  .work-number {
-    font-size: 10px;
-  }
-
   .work-links {
     grid-column: 2;
   }
@@ -676,12 +763,10 @@ html[data-language="ko"] .about-copy {
   }
 
   .contact h2 {
-    font-size: clamp(46px, 15vw, 72px);
+    font-size: clamp(42px, 13vw, 68px);
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  html[data-language="ko"] .contact h2 {
+    font-size: clamp(36px, 11vw, 58px);
   }
 }
