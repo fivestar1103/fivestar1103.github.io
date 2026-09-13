@@ -1,0 +1,86 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="store.css">
+<style>
+  /* Bookend of slide 1: same dusk player scene, now showing the restore toast. */
+  .player {
+    position: relative;
+    width: 1280px; height: 800px;
+    overflow: hidden;
+    background:
+      radial-gradient(1000px 560px at 22% 6%, rgba(248,223,160,.55) 0%, transparent 42%),
+      radial-gradient(1500px 900px at 70% 92%, #10201e 10%, transparent 70%),
+      linear-gradient(182deg, #35605b 0%, #22443f 34%, #17302d 62%, #0d1a18 100%);
+  }
+  .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(1200px 800px at 50% 45%, transparent 55%, rgba(5,10,9,.55) 100%);
+  }
+
+  .band { position: relative; padding-top: 72px; justify-content: center; }
+  h1 { color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+  .sub { position: relative; text-align: center; margin: 0 auto; color: #eef6f4; text-shadow: 0 1px 6px rgba(5,10,9,.5); }
+
+  /* restore toast, rebuilt to match the product */
+  .toast {
+    position: absolute;
+    left: 50%; top: 400px;
+    transform: translateX(-50%);
+    display: flex; align-items: center; gap: 26px;
+    background: rgba(24,36,33,.90);
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 20px;
+    padding: 26px 34px;
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,.6);
+  }
+  .toast .txt { color: #fff; }
+  .toast .txt b { display: block; font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+  .toast .txt span { font-size: 21px; color: #b8cdc8; white-space: nowrap; }
+  .toast .btn {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 24px;
+    flex: none;
+  }
+  .toast .yes { border: 2px solid #f2d16b; color: #f2d16b; }
+  .toast .no  { border: 2px solid #93a8a3; color: #cfe2de; }
+
+  .privacy {
+    position: absolute;
+    left: 50%; bottom: 132px;
+    transform: translateX(-50%);
+    display: flex; gap: 14px;
+  }
+  .privacy .cue-chip { background: rgba(13,21,20,.62); border: 1px solid rgba(255,255,255,.14); }
+
+  .brandmark { color: #cfe2de; right: 50%; transform: translateX(50%); bottom: 52px; }
+</style></head>
+<body>
+  <div class="player">
+    <div class="vignette"></div>
+
+    <div class="band">
+      <span class="stamp">[00:05]</span>
+      <h1>Come back. It remembers.</h1>
+    </div>
+    <p class="sub">Revisit a video and restore its subtitle and sync in one click.
+    Saved on your device, never uploaded.</p>
+
+    <div class="toast">
+      <div class="txt">
+        <b>Restore previous subtitle?</b>
+        <span>Documentary.Ep03.1080p.ko.srt &nbsp;·&nbsp; synced at +1.5s</span>
+      </div>
+      <div class="btn yes">✓</div>
+      <div class="btn no">✕</div>
+    </div>
+
+    <div class="privacy">
+      <span class="cue-chip">100% local</span>
+      <span class="cue-chip">No account</span>
+      <span class="cue-chip">Free to use</span>
+    </div>
+
+    <div class="brandmark"><span class="dot"></span>Subtitle Overlay</div>
+  </div>
+</body></html>

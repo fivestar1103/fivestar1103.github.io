@@ -1,0 +1,59 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  /* Chrome Web Store small promotional tile — 440×280, rendered by
+     scripts/capture-store-shots.mjs.
+
+     This is the one image Chrome documents as affecting placement: "Extensions
+     that don't have a small promotional image will be shown after extensions
+     that do have that image." It appears as a card in a list beside
+     competitors, so it carries one idea.
+
+     The name is not printed beside the icon: the store already prints it under
+     the card, and the icon artwork contains the wordmark, so setting it a third
+     time cost the space that was making the icon unreadable. */
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Spline+Sans+Mono:wght@600&display=block');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 440px; height: 280px; overflow: hidden; }
+  .stage {
+    width: 440px; height: 280px;
+    padding: 26px 30px;
+    display: flex; align-items: center; gap: 22px;
+    background:
+      radial-gradient(360px 220px at 100% -18%, rgba(130,187,181,.34), transparent 62%),
+      radial-gradient(300px 200px at -12% 118%, rgba(242,209,107,.26), transparent 58%),
+      #edf4f2;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  }
+  /* The shipped icon, never a redraw. Big enough that its own wordmark reads. */
+  .dot { width: 132px; height: 132px; flex: 0 0 auto; display: block; }
+  .copy { display: flex; flex-direction: column; gap: 13px; min-width: 0; }
+  .line {
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1.16;
+    letter-spacing: -0.018em;
+    color: #22312f;
+  }
+  .line em { font-style: normal; color: #2f746d; }
+  .chip {
+    align-self: flex-start;
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: #22312f;
+    background: #f2d16b;
+    border-radius: 999px;
+    padding: 6px 13px;
+  }
+</style></head>
+<body>
+  <div class="stage">
+    <img class="dot" src="../brand/icon_512.png" alt="">
+    <div class="copy">
+      <div class="line">Your subtitles, <em>your timing.</em></div>
+      <div class="chip">SRT · VTT · SMI · ASS</div>
+    </div>
+  </div>
+</body></html>

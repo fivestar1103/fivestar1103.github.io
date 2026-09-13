@@ -1,0 +1,50 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="store.css">
+<style>
+  .band { padding-top: 48px; }
+  h1 { max-width: 780px; }
+  .sub { max-width: 720px; }
+  .chips {
+    position: absolute;
+    top: 60px; right: 72px;
+    display: flex; flex-direction: column; gap: 12px;
+    align-items: flex-end;
+  }
+  /* Card ends inside the canvas: the shot is region-cropped at a clean UI
+     boundary (just below the search + upload panels) instead of bleeding
+     off the bottom edge. Source: live production popup capture, 1520px wide,
+     shown at scale 0.7066 (regenerate via scripts/capture-store-shots.mjs). */
+  .shot {
+    position: absolute;
+    left: 103px; top: 292px;
+    width: 1074px;
+  }
+  .crop {
+    width: 1074px; height: 459px;
+    background: url('../screenshots/popup-subtitles.png') no-repeat;
+    background-size: 1074px auto;
+    background-position: 0 0;
+  }
+</style></head>
+<body>
+  <div class="stage">
+    <div class="band">
+      <span class="stamp">[00:02]</span>
+      <h1>Drop a file, or search for one.</h1>
+    </div>
+    <p class="sub">Built-in OpenSubtitles search, drag &amp; drop onto the video, and automatic
+    encoding detection, so Japanese and Chinese files just work.</p>
+
+    <div class="chips">
+      <span class="cue-chip">SRT</span>
+      <span class="cue-chip">VTT</span>
+      <span class="cue-chip">SMI</span>
+      <span class="cue-chip">ASS</span>
+    </div>
+
+    <div class="frame shot">
+      <div class="chrome"><i></i><i></i><i></i></div>
+      <div class="crop"></div>
+    </div>
+  </div>
+</body></html>

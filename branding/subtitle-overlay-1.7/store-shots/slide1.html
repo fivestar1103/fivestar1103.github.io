@@ -1,0 +1,114 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="store.css">
+<style>
+  /* Hero: the headline IS a subtitle cue on a video. */
+  .player {
+    position: relative;
+    width: 1280px; height: 800px;
+    overflow: hidden;
+    background:
+      radial-gradient(1200px 700px at 72% 18%, #f8dfa0 0%, transparent 42%),
+      radial-gradient(1500px 900px at 30% 90%, #10201e 10%, transparent 70%),
+      linear-gradient(178deg, #35605b 0%, #22443f 34%, #17302d 62%, #0d1a18 100%);
+  }
+  /* abstract dusk scene: ridgeline + water shimmer */
+  .ridge {
+    position: absolute; left: -5%; right: -5%; bottom: 26%;
+    height: 260px;
+    background: radial-gradient(1100px 250px at 50% 100%, #0e1d1b 60%, transparent 61%);
+    filter: blur(2px);
+    opacity: .85;
+  }
+  .shimmer {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 30%;
+    background:
+      repeating-linear-gradient(180deg, rgba(248,223,160,.10) 0 2px, transparent 2px 13px),
+      linear-gradient(180deg, transparent, rgba(248,223,160,.08));
+    mask-image: radial-gradient(700px 240px at 68% 0%, #000 30%, transparent 75%);
+  }
+  .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(1200px 800px at 50% 45%, transparent 55%, rgba(5,10,9,.55) 100%);
+  }
+
+  /* player chrome */
+  .controls {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 18px 36px 22px;
+    display: flex; align-items: center; gap: 22px;
+    background: linear-gradient(180deg, transparent, rgba(5,10,9,.72));
+    color: #e9f2f0;
+  }
+  .playbtn { width: 0; height: 0; border-left: 20px solid #e9f2f0; border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+  .rail { flex: 1; height: 5px; border-radius: 3px; background: rgba(233,242,240,.28); position: relative; }
+  .rail::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 38%; border-radius: 3px; background: #82bbb5; }
+  .rail::after { content: ''; position: absolute; left: 38%; top: 50%; width: 15px; height: 15px; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); }
+  .time { font-family: 'Spline Sans Mono', monospace; font-size: 17px; font-weight: 500; }
+
+  /* the actual product: overlay cues, styled like the extension renders them */
+  .cues {
+    position: absolute; left: 0; right: 0; bottom: 118px;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+    text-align: center;
+  }
+  .cue-main {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: 66px;
+    letter-spacing: -0.015em;
+    color: #fff;
+    background: rgba(13,21,20,.78);
+    border-radius: 18px;
+    padding: 18px 42px;
+    text-shadow: 0 2px 4px rgba(0,0,0,.35);
+  }
+  .cue-sub {
+    font-size: 26px;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(13,21,20,.66);
+    border-radius: 12px;
+    padding: 10px 24px;
+  }
+  .cue-sub b { color: #f2d16b; font-weight: 700; }
+
+  /* extension presence: badge top-left, ON pill top-right */
+  .mark {
+    position: absolute; top: 34px; left: 36px;
+    display: flex; align-items: center; gap: 13px;
+    color: #eaf3f1; font-weight: 700; font-size: 23px;
+    text-shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+  /* The shipped icon, not a redraw. */
+  .mark .dot { width: 44px; height: 44px; display: block; }
+  .onpill {
+    position: absolute; top: 38px; right: 36px;
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 600; font-size: 17px; letter-spacing: .06em;
+    color: #12211f; background: #82bbb5;
+    border-radius: 999px; padding: 8px 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.28);
+  }
+</style></head>
+<body>
+  <div class="player">
+    <div class="ridge"></div>
+    <div class="shimmer"></div>
+    <div class="vignette"></div>
+
+    <div class="mark"><img class="dot" src="../brand/icon_512.png" alt="">Subtitle Overlay</div>
+    <div class="onpill">SUBTITLES&nbsp;ON</div>
+
+    <div class="cues">
+      <div class="cue-main">Your subtitles, on any video.</div>
+      <div class="cue-sub">Load <b>SRT · VTT · SMI · ASS</b> on any HTML5 player. Lectures, streams, downloads.</div>
+    </div>
+
+    <div class="controls">
+      <div class="playbtn"></div>
+      <div class="time">36:24</div>
+      <div class="rail"></div>
+      <div class="time">1:35:52</div>
+    </div>
+  </div>
+</body></html>

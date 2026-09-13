@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fivestar1103.github.io/subtitle-overlay/">
   <meta property="og:title" content="Subtitle Overlay: add your own subtitles to any video in Chrome">
-  <meta property="og:description" content="Put your own subtitle file on any video, restyle it, and let Smart Sync line it up with the audio. Everything runs on your machine.">
+  <meta property="og:description" content="Put your own subtitle file on any video, restyle it, and let Smart Sync line it up with the audio. Smart Sync audio is processed on your device.">
   <meta property="og:image" content="https://fivestar1103.github.io/subtitle-overlay/shots/card.png">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -74,7 +74,7 @@
       {
         "@type": "Question",
         "name": "What does Smart Sync actually do?",
-        "acceptedAnswer": { "@type": "Answer", "text": "It listens to a stretch of the video's audio, finds where speech happens, and matches that rhythm against the timings in your subtitle file. It corrects both a fixed offset and progressive drift, such as a 25 fps subtitle on 24 fps video. The audio is analysed on your own machine and is never uploaded." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Start Smart Sync Beta during dialogue to find an offset or common frame-rate drift correction. An optional Chrome speech pack can speed up matching when spoken and subtitle languages match; voice-activity matching remains available. Audio is processed on your device. Results vary, and you can undo an applied result." }
       },
       {
         "@type": "Question",
@@ -84,7 +84,7 @@
       {
         "@type": "Question",
         "name": "Is it free?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Everything described here is free. Pro adds Smart Sync and is sold as a one-time founding licence while the first 50 seats last." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Subtitle loading, search, styling and manual timing are free. Try five applied Smart Sync results free; Pro removes that trial limit. Founding Pro is a one-time lifetime licence, limited to the first 50 seats." }
       }
     ]
   }
@@ -224,15 +224,14 @@
     <h1>Your own subtitles, on <em>any</em> video.</h1>
     <p class="hero-sub">
       Load a subtitle file onto whatever is playing in your browser, restyle it until it
-      is actually readable, and let Smart Sync line it up with the audio. Everything
-      happens on your machine.
+      is actually readable, and let Smart Sync line it up with the audio. Smart Sync processes audio on your device.
     </p>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm">Add to Chrome, free</a>
       <a class="btn btn-ghost" href="#pro">See Pro</a>
     </div>
     <div class="hero-meta">
-      <span class="pill">1,000+ weekly users</span>
+      <span class="pill">On-device Smart Sync</span>
       <span class="pill">SRT · VTT · SMI · ASS</span>
       <span class="pill">9 languages</span>
       <span class="pill">Local-first</span>
@@ -276,18 +275,22 @@
   <section id="smart-sync">
     <div class="section-head"><span class="section-num">02</span><h2>Smart Sync</h2></div>
     <p>
-      Pro listens to a stretch of the video's audio, works out where speech actually
-      happens, and matches that rhythm against the timings in your file. It corrects a
-      fixed offset and progressive drift together, which is what a 25&nbsp;fps subtitle
-      on 24&nbsp;fps video needs.
+      Start Smart Sync Beta during dialogue to find a timing adjustment, including
+      a fixed offset or common frame-rate drift. Try five applied syncs free.
+      Failed attempts and declined suggestions do not count, and Undo restores a use.
     </p>
     <p>
-      It does not read the words, so the languages do not have to match: an English
-      subtitle file on a Korean film is the same problem to it. The speech model runs
-      on your own machine, and the audio is never uploaded, saved, or included in
-      analytics.
+      After loading subtitles, you can download an optional Chrome speech pack for
+      faster matching when the spoken and subtitle languages match. The subtitle
+      language is selected automatically when known. Voice-activity matching remains
+      available without the pack and for translated subtitles.
     </p>
-    <div class="shot"><img src="./shots/smart-sync.png" alt="Smart Sync aligning a subtitle to the video's audio" width="1280" height="800"></div>
+    <p>
+      Audio is processed on your device. Smart Sync runs when you start it; results
+      depend on the video and subtitle file, and some players cannot share audio.
+      You can try a suggested adjustment and undo the result you just applied.
+    </p>
+    <div class="shot"><img src="./shots/smart-sync.png" alt="Smart Sync Beta setup and optional speech language pack" width="1280" height="800"></div>
   </section>
 
   <section id="privacy">
@@ -296,7 +299,9 @@
     <ul>
       <li><strong>Never sent:</strong> subtitle text, video, audio, screenshots, full page URLs.</li>
       <li><strong>Sent when you search:</strong> your query, to OpenSubtitles, so it can return files.</li>
-      <li><strong>Optional:</strong> anonymous usage analytics, which you can switch off in Settings.</li>
+      <li><strong>Setup:</strong> the voice-activity model comes from GitHub Pages; optional speech packs come from Chrome.</li>
+      <li><strong>Pro activation:</strong> your licence key is verified with Gumroad.</li>
+      <li><strong>Optional:</strong> usage analytics, which you can switch off in Settings. Network services see your IP address; analytics can derive approximate location.</li>
     </ul>
     <p>The <a href="./privacy.html">full privacy policy</a> spells out every case.</p>
   </section>
@@ -304,7 +309,7 @@
   <section id="pro">
     <div class="pro">
       <h2>Subtitle Overlay Pro</h2>
-      <p>Smart Sync ships today as a beta. Auto Captions, AI Translate, a larger subtitle library, A&ndash;B repeat and a click-to-translate dictionary are still in the build, and a founding licence covers every one of them as it lands.</p>
+      <p>Smart Sync ships today as a beta. Auto Captions, AI Translate, a larger subtitle library, A&ndash;B repeat and a click-to-translate dictionary are planned, with release dates to be announced, and a founding licence covers every one of them as it lands.</p>
       <p class="price">$34.99 <small>once, yours for life</small></p>
       <p>Planned $3.99/mo after launch. Founding seats are limited to 50.</p>
       <div class="cta-row">
@@ -321,11 +326,11 @@
       <dt>What formats can I load?</dt>
       <dd>SRT, VTT, SMI and ASS.</dd>
       <dt>Do the subtitle and the audio have to be the same language?</dt>
-      <dd>No. Smart Sync matches the rhythm of speech, not the words.</dd>
+      <dd>Voice-activity matching can work with translated subtitles. The optional faster speech path compares spoken words with subtitle text, so it needs matching languages. Results vary with the video and file.</dd>
       <dt>Is any of it uploaded?</dt>
       <dd>No subtitle text, no video and no audio ever leaves the device.</dd>
       <dt>Is it free?</dt>
-      <dd>Everything above is free. Pro adds Smart Sync.</dd>
+      <dd>Subtitle loading, search, styling and manual timing are free. Try five applied Smart Sync results free. Pro removes the trial limit; Undo restores a trial use.</dd>
     </dl>
   </section>
 </main>

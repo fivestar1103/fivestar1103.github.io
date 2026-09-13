@@ -1,0 +1,212 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="store.css">
+<style>
+  /* Pro roadmap: the release plan drawn as chapters on a video timeline.
+     Built on slide1's dark player so it reads as the same product, Pro tier. */
+  .player {
+    position: relative;
+    width: 1280px; height: 800px;
+    overflow: hidden;
+    color: #e9f2f0;
+    background:
+      radial-gradient(1200px 700px at 74% 12%, #f8dfa0 0%, transparent 40%),
+      radial-gradient(1500px 900px at 28% 96%, #10201e 10%, transparent 70%),
+      linear-gradient(178deg, #35605b 0%, #22443f 34%, #17302d 62%, #0d1a18 100%);
+  }
+  .ridge {
+    position: absolute; left: -5%; right: -5%; bottom: 20%;
+    height: 240px;
+    background: radial-gradient(1100px 240px at 50% 100%, #0e1d1b 60%, transparent 61%);
+    filter: blur(2px); opacity: .8;
+  }
+  .shimmer {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 26%;
+    background:
+      repeating-linear-gradient(180deg, rgba(248,223,160,.09) 0 2px, transparent 2px 13px),
+      linear-gradient(180deg, transparent, rgba(248,223,160,.07));
+    mask-image: radial-gradient(700px 220px at 70% 0%, #000 30%, transparent 75%);
+  }
+  .vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(1200px 800px at 50% 42%, transparent 52%, rgba(5,10,9,.6) 100%);
+  }
+
+  /* ── top bar ── */
+  .mark {
+    position: absolute; top: 34px; left: 56px;
+    display: flex; align-items: center; gap: 13px;
+    font-weight: 700; font-size: 23px; color: #eaf3f1;
+    text-shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+  .mark .dot { width: 44px; height: 44px; display: block; } /* the shipped icon, not a redraw */
+  .propill {
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 700; font-size: 16px; letter-spacing: .08em;
+    color: #12211f; background: #f2d16b;
+    border-radius: 8px; padding: 4px 11px; margin-left: 4px;
+  }
+  .pricepill {
+    position: absolute; top: 38px; right: 56px;
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 600; font-size: 17px; letter-spacing: .04em;
+    color: #eaf3f1; background: rgba(130,187,181,.16);
+    border: 1.5px solid rgba(130,187,181,.55);
+    border-radius: 999px; padding: 8px 18px;
+  }
+  .pricepill b { color: #f2d16b; font-weight: 700; }
+
+  /* ── title ── */
+  .head { position: absolute; top: 116px; left: 0; right: 0; text-align: center; }
+  .title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800; font-size: 50px; letter-spacing: -0.015em; color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,.35);
+  }
+  .title .g { color: #f2d16b; }
+  .tagline {
+    margin-top: 14px; font-size: 22px; font-weight: 500; color: #bfd6d1;
+  }
+
+  /* ── timeline ── */
+  .track {
+    position: absolute; top: 268px; left: 56px; right: 56px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px;
+  }
+  .track::before { /* connector line through the nodes */
+    content: ''; position: absolute; top: 10px; left: 16.66%; right: 16.66%;
+    height: 2px; background: rgba(233,242,240,.22);
+  }
+  .col { display: flex; flex-direction: column; align-items: center; }
+  .node {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #0d1a18; border: 2px solid #6a938d; z-index: 1;
+    margin-bottom: 26px;
+  }
+  .node.now {
+    background: #82bbb5; border-color: #cdeee7;
+    box-shadow: 0 0 0 6px rgba(130,187,181,.18), 0 0 22px rgba(130,187,181,.5);
+  }
+  .card {
+    width: 100%;
+    background: rgba(11,20,18,.72);
+    border: 1px solid rgba(130,187,181,.18);
+    border-radius: 18px;
+    padding: 26px 26px 28px;
+    box-shadow: 0 24px 44px -20px rgba(0,0,0,.55);
+    min-height: 250px;
+  }
+  .card.lead { border-color: rgba(242,209,107,.5); background: rgba(20,25,17,.72); }
+  .emoji { font-size: 40px; line-height: 1; }
+  .stage-chip {
+    display: inline-block; margin-top: 20px;
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 600; font-size: 14px; letter-spacing: .07em;
+    padding: 6px 12px; border-radius: 999px;
+  }
+  .stage-chip.now { color: #12211f; background: #f2d16b; }
+  /* Shipped reads as a settled fact, not as the next promise. */
+  .stage-chip.live {
+    color: #0d1a18; background: #7fd6b6;
+  }
+  .stage-chip.soon {
+    color: #bfe0da; background: transparent;
+    border: 1.5px solid rgba(130,187,181,.5);
+  }
+  .flag {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 13px; font-weight: 600; letter-spacing: .06em;
+    color: #f2d16b; opacity: .9; margin-left: 10px;
+  }
+  .cname {
+    margin-top: 16px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700; font-size: 29px; color: #fff; letter-spacing: -0.01em;
+  }
+  .cdesc { margin-top: 10px; font-size: 17.5px; font-weight: 500; line-height: 1.4; color: #c5d6d2; }
+
+  /* ── also in Pro ── */
+  .also {
+    position: absolute; left: 0; right: 0; bottom: 96px; text-align: center;
+    font-size: 17px; font-weight: 500; color: #9fbdb7;
+  }
+  .also b { color: #dcece8; font-weight: 600; }
+
+  /* ── player controls: roadmap == chapters on the scrubber ── */
+  .controls {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 16px 36px 20px;
+    display: flex; align-items: center; gap: 20px;
+    background: linear-gradient(180deg, transparent, rgba(5,10,9,.72));
+  }
+  .playbtn { width: 0; height: 0; border-left: 18px solid #e9f2f0; border-top: 11px solid transparent; border-bottom: 11px solid transparent; flex: none; }
+  .time { font-family: 'Spline Sans Mono', monospace; font-size: 16px; font-weight: 500; flex: none; }
+  .rail { flex: 1; height: 5px; border-radius: 3px; background: rgba(233,242,240,.26); position: relative; }
+  .rail .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 33.33%; border-radius: 3px; background: #82bbb5; }
+  .rail .knob { position: absolute; left: 33.33%; top: 50%; width: 15px; height: 15px; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); box-shadow: 0 0 0 4px rgba(130,187,181,.25); }
+  .tick { position: absolute; top: 50%; width: 8px; height: 8px; border-radius: 50%; background: rgba(233,242,240,.6); transform: translate(-50%, -50%); }
+  .founding {
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 600; font-size: 15px; letter-spacing: .04em; color: #eaf3f1; flex: none;
+  }
+  .founding b { color: #f2d16b; }
+</style></head>
+<body>
+  <div class="player">
+    <div class="ridge"></div>
+    <div class="shimmer"></div>
+    <div class="vignette"></div>
+
+    <div class="mark"><img class="dot" src="../brand/icon_512.png" alt="">Subtitle&nbsp;Overlay<span class="propill">PRO</span></div>
+    <div class="pricepill"><b>$34.99</b>&nbsp;once (lifetime)</div>
+
+    <div class="head">
+      <div class="title">The Pro <span class="g">roadmap</span></div>
+      <div class="tagline">Smart Sync Beta today. Future features as they ship.</div>
+    </div>
+
+    <div class="track">
+      <div class="col">
+        <div class="node now"></div>
+        <div class="card lead">
+          <div class="emoji">✨</div>
+          <div><span class="stage-chip live">AVAILABLE (BETA)</span></div>
+          <div class="cname">Smart Sync <span class="flag">FLAGSHIP</span></div>
+          <div class="cdesc">Start it during dialogue to find a timing adjustment. Try 5 applied syncs free, with Undo.</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="node"></div>
+        <div class="card">
+          <div class="emoji">🌐</div>
+          <div><span class="stage-chip soon">PLANNED</span></div>
+          <div class="cname">AI Translate <span class="flag">FLAGSHIP</span></div>
+          <div class="cdesc">Any subtitle file, shown in your language. Original and translation, together on screen.</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="node"></div>
+        <div class="card">
+          <div class="emoji">🎙️</div>
+          <div><span class="stage-chip soon">PLANNED</span></div>
+          <div class="cname">Auto Captions</div>
+          <div class="cdesc">Subtitles built from the audio itself, for when there is no file to find.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="also">Also planned: <b>subtitle library</b>, <b>A–B repeat</b>, <b>dictionary</b>. Release dates to be announced.</div>
+
+    <div class="controls">
+      <div class="playbtn"></div>
+      <div class="time">now</div>
+      <div class="rail">
+        <div class="fill"></div>
+        <div class="tick" style="left:16.66%"></div>
+        <div class="tick" style="left:50%"></div>
+        <div class="tick" style="left:83.33%"></div>
+        <div class="knob"></div>
+      </div>
+      <div class="founding"><b>50</b> founding seats</div>
+    </div>
+  </div>
+</body></html>
