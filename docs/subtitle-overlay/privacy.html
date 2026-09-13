@@ -264,7 +264,9 @@
       padding: 0.14em 0.42em;
       border-radius: 3px;
       font-weight: 500;
-      white-space: nowrap;
+      /* Short identifiers still keep to one line; only a token that cannot fit
+         the column breaks, which the model URL cannot at 390px. */
+      overflow-wrap: anywhere;
     }
 
     a {
