@@ -90,132 +90,11 @@
   }
   </script>
 
-  <style>
-    :root {
-      --bg-deep: #0a2a23;
-      --bg-deeper: #051a14;
-      --cream: #f6efe0;
-      --cream-warm: #efe6d2;
-      --teal: #82bbb5;
-      --teal-dark: #013220;
-      --yellow: #ffde59;
-      --ink: #16201d;
-      --ink-soft: #2b3531;
-      --ink-light: #4e5854;
-      --line: rgba(20, 32, 28, 0.12);
-
-      /* Contract with kuiper.css. */
-      --kb-accent: #0d5546;
-      --kb-accent-ink: #f6efe0;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--kb-body);
-      background: var(--cream);
-      color: var(--ink);
-      line-height: 1.65;
-      font-size: 17px;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    ::selection { background: var(--yellow); color: var(--bg-deep); }
-    img { max-width: 100%; height: auto; display: block; }
-    a { color: inherit; }
-
-    .hero {
-      background:
-        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(130,187,181,0.14), transparent 65%),
-        linear-gradient(180deg, var(--bg-deeper) 0%, var(--bg-deep) 100%);
-      color: var(--cream);
-      padding: 4rem 1.5rem 4.5rem;
-      text-align: center;
-    }
-    .hero-inner { max-width: 780px; margin: 0 auto; }
-    .breadcrumb {
-      font-family: var(--kb-mono);
-      font-size: .78rem; letter-spacing: .04em;
-      color: rgba(246,239,224,.55); margin-bottom: 2rem;
-    }
-    .breadcrumb .slash { color: var(--teal); padding: 0 .3rem; }
-    .logo { width: 96px; height: 96px; margin: 0 auto 1.5rem; }
-    h1 {
-      font-family: var(--kb-display);
-      font-weight: 900; font-size: clamp(2.1rem, 5.5vw, 3.4rem);
-      line-height: 1.08; letter-spacing: -.02em; margin-bottom: 1rem;
-    }
-    h1 em { font-style: normal; color: var(--teal); }
-    .hero-sub {
-      font-size: 1.13rem; color: rgba(246,239,224,.82);
-      max-width: 40rem; margin: 0 auto 2rem;
-    }
-    .cta-row { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
-    .btn {
-      display: inline-block; padding: .8rem 1.6rem; border-radius: 999px;
-      font-weight: 700; font-size: .98rem; text-decoration: none;
-      transition: transform 140ms ease, background 140ms ease;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn-primary { background: var(--yellow); color: var(--bg-deep); }
-    .btn-ghost { border: 1.5px solid rgba(246,239,224,.32); color: var(--cream); }
-    .hero-meta {
-      margin-top: 1.6rem; display: flex; gap: .5rem; justify-content: center;
-      flex-wrap: wrap; font-family: var(--kb-mono); font-size: .76rem;
-    }
-    .pill {
-      padding: .3rem .7rem; border-radius: 999px;
-      background: rgba(246,239,224,.09); border: 1px solid rgba(246,239,224,.16);
-      color: rgba(246,239,224,.8);
-    }
-    .divider { height: 5px; background: linear-gradient(90deg, var(--teal), var(--yellow)); }
-
-    main { max-width: 860px; margin: 0 auto; padding: 3.5rem 1.5rem 1rem; }
-    .lede { font-size: 1.2rem; color: var(--ink-soft); margin-bottom: 3rem; }
-    section { margin-bottom: 3.5rem; }
-    .section-head { display: flex; align-items: baseline; gap: .9rem; margin-bottom: 1.1rem; }
-    .section-num {
-      font-family: var(--kb-mono); font-size: .8rem;
-      color: var(--teal); font-weight: 700;
-    }
-    h2 {
-      font-family: var(--kb-display); font-weight: 700;
-      font-size: 1.75rem; letter-spacing: -.01em;
-    }
-    h3 { font-size: 1.05rem; margin: 1.6rem 0 .4rem; }
-    p { margin-bottom: 1rem; color: var(--ink-soft); }
-    ul { margin: 0 0 1rem 1.2rem; color: var(--ink-soft); }
-    li { margin-bottom: .5rem; }
-    .shot {
-      border-radius: 14px; overflow: hidden; border: 1px solid var(--line);
-      box-shadow: 0 18px 44px -20px rgba(1,50,32,.4); margin: 1.5rem 0;
-    }
-    .grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .card {
-      background: #fff; border: 1px solid var(--line); border-radius: 14px;
-      padding: 1.3rem 1.4rem;
-    }
-    .card h3 { margin-top: 0; }
-    .card p { margin-bottom: 0; font-size: .95rem; }
-    .pro {
-      background: linear-gradient(180deg, var(--bg-deep), var(--bg-deeper));
-      color: var(--cream); border-radius: 18px; padding: 2.2rem 1.8rem; text-align: center;
-    }
-    .pro h2 { color: var(--cream); }
-    .pro p { color: rgba(246,239,224,.82); }
-    .price { font-family: var(--kb-display); font-size: 2.6rem; font-weight: 900; }
-    .price small { font-size: .95rem; font-family: var(--kb-body); font-weight: 500; opacity: .8; }
-    .faq dt { font-weight: 700; margin-top: 1.4rem; }
-    .faq dd { margin: .35rem 0 0; color: var(--ink-soft); }
-    footer { border-top: 1px solid var(--line); margin-top: 3rem; padding: 2rem 1.5rem 3rem; }
-    .footer-inner {
-      max-width: 860px; margin: 0 auto; display: flex; gap: 1rem;
-      justify-content: space-between; flex-wrap: wrap;
-      font-size: .9rem; color: var(--ink-light);
-    }
-    .footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-  </style>
+  <link rel="stylesheet" href="product.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="product-header"><div class="header-inner"><a class="brand" href="./"><img src="icon128.png" alt="" width="32" height="32">Subtitle Overlay</a><nav class="product-nav" aria-label="Main"><a href="./" aria-current="page">Overview</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a></nav></div></header>
 
 <header class="hero">
   <div class="hero-inner">
@@ -242,7 +121,7 @@
 
 <div class="divider" aria-hidden="true"></div>
 
-<main>
+<main id="main">
   <p class="lede">
     You found a subtitle file for something that has no captions in your language.
     It loads twenty seconds off, you nudge it into place, and three minutes later it
@@ -336,18 +215,7 @@
   </section>
 </main>
 
-<footer>
-  <div class="footer-inner">
-    <div>Subtitle Overlay &middot; built by <a href="https://fivestar1103.github.io/">Seonghwan Oh</a></div>
-    <nav class="footer-links" aria-label="Footer">
-      <a href="https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm">Chrome Web Store</a>
-      <a href="./privacy.html">Privacy</a>
-      <a href="./support.html">Support</a>
-      <a href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro">Pro</a>
-      <a href="#top">&uarr; Top</a>
-    </nav>
-  </div>
-</footer>
+<footer class="footer"><div class="footer-inner"><span>Subtitle Overlay · by Seonghwan Oh</span><nav class="product-nav" aria-label="Footer"><a href="./">Overview</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="/">More projects</a></nav></div></footer>
 
 </body>
 </html>
