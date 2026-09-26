@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<!-- 브라우저 툴바용. 판·광택·글자 없이 마크만 둔다.
+     툴바는 이미 배경이 있어서 판을 넣으면 떠 보이고, 16px 에서 글자는 어차피 안 읽힌다. -->
+  <g transform="translate(256,256) scale(1.18) translate(-512,-430)">
+    <path d="M 386.36 567.15 A 186.0 186.0 0 0 1 512.00 244.00" fill="none" stroke="#5E9189" stroke-opacity="0.26"
+          stroke-width="30" stroke-linecap="round"/>
+    <path d="M 512.00 244.00 A 186.0 186.0 0 1 1 386.36 567.15" fill="none" stroke="#5E9189" stroke-width="30" stroke-linecap="round"/>
+    <path d="M 478 358 L 478 502 L 594 430 Z" fill="#5E9189"/>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="store.css">
+<style>
+  .band { padding-top: 48px; }
+  .sub { max-width: 860px; }
+  /* Card ends inside the canvas: region-cropped just below the complete
+     Font Size / Font Family row. Source: live production popup capture, 1520px
+     wide, scale 0.7066 (regenerate via scripts/capture-store-shots.mjs). */
+  .shot {
+    position: absolute;
+    left: 103px; top: 292px;
+    width: 1074px;
+  }
+  .crop {
+    width: 1074px; height: 463px;
+    background: url('../screenshots/popup-styling.png') no-repeat;
+    background-size: 1074px auto;
+    background-position: 0 0;
+  }
+</style></head>
+<body>
+  <div class="stage">
+    <div class="band">
+      <span class="stamp">[00:04]</span>
+      <h1>Readable on any footage.</h1>
+    </div>
+    <p class="sub">Presets, fonts, outline, background blur, position, tuned live while
+    the video plays, in fullscreen too.</p>
+
+    <div class="frame shot">
+      <div class="chrome"><i></i><i></i><i></i></div>
+      <div class="crop"></div>
+    </div>
+  </div>
+</body></html>

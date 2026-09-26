@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  /* Gumroad product thumbnail — square, min 600×600. Rendered at 600×600 by
+     scripts/capture-store-shots.mjs. Same tokens as store.css. */
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Spline+Sans+Mono:wght@600&display=block');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 600px; height: 600px; overflow: hidden; }
+  .stage {
+    width: 600px; height: 600px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 34px;
+    background:
+      radial-gradient(520px 300px at 88% -8%, rgba(130,187,181,.30), transparent 60%),
+      radial-gradient(420px 260px at -8% 108%, rgba(242,209,107,.24), transparent 55%),
+      #edf4f2;
+    font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  }
+  /* The shipped icon, not a redraw. */
+  .dot { width: 196px; height: 196px; display: block; }
+  .name {
+    font-weight: 800;
+    font-size: 52px;
+    letter-spacing: -0.015em;
+    color: #22312f;
+    text-align: center;
+    line-height: 1.05;
+  }
+  .chip {
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: .08em;
+    color: #22312f;
+    background: #f2d16b;
+    border-radius: 999px;
+    padding: 10px 26px;
+  }
+</style></head>
+<body>
+  <div class="stage">
+    <img class="dot" src="../brand/icon_512.png" alt="">
+    <div class="name">Subtitle Overlay</div>
+    <div class="chip">PRO</div>
+  </div>
+</body></html>

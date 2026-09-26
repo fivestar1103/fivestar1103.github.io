@@ -1,8 +1,353 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Bring your own subtitles to the videos you watch. Subtitle Overlay offers local files, subtitle search, timing controls, and optional on-device Smart Sync."><title>Subtitle Overlay — Your subtitles, on your video</title><link rel="icon" href="icon128.png"><link rel="stylesheet" href="product.css"></head>
-<body><a class="skip" href="#main">Skip to content</a><header class="header"><div class="shell header-inner"><a class="brand" href="./"><img src="icon128.png" alt="" width="32" height="32">Subtitle Overlay</a><nav aria-label="Main"><a href="./" aria-current="page">Overview</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a></nav></div></header>
-<main id="main" class="shell"><section class="hero"><p class="eyebrow">A little more freedom to watch</p><h1>Your subtitles.<br>On your video.</h1><p class="lead">Load a subtitle file or find one online. Place it over the video, adjust the timing, and get back to watching.</p><div class="actions"><a class="button primary" href="https://chromewebstore.google.com/detail/subtitle-overlay/bhedjidakhbabmcepaadmpefnajiegjm">Get it for Chrome</a><a class="button" href="support.html">Getting started</a></div><p class="note">Safari for Mac is being prepared. Availability and features may differ by browser.</p><div class="demo" role="img" aria-label="Illustration of a movable subtitle over a video, with an optional second subtitle line"><span class="demo-label">Subtitle Overlay · illustration</span><div class="caption">A new way to follow the story.<small>Watch at your own pace.</small></div></div></section>
-<section class="section"><div class="grid"><article><h2>Make it yours.</h2><p>Move the overlay and adjust its size, colours, and background so subtitles feel comfortable on your screen.</p></article><article><h2>Find your timing.</h2><p>Adjust subtitle timing manually. Optional Smart Sync processes audio on your device to help match subtitles to the video.</p></article><article><h2>Keep control.</h2><p>Your subtitle content stays on your device. Usage analytics is optional; the privacy policy explains each external service.</p></article></div></section>
-<section class="section" id="start"><h2>Three steps to your first subtitle.</h2><div class="grid"><article><span class="step">01 · PLAY</span><h3>Open a video.</h3><p>Start playback on a normal web page, then open Subtitle Overlay from your browser toolbar.</p></article><article><span class="step">02 · CHOOSE</span><h3>Bring your subtitles.</h3><p>Search for subtitles or choose a supported subtitle file from your computer.</p></article><article><span class="step">03 · WATCH</span><h3>Settle in.</h3><p>Position the overlay and adjust the timing if needed. Your video keeps playing underneath.</p></article></div></section>
-<section class="section two-column"><div><h2>A question, a bug,<br>or a tricky video player?</h2><p>Start with the quick fixes, or contact the developer directly. You do not need an account to email support.</p><a class="button" href="support.html">Visit support</a></div><div><h2>Optional Smart Sync Pro.</h2><p>Find current pricing and product details on Gumroad. Check browser support before purchasing; Chrome and Safari can offer different capabilities.</p><a href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro">View Pro details →</a></div></section></main>
-<footer class="footer"><div class="shell footer-inner"><span>Subtitle Overlay · by Seonghwan Oh</span><nav aria-label="Footer"><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="/">More projects</a></nav></div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subtitle Overlay: add your own subtitles to any video in Chrome</title>
+  <meta name="description" content="A Chrome extension that puts your own subtitle file on any HTML5 video, restyles it, and fixes the timing. Smart Sync aligns subtitles to the audio on your own machine. SRT, VTT, SMI, ASS.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a2a23">
+  <link rel="canonical" href="https://fivestar1103.github.io/subtitle-overlay/">
+  <link rel="icon" href="./icon128.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fivestar1103.github.io/subtitle-overlay/">
+  <meta property="og:title" content="Subtitle Overlay: add your own subtitles to any video in Chrome">
+  <meta property="og:description" content="Put your own subtitle file on any video, restyle it, and let Smart Sync line it up with the audio. Smart Sync audio is processed on your device.">
+  <meta property="og:image" content="https://fivestar1103.github.io/subtitle-overlay/shots/card.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/kuiper.css">
+
+  <!-- Structured data. The point of this page is partly to be quotable: an
+       assistant asked "what puts custom subtitles on a video" should have
+       something machine-readable to reach for, and the Web Store listing is
+       not that. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Subtitle Overlay",
+    "operatingSystem": "Chrome",
+    "applicationCategory": "BrowserApplication",
+    "url": "https://fivestar1103.github.io/subtitle-overlay/",
+    "downloadUrl": "https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm",
+    "description": "A Chrome extension that overlays your own subtitle file on any HTML5 video, with styling, timing controls, and on-device audio alignment.",
+    "featureList": [
+      "Overlay SRT, VTT, SMI and ASS subtitle files on any HTML5 video",
+      "Smart Sync aligns subtitles to the video's audio on the user's own machine",
+      "Search and download subtitles from OpenSubtitles",
+      "Automatic character-encoding detection for Japanese, Chinese and Korean files",
+      "Restyle subtitles live: font, size, colour, outline, background, position",
+      "Sync Timeline for jumping to any line and snapping timing by hand",
+      "Auto-restore the last subtitle and sync when revisiting a video",
+      "Interface localized in nine languages"
+    ],
+    "offers": [
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+      { "@type": "Offer", "price": "34.99", "priceCurrency": "USD", "name": "Pro, founding lifetime", "url": "https://iknowhim.gumroad.com/l/subtitleoverlay-pro" }
+    ],
+    "author": { "@type": "Person", "name": "Seonghwan Oh", "url": "https://fivestar1103.github.io/" },
+    "privacyPolicy": "https://fivestar1103.github.io/subtitle-overlay/privacy.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does it work on any video?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Anywhere there is an HTML5 video element in the page, which covers most streaming sites, lecture platforms, and local files opened in the browser." }
+      },
+      {
+        "@type": "Question",
+        "name": "What subtitle formats are supported?",
+        "acceptedAnswer": { "@type": "Answer", "text": "SRT, VTT, SMI and ASS. Character encoding is detected automatically, so Japanese, Chinese and Korean files load without being mangled." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Smart Sync actually do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Start Smart Sync Beta during dialogue to find an offset or common frame-rate drift correction. An optional Chrome speech pack can speed up matching when spoken and subtitle languages match; voice-activity matching remains available. Audio is processed on your device. Results vary, and you can undo an applied result." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data uploaded anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Subtitle text, video and audio stay on your device. Subtitle search sends queries to OpenSubtitles. Usage analytics is optional and starts only after permission in consent-onboarding releases; older releases used a default-enabled setting. Read the privacy policy for details." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Subtitle loading, search, styling and manual timing are free. Try five applied Smart Sync results free; Pro removes that trial limit. Founding Pro is a one-time lifetime licence, limited to the first 50 seats." }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-deep: #0a2a23;
+      --bg-deeper: #051a14;
+      --cream: #f6efe0;
+      --cream-warm: #efe6d2;
+      --teal: #82bbb5;
+      --teal-dark: #013220;
+      --yellow: #ffde59;
+      --ink: #16201d;
+      --ink-soft: #2b3531;
+      --ink-light: #4e5854;
+      --line: rgba(20, 32, 28, 0.12);
+
+      /* Contract with kuiper.css. */
+      --kb-accent: #0d5546;
+      --kb-accent-ink: #f6efe0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--kb-body);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--yellow); color: var(--bg-deep); }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+
+    .hero {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(130,187,181,0.14), transparent 65%),
+        linear-gradient(180deg, var(--bg-deeper) 0%, var(--bg-deep) 100%);
+      color: var(--cream);
+      padding: 4rem 1.5rem 4.5rem;
+      text-align: center;
+    }
+    .hero-inner { max-width: 780px; margin: 0 auto; }
+    .breadcrumb {
+      font-family: var(--kb-mono);
+      font-size: .78rem; letter-spacing: .04em;
+      color: rgba(246,239,224,.55); margin-bottom: 2rem;
+    }
+    .breadcrumb .slash { color: var(--teal); padding: 0 .3rem; }
+    .logo { width: 96px; height: 96px; margin: 0 auto 1.5rem; }
+    h1 {
+      font-family: var(--kb-display);
+      font-weight: 900; font-size: clamp(2.1rem, 5.5vw, 3.4rem);
+      line-height: 1.08; letter-spacing: -.02em; margin-bottom: 1rem;
+    }
+    h1 em { font-style: normal; color: var(--teal); }
+    .hero-sub {
+      font-size: 1.13rem; color: rgba(246,239,224,.82);
+      max-width: 40rem; margin: 0 auto 2rem;
+    }
+    .cta-row { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: .8rem 1.6rem; border-radius: 999px;
+      font-weight: 700; font-size: .98rem; text-decoration: none;
+      transition: transform 140ms ease, background 140ms ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--yellow); color: var(--bg-deep); }
+    .btn-ghost { border: 1.5px solid rgba(246,239,224,.32); color: var(--cream); }
+    .hero-meta {
+      margin-top: 1.6rem; display: flex; gap: .5rem; justify-content: center;
+      flex-wrap: wrap; font-family: var(--kb-mono); font-size: .76rem;
+    }
+    .pill {
+      padding: .3rem .7rem; border-radius: 999px;
+      background: rgba(246,239,224,.09); border: 1px solid rgba(246,239,224,.16);
+      color: rgba(246,239,224,.8);
+    }
+    .divider { height: 5px; background: linear-gradient(90deg, var(--teal), var(--yellow)); }
+
+    main { max-width: 860px; margin: 0 auto; padding: 3.5rem 1.5rem 1rem; }
+    .lede { font-size: 1.2rem; color: var(--ink-soft); margin-bottom: 3rem; }
+    section { margin-bottom: 3.5rem; }
+    .section-head { display: flex; align-items: baseline; gap: .9rem; margin-bottom: 1.1rem; }
+    .section-num {
+      font-family: var(--kb-mono); font-size: .8rem;
+      color: var(--teal); font-weight: 700;
+    }
+    h2 {
+      font-family: var(--kb-display); font-weight: 700;
+      font-size: 1.75rem; letter-spacing: -.01em;
+    }
+    h3 { font-size: 1.05rem; margin: 1.6rem 0 .4rem; }
+    p { margin-bottom: 1rem; color: var(--ink-soft); }
+    ul { margin: 0 0 1rem 1.2rem; color: var(--ink-soft); }
+    li { margin-bottom: .5rem; }
+    .shot {
+      border-radius: 14px; overflow: hidden; border: 1px solid var(--line);
+      box-shadow: 0 18px 44px -20px rgba(1,50,32,.4); margin: 1.5rem 0;
+    }
+    .grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card {
+      background: #fff; border: 1px solid var(--line); border-radius: 14px;
+      padding: 1.3rem 1.4rem;
+    }
+    .card h3 { margin-top: 0; }
+    .card p { margin-bottom: 0; font-size: .95rem; }
+    .pro {
+      background: linear-gradient(180deg, var(--bg-deep), var(--bg-deeper));
+      color: var(--cream); border-radius: 18px; padding: 2.2rem 1.8rem; text-align: center;
+    }
+    .pro h2 { color: var(--cream); }
+    .pro p { color: rgba(246,239,224,.82); }
+    .price { font-family: var(--kb-display); font-size: 2.6rem; font-weight: 900; }
+    .price small { font-size: .95rem; font-family: var(--kb-body); font-weight: 500; opacity: .8; }
+    .faq dt { font-weight: 700; margin-top: 1.4rem; }
+    .faq dd { margin: .35rem 0 0; color: var(--ink-soft); }
+    footer { border-top: 1px solid var(--line); margin-top: 3rem; padding: 2rem 1.5rem 3rem; }
+    .footer-inner {
+      max-width: 860px; margin: 0 auto; display: flex; gap: 1rem;
+      justify-content: space-between; flex-wrap: wrap;
+      font-size: .9rem; color: var(--ink-light);
+    }
+    .footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">hwany<span class="slash">/</span>subtitle-overlay</div>
+    <img src="./icon128.png" alt="Subtitle Overlay" class="logo" width="96" height="96">
+    <h1>Your own subtitles, on <em>any</em> video.</h1>
+    <p class="hero-sub">
+      Load a subtitle file onto whatever is playing in your browser, restyle it until it
+      is actually readable, and let Smart Sync line it up with the audio. Smart Sync processes audio on your device.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm">Add to Chrome, free</a>
+      <a class="btn btn-ghost" href="#pro">See Pro</a>
+      <a class="btn btn-ghost" href="./support.html">Get help</a>
+    </div>
+    <div class="hero-meta">
+      <span class="pill">On-device Smart Sync</span>
+      <span class="pill">SRT · VTT · SMI · ASS</span>
+      <span class="pill">9 languages</span>
+      <span class="pill">Local-first</span>
+    </div>
+  </div>
+</header>
+
+<div class="divider" aria-hidden="true"></div>
+
+<main>
+  <p class="lede">
+    You found a subtitle file for something that has no captions in your language.
+    It loads twenty seconds off, you nudge it into place, and three minutes later it
+    has drifted again. Subtitle Overlay exists for that.
+  </p>
+
+  <div class="shot"><img src="./shots/hero.png" alt="Subtitles rendered over a video in the browser" width="1280" height="800"></div>
+
+  <section id="what">
+    <div class="section-head"><span class="section-num">01</span><h2>What it does</h2></div>
+    <div class="grid">
+      <div class="card">
+        <h3>Any player, any file</h3>
+        <p>Drop an SRT, VTT, SMI or ASS file onto the page, or search OpenSubtitles without leaving the video. Encoding is detected automatically, so Japanese, Chinese and Korean files are not mangled.</p>
+      </div>
+      <div class="card">
+        <h3>Readable on real footage</h3>
+        <p>Font, size, colour, outline, background blur and position, all adjustable while the video plays, in fullscreen too. Text scales with the screen, so one setting works in a small window and in 4K.</p>
+      </div>
+      <div class="card">
+        <h3>Timing you control</h3>
+        <p>The Sync Timeline lists every line. Jump to a scene, or snap a line to the current playback time. Keyboard shortcuts nudge the offset without opening anything.</p>
+      </div>
+      <div class="card">
+        <h3>It remembers</h3>
+        <p>Come back to a video and its subtitle and sync return in one click. Stored on your device, keyed by a one-way hash, never uploaded.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="smart-sync">
+    <div class="section-head"><span class="section-num">02</span><h2>Smart Sync</h2></div>
+    <p>
+      Start Smart Sync Beta during dialogue to find a timing adjustment, including
+      a fixed offset or common frame-rate drift. Try five applied syncs free.
+      Failed attempts and declined suggestions do not count, and Undo restores a use.
+    </p>
+    <p>
+      After loading subtitles, you can download an optional Chrome speech pack for
+      faster matching when the spoken and subtitle languages match. The subtitle
+      language is selected automatically when known. Voice-activity matching remains
+      available without the pack and for translated subtitles.
+    </p>
+    <p>
+      Audio is processed on your device. Smart Sync runs when you start it; results
+      depend on the video and subtitle file, and some players cannot share audio.
+      You can try a suggested adjustment and undo the result you just applied.
+    </p>
+    <div class="shot"><img src="./shots/smart-sync.png" alt="Smart Sync Beta setup and optional speech language pack" width="1280" height="800"></div>
+  </section>
+
+  <section id="privacy">
+    <div class="section-head"><span class="section-num">03</span><h2>What leaves your machine</h2></div>
+    <p>Almost nothing, and it is worth being specific about which parts.</p>
+    <ul>
+      <li><strong>Never sent:</strong> subtitle text, video, audio, screenshots, full page URLs.</li>
+      <li><strong>Sent when you search:</strong> your query, to OpenSubtitles, so it can return files.</li>
+      <li><strong>Setup:</strong> the voice-activity model comes from GitHub Pages; optional speech packs come from Chrome.</li>
+      <li><strong>Pro activation:</strong> your licence key is verified with Gumroad.</li>
+      <li><strong>Optional:</strong> usage analytics. Consent-onboarding releases ask permission before sending events; older releases used a default-enabled setting. Change your choice in Settings. Network services see your IP address; analytics can derive approximate location and is not fully anonymous.</li>
+    </ul>
+    <p>The <a href="./privacy.html">full privacy policy</a> spells out every case.</p>
+  </section>
+
+  <section id="pro">
+    <div class="pro">
+      <h2>Subtitle Overlay Pro</h2>
+      <p>Smart Sync ships today as a beta. Auto Captions, AI Translate, a larger subtitle library, A&ndash;B repeat and a click-to-translate dictionary are planned, with release dates to be announced, and a founding licence covers every one of them as it lands.</p>
+      <p class="price">$34.99 <small>once, yours for life</small></p>
+      <p>Planned $3.99/mo after launch. Founding seats are limited to 50.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro">Claim a founding seat</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <div class="section-head"><span class="section-num">04</span><h2>Questions</h2></div>
+    <dl>
+      <dt>Does it work on any video?</dt>
+      <dd>Anywhere the page uses an HTML5 video element, which covers most streaming sites, lecture platforms, and local files opened in the browser.</dd>
+      <dt>What formats can I load?</dt>
+      <dd>SRT, VTT, SMI and ASS.</dd>
+      <dt>Do the subtitle and the audio have to be the same language?</dt>
+      <dd>Voice-activity matching can work with translated subtitles. The optional faster speech path compares spoken words with subtitle text, so it needs matching languages. Results vary with the video and file.</dd>
+      <dt>Is any of it uploaded?</dt>
+      <dd>No subtitle text, no video and no audio ever leaves the device.</dd>
+      <dt>Is it free?</dt>
+      <dd>Subtitle loading, search, styling and manual timing are free. Try five applied Smart Sync results free. Pro removes the trial limit; Undo restores a trial use.</dd>
+    </dl>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>Subtitle Overlay &middot; built by <a href="https://fivestar1103.github.io/">Seonghwan Oh</a></div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm">Chrome Web Store</a>
+      <a href="./privacy.html">Privacy</a>
+      <a href="./support.html">Support</a>
+      <a href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro">Pro</a>
+      <a href="#top">&uarr; Top</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

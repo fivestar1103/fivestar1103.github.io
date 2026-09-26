@@ -1,0 +1,78 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  /* Chrome Web Store marquee promotional tile — 1400×560, rendered by
+     scripts/capture-store-shots.mjs.
+
+     Featuring only: Chrome's docs say an extension cannot be featured in a
+     marquee without one, and say nothing about it affecting search. So this is
+     the asset that has to look worth featuring rather than the one that has to
+     rank. The previous marquee.jpg was made in January 2026, before Smart Sync
+     existed, and was a slide deck export with no source in the repo. This is
+     the source. Same tokens as store.css. */
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@500;600&family=Spline+Sans+Mono:wght@600&display=block');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1400px; height: 560px; overflow: hidden; }
+  .stage {
+    position: relative;
+    width: 1400px; height: 560px;
+    padding: 0 84px;
+    display: flex; align-items: center; gap: 64px;
+    background:
+      radial-gradient(900px 520px at 88% -12%, rgba(130,187,181,.32), transparent 62%),
+      radial-gradient(720px 440px at -6% 112%, rgba(242,209,107,.22), transparent 56%),
+      #edf4f2;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  /* The shipped icon, never a redraw. */
+  .icon { width: 188px; height: 188px; flex: 0 0 auto; display: block; }
+  .copy { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+  h1 {
+    font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: #22312f;
+  }
+  h1 em { font-style: normal; color: #2f746d; }
+  p {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: #47605c;
+    max-width: 780px;
+  }
+  .chips { display: flex; gap: 10px; margin-top: 4px; }
+  .chip {
+    font-family: 'Spline Sans Mono', monospace;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: .07em;
+    color: #22312f;
+    background: #f2d16b;
+    border-radius: 999px;
+    padding: 9px 18px;
+  }
+  .chip.ghost {
+    background: transparent;
+    border: 1.5px solid rgba(47, 116, 109, .34);
+    color: #2f746d;
+  }
+</style></head>
+<body>
+  <div class="stage">
+    <img class="icon" src="../brand/icon_512.png" alt="">
+    <div class="copy">
+      <h1>Your subtitles. <em>Better timing.</em></h1>
+      <p>Load your subtitle file, then start Smart Sync Beta to find a timing adjustment.
+      Try 5 applied syncs free. Audio stays on your device.</p>
+      <div class="chips">
+        <span class="chip">SMART SYNC BETA</span>
+        <span class="chip ghost">SRT · VTT · SMI · ASS</span>
+        <span class="chip ghost">9 LANGUAGES</span>
+      </div>
+    </div>
+  </div>
+</body></html>

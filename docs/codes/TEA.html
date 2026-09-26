@@ -35,7 +35,7 @@
 </head>
 <body>
   <main>
-      <h1>T.E.A. (Text Editor Advanced) - Raw Python Code</h2>
+      <h1>T.E.A. (Text Editor Advanced) - Raw Python Code</h1>
       <pre><code class="language-python">
 import sys
 import tkinter as tk
@@ -448,8 +448,8 @@ def newCanvas():
     canvasSettingsFrame.grid(row=0, column=0, sticky="nesw")
     canvas.config(bg=cvColor)
     canvas.grid(row=1, column=0, sticky="nesw")
-    canvas.bind("<Button-1>", xy)
-    canvas.bind("<B1-Motion>", addLine)
+    canvas.bind("&lt;Button-1&gt;", xy)
+    canvas.bind("&lt;B1-Motion&gt;", addLine)
 
 
 # -------------------- Miscellaneous --------------------
@@ -533,13 +533,13 @@ selectFontType = tk.StringVar(window)
 selectFontType.set("Font Type")
 fontTypeCb = ttk.Combobox(noteSettingsFrame, textvariable=selectFontType, values=fontList, width=15)
 fontTypeCb.grid(row=0, column=0, padx=5, pady=3)
-fontTypeCb.bind("<<ComboboxSelected>>", changeFontType)
+fontTypeCb.bind("&lt;&lt;ComboboxSelected&gt;&gt;", changeFontType)
 # 글자 크기
 selectFontSize = tk.StringVar(window)
 selectFontSize.set("Font Size")
 fontSizeCb = ttk.Combobox(noteSettingsFrame, textvariable=selectFontSize, values=list(range(2, 101, 2)), width=8)
 fontSizeCb.grid(row=0, column=1, padx=5, pady=3)
-fontSizeCb.bind("<<ComboboxSelected>>", changeFontSize)
+fontSizeCb.bind("&lt;&lt;ComboboxSelected&gt;&gt;", changeFontSize)
 # 글자 색
 fontColorButton = tk.Button(noteSettingsFrame, text="Font Color", command=changeFontColor)
 fontColorButton.grid(row=0, column=2, padx=5, pady=3)
@@ -562,7 +562,7 @@ selectPenSize = tk.StringVar(window)
 selectPenSize.set("Pen Size")
 penSizeCb = ttk.Combobox(canvasSettingsFrame, textvariable=selectPenSize, values=list(range(1, 50)), width=8)
 penSizeCb.grid(row=0, column=0, padx=5, pady=3)
-penSizeCb.bind("<<ComboboxSelected>>", changePenSize)
+penSizeCb.bind("&lt;&lt;ComboboxSelected&gt;&gt;", changePenSize)
 # 펜 색깔
 penColorButton = tk.Button(canvasSettingsFrame, text="Pen Color", command=changePenColor)
 penColorButton.grid(row=0, column=1, padx=5, pady=3)

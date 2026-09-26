@@ -1,0 +1,135 @@
+/* Shared design tokens for Chrome Web Store screenshots (1280×800).
+   ink     #22312f  deep teal-black — text, player chrome
+   mist    #edf4f2  pale mint — stage background
+   brand   #82bbb5  extension mint — accents, frames
+   deep    #4d8a83  darker mint — gradients
+   butter  #f2d16b  version-badge yellow — timestamp chips
+   cue     rgba(13,21,20,.82) — subtitle cue bar, straight from the product */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=block');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 1280px;
+  height: 800px;
+  overflow: hidden;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  color: #22312f;
+}
+
+.stage {
+  position: relative;
+  width: 1280px;
+  height: 800px;
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(130,187,181,.28), transparent 60%),
+    radial-gradient(700px 420px at -5% 105%, rgba(242,209,107,.20), transparent 55%),
+    #edf4f2;
+}
+
+/* ── header band ── */
+.band {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 56px 72px 0;
+}
+
+.stamp {
+  font-family: 'Spline Sans Mono', monospace;
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: .02em;
+  color: #22312f;
+  background: #f2d16b;
+  border-radius: 10px;
+  padding: 7px 14px;
+  flex: none;
+}
+
+h1 {
+  font-family: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+}
+
+.sub {
+  padding: 18px 72px 0;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #47605c;
+  max-width: 900px;
+}
+
+/* ── screenshot frames ── */
+.frame {
+  background: #fff;
+  border: 1px solid rgba(34,49,47,.10);
+  border-radius: 18px;
+  box-shadow:
+    0 30px 60px -18px rgba(34,49,47,.28),
+    0 6px 18px rgba(34,49,47,.10);
+  overflow: hidden;
+}
+
+.frame img { display: block; }
+
+/* browser-style top bar for popup shots */
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 14px;
+  background: #f2f7f6;
+  border-bottom: 1px solid rgba(34,49,47,.08);
+}
+.chrome i {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: #d6e4e2;
+}
+
+/* subtitle-cue chips (product vernacular) */
+.cue-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(13,21,20,.82);
+  color: #fff;
+  border-radius: 12px;
+  padding: 11px 18px;
+  font-size: 19px;
+  font-weight: 600;
+}
+.cue-chip .key {
+  font-family: 'Spline Sans Mono', monospace;
+  font-weight: 600;
+  font-size: 17px;
+  color: #22312f;
+  background: #f2d16b;
+  border-radius: 7px;
+  padding: 2px 9px;
+}
+
+.brandmark {
+  position: absolute;
+  right: 72px;
+  bottom: 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #47605c;
+}
+.brandmark .dot {
+  /* The shipped icon. Every slide used to redraw it as a tinted square with a
+     CSS triangle, which is a different mark from the one on the toolbar. */
+  width: 34px; height: 34px;
+  background: url('../brand/icon_512.png') center / contain no-repeat;
+}

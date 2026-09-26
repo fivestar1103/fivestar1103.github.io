@@ -1,0 +1,44 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="store.css">
+<style>
+  .band { padding-top: 64px; padding-right: 560px; }
+  .sub { padding-right: 560px; max-width: none; }
+  /* tall panel screenshot on the right */
+  .shot {
+    position: absolute;
+    top: 200px; right: 72px;
+    width: 430px;
+  }
+  .shot img { width: 100%; }
+  /* In flow, not pinned to a magic top. At `top: 400px` the paragraph grew
+     down into the chips and its last line sat against them with no gap, and
+     any copy edit could reopen that. `fit-content` keeps the column
+     shrink-wrapped to the widest chip, which the absolute box did for free. */
+  .keys {
+    margin: 44px 0 0 72px;
+    width: fit-content;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+</style></head>
+<body>
+  <div class="stage">
+    <div class="band">
+      <span class="stamp">[00:03]</span>
+      <h1>Find the right timing.</h1>
+    </div>
+    <p class="sub">Start Smart Sync Beta during dialogue to find a timing adjustment.
+    Try 5 applied syncs free, with Undo. Use the timeline for finer control.</p>
+
+    <div class="keys">
+      <span class="cue-chip">Optional speech pack for faster matching</span>
+      <span class="cue-chip">Audio stays on your device</span>
+      <span class="cue-chip"><span class="key">&lt;</span><span class="key">&gt;</span> fine-tune timing yourself</span>
+    </div>
+
+    <div class="frame shot">
+      <img src="../screenshots/smart-sync-setup.png" alt="Smart Sync Beta with an optional speech language pack">
+    </div>
+
+    <div class="brandmark" style="right: 560px;"><span class="dot"></span>Subtitle Overlay</div>
+  </div>
+</body></html>
