@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>배속 지원 · Baesok Support</title>
+<meta name="description" content="배속(Baesok) Safari 확장 켜는 법, 속도가 안 바뀔 때, 버튼 위치 바꾸기 등 자주 묻는 질문입니다.">
+<link rel="canonical" href="https://fivestar1103.github.io/baesok/support.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/assets/kuiper.css">
+<style>
+  :root { --bg:#F6F4F2; --card:#FFF; --ink:#1C1C1E; --sub:#6B6B70; --line:#E7E3DF; --seal:#E0492A; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#161618; --card:#232326; --ink:#F2F2F7; --sub:#A1A1A6; --line:#333336; --seal:#FF6A4A; }
+  }
+  :root[data-theme="dark"] { --bg:#161618; --card:#232326; --ink:#F2F2F7; --sub:#A1A1A6; --line:#333336; --seal:#FF6A4A; }
+  :root[data-theme="light"] { --bg:#F6F4F2; --card:#FFF; --ink:#1C1C1E; --sub:#6B6B70; --line:#E7E3DF; --seal:#E0492A; }
+  /* Contract with kuiper.css. */
+  :root { --kb-accent: var(--seal); --kb-accent-ink: #FFFFFF; }
+  @media (prefers-color-scheme: dark) { :root { --kb-accent-ink: #161618; } }
+  body { margin:0; background:var(--bg); color:var(--ink); line-height:1.7;
+         font-family:var(--kb-body); }
+  main { max-width:680px; margin:0 auto; padding:48px 22px 80px; }
+  a { color:var(--seal); text-decoration:none; }
+  h1 { font-size:26px; font-weight:900; margin:8px 0 28px; }
+  h2 { font-size:17px; margin:40px 0 12px; }
+  details { background:var(--card); border:1px solid var(--line); border-radius:14px;
+            padding:16px 18px; margin-bottom:10px; }
+  summary { font-weight:700; font-size:15.5px; cursor:pointer; }
+  details p { font-size:14.5px; color:var(--sub); margin:10px 0 0; }
+  details b { color:var(--ink); }
+  .contact { margin-top:36px; background:var(--card); border:1px solid var(--line);
+             border-radius:14px; padding:18px; font-size:15px; }
+  footer { margin-top:56px; padding-top:24px; border-top:1px solid var(--line);
+           font-size:13.5px; color:var(--sub); }
+</style>
+</head>
+<body>
+<main>
+  <h1>배속 지원 · 자주 묻는 질문</h1>
+
+  <details open>
+    <summary>확장을 어떻게 켜나요?</summary>
+    <p><b>설정 앱 → 앱 → Safari → 확장 프로그램 → 배속</b>에서 켜고, <b>모든 웹사이트</b>를
+    <b>허용</b>으로 바꿔 주세요. 애플 정책상 확장은 사용자가 직접 켜야 합니다.
+    Safari에서 주소창 왼쪽 메뉴를 눌러도 확장 메뉴로 들어갈 수 있습니다.</p>
+  </details>
+  <details>
+    <summary>버튼이 안 보여요</summary>
+    <p>버튼은 <b>동영상이 있는 페이지</b>에서, 일정 크기 이상의 동영상이 나타날 때만 뜹니다.
+    ① 확장이 그 사이트에서 허용됐는지(주소창 왼쪽 메뉴 → 배속) ② 버튼을 숨긴 적이 있는지
+    확인해 주세요. 숨겼다면 주소창 메뉴의 배속 팝업에서 <b>화면에 속도 버튼 표시</b>를 다시 켜면 됩니다.</p>
+  </details>
+  <details>
+    <summary>속도가 바뀌었다가 다시 돌아가요</summary>
+    <p>일부 사이트의 플레이어는 자체 속도 제한(예: 2배)으로 계속 되돌립니다. 배속은 여러 번 다시
+    맞추다가, 끝까지 되돌리는 플레이어는 탭이 멈추지 않도록 놓아줍니다. 전체 화면(기본 플레이어)으로
+    전환하면 확장이 속도를 제어하지 못하는 경우도 있습니다. 안 되는 사이트 주소를 아래로 보내 주시면
+    확인하겠습니다.</p>
+  </details>
+  <details>
+    <summary>사이트 자체 속도 메뉴를 쓰고 싶어요</summary>
+    <p>배속은 한 번 속도를 고른 사이트에서만 동작합니다. 버튼을 눌러 <b>끄기 (1×)</b>를 누르면 그
+    사이트의 기억이 지워지고, 이후에는 사이트 자체 속도 메뉴가 그대로 적용됩니다.</p>
+  </details>
+  <details>
+    <summary>버튼이 화면을 가려요</summary>
+    <p>주소창 메뉴의 배속 팝업에서 <b>버튼 위치</b>를 왼쪽/오른쪽으로 바꾸거나, 버튼을 숨기고 팝업에서만
+    속도를 조절할 수 있습니다. 버튼은 잠시 뒤 반투명해집니다.</p>
+  </details>
+  <details>
+    <summary>개인정보를 수집하나요?</summary>
+    <p>아니요. 사이트별 속도는 기기 안에만 저장되며 어떤 데이터도 전송하지 않습니다.
+    <a href="privacy.html">개인정보처리방침</a>을 참고해 주세요.</p>
+  </details>
+
+  <h2 lang="en">Support (English)</h2>
+  <div lang="en">
+    <details>
+      <summary>How do I turn the extension on?</summary>
+      <p>Open <b>Settings → Apps → Safari → Extensions → Baesok</b>, turn it on, and set
+      <b>All Websites</b> to <b>Allow</b>. You can also reach it from the menu on the left of Safari's
+      address bar.</p>
+    </details>
+    <details>
+      <summary>The speed button doesn't appear</summary>
+      <p>It appears only on pages with a video of a reasonable size. Check that Baesok is allowed on the
+      site, and if you hid the button, turn <b>Show speed button on pages</b> back on in the Baesok popup.</p>
+    </details>
+    <details>
+      <summary>The speed changes back</summary>
+      <p>Some players keep forcing their own limit. Baesok re-applies your speed several times, then lets
+      go so the tab doesn't freeze. Native full-screen playback may also ignore the extension. Send us the
+      site address and we'll take a look.</p>
+    </details>
+  </div>
+
+  <div class="contact">문의 · Contact: <a href="mailto:fivestar1103@uos.ac.kr">fivestar1103@uos.ac.kr</a></div>
+
+  <footer>© 2026 배속 · Baesok · <a href="privacy.html">개인정보처리방침 · Privacy</a></footer>
+</main>
+</body>
+</html>
