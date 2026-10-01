@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Privacy policy for Subtitle Overlay for Safari on macOS: what is collected, what never leaves your Mac, and how to opt out or request deletion.">
+<title>Privacy — Subtitle Overlay for Mac</title>
+<link rel="icon" href="../icon128.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/kuiper.css">
+<link rel="stylesheet" href="../product.css">
+<script src="../navigation.js" defer></script>
+</head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="product-header"><div class="header-inner"><a class="brand" href="./"><img src="../icon128.png" alt="" width="32" height="32">Subtitle Overlay for Mac</a><nav class="product-nav" aria-label="Main"><a href="./">Overview</a><a href="support.html">Support</a><a href="privacy.html" aria-current="page">Privacy</a></nav></div></header>
+
+<section class="hero document-hero"><div class="hero-inner">
+<p class="eyebrow">Privacy policy</p>
+<h1>Your subtitles stay yours.</h1>
+<p class="lead"><span>This page covers Subtitle Overlay for Safari on macOS.</span><span>Last updated 1 October 2026.</span></p>
+</div></section>
+<div class="divider" aria-hidden="true"></div>
+
+<main id="main">
+<section class="section prose">
+  <h2>The short version.</h2>
+  <p>Subtitle files you open, the timing you set, and every appearance setting stay on your Mac. They are never uploaded anywhere.</p>
+  <p>The app contacts exactly two services, and nothing else: OpenSubtitles when you search for a subtitle, and PostHog for usage analytics, which stays off until you explicitly turn it on.</p>
+  <p>There is no account, no sign-in, no advertising, no advertising identifier, no session replay, and no sale or sharing of personal information.</p>
+</section>
+
+<section class="section prose">
+  <h2>What stays on your Mac.</h2>
+  <ul>
+    <li>Subtitle files you open or download, and their text.</li>
+    <li>Your timing offset, font, size, colour, background and position settings.</li>
+    <li>The recent-subtitle history used to restore a subtitle when you return to a video.</li>
+  </ul>
+  <p>These live in the extension’s local storage. Removing the app removes them.</p>
+</section>
+
+<section class="section prose">
+  <h2>Subtitle search.</h2>
+  <p>When you search for a subtitle, the app sends your search terms and filters to <code>api.opensubtitles.com</code> and downloads the file you choose. OpenSubtitles is an independent service with its own privacy policy and its own daily limits.</p>
+  <p>If you never search, the app never contacts it.</p>
+</section>
+
+<section class="section prose">
+  <h2>Usage analytics, only if you say yes.</h2>
+  <p>Analytics is <strong>off until you explicitly allow it</strong>. Declining, skipping, or choosing “Not now” leaves the app fully usable; nothing is withheld. You can change your mind at any time in Settings, General.</p>
+  <p>If you do allow it, the app creates a random installation identifier at that moment and sends feature-usage events to <code>us.i.posthog.com</code>. Events may include:</p>
+  <ul>
+    <li>which features were used, and whether they succeeded or failed;</li>
+    <li>diagnostic values such as an error category and how long something took;</li>
+    <li>the site’s hostname, for example <code>example.com</code>;</li>
+    <li>a one-way SHA-256 hash of the page address, shortened to 16 characters, which lets us tell a repeat visit to the same video from a new one.</li>
+  </ul>
+  <p>The following are <strong>never</strong> sent to analytics: full page addresses, paths or query strings; subtitle text; what you typed into search; page contents; and any video or audio.</p>
+  <p>PostHog receives the connection’s IP address and can derive an approximate location from it. Because the installation identifier links events from the same installation, we describe these data as pseudonymous rather than fully anonymous.</p>
+  <p>Turning sharing off stops further analytics, removes the local identifier, and discards events that have not been sent. It cannot erase records already received by the server; for those, use the deletion request below.</p>
+</section>
+
+<section class="section prose">
+  <h2>What this version does not do.</h2>
+  <p>Some features exist in the Chrome version of Subtitle Overlay and are not present here. Safari does not give extensions the audio capture they need, so the Mac app contains none of the following, and makes none of the related network requests:</p>
+  <ul>
+    <li>no audio capture, speech recognition, or speech model downloads;</li>
+    <li>no licence keys, licence verification, subscriptions, or in-app purchases of any kind;</li>
+    <li>no payment processor is contacted, because the app has no payment path.</li>
+  </ul>
+</section>
+
+<section class="section two-column" aria-labelledby="requests">
+  <div>
+    <h2 id="requests">Access and deletion.</h2>
+    <p>Ask for a copy of what is held for your installation, or ask for it to be deleted. Email the developer and say which you want.</p>
+    <p>Analytics records are pseudonymous, so a request may need the installation identifier shown in Settings to locate them. Please do not send anything else to identify yourself.</p>
+    <p lang="ko">보관 중인 기록의 사본 요청이나 삭제 요청을 한국어로 보내셔도 됩니다.</p>
+  </div>
+  <div class="contact-card">
+    <h3>Seonghwan Oh · 오성환</h3>
+    <a class="email" href="mailto:fivestar1103@uos.ac.kr?subject=Subtitle%20Overlay%20for%20Mac%20privacy%20request">fivestar1103@uos.ac.kr</a>
+    <p>Children are not a target audience and the app does not knowingly collect data from children.</p>
+    <p class="note">If this policy changes materially, the date at the top of this page changes with it.</p>
+  </div>
+</section>
+</main>
+
+<footer class="footer"><div class="footer-inner"><span>Subtitle Overlay · by Seonghwan Oh</span><nav class="product-nav" aria-label="Footer"><a href="./">Overview</a><a href="support.html">Support</a><a href="privacy.html">Privacy</a><a href="/">More projects</a></nav></div></footer>
+</body></html>

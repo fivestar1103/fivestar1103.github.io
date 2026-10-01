@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A sample video and subtitle files for trying Subtitle Overlay for Safari on macOS.">
+<title>Sample video and subtitles — Subtitle Overlay for Mac</title>
+<link rel="icon" href="../../icon128.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/kuiper.css">
+<link rel="stylesheet" href="../../product.css">
+<style>
+  .demo-stage { display: grid; place-items: center; padding: 8px 0 4px; }
+  .demo-frame { width: min(900px, 100%); aspect-ratio: 16/9; border-radius: 14px;
+                overflow: hidden; background: #000;
+                box-shadow: 0 24px 60px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.08); }
+  .demo-frame video { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .file-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .file-row a { text-decoration: none; }
+</style>
+</head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="product-header"><div class="header-inner"><a class="brand" href="../"><img src="../../icon128.png" alt="" width="32" height="32">Subtitle Overlay for Mac</a><nav class="product-nav" aria-label="Main"><a href="../">Overview</a><a href="../support.html">Support</a><a href="../privacy.html">Privacy</a></nav></div></header>
+
+<section class="hero document-hero"><div class="hero-inner">
+<p class="eyebrow">Sample files</p>
+<h1>Try it on this video.</h1>
+<p class="lead"><span>A short sample clip and matching subtitle files.</span><span>Play the video, then drag a subtitle file onto it.</span></p>
+</div></section>
+<div class="divider" aria-hidden="true"></div>
+
+<main id="main">
+<section class="section">
+  <div class="demo-stage"><div class="demo-frame">
+    <video id="demo" src="demo.webm" controls autoplay muted loop playsinline></video>
+  </div></div>
+</section>
+
+<section class="section two-column" aria-labelledby="files">
+  <div>
+    <h2 id="files">Download a subtitle file.</h2>
+    <p>Both files are timed to the clip above. English and Korean are provided so the automatic character-encoding detection can be seen as well.</p>
+    <p lang="ko">위 영상에 맞춘 자막 파일입니다. 영어와 한국어 두 가지를 올려두었습니다.</p>
+  </div>
+  <div class="contact-card">
+    <h3>Sample subtitles</h3>
+    <div class="file-row">
+      <a class="email" href="demo-en.srt" download>demo-en.srt</a>
+      <a class="email" href="demo-ko.srt" download>demo-ko.srt</a>
+    </div>
+    <p>The sample clip itself is <a href="demo.webm" download>demo.webm</a>, if you would rather play it locally.</p>
+    <p class="note">These files stay at this address so they remain available for later reference.</p>
+  </div>
+</section>
+
+<section class="section prose">
+  <h2>How to use them.</h2>
+  <ol>
+    <li>Open Safari Settings, choose Extensions, and switch on Subtitle Overlay.</li>
+    <li>Return to this page, click Subtitle Overlay in Safari's toolbar, and choose <em>Always Allow on This Website</em>. Without this step nothing will appear over the video, because Safari extensions start with no access to any page.</li>
+    <li>Start the video above.</li>
+    <li>Download <code>demo-en.srt</code> and drag it from Finder onto the video. Subtitles appear immediately.</li>
+    <li>Press <kbd>,</kbd> or <kbd>.</kbd> to shift the timing, <kbd>+</kbd> or <kbd>-</kbd> to resize. Move the pointer to the right edge of the page to open the Sync Timeline, which lists every line and jumps to it.</li>
+  </ol>
+  <p>Nothing here needs an account, a sign-in, or a payment. The subtitle file stays on your Mac.</p>
+</section>
+</main>
+
+<footer class="footer"><div class="footer-inner"><span>Subtitle Overlay · by Seonghwan Oh</span><nav class="product-nav" aria-label="Footer"><a href="../">Overview</a><a href="../support.html">Support</a><a href="../privacy.html">Privacy</a><a href="/">More projects</a></nav></div></footer>
+</body></html>
