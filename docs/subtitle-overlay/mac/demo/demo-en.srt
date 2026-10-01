@@ -1,0 +1,20 @@
+1
+00:00:00,500 --> 00:00:04,200
+Some films never get subtitles in your language.
+
+2
+00:00:04,400 --> 00:00:08,600
+Drop an SRT file onto the video and they appear.
+
+3
+00:00:08,800 --> 00:00:13,000
+Timing off by a second?
+Nudge it with the arrow keys.
+
+4
+00:00:13,200 --> 00:00:17,400
+Font, size, colour, outline — all yours.
+
+5
+00:00:17,600 --> 00:00:22,000
+Works on any HTML5 video, in any tab.
