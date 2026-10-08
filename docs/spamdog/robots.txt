@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fivestar1103.github.io/spamdog/sitemap.xml
+Sitemap: https://kuiperbelt.site/spamdog/sitemap.xml
