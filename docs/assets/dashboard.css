@@ -1,0 +1,95 @@
+/* Public-site foundation. Matches graduation 3c6da09: globals.css, Shell,
+   SiteNav, Card and ThemeToggle. Product pages keep their own identity layer. */
+:root {
+  color-scheme: light;
+  --font-sans: "IBM Plex Sans KR", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-paper: #f2f4f7;
+  --color-card: #fff;
+  --color-ink: #10151c;
+  --color-ink-2: #55606d;
+  --color-ink-3: #8b95a3;
+  --color-line: #e3e8ee;
+  --color-s1: #22485c;
+  --color-s6: #cbdae1;
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --kb-body: var(--font-sans);
+  --kb-display: var(--font-sans);
+  --kb-mono: var(--font-mono);
+  --kb-accent: var(--color-s1);
+  --kb-accent-ink: var(--color-card);
+  --kb-ground: var(--color-paper);
+  --kb-track-display: -.035em;
+  --kb-track-tight: -.02em;
+  --kb-step-1: 17px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-paper: #0d1116;
+    --color-card: #161c24;
+    --color-ink: #e8ecf1;
+    --color-ink-2: #97a2ae;
+    --color-ink-3: #626d7a;
+    --color-line: #242c36;
+    --color-s1: #79bdd6;
+    --color-s6: #23404e;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #0d1116;
+  --color-card: #161c24;
+  --color-ink: #e8ecf1;
+  --color-ink-2: #97a2ae;
+  --color-ink-3: #626d7a;
+  --color-line: #242c36;
+  --color-s1: #79bdd6;
+  --color-s6: #23404e;
+}
+html[lang="ko"] { --kb-track-display: -.015em; --kb-track-tight: -.008em; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { margin: 0; background: var(--color-paper); color: var(--color-ink); font: 15px/1.75 var(--font-sans); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; text-underline-offset: 4px; }
+img { display: block; max-width: 100%; height: auto; }
+p, h1, h2, h3 { margin: 0; }
+h1, h2, h3 { text-wrap: balance; word-break: keep-all; }
+.shell { width: 100%; max-width: 768px; padding-inline: 24px; margin-inline: auto; }
+html[data-language="en"] .copy-ko, html[data-language="ko"] .copy-en { display: none; }
+.kb-label, .kb-sig { font-family: var(--font-mono); font-size: 11px; font-weight: 400; letter-spacing: .04em; }
+.kb-label { line-height: 1.6; color: var(--color-ink-2); word-break: keep-all; text-wrap: balance; }
+.kb-label-muted { color: var(--color-ink-2); }
+.kb-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.kb-link { transition: color 160ms ease; }
+.kb-link:hover { color: var(--color-s1); }
+.kb-press { transition: transform 140ms var(--ease-out), background-color 160ms ease, color 160ms ease; }
+.kb-press:active { transform: scale(.97); }
+:focus-visible { outline: 2px solid var(--color-s1); outline-offset: 4px; border-radius: 3px; }
+.kb-skip { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 10px 16px; background: var(--color-ink); color: var(--color-paper); text-decoration: none; transform: translateY(-160%); }
+.kb-skip:focus { transform: none; }
+.kb-sig { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; line-height: 1.7; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; flex-shrink: 0; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--color-ink-2); }
+.theme-toggle:hover { background: var(--color-line); color: var(--color-ink); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .theme-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .theme-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .theme-moon { display: none; }
+}
+:root[data-theme="dark"] .theme-toggle .theme-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .theme-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .theme-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .theme-moon { display: block; }
+.kb-swapping { opacity: .4; }
+.kb-swap-target { transition: opacity 140ms ease; }
+@media (max-width: 560px) {
+  .shell { padding-inline: 16px; }
+  html { scroll-padding-top: 84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .kb-press:active { transform: none; }
+}
