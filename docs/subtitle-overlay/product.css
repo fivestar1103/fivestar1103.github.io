@@ -126,6 +126,11 @@
 h1,h2,h3,summary { text-wrap: balance; }
 p,li,dd { text-wrap: pretty; }
 [lang="ko"] { word-break: keep-all; }
+html[lang="ko"] body { overflow-wrap: anywhere; }
+html[lang="ko"] h1 { font-family: var(--kb-body); line-height: 1.25; letter-spacing: -.035em; }
+html[lang="ko"] h2 { font-family: var(--kb-body); line-height: 1.4; }
+.language-switch { padding-left: 1rem; border-left: 1px solid rgba(246,239,224,.24); opacity: 1 !important; }
+.section ol { padding-left: 1.3rem; }
 .product-header { background: var(--bg-deeper); color: var(--cream); border-bottom: 1px solid rgba(246,239,224,.12); }
 .header-inner { max-width: 860px; margin: auto; padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .brand { display: flex; align-items: center; gap: .65rem; text-decoration: none; font-weight: 650; }

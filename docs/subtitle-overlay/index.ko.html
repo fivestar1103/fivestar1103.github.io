@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko" id="top">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subtitle Overlay: Chrome 영상에 내 자막 띄우기</title>
+  <meta name="description" content="Chrome의 HTML5 영상에 SRT, VTT, SMI, ASS 자막을 띄우세요. 자막 모양과 시간을 조절하고, 기기에서 오디오를 처리하는 Smart Sync로 시간을 맞출 수 있습니다.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a2a23">
+  
+  <link rel="icon" href="./icon128.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fivestar1103.github.io/subtitle-overlay/index.ko.html">
+  <meta property="og:title" content="Subtitle Overlay: Chrome 영상에 내 자막 띄우기">
+  <meta property="og:description" content="Chrome의 HTML5 영상에 SRT, VTT, SMI, ASS 자막을 띄우세요. 자막 모양과 시간을 조절하고, 기기에서 오디오를 처리하는 Smart Sync로 시간을 맞출 수 있습니다.">
+  <meta property="og:image" content="https://fivestar1103.github.io/subtitle-overlay/shots/card.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/kuiper.css">
+
+  <!-- Structured data. The point of this page is partly to be quotable: an
+       assistant asked "what puts custom subtitles on a video" should have
+       something machine-readable to reach for, and the Web Store listing is
+       not that. -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Subtitle Overlay",
+  "operatingSystem": "Chrome",
+  "applicationCategory": "BrowserApplication",
+  "url": "https://fivestar1103.github.io/subtitle-overlay/index.ko.html",
+  "downloadUrl": "https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm",
+  "description": "Chrome의 HTML5 영상에 SRT, VTT, SMI, ASS 자막을 띄우세요. 자막 모양과 시간을 조절하고, 기기에서 오디오를 처리하는 Smart Sync로 시간을 맞출 수 있습니다.",
+  "featureList": [
+    "HTML5 영상 위에 SRT, VTT, SMI, ASS 자막 파일 표시",
+    "기기에서 영상 오디오를 처리해 자막 시간을 맞추는 Smart Sync",
+    "OpenSubtitles 자막 검색과 다운로드",
+    "한국어·일본어·중국어 파일의 문자 인코딩 자동 감지",
+    "재생 중 글꼴·크기·색상·외곽선·배경·위치 조절",
+    "원하는 자막 줄로 이동하고 시간을 직접 맞추는 Sync Timeline",
+    "같은 영상을 다시 열 때 마지막 자막과 시간 설정 복원",
+    "9개 언어 인터페이스"
+  ],
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "name": "무료"
+    },
+    {
+      "@type": "Offer",
+      "price": "3.99",
+      "priceCurrency": "USD",
+      "name": "Pro 월간 구독",
+      "url": "https://iknowhim.gumroad.com/l/subtitleoverlay-pro-membership"
+    },
+    {
+      "@type": "Offer",
+      "price": "23.99",
+      "priceCurrency": "USD",
+      "name": "Pro 연간 구독",
+      "url": "https://iknowhim.gumroad.com/l/subtitleoverlay-pro-membership"
+    },
+    {
+      "@type": "Offer",
+      "price": "34.99",
+      "priceCurrency": "USD",
+      "name": "Pro Founding Lifetime (50개 한정, 2026-12-31 KST까지)",
+      "url": "https://iknowhim.gumroad.com/l/subtitleoverlay-pro"
+    }
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Seonghwan Oh",
+    "url": "https://fivestar1103.github.io/"
+  },
+  "privacyPolicy": "https://fivestar1103.github.io/subtitle-overlay/privacy.ko.html",
+  "inLanguage": "ko"
+}
+</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "어떤 영상에서 사용할 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "페이지에 HTML5 video 요소가 있으면 사용할 수 있습니다. 대부분의 스트리밍 사이트, 강의 플랫폼, 브라우저에서 연 로컬 파일이 이에 해당합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "어떤 자막 형식을 지원하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SRT, VTT, SMI, ASS를 지원합니다. 문자 인코딩을 자동 감지해 한국어·일본어·중국어 파일이 깨지지 않도록 불러옵니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Smart Sync는 무엇을 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "대사가 나오는 구간에서 Smart Sync를 시작하면 일정한 시간 차이나 흔한 프레임 레이트 차이를 보정할 값을 찾습니다. 음성과 자막의 언어가 같으면 선택 사항인 Chrome 음성 팩으로 더 빠르게 맞출 수 있습니다. 음성이 나오는 구간을 비교하는 방식도 사용할 수 있습니다. 오디오는 기기에서 처리하며 결과는 달라질 수 있습니다. 적용한 결과는 되돌릴 수 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "데이터가 업로드되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "자막 본문, 영상, 오디오는 기기에 보관합니다. 자막을 검색하면 OpenSubtitles에 검색어를 보냅니다. Chrome의 사용 통계는 기본으로 켜져 있으며 설정에서 끌 수 있습니다. Safari 버전은 먼저 동의를 요청합니다. 자세한 내용은 개인정보 처리방침에서 확인하세요."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "무료인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "자막 불러오기, 검색, 모양 조절, 수동 시간 조절은 무료입니다. Smart Sync 결과를 무료로 5회 적용해 볼 수 있습니다. Pro는 체험 횟수 제한을 없앱니다. Pro는 월간 $3.99 또는 연간 $23.99입니다. Founding Lifetime은 한 번 결제하는 $34.99 라이선스이며 50개 한정입니다. 2026년 12월 31일(KST)까지 판매하며, 그 전에 모두 팔리면 판매를 마칩니다."
+      }
+    }
+  ],
+  "inLanguage": "ko"
+}
+</script>
+
+  <link rel="stylesheet" href="product.css">
+<script src="navigation.js" defer></script><link rel="canonical" href="https://fivestar1103.github.io/subtitle-overlay/index.ko.html">
+<link rel="alternate" hreflang="en" href="https://fivestar1103.github.io/subtitle-overlay/">
+<link rel="alternate" hreflang="ko" href="https://fivestar1103.github.io/subtitle-overlay/index.ko.html">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="product-header"><div class="header-inner"><a class="brand" href="index.ko.html"><img src="icon128.png" alt="" width="32" height="32">Subtitle Overlay</a><nav class="product-nav" aria-label="주 메뉴"><a href="index.ko.html" aria-current="page">제품 소개</a><a href="support.ko.html">도움말</a><a href="privacy.ko.html">개인정보</a><a class="language-switch" href="./" lang="en" hreflang="en">English</a></nav></div></header>
+<section class="hero document-hero overview-hero"><div class="hero-inner">
+<p class="eyebrow">제품 소개 · 내 영상에 내 자막을</p>
+<img src="./icon128.png" alt="Subtitle Overlay" class="logo" width="96" height="96">
+<h1>어떤 영상에도<br><em>내 자막을</em> 띄우세요.</h1>
+<p class="lead"><span>원하는 자막 파일을 영상에 올리세요.</span><span>모양을 바꾸고 시간을 맞추세요. 오디오는 내 기기에서 처리합니다.</span></p>
+<div class="cta-row"><a class="btn btn-primary" href="https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm">Chrome에 무료로 추가</a><a class="btn btn-ghost" href="#pro">Pro 알아보기</a><a class="btn btn-ghost" href="support.ko.html">도움말</a></div>
+<div class="hero-meta"><span class="pill">기기에서 처리하는 Smart Sync</span><span class="pill">SRT · VTT · SMI · ASS</span><span class="pill">9개 언어</span><span class="pill">기기에 자막 보관</span></div>
+</div></section>
+<div class="divider" aria-hidden="true"></div>
+<main id="main">
+<p class="lede">영상에 내 언어로 된 자막이 없어 자막 파일을 찾았습니다. 그런데 자막이 20초 어긋납니다. 시간을 맞춰도 3분 뒤에는 다시 밀립니다. Subtitle Overlay는 이런 문제를 해결하기 위해 만들었습니다.</p>
+<div class="shot"><img src="./shots/hero.png" alt="브라우저 영상 위에 표시된 자막" width="1280" height="800"></div>
+<section id="what"><div class="section-head"><span class="section-num">01</span><h2>주요 기능</h2></div><div class="grid">
+<div class="card"><h3>내 자막 파일을 영상에 바로</h3><p>SRT, VTT, SMI, ASS 파일을 페이지에 끌어 놓으세요. 영상을 보면서 OpenSubtitles에서 자막을 검색할 수도 있습니다. 문자 인코딩을 자동으로 감지해 한국어·일본어·중국어 자막이 깨지지 않도록 합니다.</p></div>
+<div class="card"><h3>영상에 맞춰 읽기 편하게</h3><p>영상이 재생되는 동안 글꼴, 크기, 색상, 외곽선, 배경 흐림, 위치를 바꿀 수 있습니다. 전체 화면에서도 조절할 수 있습니다. 자막 크기는 화면에 맞춰 바뀌므로 작은 창부터 4K 화면까지 같은 설정을 쓸 수 있습니다.</p></div>
+<div class="card"><h3>자막 시간을 직접 조절</h3><p>Sync Timeline에서 모든 자막 줄을 볼 수 있습니다. 원하는 장면으로 이동하거나, 자막 한 줄을 현재 재생 시점에 맞출 수 있습니다. 별도 창을 열지 않고 단축키로 자막 시간을 조금씩 조절할 수도 있습니다.</p></div>
+<div class="card"><h3>다시 열면 이어서</h3><p>같은 영상을 다시 열면 클릭 한 번으로 마지막 자막과 시간 설정을 복원할 수 있습니다. 복원 정보는 단방향 해시를 기준으로 기기에 저장하며 업로드하지 않습니다.</p></div>
+</div></section>
+<section id="smart-sync"><div class="section-head"><span class="section-num">02</span><h2>Smart Sync</h2></div>
+<p>대사가 나오는 구간에서 Smart Sync를 시작하세요. 자막이 일정하게 어긋나면 시간 차이를 보정할 값을 찾습니다. 흔히 생기는 프레임 레이트 차이로 자막이 점점 밀릴 때도 보정값을 찾습니다. 보정 결과를 무료로 5회 적용해 볼 수 있습니다. 실패한 시도와 거절한 제안은 횟수에 포함하지 않습니다. 방금 적용한 결과를 Undo로 되돌리면 사용 횟수도 복구됩니다.</p>
+<p>자막을 불러온 뒤 Chrome 음성 팩을 선택해서 다운로드할 수 있습니다. 음성과 자막의 언어가 같으면 음성 팩으로 더 빠르게 시간을 맞출 수 있습니다. 자막 언어를 알 수 있으면 자동으로 선택합니다. 음성 팩이 없거나 번역 자막을 쓰는 경우에도 음성이 나오는 구간을 비교하는 방식은 사용할 수 있습니다.</p>
+<p>오디오는 내 기기에서 처리합니다. Smart Sync는 사용자가 시작할 때만 실행합니다. 결과는 영상과 자막 파일에 따라 달라지며, 일부 플레이어에서는 오디오를 공유할 수 없습니다. 제안된 보정값을 적용해 볼 수 있습니다. 방금 적용한 결과는 되돌릴 수 있습니다.</p>
+<div class="shot"><img src="./shots/smart-sync.png" alt="Smart Sync 설정과 선택해서 받을 수 있는 음성 언어 팩" width="1280" height="800"></div></section>
+<section id="privacy"><div class="section-head"><span class="section-num">03</span><h2>기기 밖으로 보내는 정보</h2></div>
+<p>기기 밖으로 보내는 정보는 적습니다. 어떤 경우에 무엇을 보내는지 안내합니다.</p><ul>
+<li>자막 본문, 영상, 오디오, 스크린샷, 전체 페이지 URL은 보내지 않습니다.</li>
+<li>자막을 검색하면 OpenSubtitles에 검색어를 보냅니다. OpenSubtitles는 검색 결과로 자막 파일을 반환합니다.</li>
+<li>기능을 설정할 때 음성 활동 감지 모델은 GitHub Pages에서 받습니다. 선택 사항인 음성 팩은 Chrome에서 받습니다.</li>
+<li>Pro를 활성화할 때 Gumroad에서 라이선스 키를 검증합니다.</li>
+<li>사용 통계는 선택 사항입니다. Chrome에서는 기본으로 켜져 있으며, Safari에서는 먼저 동의를 요청합니다. 언제든 설정에서 끌 수 있습니다. 네트워크 서비스는 IP 주소를 받습니다. 사용 통계에서 대략적인 위치를 추정할 수 있으므로 완전히 익명인 정보는 아닙니다.</li>
+</ul><p>각 항목의 자세한 내용은 <a href="privacy.ko.html">개인정보 처리방침</a>에서 확인하세요.</p></section>
+<section id="pro"><div class="pro"><h2>Subtitle Overlay Pro</h2>
+<p>Pro는 Smart Sync 무료 체험 횟수 제한을 없앱니다. 설치별 OpenSubtitles 다운로드 한도도 24시간 동안 30회에서 최대 300회로 늘립니다. 실제 한도는 공유 서비스의 허용량에 따라 달라집니다. 자막 검색, 로컬 파일 불러오기, 모양 조절, 수동 시간 조절은 계속 무료입니다.</p>
+<p>Auto Captions, AI Translate, 더 큰 자막 라이브러리, A–B 반복, 사전 기능은 계획 중입니다. 아직 사용할 수 없으며 출시일도 정해지지 않았습니다.</p>
+<p class="price">$3.99 <small>월간 구독 또는 연간 $23.99. 언제든 해지할 수 있으며, 결제한 기간이 끝날 때까지 Pro를 사용할 수 있습니다.</small></p>
+<p>Founding Lifetime은 $34.99를 한 번 결제하는 평생 라이선스입니다. 50개 한정으로, 2026년 12월 31일(KST)까지 판매합니다. 그 전에 모두 팔리면 판매를 마칩니다. 구매자는 평생 이용 권한을 유지하며, 새 Pro 기능이 출시되면 사용할 수 있습니다.</p>
+<div class="cta-row"><a class="btn btn-primary" href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro-membership">Pro 구독하기</a><a class="btn btn-ghost" href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro">Founding Lifetime 구매</a></div>
+<p><small>구매 후 Gumroad 영수증이나 라이브러리에서 라이선스 키를 복사하세요. 확장 프로그램의 Pro 탭을 여세요. Activate를 선택하세요.</small></p></div></section>
+<section id="faq" class="faq"><div class="section-head"><span class="section-num">04</span><h2>자주 묻는 질문</h2></div><dl>
+<dt>어떤 영상에서 사용할 수 있나요?</dt><dd>페이지에 HTML5 video 요소가 있으면 사용할 수 있습니다. 대부분의 스트리밍 사이트, 강의 플랫폼, 브라우저에서 연 로컬 파일이 이에 해당합니다.</dd>
+<dt>어떤 자막 형식을 지원하나요?</dt><dd>SRT, VTT, SMI, ASS를 지원합니다.</dd>
+<dt>자막과 음성의 언어가 같아야 하나요?</dt><dd>음성이 나오는 구간을 비교하는 방식은 번역 자막에서도 작동할 수 있습니다. 선택 사항인 더 빠른 음성 인식 방식은 발화 내용과 자막 본문을 비교하므로 언어가 같아야 합니다. 결과는 영상과 파일에 따라 달라집니다.</dd>
+<dt>자막이나 영상이 업로드되나요?</dt><dd>자막 본문, 영상, 오디오는 기기 밖으로 보내지 않습니다.</dd>
+<dt>무료인가요?</dt><dd>자막 불러오기, 검색, 모양 조절, 수동 시간 조절은 무료입니다. Smart Sync 결과를 무료로 5회 적용해 볼 수 있습니다. Pro는 체험 횟수 제한을 없앱니다. Undo로 되돌리면 체험 횟수도 복구됩니다.</dd>
+</dl></section>
+</main>
+<footer class="footer"><div class="footer-inner"><span>Subtitle Overlay · Seonghwan Oh 제작</span><nav class="product-nav" aria-label="하단 메뉴"><a href="index.ko.html" aria-current="page">제품 소개</a><a href="support.ko.html">도움말</a><a href="privacy.ko.html">개인정보</a><a href="/">다른 프로젝트</a></nav></div></footer>
+</body>
+</html>

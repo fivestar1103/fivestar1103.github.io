@@ -69,6 +69,7 @@ html[data-language="ko"] .copy-en {
 
 html[data-language="ko"] .copy-ko {
   display: inline;
+  word-break: keep-all;
 }
 
 /* --------------------------------------------------------------------------

@@ -13,7 +13,7 @@
     },
     ko: {
       title: "오성환 — 클라이언트 프로그래머",
-      description: "NCSOFT에서 콘솔 AAA 게임 클라이언트를 만들고, 브라우저 확장과 iOS 앱, 개발 도구를 따로 만듭니다.",
+      description: "NCSOFT에서 콘솔 AAA 게임 클라이언트를 개발합니다. 브라우저 확장 프로그램, iOS 앱, 개발 도구도 만들어 배포합니다.",
       toggleLabel: "View in English"
     }
   };
@@ -21,6 +21,9 @@
   // The <head> script already picked a language and stamped it before first
   // paint. This only keeps the metadata and the toggle label in step.
   function applyMetadata(language) {
+    document.querySelectorAll("[data-ko-href]").forEach(function (link) {
+      link.setAttribute("href", language === "ko" ? link.dataset.koHref : link.dataset.enHref);
+    });
     document.title = metadata[language].title;
     if (description) {
       description.setAttribute("content", metadata[language].description);

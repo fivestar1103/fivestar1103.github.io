@@ -1,8 +1,8 @@
-// Keep the shared header and loaded fonts alive between the three product pages.
+// Keep loaded fonts alive between the English and Korean product pages.
 // Ordinary links remain fully usable without JavaScript or if fetching fails.
 (() => {
   const base = new URL('./', location.href);
-  const paths = new Set(['', 'index.html', 'support.html', 'privacy.html'].map(p => base.pathname + p));
+  const paths = new Set(['', 'index.html', 'support.html', 'privacy.html', 'index.ko.html', 'support.ko.html', 'privacy.ko.html'].map(p => base.pathname + p));
   let revision = 0;
   const cache = new Map();
   function isProduct(url) { return url.origin === location.origin && paths.has(url.pathname); }
@@ -23,8 +23,10 @@
       // One synchronous update: never hide the current page while awaiting a response.
       for (const selector of selectors) document.querySelector(selector).replaceWith(next.querySelector(selector));
       document.title = next.title;
-      document.querySelector('.product-header nav').replaceWith(next.querySelector('.product-header nav'));
-      for (const selector of ['meta[name="description"]', 'link[rel="canonical"]', 'meta[property^="og:"]', 'script[type="application/ld+json"]']) {
+      document.documentElement.lang = next.documentElement.lang;
+      document.querySelector('.product-header').replaceWith(next.querySelector('.product-header'));
+      document.querySelector('.skip').replaceWith(next.querySelector('.skip'));
+      for (const selector of ['meta[name="description"]', 'link[rel="canonical"]', 'link[rel="alternate"]', 'meta[property^="og:"]', 'script[type="application/ld+json"]']) {
         document.head.querySelectorAll(selector).forEach(node => node.remove());
         next.head.querySelectorAll(selector).forEach(node => document.head.append(node));
       }

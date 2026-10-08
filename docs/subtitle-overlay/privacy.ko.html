@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Subtitle Overlay가 자막을 기기에 저장하는 방식과 선택 사항인 사용 통계, 자막 검색·모델 다운로드·라이선스 검증에 쓰는 외부 서비스를 안내합니다."><title>개인정보 처리방침 | Subtitle Overlay</title><link rel="icon" href="icon128.png">  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/kuiper.css">
+
+<link rel="stylesheet" href="product.css"><script src="navigation.js" defer></script><link rel="canonical" href="https://fivestar1103.github.io/subtitle-overlay/privacy.ko.html">
+<link rel="alternate" hreflang="en" href="https://fivestar1103.github.io/subtitle-overlay/privacy.html">
+<link rel="alternate" hreflang="ko" href="https://fivestar1103.github.io/subtitle-overlay/privacy.ko.html">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="product-header"><div class="header-inner"><a class="brand" href="index.ko.html"><img src="icon128.png" alt="" width="32" height="32">Subtitle Overlay</a><nav class="product-nav" aria-label="주 메뉴"><a href="index.ko.html">제품 소개</a><a href="support.ko.html">도움말</a><a href="privacy.ko.html" aria-current="page">개인정보</a><a class="language-switch" href="privacy.html" lang="en" hreflang="en">English</a></nav></div></header>
+<section class="hero document-hero"><div class="hero-inner">
+<p class="eyebrow">개인정보 처리방침 · 2026년 9월 27일 갱신</p><h1>자막은 내 기기에<br>보관합니다.</h1><p class="lead"><span>기기에 저장하는 정보, 외부 서비스, 사용자가 선택할 수 있는 항목을 안내합니다.</span><span>기능과 브라우저 지원 범위는 Chrome과 Safari에서 다릅니다.</span></p>
+</div></section>
+<div class="divider" aria-hidden="true"></div>
+<main id="main">
+<div class="prose">
+<section><h2>기기에 저장하고 처리하는 정보</h2>
+<p>Subtitle Overlay는 설정, 다운로드한 자막, 자동 복원 정보, 기능 설정 상태를 확장 프로그램 저장소에 보관합니다. 현재 Chrome 구현에서는 자동 복원 캐시를 8 MB로 제한합니다. 영상의 출처(origin), 경로, 쿼리, 반올림한 재생 시간을 SHA-256으로 해시해 영상을 구분합니다.</p>
+<p>페이지를 새로고침한 뒤 복구할 수 있도록 임시 세션 저장소에 다음 정보를 보관할 수 있습니다.</p>
+<ul><li>해석한 자막.</li><li>시간 보정값.</li><li>중단 상태.</li><li>영상 식별 정보.</li></ul>
+<p>이 기록은 탭을 닫으면 지웁니다. 제품 사용 통계로 보내거나 다른 기기에 동기화하지 않습니다.</p>
+<p>선택 사항인 Smart Sync는 사용자가 시작한 뒤 탭 오디오의 일부를 기기 메모리에서 처리합니다. 캡처한 오디오, 인식한 단어, 자막 본문은 사용 통계로 업로드하지 않습니다. 선택 사항인 로컬 음성 팩은 Chrome에서 별도로 관리할 수 있습니다. 지원하는 환경에서는 사용자가 설치를 선택한 뒤 음성 활동 감지 모델을 다운로드하고 무결성을 확인합니다.</p>
+<p>Pro 라이선스 키, 검증 결과, 체험 상태, 기능 설정 상태도 기기에 저장할 수 있습니다.</p></section>
+<section id="analytics"><h2>선택 사항인 사용 통계</h2>
+<p><strong>Chrome 확장 프로그램에서는 사용 통계가 기본으로 켜져 있습니다. 언제든 Settings → General에서 끌 수 있습니다.</strong> 사용 통계를 꺼도 앱 기능은 제한하지 않습니다. 이전에 꺼 둔 설정은 업데이트 후에도 유지합니다. Safari 버전은 먼저 동의를 요청하며, 공유를 허용하기 전에는 아무 정보도 보내지 않습니다.</p>
+<p>사용 통계가 켜져 있으면 <a href="https://posthog.com/privacy">PostHog</a>에 제품 이벤트를 보냅니다. 기능 사용을 파악하고 오류를 진단하는 데 씁니다. 사이트 호환성을 개선하는 데도 씁니다. 이벤트에는 다음 정보가 포함될 수 있습니다.</p><ul>
+<li>기능 사용과 동작 측정값: 확장 프로그램 버전, 시간 맞추기에 사용한 엔진, 언어 팩 상태, 오류 유형, 걸린 시간, 체험 사용 횟수, 다운로드 허용량.</li>
+<li>영상 URL의 단방향 SHA-256 해시. 자막 불러오기 또는 실패 이벤트에는 사이트의 호스트 이름도 포함될 수 있습니다. 전체 URL, 경로, 쿼리는 제품 사용 통계에 업로드하지 않습니다.</li>
+<li>기기에서 생성한 임의의 영구 설치 ID. 실명 계정과 연결하지 않지만, 같은 설치에서 발생한 이벤트를 연결하는 데 사용합니다.</li>
+</ul>
+<p>PostHog는 연결 IP 주소를 받으며, IP 주소를 보관하거나 대략적인 위치를 추정할 수 있습니다. 현재 사용 통계 프로젝트에는 이 항목이 들어 있습니다. 이 기록은 <strong>완전히 익명인 정보가 아닙니다.</strong> 세션 재생 기능은 사용하지 않습니다.</p>
+<p>사용 통계를 끄면 이후 통계 요청을 차단합니다. 기기의 사용 통계 식별자와 아직 보내지 않은 이벤트도 지웁니다. 이미 PostHog가 받은 기록을 삭제하거나 서버가 이미 받은 요청을 취소하지는 않습니다. 기존 기록의 삭제는 개발자에게 이메일로 문의하세요. 가명 처리된 기록을 찾으려면 추가 정보가 필요할 수 있습니다. 라이선스 키는 이메일로 보내지 마세요.</p>
+<p>사용 통계 보관 기간은 PostHog 프로젝트에서 관리합니다. 아직 보관 기간을 확인하지 못했으므로 이 페이지에서 특정 기간을 안내하지 않습니다. 보관 기간 문의나 삭제 요청은 개발자에게 보내세요.</p></section>
+<section><h2>그 밖의 외부 서비스</h2>
+<h3>OpenSubtitles</h3><p>검색, 지원 사이트에서의 제목 기반 자동 추천, 다운로드에는 <code>api.opensubtitles.com</code>을 사용합니다. 검색어나 감지한 제목, 필터, API 키 또는 선택한 자막 식별자를 보냅니다. 이 기능 요청은 사용 통계 설정과 별개입니다. <a href="https://www.opensubtitles.com/en/privacy">OpenSubtitles 개인정보 처리방침</a>을 확인하세요.</p>
+<h3>선택 사항인 모델과 음성 팩 다운로드</h3><p>음성 활동 감지 모델은 현재 <code>fivestar1103.github.io/subtitle-overlay/models/silero_vad.onnx</code>에서 받습니다. 선택 사항인 권한에는 향후 리디렉션에 사용할 <code>kuiperbelt.site</code>도 포함됩니다. 브라우저 음성 팩 다운로드는 Chrome에서 관리합니다. 서버는 IP 주소 같은 연결 정보를 받습니다. 로컬 음성 처리가 클라우드 음성 인식으로 사용자 모르게 전환되지는 않습니다.</p>
+<h3>Gumroad</h3><p>Pro 활성화와 검증에는 <code>api.gumroad.com</code>을 사용합니다. 라이선스 키와 제품 식별자를 보냅니다. 검증 세부 정보는 확장 프로그램이 기기에 저장합니다. Gumroad에서 반환한 이름이나 이메일 주소는 확장 프로그램의 라이선스 기록에 저장하거나 PostHog로 보내지 않습니다. Gumroad가 보관하는 구매 정보에는 <a href="https://gumroad.com/privacy">Gumroad 개인정보 처리방침</a>이 적용됩니다.</p>
+<h3>의견과 지원 문의</h3><p>선택 사항인 PostHog 의견 양식은 사용자가 제출한 답변을 보냅니다. 연락처 입력은 선택 사항입니다. 이메일 문의에서는 사용자가 본문에 적은 정보를 받습니다. 비밀번호, 라이선스 키, 비공개 영상 링크, 민감한 녹화·녹음 파일은 제출하지 마세요.</p></section>
+<section><h2>제품 사용 통계로 보내지 않는 정보</h2><ul>
+<li>자막 본문, 인식한 음성, 영상·오디오 녹화·녹음 파일, 스크린샷, 페이지 내용.</li>
+<li>전체 페이지 URL, 쿼리 문자열, 프래그먼트, 관련 없는 방문 기록.</li>
+<li>이름, 이메일, 결제 정보, 라이선스 키. 다만 선택해서 보내는 지원 문의와 의견에는 사용자가 직접 적은 연락처가 포함될 수 있습니다.</li>
+</ul></section>
+<section><h2>권한과 설정</h2><p>활성 탭 접근과 스크립트 실행 권한으로 자막을 표시합니다. 저장소 권한으로 기기의 데이터를 보관합니다. Chrome의 탭 캡처와 오프스크린 처리 기능은 사용자가 직접 시작한 로컬 Smart Sync 실행에 사용합니다. 네트워크 권한은 자막 서비스, 선택 사항인 사용 통계, 모델 다운로드, 라이선스 검증에 사용합니다. Safari는 자체 확장 프로그램과 웹사이트 접근 설정을 사용하며, 지원하는 기능은 다를 수 있습니다.</p>
+<ul><li>Settings → General에서 사용 데이터 공유를 끄세요.</li><li>Settings → General에서 자동 복원이나 Smart Sync를 끄세요.</li><li>확장 프로그램에서 제공하는 기능으로 다운로드한 자막과 모델을 지우세요. 로컬 저장소를 지우려면 브라우저의 확장 프로그램 설정에서 확장 프로그램을 제거하세요. Chrome이 관리하는 음성 팩은 Chrome의 별도 설정을 사용합니다.</li><li>서버에 보관된 기록 문의나 삭제 요청은 이메일로 보내세요.</li></ul></section>
+<section><h2>어린이와 처리방침 변경</h2><p>이 제품은 13세 미만 어린이를 대상으로 하지 않습니다. 어린이의 개인정보임을 알면서 수집하지 않습니다. 데이터 처리 방식에 중요한 변경이 생기면 이 처리방침에 반영합니다. 갱신 날짜는 페이지 위에 표시합니다.</p></section>
+<section><h2>연락처</h2><p>개발자: Seonghwan Oh · 오성환.<br>이메일: <a href="mailto:fivestar1103@uos.ac.kr?subject=Subtitle%20Overlay%20privacy">fivestar1103@uos.ac.kr</a>.<br>영어와 한국어로 문의할 수 있습니다. 사용 중 도움이 필요하면 <a href="support.ko.html">도움말</a>을 확인하세요.</p></section>
+</div>
+</main>
+<footer class="footer"><div class="footer-inner"><span>Subtitle Overlay · Seonghwan Oh 제작</span><nav class="product-nav" aria-label="하단 메뉴"><a href="index.ko.html">제품 소개</a><a href="support.ko.html">도움말</a><a href="privacy.ko.html" aria-current="page">개인정보</a><a href="/">다른 프로젝트</a></nav></div></footer>
+</body>
+</html>

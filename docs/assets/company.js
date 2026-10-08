@@ -6,6 +6,9 @@
     ko: { title: "카이퍼 벨트 — 독립 소프트웨어", description: "오성환이 한국에서 만드는 독립 소프트웨어. Subtitle Overlay 자막 확장과 SpamDog 아이폰 스팸전화 차단 앱을 소개합니다.", label: "View in English" }
   };
   function apply(language) {
+    document.querySelectorAll("[data-ko-href]").forEach(function (link) {
+      link.setAttribute("href", language === "ko" ? link.dataset.koHref : link.dataset.enHref);
+    });
     root.lang = language;
     root.dataset.language = language;
     document.title = metadata[language].title;

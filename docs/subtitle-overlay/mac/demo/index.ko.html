@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="macOS용 Safari에서 Subtitle Overlay를 시험할 수 있는 샘플 영상과 영어·한국어 자막 파일입니다.">
+<title>샘플 영상과 자막 | Subtitle Overlay for Mac</title>
+<link rel="icon" href="../../icon128.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/kuiper.css">
+<link rel="stylesheet" href="../../product.css">
+<style>
+  .demo-stage { display: grid; place-items: center; padding: 8px 0 4px; }
+  .demo-frame { width: min(900px, 100%); aspect-ratio: 16/9; border-radius: 14px;
+                overflow: hidden; background: #000;
+                box-shadow: 0 24px 60px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.08); }
+  .demo-frame video { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .file-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  .file-row a { text-decoration: none; }
+</style>
+<link rel="canonical" href="https://fivestar1103.github.io/subtitle-overlay/mac/demo/index.ko.html">
+<link rel="alternate" hreflang="en" href="https://fivestar1103.github.io/subtitle-overlay/mac/demo/">
+<link rel="alternate" hreflang="ko" href="https://fivestar1103.github.io/subtitle-overlay/mac/demo/index.ko.html">
+</head>
+<body>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="product-header"><div class="header-inner"><a class="brand" href="../index.ko.html"><img src="../../icon128.png" alt="" width="32" height="32">Subtitle Overlay for Mac</a><nav class="product-nav" aria-label="주 메뉴"><a href="../index.ko.html">제품 소개</a><a href="../support.ko.html">도움말</a><a href="../privacy.ko.html">개인정보</a><a class="language-switch" href="./" lang="en" hreflang="en">English</a></nav></div></header>
+<section class="hero document-hero"><div class="hero-inner">
+<p class="eyebrow">샘플 파일</p><h1>이 영상에서<br>자막을 띄워 보세요.</h1><p class="lead"><span>짧은 샘플 영상과 시간이 맞춰진 자막 파일입니다.</span><span>영상을 재생한 뒤 자막 파일을 영상에 끌어 놓으세요.</span></p>
+</div></section>
+<div class="divider" aria-hidden="true"></div>
+<main id="main">
+<section class="section"><div class="demo-stage"><div class="demo-frame"><video id="demo" src="demo.webm" controls autoplay muted loop playsinline></video></div></div></section>
+<section class="section two-column" aria-labelledby="files"><div><h2 id="files">자막 파일 다운로드</h2><p>두 파일 모두 위 영상에 맞춰 시간을 설정했습니다. 문자 인코딩 자동 감지도 확인할 수 있도록 영어와 한국어 자막을 준비했습니다.</p></div><div class="contact-card"><h3>샘플 자막</h3><div class="file-row"><a class="email" href="demo-en.srt" download>demo-en.srt</a><a class="email" href="demo-ko.srt" download>demo-ko.srt</a></div><p>기기에서 재생하려면 샘플 영상인 <a href="demo.webm" download>demo.webm</a>도 받을 수 있습니다.</p><p class="note">나중에도 참고할 수 있도록 이 파일들을 같은 주소에 보관합니다.</p></div></section>
+<section class="section prose"><h2>사용 방법</h2><ol>
+<li>Safari 설정의 확장 프로그램에서 Subtitle Overlay를 켜세요.</li>
+<li>이 페이지로 돌아오세요. Safari 도구 막대에서 Subtitle Overlay를 누르세요. <em>Always Allow on This Website</em>를 선택하세요. Safari 확장 프로그램은 처음에는 어떤 페이지에도 접근할 수 없습니다. 이 단계를 거치지 않으면 영상 위에 자막이 나타나지 않습니다.</li>
+<li>위 영상을 재생하세요.</li>
+<li><code>demo-en.srt</code>를 다운로드하세요. Finder에서 자막 파일을 영상에 끌어 놓으세요. 자막이 바로 나타납니다.</li>
+<li><kbd>,</kbd> 또는 <kbd>.</kbd>로 시간을 조절하세요. <kbd>+</kbd> 또는 <kbd>-</kbd>로 크기를 조절하세요. 포인터를 페이지 오른쪽 가장자리로 옮기면 Sync Timeline이 열립니다. 모든 자막 줄을 보고 원하는 줄로 이동할 수 있습니다.</li>
+</ol><p>이 페이지에서는 계정, 로그인, 결제가 필요하지 않습니다. 자막 파일은 Mac에 보관합니다.</p></section>
+</main>
+<footer class="footer"><div class="footer-inner"><span>Subtitle Overlay · Seonghwan Oh 제작</span><nav class="product-nav" aria-label="하단 메뉴"><a href="../index.ko.html">제품 소개</a><a href="../support.ko.html">도움말</a><a href="../privacy.ko.html">개인정보</a><a href="/">다른 프로젝트</a></nav></div></footer>
+</body>
+</html>
