@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en" data-language="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f4f7">
+  <meta name="description" content="Seonghwan Oh writes client code for a console AAA game at NCSOFT, and builds browser extensions, iOS apps, and developer tools on the side.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kuiperbelt.site/hwan/">
+  <meta property="og:title" content="Seonghwan Oh — Gameplay Programmer">
+  <meta property="og:description" content="Gameplay at NCSOFT. A Chrome extension about a thousand people use each week, an iPhone spam blocker, and a shipped game.">
+  <meta property="og:image" content="https://kuiperbelt.site/assets/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://kuiperbelt.site/hwan/">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/assets/dashboard-fonts.css">
+  <script src="/assets/dashboard-theme.js"></script>
+  <link rel="stylesheet" href="/assets/dashboard.css">
+  <link rel="stylesheet" href="/assets/site.css">
+
+  <title>Seonghwan Oh — Gameplay Programmer</title>
+
+  <!-- Language is resolved before first paint. Doing this in site.js at the end
+       of <body> meant Korean visitors watched the English copy render and then
+       swap, which is the one thing a bilingual page must not do. -->
+  <script>
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("site-language"); } catch (e) { /* private mode */ }
+      var nav = (navigator.language || "en").toLowerCase();
+      var lang = saved === "ko" || saved === "en" ? saved : (nav.indexOf("ko") === 0 ? "ko" : "en");
+      document.documentElement.dataset.language = lang;
+      document.documentElement.lang = lang;
+    })();
+  </script>
+</head>
+<body>
+  <a class="kb-skip" href="#main">
+    <span class="copy-en">Skip to content</span>
+    <span class="copy-ko">본문으로 이동</span>
+  </a>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark kb-link" href="#top" aria-label="Seonghwan Oh, home">SHO<span class="wordmark-dot">.</span></a>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a class="kb-link" href="#work"><span class="copy-en">Work</span><span class="copy-ko">작업</span></a>
+        <a class="kb-link" href="#experience"><span class="copy-en">Experience</span><span class="copy-ko">경력</span></a>
+        <a class="kb-link" href="#about"><span class="copy-en">About</span><span class="copy-ko">소개</span></a>
+        <a class="kb-link" href="#contact"><span class="copy-en">Contact</span><span class="copy-ko">연락</span></a>
+      </nav>
+
+      <div class="header-controls">
+        <button class="theme-toggle kb-press" type="button" data-theme-toggle aria-label="Switch theme"><svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.8 13a9 9 0 0 1-9.8-9.8A9 9 0 1 0 20.8 13Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+        <button class="language-toggle kb-link" type="button" data-language-toggle aria-label="한국어로 보기">
+          <span class="language-option" data-language-option="en">EN</span>
+          <span aria-hidden="true">/</span>
+          <span class="language-option" data-language-option="ko">KO</span>
+        </button>
+        <button class="nav-toggle kb-press" type="button" data-nav-toggle
+                aria-controls="site-nav" aria-expanded="false">
+          <span class="copy-en">Menu</span><span class="copy-ko">메뉴</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" id="top">
+      <p class="eyebrow kb-label">
+        <span class="copy-en">Gameplay programmer · Apps on the side · Open source</span>
+        <span class="copy-ko">클라이언트 프로그래머 · 개인 앱 개발 · 오픈소스 기여</span>
+      </p>
+      <h1>
+        <span class="copy-en">I hold on to problems<br>that don’t come loose.</span>
+        <span class="copy-ko">안 풀리는 문제를<br>오래 붙잡습니다.</span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-intro">
+          <span class="copy-en">I’m Seonghwan Oh. I write client code for a console AAA game at NCSOFT. At work I build gameplay; after work I fix the tools I made because I needed them. Browser extensions, iOS apps, developer tooling — I’ve shipped all three.</span>
+          <span class="copy-ko">NCSOFT에서 콘솔 AAA 게임 클라이언트를 개발합니다. 회사에서는 게임플레이를 만들고, 퇴근 후에는 제가 쓰려고 만든 도구를 다듬습니다. 브라우저 확장 프로그램, iOS 앱, 개발 도구를 만들어 배포했습니다.</span>
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary kb-press" href="#work">
+            <span class="copy-en">See selected work</span><span class="copy-ko">주요 작업 보기</span>
+          </a>
+          <a class="text-link kb-link" href="https://github.com/fivestar1103" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof shell" aria-label="Highlights">
+      <div class="proof-item">
+        <strong class="kb-num">≈1,000</strong>
+        <span class="copy-en">weekly users</span><span class="copy-ko">주간 사용자</span>
+      </div>
+      <div class="proof-item">
+        <strong class="kb-num">2 weeks</strong>
+        <span class="copy-en">idea to App Store</span><span class="copy-ko">아이디어에서 앱 출시까지</span>
+      </div>
+      <div class="proof-item">
+        <strong>Merged</strong>
+        <span class="copy-en">upstream OSS fix</span><span class="copy-ko">오픈소스 기여</span>
+      </div>
+      <div class="proof-item">
+        <strong>EN / KO</strong>
+        <span class="copy-en">Korean · English</span><span class="copy-ko">한국어 · 영어</span>
+      </div>
+    </section>
+
+    <section class="section shell" id="work">
+      <div class="section-heading">
+        <p class="section-index kb-label kb-label-muted">01</p>
+        <div>
+          <p class="eyebrow kb-label"><span class="copy-en">Selected work</span><span class="copy-ko">주요 작업</span></p>
+          <h2><span class="copy-en">The ones that shipped.</span><span class="copy-ko">만들고, 고치고, 출시했습니다.</span></h2>
+        </div>
+      </div>
+
+      <div class="work-list">
+        <article class="work-item">
+          <div class="work-number kb-label kb-label-muted">01</div>
+          <div class="work-main">
+            <p class="work-kicker kb-label kb-label-muted">Chrome · Independent product · 2025—</p>
+            <h3>Subtitle Overlay</h3>
+            <p>
+              <span class="copy-en">A Chrome extension that drops your own subtitle file onto any video. I built it to watch lectures that had no captions; about a thousand people a week use it now. There’s a paid Pro tier, and neither the subtitle nor the video leaves your machine.</span>
+              <span class="copy-ko">어떤 영상에든 내 자막 파일을 띄울 수 있는 Chrome 확장 프로그램입니다. 자막이 없는 강의를 보려고 만들었고, 지금은 매주 1,000명쯤이 사용합니다. 유료 Pro도 판매합니다. 자막과 영상은 기기 밖으로 나가지 않습니다.</span>
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>Chrome Extension</li><li>JavaScript</li><li>On-device</li>
+            </ul>
+          </div>
+          <div class="work-links">
+            <a class="kb-link" href="/subtitle-overlay/" data-en-href="/subtitle-overlay/" data-ko-href="/subtitle-overlay/index.ko.html"><span class="copy-en">Details</span><span class="copy-ko">자세히</span> <span aria-hidden="true">→</span></a>
+            <a class="kb-link" href="/subtitle-overlay/support.html" data-en-href="/subtitle-overlay/support.html" data-ko-href="/subtitle-overlay/support.ko.html"><span class="copy-en">Support</span><span class="copy-ko">사용 도움말</span> <span aria-hidden="true">→</span></a>
+            <a class="kb-link" href="https://chromewebstore.google.com/detail/subtitle-overlay/bhedjidakhbabmcepaadmpefnajiegjm" target="_blank" rel="noreferrer"><span class="copy-en">Chrome Store</span><span class="copy-ko">Chrome 스토어</span> <span aria-hidden="true">↗</span></a>
+            <a class="kb-link" href="https://iknowhim.gumroad.com/l/subtitleoverlay-pro" target="_blank" rel="noreferrer">Pro <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-number kb-label kb-label-muted">02</div>
+          <div class="work-main">
+            <p class="work-kicker kb-label kb-label-muted">iOS · Independent product · 2026</p>
+            <h3>SpamDog</h3>
+            <p>
+              <span class="copy-en">An iPhone spam blocker I built and shipped in two weeks. Register one middle number and all ten thousand endings behind it go quiet. The block list and the call log stay on the phone.</span>
+              <span class="copy-ko">2주 만에 개발해 App Store에 출시한 iPhone 스팸 차단 앱입니다. 가운데 번호 하나를 등록하면 뒤 4자리 조합 10,000개를 한 번에 차단합니다. 차단 목록과 통화 기록은 기기 안에만 있습니다.</span>
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>Swift</li><li>CallKit</li><li>On-device</li>
+            </ul>
+          </div>
+          <div class="work-links">
+            <a class="kb-link" href="/spamdog/"><span class="copy-en">Details</span><span class="copy-ko">자세히</span> <span aria-hidden="true">→</span></a>
+            <a class="kb-link" href="https://apps.apple.com/kr/app/id6790863507" target="_blank" rel="noreferrer">App Store <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-number kb-label kb-label-muted">03</div>
+          <div class="work-main">
+            <p class="work-kicker kb-label kb-label-muted">Open source · Developer tooling · 2026</p>
+            <h3>VS-MCPServer</h3>
+            <p>
+              <span class="copy-en">Using AI tooling inside a real Unreal Engine 5 workflow, I kept hitting UI freezes during builds. I made the build and clean steps asynchronous and sent the fix upstream to CodingWithCalvin/VS-MCPServer. It was reviewed and merged.</span>
+              <span class="copy-ko">Unreal Engine 5 개발에 AI 도구를 사용하면서 빌드 중 UI가 멈추는 문제를 반복해서 겪었습니다. 빌드와 클린 작업을 비동기로 바꾼 수정안을 CodingWithCalvin/VS-MCPServer에 제출했습니다. 수정안은 코드 검토를 거쳐 병합됐습니다.</span>
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>C#</li><li>Visual Studio</li><li>MCP</li><li>UE5 workflow</li>
+            </ul>
+          </div>
+          <div class="work-links">
+            <a class="kb-link" href="https://github.com/CodingWithCalvin/VS-MCPServer/pull/96" target="_blank" rel="noreferrer"><span class="copy-en">Merged PR</span><span class="copy-ko">병합된 PR</span> <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+
+        <article class="work-item">
+          <div class="work-number kb-label kb-label-muted">04</div>
+          <div class="work-main">
+            <p class="work-kicker kb-label kb-label-muted">Game · Team of six · 2024—2026</p>
+            <h3>Fate and Accidy</h3>
+            <p>
+              <span class="copy-en">A multi-ending escape-room game six of us made over two years. I wrote the systems and the gameplay, and took on the pile of unglamorous work that sits between a finished build and an App Store release.</span>
+              <span class="copy-ko">6명이 2년 동안 만든 멀티 엔딩 방탈출 게임입니다. 시스템과 게임플레이를 개발하고, 완성된 빌드를 App Store에 출시하는 데 필요한 작업까지 맡았습니다.</span>
+            </p>
+            <ul class="tag-list" aria-label="Technologies">
+              <li>Unity</li><li>C#</li><li>Gameplay systems</li>
+            </ul>
+          </div>
+          <div class="work-links">
+            <a class="kb-link" href="/fateAndAccidy/links.html">App Store <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="experience">
+      <div class="section-heading">
+        <p class="section-index kb-label kb-label-muted">02</p>
+        <div>
+          <p class="eyebrow kb-label"><span class="copy-en">Experience</span><span class="copy-ko">경력</span></p>
+          <h2><span class="copy-en">Where I’ve worked.</span><span class="copy-ko">지금까지 일한 곳.</span></h2>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <p class="timeline-date kb-label kb-label-muted"><span class="copy-en">2026—Present</span><span class="copy-ko">2026—현재</span></p>
+          <div>
+            <h3>NCSOFT</h3>
+            <p class="timeline-role"><span class="copy-en">Gameplay Programmer · Core Gameplay</span><span class="copy-ko">클라이언트 프로그래머 · 코어 게임플레이</span></p>
+            <p><span class="copy-en">Building AAA gameplay for <em>Horizon Steel Frontiers</em> in collaboration with PlayStation.</span><span class="copy-ko">PlayStation과 협업하는 AAA 게임 <em>Horizon Steel Frontiers</em>의 게임플레이를 개발하고 있습니다.</span></p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-date kb-label kb-label-muted">2025</p>
+          <div>
+            <h3>San Diego State University · RTEC</h3>
+            <p class="timeline-role"><span class="copy-en">Research Engineer</span><span class="copy-ko">연구 엔지니어</span></p>
+            <p><span class="copy-en">Built an IoT structural monitoring system in Dr. Hyunjong Choi’s group — turning sensor readings into something an engineer could act on.</span><span class="copy-ko">최현종 교수 연구팀에서 IoT 구조물 모니터링 시스템을 만들었습니다. 센서 측정값을 실제 판단에 쓸 수 있는 형태로 정리했습니다.</span></p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-date kb-label kb-label-muted">2024—2026</p>
+          <div>
+            <h3>GameMakers</h3>
+            <p class="timeline-role"><span class="copy-en">Lead Programmer</span><span class="copy-ko">리드 프로그래머</span></p>
+            <p><span class="copy-en">Led engineering on <em>Fate and Accidy</em>, taking a six-person team from prototype to release.</span><span class="copy-ko">6인 팀에서 <em>Fate and Accidy</em> 개발을 이끌었습니다. 프로토타입 제작부터 출시까지 맡았습니다.</span></p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <p class="timeline-date kb-label kb-label-muted">2021—2022</p>
+          <div>
+            <h3><span class="copy-en">Republic of Korea Air Force</span><span class="copy-ko">대한민국 공군</span></h3>
+            <p class="timeline-role"><span class="copy-en">Military Interpreter · Osan Air Base</span><span class="copy-ko">군 통역병 · 오산 공군기지</span></p>
+            <p><span class="copy-en">Interpreted between the Korean and US air forces at Osan Air Base.</span><span class="copy-ko">오산기지에서 한미 공군 통역을 맡았습니다.</span></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="about">
+      <div class="section-heading">
+        <p class="section-index kb-label kb-label-muted">03</p>
+        <div>
+          <p class="eyebrow kb-label"><span class="copy-en">About</span><span class="copy-ko">소개</span></p>
+          <h2><span class="copy-en">I start out of curiosity<br>and finish out of stubbornness.</span><span class="copy-ko">궁금해서 시작하고,<br>오기로 끝냅니다.</span></h2>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>
+            <span class="copy-en">I’m not a one-field person. I write game client code, I build apps, and I write the store review copy too. The interesting part is usually over early — what comes after it is the actual work.</span>
+            <span class="copy-ko">한 분야만 파는 편은 아닙니다. 게임 클라이언트를 개발하고, 앱을 만들고, 스토어 심사 문구도 씁니다. 재미있는 부분은 보통 초반에 끝납니다. 그 뒤에 이어지는 작업이 진짜 일이라고 봅니다.</span>
+          </p>
+          <p>
+            <span class="copy-en">I use AI to read more and test faster, not to write the code for me. Deciding what to build, and answering for the result, is my job.</span>
+            <span class="copy-ko">AI는 더 많이 읽고 더 빨리 시험해 보려고 씁니다. 무엇을 만들지 정하고 결과를 책임지는 건 제 몫입니다.</span>
+          </p>
+        </div>
+        <aside class="details" aria-label="Background details">
+          <div class="detail-row">
+            <span class="kb-label kb-label-muted"><span class="copy-en">Languages</span><span class="copy-ko">언어</span></span>
+            <strong><span class="copy-en">Korean &amp; English, native/bilingual</span><span class="copy-ko">한국어·영어 원어민 수준</span></strong>
+          </div>
+          <div class="detail-row">
+            <span class="kb-label kb-label-muted"><span class="copy-en">Education</span><span class="copy-ko">학력</span></span>
+            <strong><span class="copy-en">University of Seoul · CS, Data Science minor</span><span class="copy-ko">서울시립대학교 · 컴퓨터과학, 데이터과학 부전공</span></strong>
+          </div>
+          <div class="detail-row">
+            <span class="kb-label kb-label-muted"><span class="copy-en">Recognition</span><span class="copy-ko">수상</span></span>
+            <strong><span class="copy-en">UOSPC Silver · Plankton Hackathon Excellence</span><span class="copy-ko">UOSPC 은상 · 플랑크톤 해커톤 우수상</span></strong>
+          </div>
+          <div class="detail-row">
+            <span class="kb-label kb-label-muted"><span class="copy-en">Away from code</span><span class="copy-ko">코드 밖에서는</span></span>
+            <strong><span class="copy-en">Music, rugby, cycling</span><span class="copy-ko">음악, 럭비, 자전거</span></strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="contact shell" id="contact">
+      <p class="eyebrow kb-label"><span class="copy-en">Get in touch</span><span class="copy-ko">연락</span></p>
+      <h2>
+        <span class="copy-en">If you’re building something,<br>email me.</span>
+        <span class="copy-ko">만들 게 있으면<br>메일 주세요.</span>
+      </h2>
+      <a class="contact-email kb-link" href="mailto:fivestar1103@uos.ac.kr">fivestar1103@uos.ac.kr <span aria-hidden="true">↗</span></a>
+      <div class="contact-links">
+        <a class="kb-link" href="https://www.linkedin.com/in/hwanyo/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a class="kb-link" href="https://github.com/fivestar1103" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <a class="kb-link" href="https://soundcloud.com/fromthekuiperbelt" target="_blank" rel="noreferrer">SoundCloud <span aria-hidden="true">↗</span></a>
+        <a class="kb-link" href="/legacy/portfolio.html"><span class="copy-en">Portfolio archive</span><span class="copy-ko">이전 포트폴리오</span> <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <p class="kb-sig">
+      <span class="kb-sig-dot">© <span data-current-year>2026</span> Seonghwan Oh</span>
+      <a href="/">kuiperbelt.site</a>
+    </p>
+    <a class="kb-link back-to-top" href="#top"><span class="copy-en">Back to top</span><span class="copy-ko">맨 위로</span> <span aria-hidden="true">↑</span></a>
+    <a class="kb-link" href="/subtitle-overlay/support.html" data-en-href="/subtitle-overlay/support.html" data-ko-href="/subtitle-overlay/support.ko.html"><span class="copy-en">Product support</span><span class="copy-ko">제품 지원</span></a>
+    <a class="kb-link" href="/"><span class="copy-en">Kuiper Belt</span><span class="copy-ko">카이퍼 벨트 소개</span></a>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+</body>
+</html>

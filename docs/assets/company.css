@@ -49,6 +49,7 @@ html[data-language="ko"] .about h2 { font-size: 23px; }
 .contact-email { display: inline-flex; gap: 14px; max-width: 100%; margin-top: 18px; font-size: clamp(18px, 4vw, 25px); font-weight: 500; letter-spacing: -.02em; text-decoration: none; overflow-wrap: anywhere; }
 .company-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; padding-block: 20px 32px; border-top: 1px solid var(--color-line); color: var(--color-ink-2); }
 .company-footer > a { font: 11px var(--font-mono); text-decoration: none; }
+.company-footer .business-info { order: 3; flex-basis: 100%; margin: 0; font: 11px/1.6 var(--font-mono); color: var(--color-ink-2); }
 @media (max-width: 640px) {
   .brand-note { display: none; }
   .company-header nav { gap: 12px; }
