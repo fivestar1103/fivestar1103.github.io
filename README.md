@@ -1,6 +1,6 @@
 # fivestar1103.github.io
 
-Seonghwan Oh's personal site and the static pages for independently shipped products.
+Kuiper Belt's company site at kuiperbelt.site, Seonghwan Oh's personal homepage at `/hwan/`, and the static pages for the products.
 
 ## Repository layout
 
@@ -12,9 +12,11 @@ Seonghwan Oh's personal site and the static pages for independently shipped prod
 │   ├── spamdog/       # SpamDog product, privacy, and support pages
 │   ├── subtitle-overlay/
 │   ├── fateAndAccidy/
+│   ├── company/       # Redirect from the old company URL to /
+│   ├── hwan/          # Founder's personal homepage
 │   ├── legacy/        # Archived portfolio pages
 │   ├── webgl-*/       # Historical interactive demos
-│   └── index.html     # Personal homepage
+│   └── index.html     # Kuiper Belt company homepage
 ├── .gitignore
 └── README.md
 ```
