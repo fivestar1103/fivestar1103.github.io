@@ -15,7 +15,7 @@
 // Playwright is resolved from the extension package's node_modules.
 
 import { createRequire } from 'node:module';
-import { mkdtempSync, rmSync, existsSync, copyFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -26,6 +26,8 @@ const extDir = process.env.SUBTITLE_OVERLAY_EXTENSION_DIR
   ? path.resolve(process.env.SUBTITLE_OVERLAY_EXTENSION_DIR)
   : path.resolve(promoDir, '..', 'subtitle-overlay-extension');
 const distDir = path.join(extDir, 'dist');
+// Match the E2E capture: disposable build, localhost fixture access, analytics off.
+const { prepareTestExtension } = await import(pathToFileURL(path.join(extDir, 'e2e/extensionBuild.mjs')).href);
 const shotsDir = path.join(promoDir, 'screenshots');
 const slidesDir = path.join(promoDir, 'store-shots');
 
@@ -58,25 +60,35 @@ const PANEL_LINES = [
 
 // ── 1. live popup captures ──────────────────────────────────────────────
 async function capturePopup() {
+  const captureDist = prepareTestExtension('standard');
   const profile = mkdtempSync(path.join(tmpdir(), 'so-shots-'));
   const context = await chromium.launchPersistentContext(profile, {
     channel: 'chromium',
     headless: true,
     viewport: { width: 760, height: 860 },
     deviceScaleFactor: 2,
+    locale: 'en-US',
     args: [
-      `--disable-extensions-except=${distDir}`,
-      `--load-extension=${distDir}`,
+      '--lang=en-US',
+      `--disable-extensions-except=${captureDist}`,
+      `--load-extension=${captureDist}`,
     ],
   });
   try {
     let [worker] = context.serviceWorkers();
     if (!worker) worker = await context.waitForEvent('serviceworker');
     const extensionId = new URL(worker.url()).host;
+    await worker.evaluate(async () => {
+      for (let waited = 0; waited < 3000; waited += 50) {
+        if ((await chrome.storage.local.get('firstRun_v1')).firstRun_v1) break;
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+      await chrome.storage.local.set({ firstRun_v1: { introSeen: true, consentPromptSeen: true } });
+    });
 
     const popup = await context.newPage();
     await popup.goto(`chrome-extension://${extensionId}/src/popup/index.html`);
-    await popup.locator('#encoding-select').waitFor({ timeout: 10_000 });
+    await popup.getByRole('button', { name: 'Styling', exact: true }).waitFor({ timeout: 10_000 });
     await popup.waitForTimeout(600); // storage hydration + first paint settle
     const popupText = await popup.locator('body').innerText();
     if (new RegExp(`\\bv${manifestVersion.replaceAll('.', '\\.')}\\b`, 'i').test(popupText)) {
@@ -85,19 +97,12 @@ async function capturePopup() {
       );
     }
 
+    if (/\bbeta\b/i.test(popupText)) throw new Error('Release UI still exposes a Beta label');
     await popup.screenshot({
       path: path.join(shotsDir, 'popup-subtitles.png'),
       fullPage: true,
     });
     console.log('✓ screenshots/popup-subtitles.png');
-
-    await popup.getByRole('button', { name: 'Styling' }).click();
-    await popup.waitForTimeout(400);
-    await popup.screenshot({
-      path: path.join(shotsDir, 'popup-styling.png'),
-      fullPage: true,
-    });
-    console.log('✓ screenshots/popup-styling.png');
 
     // The in-video panel. It needs a real page with a real <video>, because the
     // content script only injects on http/https and only mounts where there is
@@ -133,9 +138,28 @@ async function capturePopup() {
       path: path.join(shotsDir, 'side-panel.png'),
     });
     console.log('✓ screenshots/side-panel.png');
+
+    await player.bringToFront();
+    await popup.reload();
+    await popup.getByTestId('smart-sync-beta-card').waitFor();
+    await popup.getByTestId('smart-sync-beta-card').screenshot({
+      path: path.join(shotsDir, 'smart-sync-setup.png'), animations: 'disabled',
+    });
+    console.log('✓ screenshots/smart-sync-setup.png (current release controls)');
+
+    await popup.getByRole('button', { name: 'Styling' }).click();
+    await popup.waitForTimeout(400);
+    await popup.screenshot({
+      path: path.join(shotsDir, 'popup-styling.png'),
+      fullPage: true,
+    });
+    console.log('✓ screenshots/popup-styling.png');
+
+
   } finally {
     await context.close();
     rmSync(profile, { recursive: true, force: true });
+    rmSync(captureDist, { recursive: true, force: true });
   }
 }
 
@@ -179,14 +203,7 @@ async function renderSlides() {
   }
 }
 
-// The setup state is rendered from the release UI by the nine-locale browser
-// spec. Its speech service is a controlled fixture; this screenshot documents
-// the UI, not a successful speech-pack download or an alignment benchmark.
-const setupShot = path.join(extDir, 'ux-audit/inline/en-US-download.png');
-if (!existsSync(setupShot)) {
-  throw new Error('Run playwright test e2e/soda-setup-ui.spec.ts on the final build before capturing store shots.');
-}
-copyFileSync(setupShot, path.join(shotsDir, 'smart-sync-setup.png'));
+// Capture the current release card directly; do not reuse the obsolete SODA/Beta setup fixture.
 await capturePopup();
 await renderSlides();
 console.log('Done.');
