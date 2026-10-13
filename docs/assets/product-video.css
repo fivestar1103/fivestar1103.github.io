@@ -1,0 +1,29 @@
+/* Shared media frames; each page retains its own typography and colours. */
+.product-video { margin: 0; min-width: 0; }
+.product-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #edf4f2; border: 1px solid var(--color-line, var(--line)); border-radius: 10px; }
+.video-frame { position: relative; }
+.video-play { display: none; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); min-height: 48px; width: max-content; max-width: calc(100% - 32px); padding: 12px 20px; border: 1px solid #c5dfd9; border-radius: 999px; background: #22312ff2; color: #fff; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 6px 20px #22312f30; }
+html[data-video-ready] .video-play { display: inline-flex; align-items: center; gap: 8px; }
+.video-frame[data-started="true"] .video-play { display: none; }
+.video-play:active { transform: translate(-50%, -50%) scale(.97); }
+.video-play:focus-visible { outline: 3px solid #82bbb5; outline-offset: 4px; }
+.product-video figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; margin-top: 12px; font-size: 12px; color: var(--color-ink-2, var(--ink-light)); }
+.product-video figcaption p { margin: 0; }
+.product-video .video-toggle { min-height: 40px; padding: 7px 13px; border: 1px solid var(--color-line, var(--line)); border-radius: 7px; background: var(--color-card, #fff); color: var(--color-ink, var(--ink)); font: inherit; cursor: pointer; transition: transform 140ms ease-out, border-color 140ms ease; }
+.video-toggle:active { transform: scale(.97); }
+.video-toggle:focus-visible { outline: 2px solid var(--color-s1, #327c73); outline-offset: 3px; }
+[data-video-state="playing"] .video-label-play, [data-video-state="paused"] .video-label-pause { display: none; }
+.product-with-video { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.product-with-video .product-copy > p:not(.kb-label) { max-width: 62ch; }
+.work-video { grid-column: 2 / -1; margin-top: 14px; }
+.app-demo { margin-bottom: 3.5rem; scroll-margin-top: 24px; }
+.app-demo > h2 { margin-bottom: .6rem; }
+.app-demo > p { margin-bottom: 1.25rem; }
+.app-demo .product-video figcaption { font-size: .85rem; line-height: 1.6; }
+.app-tour-details { margin-top: 1.5rem; border-top: 1px solid var(--line); }
+.app-tour-details > summary { padding-block: 1rem; cursor: pointer; font-weight: 600; }
+.app-tour-details .product-video { margin-top: .25rem; }
+.tour-transcript { padding: .5rem 0 1rem 1.3rem; font-size: .95rem; }
+.tour-transcript li + li { margin-top: .4rem; }
+@media (hover: hover) { .video-toggle:hover { border-color: var(--color-s1, #327c73); } }
+@media (prefers-reduced-motion: reduce) { .video-toggle { transition: none; } }

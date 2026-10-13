@@ -46,6 +46,8 @@
       document.documentElement.dataset.language = language;
     })();
   </script>
+<link rel="stylesheet" href="/assets/product-video.css">
+<script src="/assets/product-video.js" defer></script>
 </head>
 <body>
   <a class="kb-skip" href="#main"><span class="copy-en">Skip to content</span><span class="copy-ko">본문으로 이동</span></a>
@@ -69,7 +71,7 @@
     </section>
     <section class="products shell" id="products">
       <div class="section-heading"><p class="kb-label">01 / <span class="copy-en">Our products</span><span class="copy-ko">출시한 제품</span></p><p class="section-note"><span class="copy-en">Built, shipped, and still improving.</span><span class="copy-ko">직접 만들고, 출시하고, 계속 다듬습니다.</span></p></div>
-      <article class="product">
+      <article class="product product-with-video">
         <div class="product-copy">
           <div class="product-name"><img src="/subtitle-overlay/icon128.png" alt="" width="40" height="40"><h2>Subtitle Overlay</h2></div>
           <p class="kb-label product-platform">CHROME EXTENSION</p>
@@ -79,7 +81,12 @@
           <div class="product-actions"><a class="button kb-press" href="https://chromewebstore.google.com/detail/bhedjidakhbabmcepaadmpefnajiegjm"><span class="copy-en">Get for Chrome</span><span class="copy-ko">Chrome에 추가</span><span aria-hidden="true">↗</span></a><a class="text-link kb-link" href="/subtitle-overlay/" data-en-href="/subtitle-overlay/" data-ko-href="/subtitle-overlay/index.ko.html"><span class="copy-en">Explore product</span><span class="copy-ko">제품 소개</span><span aria-hidden="true">→</span></a></div>
           <div class="policy-links"><a class="kb-link" href="/subtitle-overlay/support.html" data-en-href="/subtitle-overlay/support.html" data-ko-href="/subtitle-overlay/support.ko.html"><span class="copy-en">Support</span><span class="copy-ko">지원</span></a><a class="kb-link" href="/subtitle-overlay/privacy.html" data-en-href="/subtitle-overlay/privacy.html" data-ko-href="/subtitle-overlay/privacy.ko.html"><span class="copy-en">Privacy</span><span class="copy-ko">개인정보처리방침</span></a></div>
         </div>
-        <div class="product-visual subtitle-visual"><img src="/subtitle-overlay/shots/hero.png" alt="Subtitle Overlay subtitle styling and timing controls" width="1280" height="800" loading="lazy"></div>
+        <figure class="product-video" data-video-preview>
+          <video muted loop playsinline preload="none" width="1280" height="720" poster="/subtitle-overlay/media/1.8-preview/website-preview-12s.jpg" aria-label="Subtitle Overlay silent app preview">
+            <source data-src="/subtitle-overlay/media/1.8-preview/website-preview-12s.mp4" type="video/mp4">
+          </video>
+          <figcaption><div><p><span class="copy-en">1.8 update preview · English interface</span><span class="copy-ko">1.8 업데이트 미리보기 · 영어 화면</span></p><a class="text-link kb-link" href="/subtitle-overlay/#demo" data-en-href="/subtitle-overlay/#demo" data-ko-href="/subtitle-overlay/index.ko.html#demo"><span class="copy-en">Watch the 30-second app tour</span><span class="copy-ko">30초 제품 소개 보기</span><span aria-hidden="true">→</span></a></div><button class="video-toggle" type="button" data-video-toggle data-video-state="paused"><span class="video-label-play"><span class="copy-en">Play preview</span><span class="copy-ko">미리보기 재생</span></span><span class="video-label-pause"><span class="copy-en">Pause preview</span><span class="copy-ko">미리보기 일시정지</span></span></button></figcaption>
+        </figure>
       </article>
       <article class="product">
         <div class="product-copy">

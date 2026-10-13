@@ -1,0 +1,24 @@
+{
+  "source": "Subtitle Overlay 1.8.0 review candidate",
+  "date": "2026-10-13",
+  "assets": [
+    {
+      "id": "website-loop",
+      "file": "website-preview-12s.mp4",
+      "seconds": 12,
+      "sha256": "f0656a2d9b65b5a4b220e991ed641e60380f12eb93b8cc1b88bffd81a5e67e27"
+    },
+    {
+      "id": "compact-overview",
+      "file": "app-preview-30s.mp4",
+      "seconds": 30,
+      "sha256": "a9a9783c7f14e1c0ac82231159303f81f050ad71e05dab6a75c181d2fe8608a9"
+    },
+    {
+      "id": "detailed-walkthrough",
+      "file": "app-tour-80s.mp4",
+      "seconds": 80.4,
+      "sha256": "bdec1ccff995e8095cff3db80f679a4702a0d9a3f4ab6a5d8e1113f9d26940a7"
+    }
+  ]
+}

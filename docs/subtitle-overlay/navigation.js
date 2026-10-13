@@ -20,6 +20,7 @@
       const next = new DOMParser().parseFromString(markup, 'text/html');
       const selectors = ['.hero', '.divider', 'main', 'footer'];
       if (!selectors.every(s => next.querySelector(s))) throw new Error('Invalid product page');
+      document.querySelectorAll('video').forEach(video => video.pause());
       // One synchronous update: never hide the current page while awaiting a response.
       for (const selector of selectors) document.querySelector(selector).replaceWith(next.querySelector(selector));
       document.title = next.title;
