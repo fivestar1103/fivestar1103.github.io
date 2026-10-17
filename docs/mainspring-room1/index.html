@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#241226">
+<title>MAINSPRING 방1 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=IBM+Plex+Sans+KR:wght@400;600&display=swap">
+<style>
+/* Layout: full-bleed 3D room; a menu button opens a plum control rail; touch screens get a joystick. Single dark look by choice. */
+:root {
+  --ink: #241226;          /* the room's own outline colour (look v5 "trim") */
+  --plum: #3a1d36;
+  --panel: rgba(36, 18, 38, 0.86);
+  --rose: #ffd9e8;         /* WALL_BRIGHT */
+  --mauve: #b3799e;        /* ramp shadow */
+  --accent: #ff7fb4;
+  --text: #fbeef4;
+  --muted: #cfa9bf;
+  --display: "Gowun Batang", "Nanum Myeongjo", serif;
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--ink); color: var(--text); font-family: var(--body); overflow: hidden; }
+#view { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+#view.dragging { cursor: grabbing; }
+#view.hot { cursor: pointer; }
+.vignette { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, rgba(20, 8, 22, 0.42) 100%); }
+
+.rail { position: fixed; top: calc(64px + env(safe-area-inset-top, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); width: min(320px, calc(100% - 32px)); max-height: calc(100% - 80px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); z-index: 3; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 16px; background: var(--panel); border: 1px solid rgba(255, 217, 232, 0.14); border-radius: 14px; backdrop-filter: blur(8px); box-sizing: border-box; }
+.rail h1 { margin: 0; font-family: var(--display); font-size: 18px; line-height: 1.2; letter-spacing: 0.01em; text-wrap: balance; color: var(--rose); }
+.rail .stamp { margin: 2px 0 0; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rail p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--text); }
+.rail p strong { color: var(--rose); font-weight: 600; }
+.group { display: flex; flex-direction: column; gap: 8px; }
+.group h2 { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+button { font: inherit; font-size: 12.5px; color: var(--text); background: rgba(255, 217, 232, 0.08); border: 1px solid rgba(255, 217, 232, 0.2); border-radius: 999px; padding: 6px 11px; cursor: pointer; }
+button:hover { background: rgba(255, 217, 232, 0.16); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--ink); font-weight: 600; }
+button.feature { border-color: var(--accent); }
+.help { font-size: 12px; line-height: 1.6; color: var(--muted); }
+.help kbd { font-family: var(--body); font-size: 11px; padding: 1px 5px; border-radius: 4px; border: 1px solid rgba(255, 217, 232, 0.3); color: var(--text); }
+.menu-btn { position: fixed; top: calc(16px + env(safe-area-inset-top, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); z-index: 4; padding: 8px 14px; background: var(--panel); backdrop-filter: blur(8px); }
+.joy { position: fixed; left: calc(24px + env(safe-area-inset-left, 0px)); bottom: calc(24px + env(safe-area-inset-bottom, 0px)); width: 124px; height: 124px; border-radius: 50%; display: grid; place-items: center; background: rgba(36, 18, 38, 0.5); border: 1px solid rgba(255, 217, 232, 0.28); touch-action: none; z-index: 2; }
+.joy .knob { width: 54px; height: 54px; border-radius: 50%; background: rgba(255, 217, 232, 0.55); pointer-events: none; }
+
+.tip { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); padding: 7px 12px; border-radius: 999px; background: var(--panel); font-size: 12.5px; color: var(--text); pointer-events: none; white-space: nowrap; }
+
+#loading { position: fixed; inset: 0; display: grid; place-items: center; background: var(--ink); z-index: 5; }
+#loading .box { display: flex; flex-direction: column; gap: 10px; align-items: center; padding-inline: 16px; text-align: center; }
+#loading .t { font-family: var(--display); font-size: 20px; color: var(--rose); }
+#loading .bar { width: min(260px, 70vw); height: 4px; border-radius: 4px; background: rgba(255, 217, 232, 0.15); overflow: hidden; }
+#loading .bar i { display: block; height: 100%; width: 0%; background: var(--accent); transition: width 0.2s; }
+#loading .s { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 640px) {
+  .rail { right: 12px; width: calc(100% - 24px); max-height: 55%; padding: 14px; }
+  .tip { bottom: auto; top: calc(12px + env(safe-area-inset-top, 0px)); white-space: normal; text-align: center; max-width: calc(100% - 32px); }
+}
+@media (prefers-reduced-motion: reduce) { #loading .bar i { transition: none; } }
+</style>
+</head>
+<body>
+
+
+<canvas id="view" aria-label="방1 3D 장면"></canvas>
+<div class="vignette"></div>
+
+<button class="menu-btn" id="menuBtn" aria-controls="rail" aria-expanded="false">메뉴</button>
+<aside class="rail" id="rail" hidden>
+  <h1>방1 3D</h1>
+
+  <div class="group">
+    <h2>시점</h2>
+    <div class="chips" id="views"></div>
+  </div>
+
+  <div class="group">
+    <h2>열고 닫기 (물건을 클릭해도 됩니다)</h2>
+    <div class="chips" id="anims"></div>
+  </div>
+
+  <div class="group">
+    <h2>조작</h2>
+    <div class="chips">
+      <button id="modeWalk" aria-pressed="true">걷기</button>
+      <button id="modeOrbit" aria-pressed="false">회전 보기</button>
+    </div>
+    <div class="help" id="help"></div>
+  </div>
+
+  <p class="help">진열장 D6만 새 곰(v13p8)입니다. 웹 미리보기용 근사 셰이더라 게임 화면과 색·선이 조금 다릅니다.</p>
+</aside>
+
+<div class="tip" id="tip" hidden></div>
+
+<div id="loading" role="status">
+  <div class="box">
+    <div class="t">방1을 불러오는 중</div>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="s" id="loadText">0%</div>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js';
+
+const canvas = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, matchMedia('(pointer: coarse)').matches ? 1.5 : 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.NoToneMapping;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x241226);
+const camera = new THREE.PerspectiveCamera(70, 1, 0.02, 60);
+const effect = new OutlineEffect(renderer, { defaultThickness: 0.0032, defaultColor: [0x24 / 255, 0x12 / 255, 0x26 / 255] });
+
+// Look v5: top key light + ambient 0.34 through a pink-to-white ramp (three's toon BRDF divides by pi).
+scene.add(new THREE.AmbientLight(0xfff1f6, 0.34 * Math.PI));
+const key = new THREE.DirectionalLight(0xfff1f6, 0.95 * Math.PI);
+key.position.set(0.0, 2.64, 0.1); scene.add(key); scene.add(key.target);
+
+const touch = matchMedia('(pointer: coarse)').matches;
+const help = document.getElementById('help');
+const tip = document.getElementById('tip');
+const ROOM = { x: 2.25, z: 2.05, eye: 1.42 };
+
+// ---------- camera control: walk (drag to look, WASD) or orbit ----------
+let mode = 'walk';
+const pos = new THREE.Vector3(0, ROOM.eye, 0.4);
+let yaw = 0, pitch = THREE.MathUtils.degToRad(-8);
+const orbit = new OrbitControls(camera, canvas);
+orbit.enabled = false; orbit.enableDamping = true; orbit.target.set(0, 0.9, 0);
+orbit.minDistance = 0.4; orbit.maxDistance = 3.0; orbit.maxPolarAngle = Math.PI * 0.62;
+
+function applyWalkCamera() {
+  camera.position.copy(pos);
+  camera.quaternion.setFromEuler(new THREE.Euler(pitch, yaw, 0, 'YXZ'));
+}
+function setMode(next) {
+  mode = next;
+  document.getElementById('modeWalk').setAttribute('aria-pressed', String(next === 'walk'));
+  document.getElementById('modeOrbit').setAttribute('aria-pressed', String(next === 'orbit'));
+  orbit.enabled = next === 'orbit';
+  if (next === 'orbit') {
+    const dir = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+    orbit.target.copy(camera.position).addScaledVector(dir, 1.6);
+    orbit.target.x = THREE.MathUtils.clamp(orbit.target.x, -ROOM.x, ROOM.x);
+    orbit.target.z = THREE.MathUtils.clamp(orbit.target.z, -ROOM.z, ROOM.z);
+    orbit.target.y = THREE.MathUtils.clamp(orbit.target.y, 0.3, 2.0);
+    orbit.update();
+  } else {
+    pos.copy(camera.position); pos.y = THREE.MathUtils.clamp(pos.y, 0.6, 2.3);
+    const e = new THREE.Euler().setFromQuaternion(camera.quaternion, 'YXZ'); yaw = e.y; pitch = e.x;
+  }
+  help.innerHTML = next === 'walk'
+    ? (touch ? '왼쪽 아래 조이스틱으로 이동하고, 화면을 끌어서 둘러봅니다. 게임패드도 됩니다.' : '끌어서 둘러보기 · <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 이동 · <kbd>Shift</kbd> 빠르게 · 게임패드 왼쪽 스틱 이동, 오른쪽 스틱 시선 · <kbd>M</kbd> 메뉴')
+    : '끌어서 회전 · 휠이나 두 손가락으로 확대 · 오른쪽 버튼이나 세 손가락으로 이동';
+}
+document.getElementById('modeWalk').onclick = () => setMode('walk');
+document.getElementById('modeOrbit').onclick = () => setMode('orbit');
+
+let drag = null;
+canvas.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY }; canvas.classList.add('dragging'); });
+window.addEventListener('pointerup', (e) => {
+  canvas.classList.remove('dragging');
+  if (drag && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 5 && e.target === canvas) pick(e);
+  drag = null;
+});
+canvas.addEventListener('pointermove', (e) => {
+  if (drag && mode === 'walk') {
+    yaw -= (e.clientX - drag.x) * 0.0042; pitch -= (e.clientY - drag.y) * 0.0042;
+    pitch = THREE.MathUtils.clamp(pitch, -1.35, 1.35); drag.x = e.clientX; drag.y = e.clientY;
+  }
+  if (!drag) hover(e);
+});
+const keys = new Set();
+addEventListener('keydown', (e) => { if (e.target.tagName !== 'BUTTON' || !e.key.startsWith('Arrow')) keys.add(e.code); });
+addEventListener('keyup', (e) => keys.delete(e.code));
+addEventListener('blur', () => keys.clear());
+
+// virtual joystick on touch screens (analog move), gamepad sticks everywhere
+const joy = { x: 0, y: 0, id: null };
+if (touch) {
+  const base = document.createElement('div'); base.className = 'joy'; base.setAttribute('aria-label', '이동 조이스틱');
+  const knob = document.createElement('div'); knob.className = 'knob'; base.appendChild(knob); document.body.appendChild(base);
+  const R = 48;
+  const move = (e) => {
+    const r = base.getBoundingClientRect(); let dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    const d = Math.hypot(dx, dy); if (d > R) { dx *= R / d; dy *= R / d; }
+    joy.x = dx / R; joy.y = dy / R; knob.style.transform = `translate(${dx}px, ${dy}px)`;
+  };
+  base.addEventListener('pointerdown', (e) => { joy.id = e.pointerId; base.setPointerCapture(e.pointerId); move(e); e.preventDefault(); });
+  base.addEventListener('pointermove', (e) => { if (e.pointerId === joy.id) move(e); });
+  const end = (e) => { if (e.pointerId !== joy.id) return; joy.id = null; joy.x = joy.y = 0; knob.style.transform = ''; };
+  base.addEventListener('pointerup', end); base.addEventListener('pointercancel', end);
+}
+const dead = (v) => (Math.abs(v) < 0.15 ? 0 : v);
+function gamepad() {
+  try { return [...(navigator.getGamepads ? navigator.getGamepads() : [])].find((g) => g && g.connected) || null; } catch { return null; }
+}
+
+// ---------- loading ----------
+const manager = new THREE.LoadingManager();
+const bar = document.getElementById('bar'), loadText = document.getElementById('loadText');
+const progress = { room: 0, bear: 0 };
+function showProgress() { const p = Math.round((progress.room * 0.95 + progress.bear * 0.05) * 100); bar.style.width = p + '%'; loadText.textContent = p + '%'; }
+const loader = new GLTFLoader(manager);
+const ramp = await new THREE.TextureLoader().loadAsync('assets/toon-ramp-v5.png');
+ramp.colorSpace = THREE.NoColorSpace; ramp.minFilter = ramp.magFilter = THREE.LinearFilter; ramp.generateMipmaps = false;
+
+function load(url, keyName) {
+  return new Promise((ok, fail) => loader.load(url, ok, (ev) => { if (ev.total) { progress[keyName] = ev.loaded / ev.total; showProgress(); } }, fail));
+}
+
+let room, bear;
+try {
+  [room, bear] = await Promise.all([load('assets/room1-v12c.glb', 'room'), load('assets/bear-d6-v13p8.glb', 'bear')]);
+} catch (err) {
+  document.querySelector('#loading .t').textContent = '장면을 불러오지 못했습니다';
+  loadText.textContent = '페이지를 새로 고쳐 다시 시도해 주세요.';
+  throw err;
+}
+
+// ---------- room: toon materials, hide logic-only nodes ----------
+const toonCache = new Map();
+function toon(m) {
+  if (toonCache.has(m)) return toonCache.get(m);
+  const n = new THREE.MeshToonMaterial({
+    name: m.name, color: m.color, map: m.map, vertexColors: m.vertexColors, gradientMap: ramp,
+    transparent: m.transparent, opacity: m.opacity, alphaTest: m.alphaTest, side: m.side, depthWrite: m.depthWrite,
+  });
+  n.userData.outlineParameters = { thickness: 0.0032, color: [0x24 / 255, 0x12 / 255, 0x26 / 255], alpha: 1, visible: !m.transparent };
+  toonCache.set(m, n); return n;
+}
+const views = {};
+room.scene.traverse((o) => {
+  const name = o.name || '';
+  if (/^(COL_|INT_|ANCHOR)/.test(name)) o.visible = false;
+  if (name === 'Bear.D6' || name === 'Bear.D6.Decals') o.visible = false;
+  if (o.isMesh) o.material = Array.isArray(o.material) ? o.material.map(toon) : toon(o.material);
+  if (o.isCamera) views[o.name] = o;
+});
+scene.add(room.scene);
+
+// ---------- new D6 bear (baked painted look, hull as geometry) ----------
+bear.scene.traverse((o) => {
+  if (o.isMesh) {
+    const map = o.material.map;
+    o.material = new THREE.MeshBasicMaterial({ map, side: THREE.FrontSide });
+    o.material.userData.outlineParameters = { visible: false };
+  }
+});
+scene.add(bear.scene);
+
+// ---------- animations ----------
+const mixer = new THREE.AnimationMixer(room.scene);
+const clips = Object.fromEntries(room.animations.map((c) => [c.name, c]));
+const ITEMS = [
+  ['방문', 'Room.Door', ['room.door']],
+  ['노트북', 'Laptop.Lid', ['laptop']],
+  ['사진 상자', 'PhotoBox.Lid', ['photobox']],
+  ['옷장 왼쪽 문', 'Wardrobe.Doors.Left', ['wardrobe.doors.left']],
+  ['옷장 오른쪽 문', 'Wardrobe.Doors.Right', ['wardrobe.doors.right']],
+  ['옷장 서랍 1', 'Wardrobe.Drawer1', ['wardrobe.drawer1']],
+  ['옷장 서랍 2', 'Wardrobe.Drawer2', ['wardrobe.drawer2']],
+  ['유리 수납장 왼쪽', 'Cabinet.Doors.Left', ['cabinet.doors.left', 'cabinet.glass.left']],
+  ['유리 수납장 오른쪽', 'Cabinet.Doors.Right', ['cabinet.doors.right', 'cabinet.glass.right']],
+  ['의자', 'Chair.Move', ['chair']],
+  ['러그 모서리', 'Carpet.Corner', ['carpet.corner', 'carpet.letter']],
+].filter(([, base]) => clips[base + '.Open'] && clips[base + '.Close']);
+const state = new Map();
+const animBox = document.getElementById('anims');
+const animButtons = new Map();
+function toggle(base) {
+  const open = !state.get(base); state.set(base, open);
+  for (const s of ['.Open', '.Close']) mixer.clipAction(clips[base + s]).stop();
+  const a = mixer.clipAction(clips[base + (open ? '.Open' : '.Close')]);
+  a.setLoop(THREE.LoopOnce, 1); a.clampWhenFinished = true; a.reset().play();
+  animButtons.get(base).setAttribute('aria-pressed', String(open));
+}
+for (const [label, base] of ITEMS) {
+  const b = document.createElement('button'); b.textContent = label; b.setAttribute('aria-pressed', 'false');
+  b.onclick = () => toggle(base); animBox.appendChild(b); animButtons.set(base, b);
+}
+
+// click / hover on objects
+const ray = new THREE.Raycaster(); const ndc = new THREE.Vector2();
+function itemAt(e) {
+  const r = canvas.getBoundingClientRect();
+  ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  const hit = ray.intersectObject(room.scene, true).find((h) => h.object.visible && h.object.material && !h.object.material.transparent);
+  if (!hit || hit.distance > 3.2) return null;
+  for (let o = hit.object; o; o = o.parent) {
+    const n = (o.name || '').toLowerCase();
+    const item = ITEMS.find(([, , prefixes]) => prefixes.some((p) => n.startsWith(p)));
+    if (item) return item;
+  }
+  return null;
+}
+function pick(e) { const item = itemAt(e); if (item) toggle(item[1]); }
+let lastHover = 0;
+function hover(e) {
+  const now = performance.now(); if (now - lastHover < 60) return; lastHover = now;
+  const item = itemAt(e); canvas.classList.toggle('hot', !!item);
+  if (item) { tip.textContent = `클릭: ${item[0]} ${state.get(item[1]) ? '닫기' : '열기'}`; tip.hidden = false; } else tip.hidden = true;
+}
+
+// ---------- viewpoints ----------
+const VIEW_LABELS = [['side1', '원작 1면'], ['side2', '원작 2면'], ['side3', '원작 3면'], ['side4', '원작 4면'],
+  ['close-bed-bears', '침대 곰'], ['close-egg-chair', '에그체어'], ['close-laptop', '노트북']];
+room.scene.updateMatrixWorld(true);
+const presets = [];
+for (const [n, label] of VIEW_LABELS) {
+  const c = views[n]; if (!c) continue;
+  const p = new THREE.Vector3(), q = new THREE.Quaternion(); c.getWorldPosition(p); c.getWorldQuaternion(q);
+  presets.push({ label, pos: p, quat: q });
+}
+// New bear and its cabinet: bear world position comes from the bear GLB itself.
+const bearBox = new THREE.Box3().setFromObject(bear.scene); const bearC = bearBox.getCenter(new THREE.Vector3());
+const front = new THREE.Vector3(1, 0, 0); // display bears face +X in this room
+function lookPreset(label, from, at, feature) {
+  const m = new THREE.Matrix4().lookAt(from, at, new THREE.Vector3(0, 1, 0));
+  presets.unshift({ label, pos: from, quat: new THREE.Quaternion().setFromRotationMatrix(m), feature });
+}
+lookPreset('곰 진열장', new THREE.Vector3(-0.35, 1.42, -0.82), new THREE.Vector3(-2.1, 1.0, -0.82));
+// Screen-right is -Z when looking toward -X, so aim a little toward +Z to keep the bear clear of the side panel.
+lookPreset('새 곰 D6 (v13p8)', bearC.clone().addScaledVector(front, 0.7).add(new THREE.Vector3(0, 0.08, 0.26)), bearC.clone().add(new THREE.Vector3(0, 0, 0.14)), true);
+
+const viewBox = document.getElementById('views');
+let tween = null;
+function goTo(p) {
+  setMode('walk');
+  const e = new THREE.Euler().setFromQuaternion(p.quat, 'YXZ');
+  tween = { t: 0, fromPos: pos.clone(), toPos: p.pos.clone(), fromYaw: yaw, toYaw: e.y, fromPitch: pitch, toPitch: e.x };
+  let d = tween.toYaw - tween.fromYaw; d = Math.atan2(Math.sin(d), Math.cos(d)); tween.toYaw = tween.fromYaw + d;
+}
+for (const p of presets) {
+  const b = document.createElement('button'); b.textContent = p.label; if (p.feature) b.classList.add('feature');
+  b.onclick = () => goTo(p); viewBox.appendChild(b);
+}
+
+// ---------- menu toggle (button or M) ----------
+const rail = document.getElementById('rail'), menuBtn = document.getElementById('menuBtn');
+function setMenu(open) { rail.hidden = !open; menuBtn.setAttribute('aria-expanded', String(open)); menuBtn.textContent = open ? '닫기' : '메뉴'; }
+menuBtn.onclick = () => setMenu(rail.hidden);
+addEventListener('keydown', (e) => { if (e.code === 'KeyM' && !e.repeat) setMenu(rail.hidden); });
+
+// ---------- loop ----------
+function resize() {
+  const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.fov = w / h < 1 ? 78 : 66; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); addEventListener('orientationchange', () => setTimeout(resize, 200)); resize();
+setMode('walk');
+const first = presets.find((p) => p.label === '원작 1면') || presets[0];
+pos.copy(first.pos); { const e = new THREE.Euler().setFromQuaternion(first.quat, 'YXZ'); yaw = e.y; pitch = e.x; }
+
+const clock = new THREE.Clock();
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.05);
+  mixer.update(dt);
+  if (mode === 'walk') {
+    if (tween) {
+      tween.t = Math.min(1, tween.t + dt / (reduce ? 0.001 : 0.9)); const k = tween.t * tween.t * (3 - 2 * tween.t);
+      pos.lerpVectors(tween.fromPos, tween.toPos, k); yaw = THREE.MathUtils.lerp(tween.fromYaw, tween.toYaw, k); pitch = THREE.MathUtils.lerp(tween.fromPitch, tween.toPitch, k);
+      if (tween.t >= 1) tween = null;
+    }
+    const gp = gamepad();
+    const sp = (keys.has('ShiftLeft') || keys.has('ShiftRight') || (gp && gp.buttons[10] && gp.buttons[10].pressed) ? 2.6 : 1.3) * dt;
+    let f = (keys.has('KeyW') || keys.has('ArrowUp') ? 1 : 0) - (keys.has('KeyS') || keys.has('ArrowDown') ? 1 : 0) - joy.y;
+    let s = (keys.has('KeyD') || keys.has('ArrowRight') ? 1 : 0) - (keys.has('KeyA') || keys.has('ArrowLeft') ? 1 : 0) + joy.x;
+    if (gp) {
+      f -= dead(gp.axes[1] || 0); s += dead(gp.axes[0] || 0);
+      const lx = dead(gp.axes[2] || 0), ly = dead(gp.axes[3] || 0);
+      if (lx || ly) { tween = null; yaw -= lx * 2.2 * dt; pitch = THREE.MathUtils.clamp(pitch - ly * 1.8 * dt, -1.35, 1.35); }
+    }
+    f = THREE.MathUtils.clamp(f, -1, 1); s = THREE.MathUtils.clamp(s, -1, 1);
+    if (f || s) {
+      tween = null;
+      pos.x += (-Math.sin(yaw) * f + Math.cos(yaw) * s) * sp; pos.z += (-Math.cos(yaw) * f - Math.sin(yaw) * s) * sp;
+      pos.x = THREE.MathUtils.clamp(pos.x, -ROOM.x, ROOM.x); pos.z = THREE.MathUtils.clamp(pos.z, -ROOM.z, ROOM.z);
+    }
+    applyWalkCamera();
+  } else {
+    const gp = gamepad();
+    if (joy.x || joy.y || (gp && (dead(gp.axes[0] || 0) || dead(gp.axes[1] || 0)))) setMode('walk');
+    orbit.update();
+  }
+  effect.render(scene, camera);
+});
+document.getElementById('loading').hidden = true;
+</script>
+
+</body>
+</html>
