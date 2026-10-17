@@ -25,3 +25,11 @@ Style: original, timeless, flat vector-like logo design, mathematically clean ed
 Text verbatim: "A", "B", "C", "Kuiper Belt" (repeat company name under each mark).
 Avoid: gradients, 3D, glow, shadows, stars and starfields, spacecraft, stock clipart, texture, hairline complexity, brand lookalikes, misspelled lettering. This is a review board of logo proposals, not a final approved logo.
 ```
+
+## Favicon draft on A (2026-10-17)
+
+Concept A is redrawn as geometry in `kuiper-belt-mark.svg` (64-unit grid, ring radius 20, stroke 7, body radius 6.5).
+The lower-left gap and the gaps around the body are widened so the round caps do not close them at 16 px.
+The homepage uses it as its tab icon (`docs/assets/brand/`): an SVG that switches to light ink in a dark browser theme,
+a 32 px PNG on a light tile, and a 180 px Apple touch icon. `/hwan/` keeps its own icon.
+This is a favicon draft on the recommended concept, not a final logo selection.
