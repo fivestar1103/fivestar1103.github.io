@@ -26,10 +26,16 @@ Text verbatim: "A", "B", "C", "Kuiper Belt" (repeat company name under each mark
 Avoid: gradients, 3D, glow, shadows, stars and starfields, spacecraft, stock clipart, texture, hairline complexity, brand lookalikes, misspelled lettering. This is a review board of logo proposals, not a final approved logo.
 ```
 
-## Favicon draft on A (2026-10-17)
+## Korean concept board and the chosen favicon (2026-10-17)
 
-Concept A is redrawn as geometry in `kuiper-belt-mark.svg` (64-unit grid, ring radius 20, stroke 7, body radius 6.5).
-The lower-left gap and the gaps around the body are widened so the round caps do not close them at 16 px.
-The homepage uses it as its tab icon (`docs/assets/brand/`): an SVG that switches to light ink in a dark browser theme,
-a 32 px PNG on a light tile, and a 180 px Apple touch icon. `/hwan/` keeps its own icon.
-This is a favicon draft on the recommended concept, not a final logo selection.
+A second board with nine concepts (`kuiper-belt-logo-concepts-ko.webp`, black and white on the left, colour on the right)
+followed the A/B/C sheet. For the tab icon, concept **01 쌍성 (contact binary)** is chosen over A and the other eight:
+
+- Two solid shapes keep their silhouette at 16 px. A and 05 rely on a thin open ring and gaps; 07 relies on small dots.
+- It is the Kuiper Belt's own picture: Arrokoth is a contact binary, and Pluto and Charon are a binary pair.
+- It works in one colour. 06, 08 and 09 are lettering and do not fit a favicon.
+
+`kuiper-belt-mark.svg` redraws 01 as geometry (64-unit grid: large body r 20, small body r 12.5, moat 3) in navy #123f5e
+and orange #c8613b; `kuiper-belt-mark-mono.svg` is the one-colour version. The homepage uses it as its tab icon
+(`docs/assets/brand/`): an SVG that lightens in a dark browser theme, a 32 px PNG on a light tile and a 180 px Apple touch
+icon. `/hwan/` keeps its own icon. This is a favicon on the chosen concept, not a finished logo system.

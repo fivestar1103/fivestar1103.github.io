@@ -1,4 +1,4 @@
-<!-- Kuiper Belt mark, concept A (Orbit) from branding/README.md (2026-10-08), redrawn as geometry:
-     an open belt in two arcs and one body in the open quadrant. Charcoal #10151c and slate #22485c;
-     the favicon switches to light ink in a dark browser theme. -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><style>@media (prefers-color-scheme: dark){.a{stroke:#e8ecf1}.b{stroke:#79bdd6}.c{fill:#79bdd6}}</style><path class="a" d="M11.93 39.01A20 20 0 0 1 39.13 14.73" fill="none" stroke="#10151c" stroke-width="7" stroke-linecap="round"/><path class="b" d="M50.41 37.84A20 20 0 0 1 18.28 48.43" fill="none" stroke="#22485c" stroke-width="7" stroke-linecap="round"/><circle class="c" cx="48.98" cy="24.23" r="6.5" fill="#22485c"/></svg>
+<!-- Kuiper Belt mark: concept 01 (쌍성, contact binary) from the Korean concept board, redrawn as
+     geometry. A large body with a small one pressed into it, separated by a moat, like Arrokoth
+     or Pluto and Charon. Navy #123f5e and orange #c8613b; the favicon lightens in a dark theme. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><style>@media (prefers-color-scheme: dark){.a{fill:#e6edf2}.b{fill:#e57a50}}</style><defs><mask id="m"><rect width="64" height="64" fill="#fff"/><circle cx="44.5" cy="19.5" r="15.5" fill="#000"/></mask></defs><circle class="a" cx="25.5" cy="38.5" r="20.0" fill="#123f5e" mask="url(#m)"/><circle class="b" cx="44.5" cy="19.5" r="12.5" fill="#c8613b"/></svg>
