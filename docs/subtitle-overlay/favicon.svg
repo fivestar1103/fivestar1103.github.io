@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Subtitle Overlay tab icon: the app tile without its wordmark, with the mark enlarged and the
+       ring thickened so it still reads at 16 px. Source: subtitle-overlay-extension,
+       tools/demo-video-branding/assets/icon.svg (ring = 1/phi of a turn from 12 o'clock). -->
+  <defs>
+    <radialGradient id="plate" cx="0.32" cy="0.2" r="1">
+      <stop offset="0" stop-color="#F9F6EF"/><stop offset="1" stop-color="#DED5C3"/></radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="224" fill="url(#plate)"/>
+  <g transform="translate(512 512) scale(1.8) translate(-512 -430)">
+    <path d="M 386.36 567.15 A 186.0 186.0 0 0 1 512.00 244.00" fill="none" stroke="#5E9189" stroke-opacity="0.25"
+          stroke-width="34" stroke-linecap="round"/>
+    <path d="M 512.00 244.00 A 186.0 186.0 0 1 1 386.36 567.15" fill="none" stroke="#5E9189" stroke-width="34" stroke-linecap="round"/>
+    <path d="M 478 358 L 478 502 L 594 430 Z" fill="#5E9189"/>
+  </g>
+</svg>

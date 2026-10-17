@@ -1,0 +1,4 @@
+<!-- Kuiper Belt mark: concept 01 (쌍성, contact binary) from the Korean concept board, redrawn as
+     geometry. A large body with a small one pressed into it, separated by a moat, like Arrokoth
+     or Pluto and Charon. Navy #123f5e and orange #c8613b; the favicon lightens in a dark theme. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><mask id="m"><rect width="64" height="64" fill="#fff"/><circle cx="44.5" cy="19.5" r="15.5" fill="#000"/></mask></defs><circle class="a" cx="25.5" cy="38.5" r="20.0" fill="#123f5e" mask="url(#m)"/><circle class="b" cx="44.5" cy="19.5" r="12.5" fill="#c8613b"/></svg>
