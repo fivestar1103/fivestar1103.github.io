@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Threads 인증 완료</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { display: grid; min-height: 100vh; margin: 0; place-items: center; background: #f4f4f0; color: #171717; }
+    main { width: min(36rem, calc(100% - 3rem)); padding: 2rem; border: 1px solid #d8d8d2; border-radius: 1.25rem; background: #fff; box-shadow: 0 1rem 3rem #00000012; }
+    h1 { margin-top: 0; font-size: clamp(1.7rem, 6vw, 2.4rem); letter-spacing: -0.04em; }
+    p { line-height: 1.65; }
+    code { overflow-wrap: anywhere; }
+    button { margin-top: .75rem; padding: .8rem 1rem; border: 0; border-radius: .75rem; background: #171717; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+    .error { color: #b42318; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #111; color: #f5f5f5; }
+      main { border-color: #333; background: #1c1c1c; box-shadow: none; }
+      button { background: #f5f5f5; color: #171717; }
+      .error { color: #ff8a80; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="title">Threads 인증 결과</h1>
+    <p id="message">응답을 확인하고 있습니다.</p>
+    <button id="copy" type="button" hidden>콜백 URL 복사</button>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search || location.hash.slice(1));
+    const code = params.get("code");
+    const error = params.get("error_message") || params.get("error_description") || params.get("error");
+    const title = document.querySelector("#title");
+    const message = document.querySelector("#message");
+    const copy = document.querySelector("#copy");
+
+    if (code) {
+      title.textContent = "인증 완료";
+      message.textContent = "이 창의 전체 주소를 threads-lab 터미널에 붙여 넣으세요.";
+      copy.hidden = false;
+      copy.addEventListener("click", async () => {
+        await navigator.clipboard.writeText(location.href);
+        copy.textContent = "복사됨";
+      });
+    } else if (error) {
+      title.textContent = "인증 실패";
+      message.textContent = error;
+      message.classList.add("error");
+    } else {
+      title.textContent = "Threads OAuth 콜백";
+      message.textContent = "Meta Threads 인증 응답을 기다리는 주소입니다.";
+    }
+  </script>
+</body>
+</html>
