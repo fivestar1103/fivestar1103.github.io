@@ -30,10 +30,25 @@ try {
     assert.equal(response.status, 200); assert.equal(bytes.length, 2327524);
     assert.equal(createHash('sha256').update(bytes).digest('hex'), '2623a2953f6ff3d2c1e61740c6cdb7168133479b267dfef114a4a3cc5bdd788f');
   });
-  for (const path of ['/', '/no-such-page.html?lang=ko#contact', '/a/deep/link?x=1&y=%ED%95%9C#part', '//evil.example/path?x=1', '/a%20b?next=https%3A%2F%2Fevil.example']) {
+  for (const path of ['/', '/?lang=ko#work', '/index.html#experience']) {
+    await test(`root opens the personal homepage ${path}`, async () => {
+      const response = await fetch(base + path); const html = await response.text();
+      assert.equal(response.status, 200);
+      assert.match(html, /name="robots" content="noindex, follow"/);
+      assert.ok(html.includes('<meta http-equiv="refresh" content="0; url=https://kuiperbelt.site/hwan/">'));
+      assert.ok(html.includes('<link id="canonical" rel="canonical" href="https://kuiperbelt.site/hwan/">'));
+      const url = new URL(base + path); let destination;
+      const elements = { destination: {} };
+      const context = vm.createContext({ location: {pathname:url.pathname,search:url.search,hash:url.hash,replace(v){destination=v;}},document:{getElementById(id){return elements[id];}} });
+      for (const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) vm.runInContext(match[1],context);
+      assert.equal(destination, 'https://kuiperbelt.site/hwan/' + url.search + url.hash);
+      assert.equal(elements.destination.href, destination);
+    });
+  }
+  for (const path of ['/no-such-page.html?lang=ko#contact', '/a/deep/link?x=1&y=%ED%95%9C#part', '//evil.example/path?x=1', '/a%20b?next=https%3A%2F%2Fevil.example']) {
     await test(`human redirect ${path}`, async () => {
       const response = await fetch(base + path); const html = await response.text();
-      assert.equal(response.status, path === '/' ? 200 : 404);
+      assert.equal(response.status, 404);
       assert.match(html, /name="robots" content="noindex, follow"/);
       assert.match(html, /http-equiv="refresh"/);
       assert.match(html, /rel="canonical"/);
