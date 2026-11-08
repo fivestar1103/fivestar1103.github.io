@@ -4,14 +4,14 @@
 
 :root {
   color-scheme: light;
-  --paper: #eef1f4; --ink: #161b22; --ink-2: #4d5a69; --ink-3: #6a7684; --line: #c9d1db; --accent: #526b88; --dot: #aab5c3;
+  --paper: #eef1f4; --ink: #161b22; --ink-2: #4d5a69; --ink-3: #6a7684; --line: #c9d1db; --accent: #526b88; --mesh: 52, 66, 84;
   --font: "NanumSquare Neo", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --gutter: max(5vw, 24px);
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { color-scheme: dark; --paper: #090b0f; --ink: #e6ebf2; --ink-2: #a5b0bf; --ink-3: #7f8b9b; --line: #262d38; --accent: #a9bed8; --dot: #323b49; }
+  :root:not([data-theme="light"]) { color-scheme: dark; --paper: #090b0f; --ink: #e6ebf2; --ink-2: #a5b0bf; --ink-3: #7f8b9b; --line: #262d38; --accent: #a9bed8; --mesh: 176, 194, 216; }
 }
-:root[data-theme="dark"] { color-scheme: dark; --paper: #090b0f; --ink: #e6ebf2; --ink-2: #a5b0bf; --ink-3: #7f8b9b; --line: #262d38; --accent: #a9bed8; --dot: #323b49; }
+:root[data-theme="dark"] { color-scheme: dark; --paper: #090b0f; --ink: #e6ebf2; --ink-2: #a5b0bf; --ink-3: #7f8b9b; --line: #262d38; --accent: #a9bed8; --mesh: 176, 194, 216; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -41,14 +41,14 @@ html[data-language="en"] .copy-ko, html[data-language="ko"] .copy-en { display: 
 .language-toggle { min-height: 44px; padding: 0; border: 0; background: transparent; font-size: 11px; letter-spacing: .04em; color: var(--ink-3); white-space: nowrap; }
 html[data-language="en"] .language-en, html[data-language="ko"] .language-ko { color: var(--ink); }
 
-/* A tile grid of dots behind everything. It drifts at a steady third of the
-   scroll speed (home.js) while the text eases, so the scroll is always visible.
-   It is strongest on the empty right side and faint behind the text. */
+/* A faint Delaunay mesh behind everything (mesh.js). Only short edges show, so
+   it reads as scattered constellations, not a net. It drifts at a steady third
+   of the scroll while the text eases, so scrolling stays visible. Strongest on
+   the empty right side, almost gone behind the text. */
 .backdrop { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
-  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.35) 35%, #000 70%);
-          mask-image: linear-gradient(90deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.35) 35%, #000 70%); }
-.dots { position: absolute; left: 0; right: 0; top: 0; height: calc(100% + 28px);
-  background-image: radial-gradient(circle, var(--dot) 1.1px, transparent 1.6px); background-size: 28px 28px; background-position: 14px 14px; will-change: transform; }
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.3) 38%, #000 72%);
+          mask-image: linear-gradient(90deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.3) 38%, #000 72%); }
+.mesh { display: block; width: 100%; height: 100%; }
 main { position: relative; z-index: 1; }
 
 /* One screen per section. home.js changes how fast each section's content
@@ -87,7 +87,7 @@ a.row:hover .ext, a.name:hover .ext, .links a:hover .ext { color: var(--accent);
 .bottom { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 44px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 10px; color: var(--ink-3); }
 
 @media (max-width: 640px) {
-  .backdrop { -webkit-mask-image: none; mask-image: none; opacity: .45; }
+  .backdrop { -webkit-mask-image: none; mask-image: none; opacity: .5; }
   .top { padding-block: 18px; }
   .shell { padding-block: 96px 88px; }
   .hero h1 { font-size: clamp(40px, 12vw, 56px); }

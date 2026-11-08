@@ -41,15 +41,13 @@
   // about 2x between sections, so each one settles and the next arrives quickly.
   // Native scrolling throughout; nothing is pinned or hijacked.
   var chapters = [].slice.call(document.querySelectorAll(".chapter"));
-  var dots = document.querySelector(".dots");
   var shells = chapters.map(function (chapter) { return chapter.querySelector(".shell"); });
   var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var queued = false;
   function update() {
     queued = false;
     var h = window.innerHeight, y = window.scrollY;
-    // Backdrop: a steady third of the scroll, wrapped to one 28px tile.
-    dots.style.transform = motion.matches ? "" : "translate3d(0," + (-((y * 0.33) % 28)).toFixed(1) + "px,0)";
+    if (window.homeMesh) window.homeMesh.draw(motion.matches ? 0 : y * 0.33);
     chapters.forEach(function (chapter, i) {
       var shell = shells[i];
       if (motion.matches || shell.offsetHeight > h + 1) {
