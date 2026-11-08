@@ -4,14 +4,14 @@
 
 :root {
   color-scheme: light;
-  --paper: #eef1f4; --ink: #161b22; --ink-2: #4d5a69; --ink-3: #6a7684; --line: #c9d1db; --accent: #526b88; --mesh: 52, 66, 84;
+  --paper: #eef1f4; --ink: #161b22; --ink-2: #4d5a69; --ink-3: #6a7684; --line: #c9d1db; --accent: #526b88; --mesh: 52, 66, 84; --spark: #cf6d34; --spark-rgb: 207, 109, 52;
   --font: "NanumSquare Neo", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --gutter: max(5vw, 24px);
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { color-scheme: dark; --paper: #090b0f; --ink: #e6ebf2; --ink-2: #a5b0bf; --ink-3: #7f8b9b; --line: #262d38; --accent: #a9bed8; --mesh: 176, 194, 216; }
+  :root:not([data-theme="light"]) { color-scheme: dark; --paper: #090b0f; --ink: #e6ebf2; --ink-2: #a5b0bf; --ink-3: #7f8b9b; --line: #262d38; --accent: #a9bed8; --mesh: 176, 194, 216; --spark: #f0a46a; --spark-rgb: 240, 164, 106; }
 }
-:root[data-theme="dark"] { color-scheme: dark; --paper: #090b0f; --ink: #e6ebf2; --ink-2: #a5b0bf; --ink-3: #7f8b9b; --line: #262d38; --accent: #a9bed8; --mesh: 176, 194, 216; }
+:root[data-theme="dark"] { color-scheme: dark; --paper: #090b0f; --ink: #e6ebf2; --ink-2: #a5b0bf; --ink-3: #7f8b9b; --line: #262d38; --accent: #a9bed8; --mesh: 176, 194, 216; --spark: #f0a46a; --spark-rgb: 240, 164, 106; }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -21,6 +21,7 @@ ul { padding: 0; list-style: none; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; cursor: pointer; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+::selection { background: rgba(var(--spark-rgb), .22); }
 html[data-language="en"] .copy-ko, html[data-language="ko"] .copy-en { display: none; }
 .skip { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 10px 16px; background: var(--ink); color: var(--paper); transform: translateY(-160%); }
 .skip:focus { transform: none; }
@@ -59,6 +60,8 @@ main { position: relative; z-index: 1; }
 .list { max-width: 920px; }
 .hero h1 { font-size: clamp(44px, 6.4vw, 88px); font-weight: 800; line-height: 1.1; letter-spacing: -.04em; }
 html[data-language="ko"] .hero h1 { letter-spacing: -.02em; }
+/* The one warm point on the page: the full stop after the name. */
+.hero h1 .stop { color: var(--spark); margin-left: .02em; }
 .lede { margin-top: 28px; color: var(--ink-2); font-size: 15px; }
 .anchor { position: absolute; bottom: 0; }
 
@@ -70,16 +73,16 @@ html[data-language="ko"] .chapter h2 { font-size: 11px; letter-spacing: .06em; }
 .note { color: var(--ink-2); font-size: 13px; word-break: keep-all; overflow-wrap: anywhere; }
 .nobr { white-space: nowrap; }
 .year { justify-self: end; color: var(--ink-3); font-size: 11px; letter-spacing: .02em; white-space: nowrap; }
-a.row:hover .name, a.name:hover { color: var(--accent); }
+a.row:hover .name, a.name:hover { color: var(--spark); }
 .name { justify-self: start; }
 .ext { margin-left: 6px; font-size: .7em; color: var(--ink-3); transition: color 160ms ease; }
-a.row:hover .ext, a.name:hover .ext, .links a:hover .ext { color: var(--accent); }
+a.row:hover .ext, a.name:hover .ext, .links a:hover .ext { color: var(--spark); }
 .note em { font-style: normal; color: var(--ink); }
 .note a { color: var(--ink); border-bottom: 1px solid var(--line); transition: color 160ms ease, border-color 160ms ease; }
-.note a:hover { color: var(--accent); border-color: var(--accent); }
+.note a:hover { color: var(--spark); border-color: var(--spark); }
 
 .email { display: inline-block; align-self: flex-start; max-width: 100%; padding-bottom: 6px; border-bottom: 1px solid var(--ink-3); font-size: clamp(22px, 2.8vw, 34px); line-height: 1.4; letter-spacing: -.03em; overflow-wrap: anywhere; transition: color 160ms ease, border-color 160ms ease; }
-.email:hover { color: var(--accent); border-color: var(--accent); }
+.email:hover { color: var(--spark); border-color: var(--spark); }
 .links { display: flex; align-self: flex-start; flex-wrap: wrap; gap: 4px 26px; margin-top: 28px; font-size: 12px; color: var(--ink-2); }
 .links a { display: inline-flex; align-items: center; min-height: 40px; transition: color 160ms ease; }
 .links a:hover { color: var(--ink); }
