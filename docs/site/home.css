@@ -72,6 +72,8 @@ html[data-language="ko"] .chapter h2 { font-size: 11px; letter-spacing: .06em; }
 .name { font-size: 16px; letter-spacing: -.01em; transition: color 160ms ease; }
 .note { color: var(--ink-2); font-size: 13px; word-break: keep-all; overflow-wrap: anywhere; }
 .nobr { white-space: nowrap; }
+.note .sub { display: block; margin-top: 1px; color: var(--ink-3); }
+.note .sub a, .note .sub em { color: var(--ink-2); }
 .year { justify-self: end; color: var(--ink-3); font-size: 11px; letter-spacing: .02em; white-space: nowrap; }
 a.row:hover .name, a.name:hover { color: var(--spark); }
 .name { justify-self: start; }
