@@ -1,22 +1,101 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-language="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, follow">
-<meta name="referrer" content="no-referrer">
-<link id="canonical" rel="canonical" href="https://kuiperbelt.site/hwan/">
-<title>Seonghwan Oh — moved</title>
-<script>
-  // The old site root was the founder's personal homepage, which now lives at /hwan/.
-  // Old links such as /#work keep their query and hash.
-  const destination = 'https://kuiperbelt.site/hwan/' + location.search + location.hash;
-  location.replace(destination);
-</script>
-<noscript><meta http-equiv="refresh" content="0; url=https://kuiperbelt.site/hwan/"></noscript>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef1f4">
+  <title>Seonghwan Oh — Gameplay Programmer</title>
+  <meta name="description" content="Seonghwan Oh, gameplay programmer at NCSOFT.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fivestar1103.github.io/">
+  <meta property="og:title" content="Seonghwan Oh — Gameplay Programmer">
+  <meta property="og:description" content="Seonghwan Oh, gameplay programmer at NCSOFT.">
+  <link rel="canonical" href="https://fivestar1103.github.io/">
+  <link rel="preload" href="/site/fonts/NanumSquareNeo-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/site/home.css">
+  <script>
+    // Before first paint: saved theme and language, so nothing flips after load.
+    (function () {
+      var root = document.documentElement, theme, language;
+      try { theme = localStorage.getItem("home-theme"); language = localStorage.getItem("home-language"); } catch (e) {}
+      if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+      if (language !== "ko" && language !== "en") language = (navigator.language || "en").toLowerCase().indexOf("ko") === 0 ? "ko" : "en";
+      root.lang = language;
+      root.dataset.language = language;
+    })();
+  </script>
 </head>
 <body>
-<p><a id="destination" href="https://kuiperbelt.site/hwan/">Continue to Seonghwan Oh</a></p>
-<script>document.getElementById('destination').href = destination;</script>
+  <a class="skip" href="#main"><span class="copy-en">Skip to content</span><span class="copy-ko">본문으로 이동</span></a>
+
+  <header class="top">
+    <nav aria-label="Settings">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20.8 13a9 9 0 0 1-9.8-9.8A9 9 0 1 0 20.8 13Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+      <button class="language-toggle" type="button" data-language-toggle aria-label="한국어로 보기"><span class="language-en">EN</span><span aria-hidden="true"> / </span><span class="language-ko">KO</span></button>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="name">
+      <h1 id="name"><span class="copy-en">Seonghwan Oh</span><span class="copy-ko">오성환</span></h1>
+      <p class="lede"><span class="copy-en">Gameplay programmer at NCSOFT.</span><span class="copy-ko">NCSOFT 클라이언트 프로그래머.</span></p>
+      <span id="about" class="anchor" aria-hidden="true"></span>
+    </section>
+
+    <section class="block" id="work" aria-labelledby="work-title">
+      <h2 id="work-title"><span class="copy-en">Work</span><span class="copy-ko">작업</span></h2>
+      <ul class="list">
+        <li><a class="row" href="https://apps.apple.com/kr/app/fate-and-accidy/id6757942408" rel="noreferrer">
+          <span class="name">Fate and Accidy</span>
+          <span class="note"><span class="copy-en">Escape-room game, team of six</span><span class="copy-ko">6인 팀 방탈출 게임</span></span>
+          <span class="year">2024—26</span>
+        </a></li>
+        <li><a class="row" href="https://github.com/CodingWithCalvin/VS-MCPServer/pull/96" rel="noreferrer">
+          <span class="name">VS-MCPServer</span>
+          <span class="note"><span class="copy-en">Open-source fix, merged</span><span class="copy-ko">오픈소스 수정, 병합됨</span></span>
+          <span class="year">2026</span>
+        </a></li>
+      </ul>
+    </section>
+
+    <section class="block" id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title"><span class="copy-en">Experience</span><span class="copy-ko">경력</span></h2>
+      <ul class="list">
+        <li class="row">
+          <span class="name">NCSOFT</span>
+          <span class="note"><span class="copy-en">Gameplay Programmer</span><span class="copy-ko">클라이언트 프로그래머</span></span>
+          <span class="year">2026—</span>
+        </li>
+        <li class="row">
+          <span class="name">San Diego State University</span>
+          <span class="note"><span class="copy-en">Research Engineer</span><span class="copy-ko">연구 엔지니어</span></span>
+          <span class="year">2025</span>
+        </li>
+        <li class="row">
+          <span class="name">GameMakers</span>
+          <span class="note"><span class="copy-en">Lead Programmer</span><span class="copy-ko">리드 프로그래머</span></span>
+          <span class="year">2024—26</span>
+        </li>
+        <li class="row">
+          <span class="name"><span class="copy-en">Republic of Korea Air Force</span><span class="copy-ko">대한민국 공군</span></span>
+          <span class="note"><span class="copy-en">Interpreter</span><span class="copy-ko">통역병</span></span>
+          <span class="year">2021—22</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block contact" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title"><span class="copy-en">Contact</span><span class="copy-ko">연락</span></h2>
+      <a class="email" href="mailto:fivestar1103@uos.ac.kr">fivestar1103@uos.ac.kr</a>
+      <p class="links">
+        <a href="https://github.com/fivestar1103" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/hwanyo/" rel="noreferrer">LinkedIn</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="bottom">© <span data-current-year>2026</span> Seonghwan Oh</footer>
+
+  <script src="/site/home.js"></script>
 </body>
 </html>
