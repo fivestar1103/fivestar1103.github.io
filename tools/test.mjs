@@ -41,7 +41,7 @@ try {
   }
   await test('homepage and its files never mention or link Kuiper Belt', async () => {
     const { pages, personal } = await import('./make-stubs.mjs');
-    const files = ['index.html', 'site/home.css', 'site/home.js', 'robots.txt', ...(await pages()).filter(path => personal.test(path))];
+    const files = ['index.html', 'site/home.css', 'site/home.js', 'site/mesh.js', 'robots.txt', ...(await pages()).filter(path => personal.test(path))];
     for (const file of files) assert.doesNotMatch(await readFile(resolve(root, file), 'utf8'), /kuiper|카이퍼/i, file);
     for (const font of ['NanumSquareNeo-Regular.woff2', 'NanumSquareNeo-ExtraBold.woff2']) {
       const r = await fetch(`${base}/site/fonts/${font}`); assert.equal(r.status, 200, font);
