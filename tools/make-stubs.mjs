@@ -10,12 +10,33 @@ const here = import.meta.dirname;
 const docs = resolve(here, '../docs');
 const kept = /^(index\.html|404\.html|threads-oauth\/)/;
 
+// The founder's own pages stay on this host and open its homepage. They never
+// lead to kuiperbelt.site: the two sites are kept apart on purpose.
+export const personal = /^(hwan\/index\.html|portfolio[^/]*\.html|legacy\/portfolio[^/]*\.html)$/;
+
 export function target(path) {
+  if (personal.test(path)) return '/';
   const page = path.replace(/(^|\/)index\.html$/, '$1');
   return 'https://kuiperbelt.site/' + page.split('/').map(encodeURIComponent).join('/');
 }
 
 export function stub(path) {
+  if (personal.test(path)) return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://fivestar1103.github.io/">
+<title>Seonghwan Oh</title>
+<script>location.replace('/' + location.search + location.hash);</script>
+<meta http-equiv="refresh" content="0; url=/">
+</head>
+<body>
+<p><a href="/">Seonghwan Oh</a></p>
+</body>
+</html>
+`;
   const to = target(path);
   return `<!doctype html>
 <html lang="en">

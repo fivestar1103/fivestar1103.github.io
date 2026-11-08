@@ -1,3 +1,2 @@
 User-agent: *
 Allow: /
-Sitemap: https://kuiperbelt.site/spamdog/sitemap.xml
