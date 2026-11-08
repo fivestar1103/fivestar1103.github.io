@@ -5,7 +5,7 @@
   var languageButton = document.querySelector("[data-language-toggle]");
   var text = {
     en: { title: "Seonghwan Oh — Gameplay Programmer", description: "Seonghwan Oh, gameplay programmer at NCSOFT.", language: "한국어로 보기", toLight: "Switch to light theme", toDark: "Switch to dark theme" },
-    ko: { title: "오성환 — 클라이언트 프로그래머", description: "NCSOFT 클라이언트 프로그래머 오성환입니다.", language: "View in English", toLight: "라이트 테마로 전환", toDark: "다크 테마로 전환" }
+    ko: { title: "오성환 — 게임플레이 프로그래머", description: "NCSOFT 게임플레이 프로그래머 오성환입니다.", language: "View in English", toLight: "라이트 테마로 전환", toDark: "다크 테마로 전환" }
   };
 
   function dark() { return root.dataset.theme === "dark" || (!root.dataset.theme && system.matches); }
