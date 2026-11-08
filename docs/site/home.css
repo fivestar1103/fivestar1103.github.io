@@ -48,7 +48,7 @@ html[data-language="en"] .language-en, html[data-language="ko"] .language-ko { c
 .chapter[data-pinned] > .shell { position: sticky; top: 0; }
 .shell { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 104px var(--gutter) 96px; }
 .sections-ready .shell { opacity: var(--chapter-opacity, 1); }
-.list { max-width: 760px; }
+.list { max-width: 920px; }
 .hero h1 { font-size: clamp(44px, 6.4vw, 88px); font-weight: 800; line-height: 1.1; letter-spacing: -.04em; }
 html[data-language="ko"] .hero h1 { letter-spacing: -.02em; }
 .lede { margin-top: 28px; color: var(--ink-2); font-size: 15px; }
@@ -59,12 +59,14 @@ html[data-language="ko"] .chapter h2 { font-size: 11px; letter-spacing: .06em; }
 
 .row { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) 4.5rem; align-items: baseline; gap: 6px 28px; padding-block: 11px; }
 .name { font-size: 16px; letter-spacing: -.01em; transition: color 160ms ease; }
-.note { color: var(--ink-2); font-size: 13px; }
+.note { color: var(--ink-2); font-size: 13px; word-break: keep-all; overflow-wrap: anywhere; }
+.nobr { white-space: nowrap; }
 .year { justify-self: end; color: var(--ink-3); font-size: 11px; letter-spacing: .02em; white-space: nowrap; }
 a.row:hover .name, a.name:hover { color: var(--accent); }
 .name { justify-self: start; }
 .ext { margin-left: 6px; font-size: .7em; color: var(--ink-3); transition: color 160ms ease; }
 a.row:hover .ext, a.name:hover .ext, .links a:hover .ext { color: var(--accent); }
+.note em { font-style: normal; color: var(--ink); }
 .note a { color: var(--ink); border-bottom: 1px solid var(--line); transition: color 160ms ease, border-color 160ms ease; }
 .note a:hover { color: var(--accent); border-color: var(--accent); }
 
