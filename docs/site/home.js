@@ -36,41 +36,40 @@
   document.querySelector("[data-current-year]").textContent = String(new Date().getFullYear());
   render();
 
-  // Sections: one screen each. On a large screen a section that fits is pinned
-  // for a short stretch of scrolling, and every section fades with its distance
-  // from the viewport. Native scrolling throughout; nothing is hijacked.
+  // Sections: one screen each, at the page's natural length. Content moves at a
+  // changing speed instead: about 0.4x of the scroll while a section is centred,
+  // about 2x between sections, so each one settles and the next arrives quickly.
+  // Native scrolling throughout; nothing is pinned or hijacked.
   var chapters = [].slice.call(document.querySelectorAll(".chapter"));
+  var dots = document.querySelector(".dots");
   var shells = chapters.map(function (chapter) { return chapter.querySelector(".shell"); });
   var motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var large = window.matchMedia("(min-width: 900px) and (min-height: 640px)");
-  var queued = false, layoutNeeded = true;
+  var queued = false;
   function update() {
     queued = false;
     var h = window.innerHeight, y = window.scrollY;
-    if (layoutNeeded) {
-      layoutNeeded = false;
-      chapters.forEach(function (chapter, i) {
-        var pin = !motion.matches && large.matches && i < chapters.length - 1 && shells[i].offsetHeight <= h + 1;
-        chapter.toggleAttribute("data-pinned", pin);
-      });
-    }
-    chapters.forEach(function (chapter) {
-      var top = chapter.offsetTop;
-      var enter = Math.max(0, (top - y) / h);
-      var exit = Math.max(0, (y - (top + Math.max(0, chapter.offsetHeight - h))) / h);
-      var opacity = motion.matches ? 1 : Math.max(0, 1 - Math.max(enter, exit) * 0.8);
-      chapter.style.setProperty("--chapter-opacity", opacity.toFixed(3));
+    // Backdrop: a steady third of the scroll, wrapped to one 28px tile.
+    dots.style.transform = motion.matches ? "" : "translate3d(0," + (-((y * 0.33) % 28)).toFixed(1) + "px,0)";
+    chapters.forEach(function (chapter, i) {
+      var shell = shells[i];
+      if (motion.matches || shell.offsetHeight > h + 1) {
+        shell.style.transform = "";
+        chapter.style.setProperty("--chapter-opacity", "1");
+        return;
+      }
+      var p = (y - chapter.offsetTop) / h;           // 0 when the section fills the screen
+      var q = Math.max(-1, Math.min(1, p));
+      var seen = q - 0.6 * q * (1 - q * q);           // eased position: slow near 0, fast near ±1
+      shell.style.transform = "translate3d(0," + ((p - (Math.abs(p) > 1 ? p : seen)) * h).toFixed(1) + "px,0)";
+      chapter.style.setProperty("--chapter-opacity", Math.max(0, 1 - Math.abs(seen) * 1.25).toFixed(3));
     });
   }
   function schedule() { if (!queued) { queued = true; window.requestAnimationFrame(update); } }
-  function layout() { layoutNeeded = true; schedule(); }
   window.addEventListener("scroll", schedule, { passive: true });
-  window.addEventListener("resize", layout, { passive: true });
-  window.addEventListener("pageshow", layout);
-  motion.addEventListener("change", layout);
-  large.addEventListener("change", layout);
-  if ("ResizeObserver" in window) { var observer = new ResizeObserver(layout); shells.forEach(function (shell) { observer.observe(shell); }); }
-  if (document.fonts) document.fonts.ready.then(layout);
+  window.addEventListener("resize", schedule, { passive: true });
+  window.addEventListener("pageshow", schedule);
+  motion.addEventListener("change", schedule);
+  if (document.fonts) document.fonts.ready.then(schedule);
   root.classList.add("sections-ready");
   update();
 })();
